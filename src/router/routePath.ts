@@ -12,6 +12,7 @@ import Index from "../views/Index.vue";
 import MailInfo from "../views/MailInfo.vue";
 import MailSend from "../views/MailSend.vue";
 import MailEdit from "../views/MailEdit.vue";
+import Setting from "../views/Setting.vue";
 import { RouteRecordRaw } from "vue-router";
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -29,5 +30,9 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: "/send",
     component: MailSend,
+  },
+  {
+    path: "/setting",
+    component: Setting,
   },
 ];

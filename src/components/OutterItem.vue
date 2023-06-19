@@ -1,7 +1,7 @@
 <template>
   <tr>
     <td :style="ItemStyles" :colspan="ItemColSpan">
-
+      <slot></slot>
     </td>
   </tr>
 </template>
@@ -30,7 +30,7 @@ let ItemStyles = computed(() => {
   let marginParse = parseArray(margin)
 
   let mp = 'padding: ' + paddingParse + ';margin:' + marginParse + ';'
-  console.log(mp)
+
   return 'font-size: ' + fontSize + 'pt; line-height: 0pt;' + 'background-color:' + bgColor + ' ;text-align: ' + textAlign + ';font-family:' + fontFamily + ' ;color: ' + fontColor + ';' + mp
 })
 

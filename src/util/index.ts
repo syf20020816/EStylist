@@ -1,3 +1,3 @@
-import { generateUUID, parseArray } from "./utils";
+import { generateUUID, parseArray, convertImageToBase64 } from "./utils";
 
-export { generateUUID, parseArray };
+export { generateUUID, parseArray, convertImageToBase64 };

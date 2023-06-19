@@ -14,6 +14,9 @@
         <el-icon size="20" @click="toPage('info')">
           <InfoFilled />
         </el-icon>
+        <el-icon size="20" @click="toPage('setting')">
+          <Tools />
+        </el-icon>
       </div>
     </div>
     <div :class="buildWrap(component,'right')">
@@ -24,7 +27,7 @@
 
 <script setup lang="ts">
 import { build, buildView, buildWrap } from './styles/name'
-import { Edit, Message, InfoFilled } from '@element-plus/icons-vue'
+import { Edit, Message, InfoFilled, Tools } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 
 const component = 'TaApp'

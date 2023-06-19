@@ -36,6 +36,8 @@ export interface AreaModel {
   padding: Array<number>;
   margin: Array<number>;
   span: number;
+  areas: Array<AreaModel> | null;
+  modelItem: ModelItem | undefined;
 }
 
 // export type FontFamily =
@@ -44,4 +46,23 @@ export interface Model {
   base: BaseModel;
   areas: Array<AreaModel>;
   areasLen: number;
+}
+
+export interface ModelItem {
+  type: string;
+  height: string;
+  width: string;
+  bgColor: string;
+  fontSize: number;
+  fontColor: string;
+  fontWeight: boolean;
+  fontFamily: string;
+  textAlign: string;
+  direction: string;
+  padding: Array<number>;
+  margin: Array<number>;
+  src: string;
+  content: string;
+  borderRadius: string;
+  justifyContent: string;
 }

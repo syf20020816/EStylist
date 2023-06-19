@@ -1,3 +1,3 @@
-import { BaseModel, AreaModel, Model } from "./baseModel";
+import { BaseModel, AreaModel, Model, ModelItem } from "./baseModel";
 
-export type { BaseModel, AreaModel, Model };
+export type { BaseModel, AreaModel, Model, ModelItem };

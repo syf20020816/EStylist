@@ -7,11 +7,11 @@
             <tbody>
               <tr>
                 <td :style="baseOutterPadding" :bgcolor="baseOtterColor">
-                  <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                    <tbody>
-                      <OutterItem :data="item" v-for="item,index in areaItem" :key="index"></OutterItem>
-                    </tbody>
-                  </table>
+                  <Outter>
+                    <OutterItem :data="item" v-for="item,index in areaItem" :key="index">
+                      <ModelVue :data="item.modelItem" v-if="!modelItemExist(item.modelItem)"></ModelVue>
+                    </OutterItem>
+                  </Outter>
                 </td>
               </tr>
             </tbody>
@@ -33,6 +33,8 @@ import { ref, reactive, computed, defineProps, PropType } from 'vue'
 import { build, buildView, buildWrap } from '../styles/name'
 import type { BaseModel, Model } from '../core'
 import OutterItem from './OutterItem.vue'
+import Outter from './Outter.vue'
+import ModelVue from './Model.vue'
 
 const props = defineProps({
   data: {
@@ -60,6 +62,10 @@ let areaItem = computed(() => {
   let { areas } = props.data
   return areas
 })
+
+let modelItemExist = (obj: any): boolean => {
+  return typeof obj == 'undefined'
+}
 </script>
 
 <style lang="scss" scoped>

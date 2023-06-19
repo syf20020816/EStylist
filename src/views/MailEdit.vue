@@ -83,17 +83,17 @@
               </div>
               <div :class="build('template','base')" style="flex-wrap: wrap;">
                 <div class="tmptitle">内边距</div>
-                <div class="wrapline">上:<el-input-number v-model="citem.padding[0]" :step="1" :max="40" /></div>
-                <div class="wrapline">右:<el-input-number v-model="citem.padding[1]" :step="1" :max="40" /></div>
-                <div class="wrapline">下:<el-input-number v-model="citem.padding[2]" :step="1" :max="40" /></div>
-                <div class="wrapline">左:<el-input-number v-model="citem.padding[3]" :step="1" :max="40" /></div>
+                <div class="wrapline">上:<el-input-number v-model="citem.padding[0]" :step="1" :max="1000" /></div>
+                <div class="wrapline">右:<el-input-number v-model="citem.padding[1]" :step="1" :max="1000" /></div>
+                <div class="wrapline">下:<el-input-number v-model="citem.padding[2]" :step="1" :max="1000" /></div>
+                <div class="wrapline">左:<el-input-number v-model="citem.padding[3]" :step="1" :max="1000" /></div>
               </div>
               <div :class="build('template','base')" style="flex-wrap: wrap;">
                 <div class="tmptitle">外边距</div>
-                <div class="wrapline">上:<el-input-number v-model="citem.margin[0]" :step="1" :max="40" /></div>
-                <div class="wrapline">右:<el-input-number v-model="citem.margin[1]" :step="1" :max="40" /></div>
-                <div class="wrapline">下:<el-input-number v-model="citem.margin[2]" :step="1" :max="40" /></div>
-                <div class="wrapline">左:<el-input-number v-model="citem.margin[3]" :step="1" :max="40" /></div>
+                <div class="wrapline">上:<el-input-number v-model="citem.margin[0]" :step="1" :max="1000" /></div>
+                <div class="wrapline">右:<el-input-number v-model="citem.margin[1]" :step="1" :max="1000" /></div>
+                <div class="wrapline">下:<el-input-number v-model="citem.margin[2]" :step="1" :max="1000" /></div>
+                <div class="wrapline">左:<el-input-number v-model="citem.margin[3]" :step="1" :max="1000" /></div>
               </div>
               <div :class="build('template','base')">
                 <div class="tmptitle">排版方向</div>
@@ -102,19 +102,109 @@
                 </el-select>
               </div>
               <div style="display: flex;align-items: center;justify-content:end;margin-top: 1vh;">
-                <el-button type="success" round @click="saveBaseChange">Save Change</el-button>
+                <el-button type="primary" round @click="addModel(index)">添加模块</el-button>
+                <el-button type="success" round @click="saveAreaChange(index)">修改子区域</el-button>
+              </div>
+              <div :class="build('template','base')" v-if="citem.modelItem!=null" style="display: flex;flex-wrap: wrap;">
+                <div class="tmptitle" style="width: 100%;font-size:14px;"><el-icon>
+                    <Operation />
+                  </el-icon>构建模块</div>
+                <div :class="build('template','base')">
+                  <div class="tmptitle">模块类型</div>
+                  <el-select v-model="citem.modelItem.type" placeholder="Select Type">
+                    <el-option v-for="titem in ModelTypes" :key="titem.value" :label="titem.label" :value="titem.value" />
+                  </el-select>
+                </div>
+                <div :class="build('template','base')">
+                  <div class="tmptitle">模块高度</div>
+                  <el-input placeholder="Please input height" v-model="citem.modelItem.height" />
+                </div>
+                <div :class="build('template','base')">
+                  <div class="tmptitle">模块宽度</div>
+                  <el-input v-model="citem.modelItem.width" placeholder="Please input width" />
+                </div>
+                <div :class="build('template','base')">
+                  <div class="tmptitle">模块内容位置</div>
+                  <el-select v-model="citem.modelItem.justifyContent" placeholder="Select Type">
+                    <el-option v-for="jcitem in JustifyContent" :key="jcitem.value" :label="jcitem.label" :value="jcitem.value" />
+                  </el-select>
+                </div>
+                <div :class="build('template','base')">
+                  <div class="tmptitle">圆角</div>
+                  <el-input v-model="citem.modelItem.borderRadius" placeholder="Please input radius" />
+                </div>
+                <div :class="build('template','base')">
+                  <div class="tmptitle">文字</div>
+                  <el-input v-model="citem.modelItem.content" placeholder="Please input text" />
+                </div>
+                <div :class="build('template','base')" v-if="citem.modelItem.type=='img'">
+                  <div class="tmptitle">本地上传</div>
+                  <input type="file" name="" id="upload-picture" @change="uploadPicture(index,$event)">
+                </div>
+                <!-- <div :class="build('template','base')">
+                  <div class="tmptitle">地址</div>
+                  <el-input v-model="citem.modelItem.src" placeholder="Please input address" />
+                </div> -->
+                <div :class="build('template','base')">
+                  <div class="tmptitle">背景色</div>
+                  <el-color-picker v-model="citem.modelItem.bgColor" />
+                </div>
+                <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
+                  <div class="tmptitle">字体大小</div>
+                  <el-input-number v-model="citem.modelItem.fontSize" :step="2" :max="80" />
+                </div>
+                <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
+                  <div class="tmptitle">字体粗细</div>
+                  <el-switch v-model="citem.modelItem.fontWeight" style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949" />
+                </div>
+                <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
+                  <div class="tmptitle">字体类型</div>
+                  <el-select v-model="citem.modelItem.fontFamily" placeholder="Select FontFamily">
+                    <el-option v-for="fitem in FontFamily" :key="fitem.value" :label="fitem.label" :value="fitem.value" />
+                  </el-select>
+                </div>
+                <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
+                  <div class="tmptitle">字体颜色</div>
+                  <el-color-picker v-model="citem.modelItem.fontColor" />
+                </div>
+                <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
+                  <div class="tmptitle">文字位置</div>
+                  <el-select v-model="citem.modelItem.textAlign" placeholder="Select FontFamily">
+                    <el-option v-for="taitem in TextAlign" :key="taitem.value" :label="taitem.label" :value="taitem.value" />
+                  </el-select>
+                </div>
+                <div :class="build('template','base')" style="flex-wrap: wrap;">
+                  <div class="tmptitle">内边距</div>
+                  <div class="wrapline">上:<el-input-number v-model="citem.modelItem.padding[0]" :step="1" :max="1000" /></div>
+                  <div class="wrapline">右:<el-input-number v-model="citem.modelItem.padding[1]" :step="1" :max="1000" /></div>
+                  <div class="wrapline">下:<el-input-number v-model="citem.modelItem.padding[2]" :step="1" :max="1000" /></div>
+                  <div class="wrapline">左:<el-input-number v-model="citem.modelItem.padding[3]" :step="1" :max="1000" /></div>
+                </div>
+                <div :class="build('template','base')" style="flex-wrap: wrap;">
+                  <div class="tmptitle">外边距</div>
+                  <div class="wrapline">上:<el-input-number v-model="citem.modelItem.margin[0]" :step="1" :max="1000" /></div>
+                  <div class="wrapline">右:<el-input-number v-model="citem.modelItem.margin[1]" :step="1" :max="1000" /></div>
+                  <div class="wrapline">下:<el-input-number v-model="citem.modelItem.margin[2]" :step="1" :max="1000" /></div>
+                  <div class="wrapline">左:<el-input-number v-model="citem.modelItem.margin[3]" :step="1" :max="1000" /></div>
+                </div>
               </div>
             </div>
           </el-collapse-item>
         </el-collapse>
       </div>
-      <div :class="buildWrap(component,'edit')"></div>
+      <!-- <div :class="buildWrap(component,'edit')"></div> -->
       <div :class="buildWrap(component,'tools')">
         <el-icon size="18" @click="scaleView(-0.1)">
           <ZoomOut />
         </el-icon>
         <el-icon size="18" @click="scaleView(0.1)">
           <ZoomIn />
+        </el-icon>
+        <el-icon size="18" @click="uploadTemplate">
+          <Upload />
+        </el-icon>
+        <el-icon size="18" @click="downloadTemplate">
+          <Download />
         </el-icon>
       </div>
     </div>
@@ -128,10 +218,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { generateUUID } from '../util'
+import { generateUUID, convertImageToBase64 } from '../util'
 import { ref, reactive, computed } from 'vue'
 import { build, buildView, buildWrap } from '../styles/name'
-import { ZoomIn, ZoomOut, InfoFilled } from '@element-plus/icons-vue'
+import { ZoomIn, ZoomOut, InfoFilled, Operation, Download, Upload } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import type { BaseModel, AreaModel, Model } from '../core'
 import BaseOutter from '../components/BaseOutter.vue'
@@ -169,6 +259,59 @@ const FontFamily = [
     label: 'Franklin Gothic Medium'
   }
 ]
+
+const ModelTypes = [
+  {
+    value: 'div',
+    label: '文字'
+  },
+  {
+    value: 'img',
+    label: '图片'
+  },
+  {
+    value: 'a',
+    label: '链接'
+  }
+]
+
+const TextAlign = [
+  {
+    value: 'left',
+    label: 'left'
+  },
+  {
+    value: 'right',
+    label: 'right'
+  },
+  {
+    value: 'center',
+    label: 'center'
+  },
+  {
+    value: 'justify',
+    label: 'justify'
+  }
+]
+
+const JustifyContent = [
+  {
+    value: 'start',
+    label: 'start'
+  },
+  {
+    value: 'end',
+    label: 'end'
+  },
+  {
+    value: 'center',
+    label: 'center'
+  },
+  {
+    value: 'baseline',
+    label: 'baseline'
+  }
+]
 let mailModel = reactive({
   base: {
     // height: 240,
@@ -187,12 +330,14 @@ let mailModel = reactive({
       fontSize: 16,
       fontColor: '#000',
       fontFamily: 'Helvetica',
-      areaNum: 1,
+      areaNum: 0,
       direction: 'y',
       padding: [0, 0, 0, 0],
       margin: [0, 0, 0, 0],
       textAlign: 'center',
-      span: 1
+      span: 1,
+      areas: new Array(),
+      modelItem: undefined
     }
   ] as Array<AreaModel>,
   areasLen: 1
@@ -228,12 +373,14 @@ const saveBaseChange = () => {
         fontSize: 16,
         fontColor: '#000',
         fontFamily: 'Helvetica',
-        areaNum: 1,
+        areaNum: 0,
         direction: 'y',
         padding: [0, 0, 0, 0],
         margin: [0, 0, 0, 0],
         textAlign: 'center',
-        span: 1
+        span: 1,
+        areas: new Array(),
+        modelItem: undefined
       }
       mailModel.areas.push(tmp)
     }
@@ -249,6 +396,47 @@ const saveBaseChange = () => {
     type: 'success'
   })
 }
+
+const saveAreaChange = (index: number) => {}
+const addModel = (index: number) => {
+  mailModel.areas[index].modelItem = {
+    type: 'div',
+    height: '30px',
+    width: '100%',
+    bgColor: 'transparent',
+    fontSize: 16,
+    fontColor: '#000',
+    fontFamily: 'Helvetica',
+    textAlign: 'center',
+    direction: 'x',
+    fontWeight: false,
+    padding: [0, 0, 0, 0],
+    margin: [0, 0, 0, 0],
+    content: '示例文字|地址',
+    borderRadius: '0px',
+    justifyContent: 'center',
+    src: ''
+  }
+  ElMessage({
+    message: 'Add Model Successfully',
+    type: 'success'
+  })
+}
+
+const uploadPicture = (index: number, event: any) => {
+  const file = event.target.files[0]
+  convertImageToBase64(file)
+    .then((base64: any) => {
+      mailModel.areas[index].modelItem!.src = base64
+    })
+    .catch(error => {
+      console.error(error)
+    })
+
+  console.log()
+}
+const uploadTemplate = () => {}
+const downloadTemplate = () => {}
 </script>
 
 <style lang="scss" >
@@ -266,7 +454,7 @@ $component: 'MailEdit';
   align-items: center;
   justify-content: space-between;
   @include buildWrap($component, 'left') {
-    width: 70%;
+    width: 65%;
     height: inherit;
     overflow: scroll;
     scrollbar-width: thin;
@@ -277,12 +465,12 @@ $component: 'MailEdit';
     box-sizing: border-box;
   }
   @include buildWrap($component, 'right') {
-    width: 30%;
+    width: 35%;
     height: inherit;
     background-color: $bg-color-dark-deep;
 
     @include buildWrap($component, 'templates') {
-      height: 70%;
+      height: calc(100% - 24px);
       width: 100%;
       overflow-y: scroll;
       scrollbar-width: thin;
@@ -290,15 +478,17 @@ $component: 'MailEdit';
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        width: inherit;
+        width: 100%;
         height: auto;
         margin: 0.5vh 0;
         .tmptitle {
           white-space: nowrap;
           margin-right: 16px;
+          font-size: 13px;
         }
         .wrapline {
           width: 100%;
+          margin: 0.5vh 0;
           .el-input-number {
             margin-left: 16px;
           }
@@ -318,10 +508,10 @@ $component: 'MailEdit';
         padding: 1vh 0.5vw;
       }
     }
-    @include buildWrap($component, 'edit') {
-      height: calc(30% - 24px);
-      width: 100%;
-    }
+    // @include buildWrap($component, 'edit') {
+    //   height: calc(5% - 24px);
+    //   width: 100%;
+    // }
     @include buildWrap($component, 'tools') {
       height: 24px;
       width: 100%;
