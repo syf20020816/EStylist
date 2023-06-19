@@ -181,7 +181,7 @@ let mailModel = reactive({
   },
   areas: [
     {
-      height: 240,
+      height: 100,
       width: 180,
       bgColor: '#fff',
       fontSize: 16,

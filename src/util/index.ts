@@ -1,3 +1,3 @@
-import { generateUUID } from "./utils";
+import { generateUUID, parseArray } from "./utils";
 
-export { generateUUID };
+export { generateUUID, parseArray };

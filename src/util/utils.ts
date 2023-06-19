@@ -11,3 +11,21 @@ export const generateUUID = (): string => {
   }
   return guid;
 };
+
+/**
+ * 解析[2,3]->2,3
+ */
+export const parseArray = (array: Array<number>): string => {
+  let strArr: Array<string> = [];
+  array.forEach((x) => {
+    strArr.push(x + "px");
+  });
+
+  let str = JSON.stringify(strArr);
+  str = str.replace("[", "");
+  str = str.replace("]", "");
+  str = str.replaceAll(",", " ");
+  str = str.replaceAll('"', "");
+
+  return str;
+};
