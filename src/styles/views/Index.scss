@@ -1,0 +1,53 @@
+@use '../../styles/name.scss' as *;
+@use '../src/var.scss' as *;
+
+$component:'index';
+
+@include buildView($component){
+  position: relative;
+  height: inherit;
+  width: inherit;
+  background: url('/src/assets/bg/bg2.svg');
+  background-repeat: no-repeat;
+  background-size:60vw;
+  background-position-x: center;
+  background-position-y: center;
+  @include buildWrap($component,'title'){
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 160px;
+    width: 40vw;
+    color: $bg-color-light;
+    font-weight:bold;
+    font-size: 3vw;
+    line-height: 2em;
+    @include build($component,'title'){
+      font-size: 6vw;
+      letter-spacing: 6px;
+      margin: 16px 0;
+      text-shadow: 1px 0px 2px #fff;
+    }
+    @include build($component,'des'){
+      font-size: 2.8vw;
+      font-weight: 100;
+      letter-spacing: 1px;
+      text-shadow: 1px 0px 2px #fff;
+    }
+  }
+  @include buildWrap($component,'des'){
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 30vw;
+    height: 30vh;
+    font-size: 2vw;
+    text-align:left;
+    padding: 4vw;
+    box-sizing: border-box;
+    line-height: 2em;
+    letter-spacing: 1px;
+    color: $bg-color-light;
+    text-shadow: 1px 0px 2px #fff;
+  }
+}
