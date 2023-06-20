@@ -38,9 +38,9 @@ impl Default for Settings {
 }
 
 ///  From string -> struct (serde)
-impl From<&str> for Settings {
-    fn from(value: &str) -> Self {
-        let res = serde_json::from_str(value).unwrap_or(Settings::default());
+impl From<String> for Settings {
+    fn from(value: String) -> Self {
+        let res = serde_json::from_str(&value).unwrap_or(Settings::default());
         res
     }
 }

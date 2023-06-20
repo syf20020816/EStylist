@@ -11,32 +11,32 @@
         <el-collapse accordion>
           <el-collapse-item name="1">
             <template #title>
-              构建底板
+              {{ getStr(store.settings.language,pagei18n.edit.basePlateTitle) }}
             </template>
             <div>
 
               <div :class="build('template','base')">
-                <div class="tmptitle">底板宽度</div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.width) }}</div>
                 <el-input-number v-model="mailModel.base.width" :step="10" :max="800" />
               </div>
               <div :class="build('template','base')">
-                <div class="tmptitle">底板颜色</div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bgColor) }}</div>
                 <el-color-picker v-model="mailModel.base.bgColor" />
               </div>
               <div :class="build('template','base')">
-                <div class="tmptitle">字体大小</div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontSize) }}</div>
                 <el-input-number v-model="mailModel.base.fontSize" :step="1" :max="60" />
               </div>
               <div :class="build('template','base')">
-                <div class="tmptitle">内边距</div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.padding) }}</div>
                 <el-input-number v-model="mailModel.base.padding" :step="2" :max="100" />
               </div>
               <div :class="build('template','base')">
-                <div class="tmptitle">区域个数</div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.areaNum) }}</div>
                 <el-input-number v-model="mailModel.base.areaNum" :step="1" :max="20" />
               </div>
               <div :class="build('template','base')">
-                <div class="tmptitle">排版方向</div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.direction) }}</div>
                 <el-select v-model="mailModel.base.direction" placeholder="Select Direction">
                   <el-option v-for="item in Direction" :key="item.value" :label="item.label" :value="item.value" />
                 </el-select>
@@ -48,7 +48,7 @@
           </el-collapse-item>
           <el-collapse-item :name="generateUUID()" v-for="citem,index in mailModel.areas" :key="index">
             <template #title>
-              构建区域{{ index+1 }}
+              {{ getStr(store.settings.language,pagei18n.edit.areaTitle) }}{{ index+1 }}
             </template>
             <div>
               <!-- <div :class="build('template','base')">
@@ -56,47 +56,47 @@
                 <el-input-number v-model="citem.height" :step="10" :max="800" />
               </div> -->
               <div :class="build('template','base')">
-                <div class="tmptitle">区域跨度</div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.colSpan) }}</div>
                 <el-input-number v-model="citem.span" :step="10" :max="800" />
               </div>
               <div :class="build('template','base')">
-                <div class="tmptitle">区域颜色</div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bgColor) }}</div>
                 <el-color-picker v-model="citem.bgColor" />
               </div>
               <div :class="build('template','base')">
-                <div class="tmptitle">字体类型</div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontFamily) }}</div>
                 <el-select v-model="citem.fontFamily" placeholder="Select FontFamily">
                   <el-option v-for="fitem in FontFamily" :key="fitem.value" :label="fitem.label" :value="fitem.value" />
                 </el-select>
               </div>
               <div :class="build('template','base')">
-                <div class="tmptitle">字体颜色</div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontColor) }}</div>
                 <el-color-picker v-model="citem.fontColor" />
               </div>
               <div :class="build('template','base')">
-                <div class="tmptitle">字体大小</div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontSize) }}</div>
                 <el-input-number v-model="citem.fontSize" :step="1" :max="60" />
               </div>
               <div :class="build('template','base')">
-                <div class="tmptitle">子区域个数</div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.areaNum) }}</div>
                 <el-input-number v-model="citem.areaNum" :step="1" :max="20" />
               </div>
               <div :class="build('template','base')" style="flex-wrap: wrap;">
-                <div class="tmptitle">内边距</div>
-                <div class="wrapline">上:<el-input-number v-model="citem.padding[0]" :step="1" :max="1000" /></div>
-                <div class="wrapline">右:<el-input-number v-model="citem.padding[1]" :step="1" :max="1000" /></div>
-                <div class="wrapline">下:<el-input-number v-model="citem.padding[2]" :step="1" :max="1000" /></div>
-                <div class="wrapline">左:<el-input-number v-model="citem.padding[3]" :step="1" :max="1000" /></div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.padding) }}</div>
+                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.top) }}:<el-input-number v-model="citem.padding[0]" :step="1" :max="1000" /></div>
+                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.right) }}:<el-input-number v-model="citem.padding[1]" :step="1" :max="1000" /></div>
+                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.bottom) }}:<el-input-number v-model="citem.padding[2]" :step="1" :max="1000" /></div>
+                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.left) }}:<el-input-number v-model="citem.padding[3]" :step="1" :max="1000" /></div>
               </div>
               <div :class="build('template','base')" style="flex-wrap: wrap;">
-                <div class="tmptitle">外边距</div>
-                <div class="wrapline">上:<el-input-number v-model="citem.margin[0]" :step="1" :max="1000" /></div>
-                <div class="wrapline">右:<el-input-number v-model="citem.margin[1]" :step="1" :max="1000" /></div>
-                <div class="wrapline">下:<el-input-number v-model="citem.margin[2]" :step="1" :max="1000" /></div>
-                <div class="wrapline">左:<el-input-number v-model="citem.margin[3]" :step="1" :max="1000" /></div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.margin) }}</div>
+                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.top) }}:<el-input-number v-model="citem.margin[0]" :step="1" :max="1000" /></div>
+                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.right) }}:<el-input-number v-model="citem.margin[1]" :step="1" :max="1000" /></div>
+                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.bottom) }}:<el-input-number v-model="citem.margin[2]" :step="1" :max="1000" /></div>
+                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.left) }}:<el-input-number v-model="citem.margin[3]" :step="1" :max="1000" /></div>
               </div>
               <div :class="build('template','base')">
-                <div class="tmptitle">排版方向</div>
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.direction) }}</div>
                 <el-select v-model="citem.direction" placeholder="Select Direction">
                   <el-option v-for="item in Direction" :key="item.value" :label="item.label" :value="item.value" />
                 </el-select>
@@ -108,84 +108,84 @@
               <div :class="build('template','base')" v-if="citem.modelItem!=null" style="display: flex;flex-wrap: wrap;">
                 <div class="tmptitle" style="width: 100%;font-size:14px;"><el-icon>
                     <Operation />
-                  </el-icon>构建模块</div>
+                  </el-icon>{{ getStr(store.settings.language,pagei18n.edit.modelTitle) }}</div>
                 <div :class="build('template','base')">
-                  <div class="tmptitle">模块类型</div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.modelTypes) }}</div>
                   <el-select v-model="citem.modelItem.type" placeholder="Select Type">
                     <el-option v-for="titem in ModelTypes" :key="titem.value" :label="titem.label" :value="titem.value" />
                   </el-select>
                 </div>
                 <div :class="build('template','base')">
-                  <div class="tmptitle">模块高度</div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.height) }}</div>
                   <el-input placeholder="Please input height" v-model="citem.modelItem.height" />
                 </div>
                 <div :class="build('template','base')">
-                  <div class="tmptitle">模块宽度</div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.width) }}</div>
                   <el-input v-model="citem.modelItem.width" placeholder="Please input width" />
                 </div>
                 <div :class="build('template','base')">
-                  <div class="tmptitle">模块内容位置</div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.contentPos) }}</div>
                   <el-select v-model="citem.modelItem.justifyContent" placeholder="Select Type">
                     <el-option v-for="jcitem in JustifyContent" :key="jcitem.value" :label="jcitem.label" :value="jcitem.value" />
                   </el-select>
                 </div>
                 <div :class="build('template','base')">
-                  <div class="tmptitle">圆角</div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.radius) }}</div>
                   <el-input v-model="citem.modelItem.borderRadius" placeholder="Please input radius" />
                 </div>
                 <div :class="build('template','base')">
-                  <div class="tmptitle">文字</div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.content) }}</div>
                   <el-input v-model="citem.modelItem.content" placeholder="Please input text" />
                 </div>
                 <div :class="build('template','base')" v-if="citem.modelItem.type=='img'">
-                  <div class="tmptitle">本地上传</div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.upload) }}</div>
                   <input type="file" name="" id="upload-picture" @change="uploadPicture(index,$event)">
                 </div>
-                <!-- <div :class="build('template','base')">
-                  <div class="tmptitle">地址</div>
+                <div :class="build('template','base')" v-if="citem.modelItem.type!='div'">
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.src) }}</div>
                   <el-input v-model="citem.modelItem.src" placeholder="Please input address" />
-                </div> -->
+                </div>
                 <div :class="build('template','base')">
-                  <div class="tmptitle">背景色</div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bgColor) }}</div>
                   <el-color-picker v-model="citem.modelItem.bgColor" />
                 </div>
                 <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
-                  <div class="tmptitle">字体大小</div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontSize) }}</div>
                   <el-input-number v-model="citem.modelItem.fontSize" :step="2" :max="80" />
                 </div>
                 <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
-                  <div class="tmptitle">字体粗细</div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontWeight) }}</div>
                   <el-switch v-model="citem.modelItem.fontWeight" style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949" />
                 </div>
                 <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
-                  <div class="tmptitle">字体类型</div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontFamily) }}</div>
                   <el-select v-model="citem.modelItem.fontFamily" placeholder="Select FontFamily">
                     <el-option v-for="fitem in FontFamily" :key="fitem.value" :label="fitem.label" :value="fitem.value" />
                   </el-select>
                 </div>
                 <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
-                  <div class="tmptitle">字体颜色</div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontColor) }}</div>
                   <el-color-picker v-model="citem.modelItem.fontColor" />
                 </div>
                 <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
-                  <div class="tmptitle">文字位置</div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.textAlign) }}</div>
                   <el-select v-model="citem.modelItem.textAlign" placeholder="Select FontFamily">
                     <el-option v-for="taitem in TextAlign" :key="taitem.value" :label="taitem.label" :value="taitem.value" />
                   </el-select>
                 </div>
                 <div :class="build('template','base')" style="flex-wrap: wrap;">
-                  <div class="tmptitle">内边距</div>
-                  <div class="wrapline">上:<el-input-number v-model="citem.modelItem.padding[0]" :step="1" :max="1000" /></div>
-                  <div class="wrapline">右:<el-input-number v-model="citem.modelItem.padding[1]" :step="1" :max="1000" /></div>
-                  <div class="wrapline">下:<el-input-number v-model="citem.modelItem.padding[2]" :step="1" :max="1000" /></div>
-                  <div class="wrapline">左:<el-input-number v-model="citem.modelItem.padding[3]" :step="1" :max="1000" /></div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.padding) }}</div>
+                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.top) }}:<el-input-number v-model="citem.modelItem.padding[0]" :step="1" :max="1000" /></div>
+                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.right) }}:<el-input-number v-model="citem.modelItem.padding[1]" :step="1" :max="1000" /></div>
+                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.bottom) }}:<el-input-number v-model="citem.modelItem.padding[2]" :step="1" :max="1000" /></div>
+                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.left) }}:<el-input-number v-model="citem.modelItem.padding[3]" :step="1" :max="1000" /></div>
                 </div>
                 <div :class="build('template','base')" style="flex-wrap: wrap;">
-                  <div class="tmptitle">外边距</div>
-                  <div class="wrapline">上:<el-input-number v-model="citem.modelItem.margin[0]" :step="1" :max="1000" /></div>
-                  <div class="wrapline">右:<el-input-number v-model="citem.modelItem.margin[1]" :step="1" :max="1000" /></div>
-                  <div class="wrapline">下:<el-input-number v-model="citem.modelItem.margin[2]" :step="1" :max="1000" /></div>
-                  <div class="wrapline">左:<el-input-number v-model="citem.modelItem.margin[3]" :step="1" :max="1000" /></div>
+                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.margin) }}</div>
+                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.top) }}:<el-input-number v-model="citem.modelItem.margin[0]" :step="1" :max="1000" /></div>
+                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.right) }}:<el-input-number v-model="citem.modelItem.margin[1]" :step="1" :max="1000" /></div>
+                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.bottom) }}:<el-input-number v-model="citem.modelItem.margin[2]" :step="1" :max="1000" /></div>
+                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.left) }}:<el-input-number v-model="citem.modelItem.margin[3]" :step="1" :max="1000" /></div>
                 </div>
               </div>
             </div>
@@ -225,8 +225,11 @@ import { ZoomIn, ZoomOut, InfoFilled, Operation, Download, Upload } from '@eleme
 import { ElMessage } from 'element-plus'
 import type { BaseModel, AreaModel, Model } from '../core'
 import BaseOutter from '../components/BaseOutter.vue'
+import { pagei18n, getStr } from '../core'
+import { indexStore } from '../store/IndexPinia'
 
 const component = 'MailEdit'
+const store = indexStore()
 const Direction = [
   {
     value: 'x',

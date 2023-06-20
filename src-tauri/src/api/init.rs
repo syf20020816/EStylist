@@ -112,4 +112,12 @@ impl Init {
         }
         let _ = write(Path::new(&readme_file_str), &content);
     }
+    /// json file -> Settings struct
+    pub fn get_config_settings(&self) -> Settings {
+        let tmp = format!("./{}/{}.json", CONF_DIR, CONF_FILE);
+        let config_path = Path::new(&tmp);
+        let config_str = read_to_string(config_path).unwrap();
+        let settings: Settings = config_str.into();
+        settings
+    }
 }

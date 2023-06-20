@@ -66,3 +66,11 @@ export interface ModelItem {
   borderRadius: string;
   justifyContent: string;
 }
+
+export interface Settings {
+  store: string;
+  template: string;
+  auto: boolean;
+  proportion: string;
+  language: string;
+}

@@ -2,9 +2,11 @@
   <div :id="buildView(component)">
     <div :class="build(component,'title')">EStylist</div>
     <div :class="buildWrap(component,'content')">
-      <div :class="build('content','title')">What is EStylist</div>
+      <div :class="build('content','title')">
+        {{ getStr(store.settings.language,pagei18n.info.what) }}
+      </div>
       <div :class="build('content','des')">
-        EStylist means email designer. I wonder if you are often troubled by ugly emails and want to pursue the layout and style of emails. Do you want emails as exquisite as Stream or GitHub? Let EStylist help you build exquisite emails!
+        {{ getStr(store.settings.language,pagei18n.info.des) }}
       </div>
       <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="version" label="Version" width="200" />
@@ -25,11 +27,14 @@ export default {
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 import { build, buildView, buildWrap } from '../styles/name'
+import { pagei18n, getStr } from '../core'
+import { indexStore } from '../store/IndexPinia'
 const component = 'MailInfo'
+const store = indexStore()
 
 const tableData = [
   {
-    date: '2016-05-03',
+    date: '2023-07-01',
     version: '0.0.1',
     author: 'syf20020816@outlook.com'
   }

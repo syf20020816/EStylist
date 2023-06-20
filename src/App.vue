@@ -32,7 +32,9 @@ import { useRouter } from 'vue-router'
 import { onBeforeMount } from 'vue'
 import { invoke } from '@tauri-apps/api'
 import { ElMessage } from 'element-plus'
+import { indexStore } from './store/IndexPinia'
 
+const store = indexStore()
 const component = 'TaApp'
 const router = useRouter()
 const toPage = (url: string) => {
@@ -44,8 +46,10 @@ onBeforeMount(() => {
   invoke('init')
     // `invoke` 返回的是一个 Promise
     .then((res: any) => {
+      store.settings = JSON.parse(res)
+
       ElMessage({
-        message: res,
+        message: 'init successfully!',
         type: 'info'
       })
     })
