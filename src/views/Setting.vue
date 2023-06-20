@@ -4,7 +4,7 @@
     <div :class="buildWrap(component,'content')">
       <div :class="build('content','item')">
         <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.confPath) }}</div>
-        <el-input v-model="store.settings.store" clearable></el-input>
+        <el-input v-model="store.settings.store" disabled></el-input>
       </div>
       <div :class="build('content','item')">
         <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.templatePath) }}</div>

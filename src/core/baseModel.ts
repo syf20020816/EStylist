@@ -38,6 +38,7 @@ export interface AreaModel {
   span: number;
   areas: Array<AreaModel> | null;
   modelItem: ModelItem | undefined;
+  justifyContent: string;
 }
 
 // export type FontFamily =

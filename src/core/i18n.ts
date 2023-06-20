@@ -9,6 +9,26 @@ export const getStr = (language: string, i18n: I18n): string => {
 };
 
 export let pagei18n = {
+  common: {
+    dowloadTemplate: {
+      title: {
+        zh: "确认存储文件",
+        en: "Confirm Save File",
+      } as I18n,
+      placeholder: {
+        zh: "请为存储文件命名",
+        en: "Please name the storage file",
+      } as I18n,
+    },
+    cancel: {
+      zh: "取消",
+      en: "Cancel",
+    } as I18n,
+    confirm: {
+      zh: "确认",
+      en: "Confirm",
+    } as I18n,
+  },
   edit: {
     basePlateTitle: {
       zh: "构建底板",

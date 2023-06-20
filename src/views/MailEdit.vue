@@ -3,7 +3,7 @@
     <div :class="buildWrap(component,'left')">
       <div :style="scaleViewStyle">
         <!-- todo: -->
-        <BaseOutter :data="mailModel"></BaseOutter>
+        <BaseOutter id="targetTemplate" ref="targetTemplate" :data="mailModel"></BaseOutter>
       </div>
     </div>
     <div :class="buildWrap(component,'right')">
@@ -76,6 +76,12 @@
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontSize) }}</div>
                 <el-input-number v-model="citem.fontSize" :step="1" :max="60" />
+              </div>
+              <div :class="build('template','base')">
+                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.contentPos) }}</div>
+                <el-select v-model="citem.justifyContent" placeholder="Select Type">
+                  <el-option v-for="jcitem in JustifyContent" :key="jcitem.value" :label="jcitem.label" :value="jcitem.value" />
+                </el-select>
               </div>
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.areaNum) }}</div>
@@ -203,12 +209,23 @@
         <el-icon size="18" @click="uploadTemplate">
           <Upload />
         </el-icon>
-        <el-icon size="18" @click="downloadTemplate">
+        <el-icon size="18" @click="downloadTemplateVisable = true">
           <Download />
         </el-icon>
       </div>
     </div>
   </div>
+  <el-dialog v-model="downloadTemplateVisable" :title="getStr(store.settings.language,pagei18n.common.dowloadTemplate.title)">
+    <el-input v-model="downloadFileName" :placeholder="getStr(store.settings.language,pagei18n.common.dowloadTemplate.placeholder)" clearable></el-input>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="downloadTemplateVisable = false">{{ getStr(store.settings.language,pagei18n.common.cancel) }}</el-button>
+        <el-button type="primary" @click="downloadTemplate">
+          {{ getStr(store.settings.language,pagei18n.common.confirm) }}
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script lang="ts">
@@ -227,8 +244,12 @@ import type { BaseModel, AreaModel, Model } from '../core'
 import BaseOutter from '../components/BaseOutter.vue'
 import { pagei18n, getStr } from '../core'
 import { indexStore } from '../store/IndexPinia'
+import { invoke } from '@tauri-apps/api'
 
 const component = 'MailEdit'
+let targetTemplate = ref()
+let downloadFileName = ref('')
+let downloadTemplateVisable = ref(false)
 const store = indexStore()
 const Direction = [
   {
@@ -340,6 +361,7 @@ let mailModel = reactive({
       textAlign: 'center',
       span: 1,
       areas: new Array(),
+      justifyContent: 'center',
       modelItem: undefined
     }
   ] as Array<AreaModel>,
@@ -364,7 +386,7 @@ let scaleViewStyle = computed(() => {
 const scaleView = (num: number) => {
   scaleViewSize.value += num
 }
-
+// 修改子区域个数
 const saveBaseChange = () => {
   let oldLen = mailModel.areasLen
   if (oldLen < mailModel.base.areaNum) {
@@ -381,6 +403,7 @@ const saveBaseChange = () => {
         padding: [0, 0, 0, 0],
         margin: [0, 0, 0, 0],
         textAlign: 'center',
+        justifyContent: 'center',
         span: 1,
         areas: new Array(),
         modelItem: undefined
@@ -401,6 +424,7 @@ const saveBaseChange = () => {
 }
 
 const saveAreaChange = (index: number) => {}
+// 添加模块
 const addModel = (index: number) => {
   mailModel.areas[index].modelItem = {
     type: 'div',
@@ -425,7 +449,7 @@ const addModel = (index: number) => {
     type: 'success'
   })
 }
-
+// 上传本地照片
 const uploadPicture = (index: number, event: any) => {
   const file = event.target.files[0]
   convertImageToBase64(file)
@@ -438,8 +462,25 @@ const uploadPicture = (index: number, event: any) => {
 
   console.log()
 }
+// 上传模板文件
 const uploadTemplate = () => {}
-const downloadTemplate = () => {}
+// 下载模板文件
+const downloadTemplate = () => {
+  let tmp = JSON.stringify(mailModel)
+  invoke('download_template', { name: downloadFileName.value, data: tmp, dom: targetTemplate.value.$el.outerHTML })
+    .then(res => {
+      ElMessage({
+        message: 'Download Template Successfully',
+        type: 'success'
+      })
+    })
+    .catch(() => {
+      ElMessage({
+        message: 'Download Template Failed',
+        type: 'error'
+      })
+    })
+}
 </script>
 
 <style lang="scss" >

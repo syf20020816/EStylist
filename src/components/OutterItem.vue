@@ -25,13 +25,13 @@ const props = defineProps({
 })
 
 let ItemStyles = computed(() => {
-  let { bgColor, fontSize, fontColor, fontFamily, textAlign, direction, padding, margin } = props.data
+  let { bgColor, fontSize, fontColor, fontFamily, textAlign, direction, padding, margin, justifyContent } = props.data
   let paddingParse = parseArray(padding)
   let marginParse = parseArray(margin)
 
   let mp = 'padding: ' + paddingParse + ';margin:' + marginParse + ';'
 
-  return 'font-size: ' + fontSize + 'pt; line-height: 0pt;' + 'background-color:' + bgColor + ' ;text-align: ' + textAlign + ';font-family:' + fontFamily + ' ;color: ' + fontColor + ';' + mp
+  return 'font-size: ' + fontSize + 'pt; line-height: 0pt;' + 'background-color:' + bgColor + ' ;text-align: ' + textAlign + ';font-family:' + fontFamily + ' ;color: ' + fontColor + ';' + mp + 'display:flex;align-items:center;justify-content:' + justifyContent + ';'
 })
 
 let ItemColSpan = computed(() => {

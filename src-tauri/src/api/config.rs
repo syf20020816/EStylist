@@ -52,6 +52,7 @@ impl Settings {
     fn get_store(&self) -> &str {
         &self.store
     }
+    pub fn get_template(&self) -> &str {&self.template}
     pub fn store_config(&self) {
         // Settings -> Json
         let json_str = serde_json::to_string_pretty(&self.clone()).unwrap();

@@ -20,3 +20,34 @@ pub const README_CONTENT: [&str; 4] = [
     " - repository : https://github.com/syf20020816/EStylist",
     "EStylist means email designer. I wonder if you are often troubled by ugly emails and want to pursue the layout and style of emails.\n Do you want emails as exquisite as Stream or GitHub? Let EStylist help you build exquisite emails!"
 ];
+
+pub const HTML: &str = r#"<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>$name$</title>
+    <style>
+      :root {
+        margin: 0;
+        padding: 0;
+        background-color: #263238;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      body {
+        min-height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    $content$
+  </body>
+</html>
+"#;
