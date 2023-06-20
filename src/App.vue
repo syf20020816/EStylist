@@ -29,12 +29,23 @@
 import { build, buildView, buildWrap } from './styles/name'
 import { Edit, Message, InfoFilled, Tools } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
+import { onBeforeMount } from 'vue'
+import { invoke } from '@tauri-apps/api'
 
 const component = 'TaApp'
 const router = useRouter()
 const toPage = (url: string) => {
   router.push({ path: '/' + url })
 }
+
+onBeforeMount(() => {
+  //initialize
+  invoke('init')
+    // `invoke` 返回的是一个 Promise
+    .then(() => {
+      console.log('init success')
+    })
+})
 </script>
 
 <style lang="scss" scoped>
