@@ -10,9 +10,10 @@ use crate::init_or_not;
 use super::Init;
 
 #[tauri::command]
-pub fn init() {
+pub fn init() -> String {
     if init_or_not().unwrap() {
         let init_obj = Init::new();
         init_obj.init_all();
     }
+    return String::from("init successfully!");
 }

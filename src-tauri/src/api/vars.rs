@@ -9,7 +9,7 @@
 
 pub const CONF_DIR: &str = "conf";
 pub const CONF_FILE: &str = "EStylist_config";
-pub const TEMPLATE_DIR: &str = "./templates";
+pub const TEMPLATE_DIR: &str = "templates";
 pub const DOC_DIR: &str = "doc";
 pub const DOC_FILE: &str = "download_url";
 pub const DOC_DOWNLOAD_URL: &str = "git clone https://github.com/syf20020816/EStylist.wiki.git";

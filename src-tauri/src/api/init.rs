@@ -5,10 +5,10 @@
 //! @version:0.0.1
 //! @description:
 //! ```
-use std::fs::{create_dir, create_dir_all, File, read_to_string};
+use std::fs::{create_dir, create_dir_all, File, read_to_string, write};
 use std::path::{Path};
 use serde::{Serialize, Deserialize};
-use super::{CONF_DIR, CONF_FILE, TEMPLATE_DIR, DOC_DIR, DOC_FILE, DOC_DOWNLOAD_URL, README, README_CONTENT};
+use super::{Settings, CONF_DIR, CONF_FILE, TEMPLATE_DIR, DOC_DIR, DOC_FILE, DOC_DOWNLOAD_URL, README, README_CONTENT};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Init {
@@ -54,7 +54,7 @@ impl Init {
     fn get_conf_path(&self) -> &str { &self.conf_path }
     fn get_conf_name(&self) -> &str { &self.conf_name }
     fn get_conf_type(&self) -> &str { &self.conf_type }
-    fn get_templates_path(&self) -> &str { &self.templates_type }
+    fn get_templates_path(&self) -> &str { &self.templates_path }
     fn get_templates_type(&self) -> &str { &self.templates_type }
     fn get_templates_data_type(&self) -> &str { &self.templates_data_type }
     fn get_doc_path(&self) -> &str { &self.doc_path }
@@ -72,9 +72,9 @@ impl Init {
     fn create_item(&self, path: &Path, is_file: bool) {
         if !path.try_exists().unwrap() {
             if !is_file {
-                create_dir(path);
+                let _ = create_dir(path);
             } else {
-                File::create(path);
+                let _ = File::create(path);
             }
         }
     }
@@ -87,10 +87,29 @@ impl Init {
         self.create_item(conf_dir_path, false);
         let conf_file_str = self.build_path(self.get_default_path(), self.get_conf_path(), self.get_conf_name(), self.get_conf_type());
         self.create_item(Path::new(&conf_file_str), true);
+        // write config
+        let conf = Settings::new();
+        conf.store_config();
         //init templates
-
+        let template_dir_str = self.build_path(self.get_default_path(), self.get_templates_path(), "", "");
+        let template_dir_path = Path::new(&template_dir_str);
+        self.create_item(template_dir_path, false);
         //init doc
-
+        let doc_dir_str = self.build_path(self.get_default_path(), self.get_doc_path(), "", "");
+        let doc_dir_path = Path::new(&doc_dir_str);
+        self.create_item(doc_dir_path, false);
+        let doc_file_str = self.build_path(self.get_default_path(), self.get_doc_path(), self.get_doc_path(), self.get_common_type());
+        self.create_item(Path::new(&doc_file_str), true);
+        let _ = write(Path::new(&doc_file_str), DOC_DOWNLOAD_URL);
         //init readme
+        let readme_file_str = format!("{}/{}.{}", self.get_default_path(), README, self.get_common_type());
+        self.create_item(Path::new(&readme_file_str), true);
+        let mut content = String::new();
+        for s in README_CONTENT {
+            content.push_str(s);
+            content.push_str("\n");
+            content.push_str("\n");
+        }
+        let _ = write(Path::new(&readme_file_str), &content);
     }
 }

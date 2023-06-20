@@ -6,6 +6,9 @@
 //! @description:
 //! ```
 use serde::{Serialize, Deserialize};
+use super::{CONF_DIR, CONF_FILE, TEMPLATE_DIR};
+use std::fs::write;
+use std::path::Path;
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct Settings {
@@ -25,8 +28,8 @@ pub enum Language {
 impl Default for Settings {
     fn default() -> Self {
         Settings {
-            store: "".to_string(),
-            template: "".to_string(),
+            store: format!("./{}/{}.json", CONF_DIR, CONF_FILE),
+            template: format!("./{}", TEMPLATE_DIR),
             auto: false,
             proportion: "13:7".to_string(),
             language: Language::Chinese,
@@ -43,13 +46,17 @@ impl From<&str> for Settings {
 }
 
 impl Settings {
-    fn new() -> Self {
+    pub fn new() -> Self {
         Settings::default()
     }
-    // fn store_config(&self) -> Result<bool, Box<&'static str>> {
-    //     // Settings -> Json
-    //     let json_str = serde_json::to_string_pretty(&self.clone()).unwrap();
-    //     // store in conf dir
-    //
-    // }
+    fn get_store(&self) -> &str {
+        &self.store
+    }
+    pub fn store_config(&self) {
+        // Settings -> Json
+        let json_str = serde_json::to_string_pretty(&self.clone()).unwrap();
+        // store in conf dir
+        let conf_path = Path::new(self.get_store());
+        let _ = write(conf_path, json_str);
+    }
 }
