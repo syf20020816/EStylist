@@ -6,9 +6,10 @@
 //! @description:
 //! ```
 
-use crate::{init_or_not,replace_name};
-use super::{Init, Settings, CONF_FILE, CONF_DIR,HTML};
-use std::fs::{write, read_to_string};
+use std::ffi::OsStr;
+use crate::{init_or_not, replace_name};
+use super::{Init, Settings, CONF_FILE, CONF_DIR, HTML};
+use std::fs::{write, read_to_string, read_dir};
 use std::path::Path;
 
 
@@ -35,7 +36,7 @@ pub fn save_settings(settings: &str) {
 
 
 #[tauri::command]
-pub fn download_template(name: &str, data: &str,dom:&str) {
+pub fn download_template(name: &str, data: &str, dom: &str) {
     // read configuration file
     let conf_path = Path::new("./conf/EStylist_config.json");
     let conf: Settings = read_to_string(conf_path).unwrap().into();
@@ -44,7 +45,46 @@ pub fn download_template(name: &str, data: &str,dom:&str) {
     let template_path = Path::new(&template_path);
     let template_data_path = Path::new(&template_data_path);
     let _ = write(template_path, data).expect("Couldn't Download");
-    let mut html_dom = HTML.replace("$name$",name);
-    html_dom = html_dom.replace("$content$",dom);
+    let mut html_dom = HTML.replace("$name$", name);
+    html_dom = html_dom.replace("$content$", dom);
     let _ = write(template_data_path, html_dom).expect("Couldn't Download Template");
+}
+
+#[tauri::command]
+pub fn load_templates() -> Vec<String> {
+    let conf_path = Path::new("./conf/EStylist_config.json");
+    let conf: Settings = read_to_string(conf_path).unwrap().into();
+    let template_path = Path::new(conf.get_template());
+    let files = read_dir(template_path).unwrap();
+    let mut json_files = vec![];
+    for file_entry in files {
+        let file = file_entry.unwrap();
+        if file.file_type().unwrap().is_file() {
+            let file_path = file.path();
+            //获取扩展名
+            if let Some(extension) = file_path.extension() {
+                if extension.eq("json") {
+                    let file_name = file_path.file_name();
+                    match file_name {
+                        Some(name) => {
+                            json_files.push(name.to_str().unwrap().to_string())
+                        }
+                        None => ()
+                    }
+                }
+            }
+        }
+    }
+    return json_files;
+}
+
+#[tauri::command]
+pub fn upload_template(name: &str) -> String {
+    let conf_path = Path::new("./conf/EStylist_config.json");
+    let conf: Settings = read_to_string(conf_path).unwrap().into();
+    let template_path = format!("{}/{}", conf.get_template(), name);
+    let template_path = Path::new(&template_path);
+    // read and get json str
+    let json_str = read_to_string(template_path).unwrap();
+    json_str
 }

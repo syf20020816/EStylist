@@ -206,21 +206,38 @@
         <el-icon size="18" @click="scaleView(0.1)">
           <ZoomIn />
         </el-icon>
-        <el-icon size="18" @click="uploadTemplate">
+        <el-icon size="18" @click="uploadTemplateCheck">
           <Upload />
         </el-icon>
         <el-icon size="18" @click="downloadTemplateVisable = true">
           <Download />
         </el-icon>
+        <el-icon size="18" @click="uploadToStore">
+          <UploadFilled />
+        </el-icon>
       </div>
     </div>
   </div>
-  <el-dialog v-model="downloadTemplateVisable" :title="getStr(store.settings.language,pagei18n.common.dowloadTemplate.title)">
+  <el-dialog v-model="downloadTemplateVisable" :title="getStr(store.settings.language,pagei18n.common.dowloadTemplate.title)" width="40%">
     <el-input v-model="downloadFileName" :placeholder="getStr(store.settings.language,pagei18n.common.dowloadTemplate.placeholder)" clearable></el-input>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="downloadTemplateVisable = false">{{ getStr(store.settings.language,pagei18n.common.cancel) }}</el-button>
         <el-button type="primary" @click="downloadTemplate">
+          {{ getStr(store.settings.language,pagei18n.common.confirm) }}
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
+  <!-- load templates -->
+  <el-dialog v-model="uploadTemplateVisiable" :title="getStr(store.settings.language,pagei18n.common.uploadTemplate.title)" width="40%">
+    <el-select v-model="uploadTemplateTarget" :placeholder="getStr(store.settings.language,pagei18n.common.uploadTemplate.placeholder)" style="width: 90%;">
+      <el-option v-for="titem in store.templates" :key="titem" :label="titem" :value="titem" />
+    </el-select>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="uploadTemplateVisiable = false">{{ getStr(store.settings.language,pagei18n.common.cancel) }}</el-button>
+        <el-button type="primary" @click="uploadTemplate">
           {{ getStr(store.settings.language,pagei18n.common.confirm) }}
         </el-button>
       </span>
@@ -236,9 +253,9 @@ export default {
 
 <script lang="ts" setup>
 import { generateUUID, convertImageToBase64 } from '../util'
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { build, buildView, buildWrap } from '../styles/name'
-import { ZoomIn, ZoomOut, InfoFilled, Operation, Download, Upload } from '@element-plus/icons-vue'
+import { ZoomIn, ZoomOut, InfoFilled, Operation, Download, Upload, UploadFilled } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import type { BaseModel, AreaModel, Model } from '../core'
 import BaseOutter from '../components/BaseOutter.vue'
@@ -249,6 +266,8 @@ import { invoke } from '@tauri-apps/api'
 const component = 'MailEdit'
 let targetTemplate = ref()
 let downloadFileName = ref('')
+let uploadTemplateVisiable = ref(false)
+let uploadTemplateTarget = ref('')
 let downloadTemplateVisable = ref(false)
 const store = indexStore()
 const Direction = [
@@ -336,7 +355,8 @@ const JustifyContent = [
     label: 'baseline'
   }
 ]
-let mailModel = reactive({
+
+let mailModel = ref<any>({
   base: {
     // height: 240,
     width: 180,
@@ -388,9 +408,9 @@ const scaleView = (num: number) => {
 }
 // 修改子区域个数
 const saveBaseChange = () => {
-  let oldLen = mailModel.areasLen
-  if (oldLen < mailModel.base.areaNum) {
-    for (let i = oldLen; i < mailModel.base.areaNum; i++) {
+  let oldLen = mailModel.value.areasLen
+  if (oldLen < mailModel.value.base.areaNum) {
+    for (let i = oldLen; i < mailModel.value.base.areaNum; i++) {
       let tmp: AreaModel = {
         height: 100,
         width: 180,
@@ -408,15 +428,15 @@ const saveBaseChange = () => {
         areas: new Array(),
         modelItem: undefined
       }
-      mailModel.areas.push(tmp)
+      mailModel.value.areas.push(tmp)
     }
-  } else if (oldLen > mailModel.base.areaNum) {
-    for (let i = oldLen; i > mailModel.base.areaNum; i--) {
-      mailModel.areas.pop()
+  } else if (oldLen > mailModel.value.base.areaNum) {
+    for (let i = oldLen; i > mailModel.value.base.areaNum; i--) {
+      mailModel.value.areas.pop()
     }
   } else {
   }
-  mailModel.areasLen = mailModel.areas.length
+  mailModel.value.areasLen = mailModel.value.areas.length
   ElMessage({
     message: 'Change Save Successfully',
     type: 'success'
@@ -426,7 +446,7 @@ const saveBaseChange = () => {
 const saveAreaChange = (index: number) => {}
 // 添加模块
 const addModel = (index: number) => {
-  mailModel.areas[index].modelItem = {
+  mailModel.value.areas[index].modelItem = {
     type: 'div',
     height: '30px',
     width: '100%',
@@ -454,7 +474,7 @@ const uploadPicture = (index: number, event: any) => {
   const file = event.target.files[0]
   convertImageToBase64(file)
     .then((base64: any) => {
-      mailModel.areas[index].modelItem!.src = base64
+      mailModel.value.areas[index].modelItem!.src = base64
     })
     .catch(error => {
       console.error(error)
@@ -462,25 +482,90 @@ const uploadPicture = (index: number, event: any) => {
 
   console.log()
 }
-// 上传模板文件
-const uploadTemplate = () => {}
+
+// 上传模板文件检查
+const uploadTemplateCheck = () => {
+  if (store.templates.length == 0) {
+    invoke('load_templates').then((res: any) => {
+      store.templates = res
+      if (res.length == 0) {
+        ElMessage({
+          message: 'You Have No Templates!',
+          type: 'info'
+        })
+      } else {
+        ElMessage({
+          message: 'Load Templates Successfully!',
+          type: 'info'
+        })
+      }
+    })
+  }
+  uploadTemplateVisiable.value = true
+}
+
+// 上传文件
+const uploadTemplate = () => {
+  invoke('upload_template', { name: uploadTemplateTarget.value })
+    .then((res: any) => {
+      mailModel.value = JSON.parse(res)
+      store.templateMailModel = mailModel.value
+      ElMessage({
+        message: 'Upload Template Successfully! Please Wait a moment!',
+        type: 'success'
+      })
+    })
+    .catch(e => {
+      ElMessage({
+        message: 'Upload Template Failure!',
+        type: 'error'
+      })
+    })
+  setTimeout(() => {
+    uploadTemplateVisiable.value = false
+  }, 2000)
+}
+
 // 下载模板文件
 const downloadTemplate = () => {
-  let tmp = JSON.stringify(mailModel)
+  let tmp = JSON.stringify(mailModel.value)
   invoke('download_template', { name: downloadFileName.value, data: tmp, dom: targetTemplate.value.$el.outerHTML })
     .then(res => {
       ElMessage({
-        message: 'Download Template Successfully',
+        message: 'Download Template Successfully! Please Check Your Template Store Dir!',
         type: 'success'
       })
     })
     .catch(() => {
       ElMessage({
-        message: 'Download Template Failed',
+        message: 'Download Template Failed!',
         type: 'error'
       })
     })
+  downloadTemplateVisable.value = false
 }
+
+// 模板暂存到Pinia中，关闭页面消失
+const uploadToStore = () => {
+  store.templateMailModel = mailModel.value
+  if (JSON.stringify(store.templateMailModel) != '{}') {
+    ElMessage({
+      message: 'Upload To Temp Store Successfully!',
+      type: 'success'
+    })
+  } else {
+    ElMessage({
+      message: 'Upload To Temp Store Failure!',
+      type: 'error'
+    })
+  }
+}
+
+onMounted(() => {
+  if (JSON.stringify(store.templateMailModel) != '{}') {
+    mailModel.value = store.templateMailModel
+  }
+})
 </script>
 
 <style lang="scss" >

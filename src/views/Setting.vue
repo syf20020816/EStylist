@@ -156,6 +156,7 @@ $component: 'Setting';
         font-size: 16px;
         font-weight: 700;
         white-space: nowrap;
+        color: $bg-color-light;
         margin-right: 16px;
         display: flex;
         align-content: center;

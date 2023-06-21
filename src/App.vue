@@ -47,12 +47,17 @@ onBeforeMount(() => {
     // `invoke` 返回的是一个 Promise
     .then((res: any) => {
       store.settings = JSON.parse(res)
-
-      ElMessage({
-        message: 'init successfully!',
-        type: 'info'
-      })
+      if (store.settings.auto) {
+        invoke('load_templates').then((res: any) => {
+          store.templates = res
+        })
+      }
     })
+
+  ElMessage({
+    message: 'init successfully!',
+    type: 'info'
+  })
 })
 </script>
 

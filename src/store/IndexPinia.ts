@@ -7,6 +7,8 @@ export const indexStore = defineStore("index", {
   state: () => {
     return {
       settings: {} as Settings,
+      templates: [] as Array<string>,
+      templateMailModel: {},
     };
   },
   actions: {},

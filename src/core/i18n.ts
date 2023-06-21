@@ -10,6 +10,16 @@ export const getStr = (language: string, i18n: I18n): string => {
 
 export let pagei18n = {
   common: {
+    uploadTemplate: {
+      title: {
+        zh: "选择上传模板",
+        en: "Choose Upload Template",
+      } as I18n,
+      placeholder: {
+        zh: "选择JSON文件",
+        en: "Choose JSON File",
+      } as I18n,
+    },
     dowloadTemplate: {
       title: {
         zh: "确认存储文件",
