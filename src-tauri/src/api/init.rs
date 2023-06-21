@@ -5,7 +5,7 @@
 //! @version:0.0.1
 //! @description:
 //! ```
-use std::fs::{create_dir, create_dir_all, File, read_to_string, write};
+use std::fs::{create_dir, File, read_to_string, write};
 use std::path::{Path};
 use serde::{Serialize, Deserialize};
 use super::{Settings, CONF_DIR, CONF_FILE, TEMPLATE_DIR, DOC_DIR, DOC_FILE, DOC_DOWNLOAD_URL, README, README_CONTENT};

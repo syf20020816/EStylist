@@ -8,7 +8,6 @@
 
 use std::fs::{File, read_to_string};
 use std::path::Path;
-use tauri::regex::Regex;
 
 
 /// Init or not ? init -> true
@@ -32,9 +31,3 @@ pub fn init_or_not() -> Result<bool, Box<&'static str>> {
     return Ok(true);
 }
 
-/// 匹配
-pub fn replace_name(origin_str:&str,target:&str)->String{
-    let re = Regex::new(r"\$name\$").unwrap();
-    // let re = Regex::new(r"\$(\w+)\$").unwrap();
-    re.replace_all(origin_str, target).to_string()
-}

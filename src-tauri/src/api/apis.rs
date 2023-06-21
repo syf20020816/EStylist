@@ -7,7 +7,7 @@
 //! ```
 
 use std::ffi::OsStr;
-use crate::{init_or_not, replace_name};
+use crate::{init_or_not};
 use super::{Init, Settings, CONF_FILE, CONF_DIR, HTML};
 use std::fs::{write, read_to_string, read_dir};
 use std::path::Path;
