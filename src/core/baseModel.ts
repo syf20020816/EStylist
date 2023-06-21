@@ -74,4 +74,7 @@ export interface Settings {
   auto: boolean;
   proportion: string;
   language: string;
+  email: string;
+  password: string;
+  contacts: Array<string>;
 }

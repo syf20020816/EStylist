@@ -17,6 +17,9 @@ pub struct Settings {
     auto: bool,
     proportion: String,
     language: Language,
+    email:String,
+    password:String,
+    contacts:Vec<String>
 }
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -33,6 +36,9 @@ impl Default for Settings {
             auto: false,
             proportion: "13:7".to_string(),
             language: Language::Chinese,
+            email: "".to_string(),
+            password: "".to_string(),
+            contacts: vec![]
         }
     }
 }
@@ -53,6 +59,9 @@ impl Settings {
         &self.store
     }
     pub fn get_template(&self) -> &str {&self.template}
+    pub fn push_contact(&mut self,contact:&str){
+        self.contacts.push(contact.to_string())
+    }
     pub fn store_config(&self) {
         // Settings -> Json
         let json_str = serde_json::to_string_pretty(&self.clone()).unwrap();

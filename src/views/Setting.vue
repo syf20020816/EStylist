@@ -11,6 +11,14 @@
         <el-input v-model="store.settings.template" clearable></el-input>
       </div>
       <div :class="build('content','item')">
+        <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.email) }}</div>
+        <el-input v-model="store.settings.email" clearable></el-input>
+      </div>
+      <div :class="build('content','item')">
+        <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.password) }}</div>
+        <el-input v-model="store.settings.password" clearable type="password" show-password></el-input>
+      </div>
+      <div :class="build('content','item')">
         <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.autoTemplate) }}</div>
         <el-switch v-model="store.settings.auto" class="ml-2" style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949" />
       </div>

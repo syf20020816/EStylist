@@ -8,7 +8,9 @@ export const indexStore = defineStore("index", {
     return {
       settings: {} as Settings,
       templates: [] as Array<string>,
+      htmlTemplates: [] as Array<string>,
       templateMailModel: {},
+      templateMailHtml: "",
     };
   },
   actions: {},

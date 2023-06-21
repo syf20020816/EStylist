@@ -47,6 +47,7 @@ onBeforeMount(() => {
     // `invoke` 返回的是一个 Promise
     .then((res: any) => {
       store.settings = JSON.parse(res)
+
       if (store.settings.auto) {
         invoke('load_templates').then((res: any) => {
           store.templates = res

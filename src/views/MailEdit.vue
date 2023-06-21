@@ -215,6 +215,9 @@
         <el-icon size="18" @click="uploadToStore">
           <UploadFilled />
         </el-icon>
+        <el-icon size="18" @click="delCache">
+          <Delete />
+        </el-icon>
       </div>
     </div>
   </div>
@@ -255,8 +258,8 @@ export default {
 import { generateUUID, convertImageToBase64 } from '../util'
 import { ref, reactive, computed, onMounted } from 'vue'
 import { build, buildView, buildWrap } from '../styles/name'
-import { ZoomIn, ZoomOut, InfoFilled, Operation, Download, Upload, UploadFilled } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
+import { ZoomIn, ZoomOut, InfoFilled, Operation, Download, Upload, UploadFilled, Delete } from '@element-plus/icons-vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import type { BaseModel, AreaModel, Model } from '../core'
 import BaseOutter from '../components/BaseOutter.vue'
 import { pagei18n, getStr } from '../core'
@@ -358,7 +361,6 @@ const JustifyContent = [
 
 let mailModel = ref<any>({
   base: {
-    // height: 240,
     width: 180,
     bgColor: '#fff',
     fontSize: 16,
@@ -506,7 +508,7 @@ const uploadTemplateCheck = () => {
 
 // 上传文件
 const uploadTemplate = () => {
-  invoke('upload_template', { name: uploadTemplateTarget.value })
+  invoke('upload_file', { name: uploadTemplateTarget.value })
     .then((res: any) => {
       mailModel.value = JSON.parse(res)
       store.templateMailModel = mailModel.value
@@ -548,6 +550,7 @@ const downloadTemplate = () => {
 // 模板暂存到Pinia中，关闭页面消失
 const uploadToStore = () => {
   store.templateMailModel = mailModel.value
+  store.templateMailHtml = targetTemplate.value.$el.outerHTML
   if (JSON.stringify(store.templateMailModel) != '{}') {
     ElMessage({
       message: 'Upload To Temp Store Successfully!',
@@ -561,6 +564,58 @@ const uploadToStore = () => {
   }
 }
 
+const delCache = () => {
+  ElMessageBox.confirm('Delete The Template And Cache?', 'Warning', {
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Cancel',
+    type: 'warning'
+  })
+    .then(() => {
+      store.templateMailHtml = ''
+      store.templateMailModel = {}
+      mailModel.value = {
+        base: {
+          width: 180,
+          bgColor: '#fff',
+          fontSize: 16,
+          areaNum: 1,
+          direction: 'y',
+          padding: 0
+        },
+        areas: [
+          {
+            height: 100,
+            width: 180,
+            bgColor: '#fff',
+            fontSize: 16,
+            fontColor: '#000',
+            fontFamily: 'Helvetica',
+            areaNum: 0,
+            direction: 'y',
+            padding: [0, 0, 0, 0],
+            margin: [0, 0, 0, 0],
+            textAlign: 'center',
+            span: 1,
+            areas: new Array(),
+            justifyContent: 'center',
+            modelItem: undefined
+          }
+        ] as Array<AreaModel>,
+        areasLen: 1
+      }
+      ElMessage({
+        type: 'success',
+        message: 'Delete completed'
+      })
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: 'Delete canceled'
+      })
+    })
+}
+
 onMounted(() => {
   if (JSON.stringify(store.templateMailModel) != '{}') {
     mailModel.value = store.templateMailModel
@@ -569,94 +624,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss" >
-@use '../styles/name.scss' as *;
-@use '../styles/src/var.scss' as *;
-
-$component: 'MailEdit';
-
-@include buildView($component) {
-  height: inherit;
-  width: calc(100vw - 60px);
-  text-align: left;
-  color: $bg-color-light;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  @include buildWrap($component, 'left') {
-    width: 65%;
-    height: inherit;
-    overflow: scroll;
-    scrollbar-width: thin;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 30px;
-    box-sizing: border-box;
-  }
-  @include buildWrap($component, 'right') {
-    width: 35%;
-    height: inherit;
-    background-color: $bg-color-dark-deep;
-
-    @include buildWrap($component, 'templates') {
-      height: calc(100% - 24px);
-      width: 100%;
-      overflow-y: scroll;
-      scrollbar-width: thin;
-      @include build('template', 'base') {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        width: 100%;
-        height: auto;
-        margin: 0.5vh 0;
-        .tmptitle {
-          white-space: nowrap;
-          margin-right: 16px;
-          font-size: 13px;
-        }
-        .wrapline {
-          width: 100%;
-          margin: 0.5vh 0;
-          .el-input-number {
-            margin-left: 16px;
-          }
-        }
-      }
-      .el-collapse {
-        color: $bg-color-light;
-      }
-      .el-collapse-item__header {
-        background-color: transparent;
-        color: $bg-color-light;
-        text-indent: 10px;
-      }
-      .el-collapse-item__content {
-        background-color: $bg-color-dark;
-        color: $bg-color-light;
-        padding: 1vh 0.5vw;
-      }
-    }
-    // @include buildWrap($component, 'edit') {
-    //   height: calc(5% - 24px);
-    //   width: 100%;
-    // }
-    @include buildWrap($component, 'tools') {
-      height: 24px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-
-      .el-icon {
-        cursor: pointer;
-        transition: all 0.4s ease-in-out;
-        &:hover {
-          filter: drop-shadow(0 0 4px $force-color) brightness(1.5);
-          transform: scale(0.9);
-        }
-      }
-    }
-  }
-}
+@use '../styles/views/MailEdit.scss';
 </style>

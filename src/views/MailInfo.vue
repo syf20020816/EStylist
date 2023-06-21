@@ -8,6 +8,12 @@
       <div :class="build('content','des')">
         {{ getStr(store.settings.language,pagei18n.info.des) }}
       </div>
+      <div :class="build('content','title')">
+        {{ getStr(store.settings.language,pagei18n.info.promise) }}
+      </div>
+      <div :class="build('content','des')">
+        {{ getStr(store.settings.language,pagei18n.info.promiseDes) }}
+      </div>
       <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="version" label="Version" width="200" />
         <el-table-column prop="date" label="Date" />

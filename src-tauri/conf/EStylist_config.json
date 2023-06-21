@@ -3,5 +3,11 @@
   "template": "./templates",
   "auto": true,
   "proportion": "13:7",
-  "language": "English"
+  "language": "English",
+  "email": "2654029407@qq.com",
+  "password": "hvacushccrxtdjda",
+  "contacts": [
+    "syf20020816@outlook.com",
+    "2078933968@qq.com"
+  ]
 }

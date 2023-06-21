@@ -22,7 +22,8 @@ pub fn init() -> String {
         init_obj.init_all();
     }
     // get config
-    let settings = init_obj.get_config_settings();
+    let conf_path = Path::new("./conf/EStylist_config.json");
+    let settings: Settings = read_to_string(conf_path).unwrap().into();
     serde_json::to_string(&settings).unwrap()
 }
 
@@ -78,13 +79,57 @@ pub fn load_templates() -> Vec<String> {
     return json_files;
 }
 
+
+
 #[tauri::command]
-pub fn upload_template(name: &str) -> String {
+pub fn load_html_templates()  -> Vec<String>{
+    let conf_path = Path::new("./conf/EStylist_config.json");
+    let conf: Settings = read_to_string(conf_path).unwrap().into();
+    let template_path = Path::new(conf.get_template());
+    let files = read_dir(template_path).unwrap();
+    let mut html_files = vec![];
+    for file_entry in files {
+        let file = file_entry.unwrap();
+        if file.file_type().unwrap().is_file() {
+            let file_path = file.path();
+            //获取扩展名
+            if let Some(extension) = file_path.extension() {
+                if extension.eq("html") {
+                    let file_name = file_path.file_name();
+                    match file_name {
+                        Some(name) => {
+                            html_files.push(name.to_str().unwrap().to_string())
+                        }
+                        None => ()
+                    }
+                }
+            }
+        }
+    }
+    return html_files;
+}
+
+
+
+#[tauri::command]
+pub fn upload_file(name:&str)->String{
     let conf_path = Path::new("./conf/EStylist_config.json");
     let conf: Settings = read_to_string(conf_path).unwrap().into();
     let template_path = format!("{}/{}", conf.get_template(), name);
     let template_path = Path::new(&template_path);
     // read and get json str
-    let json_str = read_to_string(template_path).unwrap();
-    json_str
+    let res = read_to_string(template_path).unwrap();
+    res
+}
+
+
+/// add contact return Settings
+#[tauri::command]
+pub fn add_contact(email:&str)->String{
+    let conf_path = Path::new("./conf/EStylist_config.json");
+    let mut settings: Settings = read_to_string(conf_path).unwrap().into();
+    let _ = settings.push_contact(email);
+    // store
+    settings.store_config();
+    serde_json::to_string(&settings).unwrap()
 }

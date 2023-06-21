@@ -40,7 +40,9 @@ pub const HTML: &str = r#"<!DOCTYPE html>
         min-height: 100vh;
         width: 100vw;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
+        box-sizing: border-box;
+        padding:20px;
         justify-content: center;
         height: auto;
       }

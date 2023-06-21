@@ -145,7 +145,36 @@ export let pagei18n = {
       en: "Child Area Num",
     } as I18n,
   },
-  send: {},
+  send: {
+    contact: {
+      title: {
+        zh: "添加联系人邮箱",
+        en: "Add Contact Email",
+      } as I18n,
+      // placeholder: {
+      //   zh: "选择HTML文件",
+      //   en: "Choose HTML File",
+      // } as I18n,
+    },
+    uploadTemplate: {
+      title: {
+        zh: "选择上传模板",
+        en: "Choose Upload Template",
+      } as I18n,
+      placeholder: {
+        zh: "选择HTML文件",
+        en: "Choose HTML File",
+      } as I18n,
+    },
+    recipient: {
+      zh: "收件人",
+      en: "Recipient",
+    } as I18n,
+    cc: {
+      zh: "抄送",
+      en: "Carbon Copy",
+    } as I18n,
+  },
   info: {
     what: {
       zh: "什么是EStylist",
@@ -155,8 +184,28 @@ export let pagei18n = {
       zh: "EStylist的意思是电子邮件设计者。我想知道你是否经常被丑陋的电子邮件所困扰，并想追求电子邮件的布局和风格。你想要像Stream或GitHub那样精致的电子邮件吗？让EStylist帮助您构建精美的电子邮件！",
       en: "EStylist means email designer. I wonder if you are often troubled by ugly emails and want to pursue the layout and style of emails. Do you want emails as exquisite as Stream or GitHub? Let EStylist help you build exquisite emails!",
     } as I18n,
+    promise: {
+      zh: "承诺",
+      en: "Promise",
+    } as I18n,
+    promiseDes: {
+      zh: "本程序永远不会索要任何您的个人信息，所有的信息都会存储在你的电脑上。",
+      en: "This program will never request any personal information from you, and all information will be stored on your computer.",
+    } as I18n,
   },
   settings: {
+    email: {
+      zh: "邮箱",
+      en: "Email",
+    } as I18n,
+    password: {
+      zh: "密码",
+      en: "Password",
+    } as I18n,
+    connector: {
+      zh: "联系人列表",
+      en: "Contact List",
+    } as I18n,
     title: {
       zh: "设置",
       en: "Settings",

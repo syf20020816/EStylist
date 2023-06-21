@@ -1,0 +1,90 @@
+@use '../name.scss' as *;
+@use '../src/var.scss' as *;
+
+$component: 'MailEdit';
+
+@include buildView($component) {
+  height: inherit;
+  width: calc(100vw - 60px);
+  text-align: left;
+  color: $bg-color-light;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @include buildWrap($component, 'left') {
+    width: 65%;
+    height: inherit;
+    overflow: scroll;
+    scrollbar-width: thin;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 30px;
+    box-sizing: border-box;
+  }
+  @include buildWrap($component, 'right') {
+    width: 35%;
+    height: inherit;
+    background-color: $bg-color-dark-deep;
+
+    @include buildWrap($component, 'templates') {
+      height: calc(100% - 24px);
+      width: 100%;
+      overflow-y: scroll;
+      scrollbar-width: thin;
+      @include build('template', 'base') {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        height: auto;
+        margin: 0.5vh 0;
+        .tmptitle {
+          white-space: nowrap;
+          margin-right: 16px;
+          font-size: 13px;
+        }
+        .wrapline {
+          width: 100%;
+          margin: 0.5vh 0;
+          .el-input-number {
+            margin-left: 16px;
+          }
+        }
+      }
+      .el-collapse {
+        color: $bg-color-light;
+      }
+      .el-collapse-item__header {
+        background-color: transparent;
+        color: $bg-color-light;
+        text-indent: 10px;
+      }
+      .el-collapse-item__content {
+        background-color: $bg-color-dark;
+        color: $bg-color-light;
+        padding: 1vh 0.5vw;
+      }
+    }
+    // @include buildWrap($component, 'edit') {
+    //   height: calc(5% - 24px);
+    //   width: 100%;
+    // }
+    @include buildWrap($component, 'tools') {
+      height: 24px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+
+      .el-icon {
+        cursor: pointer;
+        transition: all 0.4s ease-in-out;
+        &:hover {
+          filter: drop-shadow(0 0 4px $force-color) brightness(1.5);
+          transform: scale(0.9);
+        }
+      }
+    }
+  }
+}
