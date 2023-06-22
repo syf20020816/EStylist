@@ -21,7 +21,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.dev",
+      "identifier": "com.EStylist.syf",
       "icon": [
         "icons/EStylist.png",
         "icons/EStylist.ico"

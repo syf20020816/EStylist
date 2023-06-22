@@ -9,6 +9,9 @@
         <el-icon size="20" @click="toPage('send')">
           <Message />
         </el-icon>
+        <el-icon size="20" @click="toPage('doc')">
+          <Document />
+        </el-icon>
       </div>
       <div :class="buildWrap(component,'nav-bottom')">
         <el-icon size="20" @click="toPage('info')">
@@ -27,7 +30,7 @@
 
 <script setup lang="ts">
 import { build, buildView, buildWrap } from './styles/name'
-import { Edit, Message, InfoFilled, Tools } from '@element-plus/icons-vue'
+import { Edit, Message, InfoFilled, Tools, Document } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import { onBeforeMount } from 'vue'
 import { invoke } from '@tauri-apps/api'

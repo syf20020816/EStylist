@@ -42,7 +42,7 @@
                 </el-select>
               </div>
               <div style="display: flex;align-items: center;justify-content:end;margin-top: 1vh;">
-                <el-button type="success" round @click="saveBaseChange">Save Change</el-button>
+                <el-button type="success" round @click="saveBaseChange">{{ getStr(store.settings.language,pagei18n.buttons.changeArea) }}</el-button>
               </div>
             </div>
           </el-collapse-item>
@@ -108,8 +108,8 @@
                 </el-select>
               </div>
               <div style="display: flex;align-items: center;justify-content:end;margin-top: 1vh;">
-                <el-button type="primary" round @click="addModel(index)">添加模块</el-button>
-                <el-button type="success" round @click="saveAreaChange(index)">修改子区域</el-button>
+                <el-button type="primary" round @click="addModel(index)">{{ getStr(store.settings.language,pagei18n.buttons.addModel) }}</el-button>
+                <el-button type="success" round @click="saveAreaChange(index)">{{ getStr(store.settings.language,pagei18n.buttons.changeArea) }}</el-button>
               </div>
               <div :class="build('template','base')" v-if="citem.modelItem!=null" style="display: flex;flex-wrap: wrap;">
                 <div class="tmptitle" style="width: 100%;font-size:14px;"><el-icon>
@@ -531,7 +531,7 @@ const uploadTemplate = () => {
     })
   setTimeout(() => {
     uploadTemplateVisiable.value = false
-  }, 2000)
+  }, 1500)
 }
 
 // 下载模板文件

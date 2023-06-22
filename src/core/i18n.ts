@@ -246,6 +246,14 @@ export let pagei18n = {
     } as I18n,
   },
   buttons: {
+    addModel: {
+      zh: "添加模块",
+      en: "Add Model",
+    } as I18n,
+    changeArea: {
+      zh: "修改子区域个数",
+      en: "Change Area Num",
+    } as I18n,
     save: {
       zh: "保存",
       en: "Save",

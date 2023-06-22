@@ -3,9 +3,9 @@
   "template": "./templates",
   "auto": true,
   "proportion": "13:7",
-  "language": "Chinese",
+  "language": "English",
   "email": "2654029407@qq.com",
-  "password": "gmaonrqdkygkecgg",
+  "password": "",
   "smtp": "smtp.qq.com",
   "contacts": [
     "syf20020816@outlook.com",

@@ -78,7 +78,7 @@ body{
 }
 
 li{
-  list-style: none;
+  // list-style: none;
 }
 
 .el-tabs__item:hover{
@@ -157,3 +157,18 @@ li{
   font-size: 2vh !important;
 }
 
+.el-tabs__item {
+  color: $bg-color-light;
+  font-weight: 700;
+}
+.demo-tabs > .el-tabs__content {
+  padding:16px;
+ box-sizing: border-box;
+  overflow-y: scroll;
+  text-align: left;
+}
+
+.el-tabs--right .el-tabs__content,
+.el-tabs--left .el-tabs__content {
+  height: 100%;
+}

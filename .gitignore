@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+src-tauri/target
+src-tauri/doc
+src-tauri/conf
+src-tauri/templates
+src-tauri/.idea
