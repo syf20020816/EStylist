@@ -27,26 +27,6 @@ pub const HTML: &str = r#"<!DOCTYPE html>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>$name$</title>
-    <style>
-      :root {
-        margin: 0;
-        padding: 0;
-        background-color: #263238;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      body {
-        min-height: 100vh;
-        width: 100vw;
-        display: flex;
-        align-items: flex-start;
-        box-sizing: border-box;
-        padding:20px;
-        justify-content: center;
-        height: auto;
-      }
-    </style>
   </head>
   <body>
     $content$

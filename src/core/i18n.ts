@@ -166,6 +166,10 @@ export let pagei18n = {
         en: "Choose HTML File",
       } as I18n,
     },
+    title: {
+      zh: "主题",
+      en: "Title",
+    } as I18n,
     recipient: {
       zh: "收件人",
       en: "Recipient",

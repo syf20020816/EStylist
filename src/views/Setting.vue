@@ -88,7 +88,7 @@ const Proportion = [
   },
   {
     label: '6:4',
-    value: '1:2'
+    value: '6:4'
   },
   {
     label: '4:6',
@@ -96,11 +96,15 @@ const Proportion = [
   },
   {
     label: '13:7',
-    value: '7:13'
+    value: '13:7'
   },
   {
     label: '7:13',
     value: '7:13'
+  },
+  {
+    label: '3:1',
+    value: '3:1'
   }
 ]
 

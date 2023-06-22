@@ -17,9 +17,9 @@ pub struct Settings {
     auto: bool,
     proportion: String,
     language: Language,
-    email:String,
-    password:String,
-    contacts:Vec<String>
+    email: String,
+    password: String,
+    contacts: Vec<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -38,7 +38,7 @@ impl Default for Settings {
             language: Language::Chinese,
             email: "".to_string(),
             password: "".to_string(),
-            contacts: vec![]
+            contacts: vec![],
         }
     }
 }
@@ -58,9 +58,15 @@ impl Settings {
     fn get_store(&self) -> &str {
         &self.store
     }
-    pub fn get_template(&self) -> &str {&self.template}
-    pub fn push_contact(&mut self,contact:&str){
+    pub fn get_template(&self) -> &str { &self.template }
+    pub fn push_contact(&mut self, contact: &str) {
         self.contacts.push(contact.to_string())
+    }
+    pub fn pop_contact(&mut self, contact: &str) {
+        self.contacts.retain(|x| x.ne(contact))
+    }
+    pub fn get_password(&self)->&str{
+        &self.password
     }
     pub fn store_config(&self) {
         // Settings -> Json

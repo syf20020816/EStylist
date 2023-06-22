@@ -11,6 +11,11 @@ use crate::{init_or_not};
 use super::{Init, Settings, CONF_FILE, CONF_DIR, HTML};
 use std::fs::{write, read_to_string, read_dir};
 use std::path::Path;
+use lettre::{Message, SmtpTransport, Transport};
+use lettre::transport::smtp::authentication::Credentials;
+use lettre::message::header::ContentType;
+use lettre::transport::smtp::Error;
+use lettre::transport::smtp::response::Response;
 
 
 /// Init Service
@@ -80,9 +85,8 @@ pub fn load_templates() -> Vec<String> {
 }
 
 
-
 #[tauri::command]
-pub fn load_html_templates()  -> Vec<String>{
+pub fn load_html_templates() -> Vec<String> {
     let conf_path = Path::new("./conf/EStylist_config.json");
     let conf: Settings = read_to_string(conf_path).unwrap().into();
     let template_path = Path::new(conf.get_template());
@@ -110,9 +114,8 @@ pub fn load_html_templates()  -> Vec<String>{
 }
 
 
-
 #[tauri::command]
-pub fn upload_file(name:&str)->String{
+pub fn upload_file(name: &str) -> String {
     let conf_path = Path::new("./conf/EStylist_config.json");
     let conf: Settings = read_to_string(conf_path).unwrap().into();
     let template_path = format!("{}/{}", conf.get_template(), name);
@@ -125,11 +128,55 @@ pub fn upload_file(name:&str)->String{
 
 /// add contact return Settings
 #[tauri::command]
-pub fn add_contact(email:&str)->String{
+pub fn add_contact(email: &str) -> String {
     let conf_path = Path::new("./conf/EStylist_config.json");
     let mut settings: Settings = read_to_string(conf_path).unwrap().into();
     let _ = settings.push_contact(email);
     // store
     settings.store_config();
     serde_json::to_string(&settings).unwrap()
+}
+
+/// delete a contact
+#[tauri::command]
+pub fn del_contact(email: &str) -> String {
+    let conf_path = Path::new("./conf/EStylist_config.json");
+    let mut settings: Settings = read_to_string(conf_path).unwrap().into();
+    settings.pop_contact(email);
+    // store
+    settings.store_config();
+    serde_json::to_string(&settings).unwrap()
+}
+
+/// send email
+#[tauri::command]
+pub fn send_email(from: &str, cc: &str, to: &str, subject: &str, content: &str) -> String {
+    // get pwd
+    let conf_path = Path::new("./conf/EStylist_config.json");
+    let mut settings: Settings = read_to_string(conf_path).unwrap().into();
+    let pwd = String::from(settings.get_password());
+
+    let mut from_mut = from;
+    let mut to_mut = to;
+    let mut cc_mut = cc;
+    let email = Message::builder()
+        .from(from_mut.parse().unwrap())
+        .to(to_mut.parse().unwrap())
+        .subject(subject)
+        .header(ContentType::TEXT_HTML)
+        .body(String::from(content))
+        .unwrap();
+
+
+    let cred = Credentials::new(from_mut.to_string(), pwd);
+
+    let mailer = SmtpTransport::relay("smtp.qq.com")
+        .unwrap().credentials(cred).build();
+
+
+    // Send
+    match mailer.send(&email) {
+        Ok(_) => "Send Successfully".to_string(),
+        Err(e) => e.to_string()
+    }
 }

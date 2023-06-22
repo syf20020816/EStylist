@@ -3,6 +3,10 @@
     <div :class="buildWrap(component,'left')">
       <div :class="build(component,'tools')">
         <div :class="build('tool','item')">
+          <div class="title">{{ getStr(store.settings.language,pagei18n.send.title) }}:</div>
+          <el-input v-model="MailSend.subject" :placeholder="getStr(store.settings.language,pagei18n.send.title)" clearable></el-input>
+        </div>
+        <div :class="build('tool','item')">
           <div class="title">{{ getStr(store.settings.language,pagei18n.send.recipient) }}:</div>
           <el-input v-model="MailSend.to" :placeholder="getStr(store.settings.language,pagei18n.send.recipient)" clearable></el-input>
         </div>
@@ -19,20 +23,23 @@
       </div>
       <div class="send">
         <el-button type="primary" @click="uploadTemplateCheck">Choose</el-button>
-        <el-button type="primary">Send</el-button>
+        <el-button type="primary" @click="sendEmail">Send</el-button>
       </div>
     </div>
     <div :class="buildWrap(component,'right')">
       <div :class="build(component,'connectTitle')"> {{ getStr(store.settings.language,pagei18n.settings.connector) }}</div>
       <div :class="build(component,'connectList')">
         <div :class="build('connectList','item')" v-for="item,index in store.settings.contacts" :key="index">
-          <span style="overflow-x:hidden;display: inline-block;width: calc(100% - 50px);"> {{ item }}</span>
+          <span style="overflow-x:hidden;display: inline-block;width: calc(100% - 64px);"> {{ item }}</span>
           <span>
-            <el-icon size="18" @click="addRecipient(item)">
+            <el-icon size="16" @click="addRecipient(item)">
               <Promotion />
             </el-icon>
-            <el-icon size="18" @click="addCC(item)">
+            <el-icon size="16" @click="addCC(item)">
               <CopyDocument />
+            </el-icon>
+            <el-icon size="16" @click="delContact(item)">
+              <CircleCloseFilled />
             </el-icon>
           </span>
         </div>
@@ -84,7 +91,7 @@ import { indexStore } from '../store/IndexPinia'
 import { ElMessage } from 'element-plus'
 import { invoke } from '@tauri-apps/api'
 import BaseOutter from '../components/BaseOutter.vue'
-import { Promotion, CopyDocument } from '@element-plus/icons-vue'
+import { Promotion, CopyDocument, CircleCloseFilled } from '@element-plus/icons-vue'
 
 const component = 'MailSend'
 const store = indexStore()
@@ -98,7 +105,8 @@ let sendMailHTML = ref('')
 
 let MailSend = ref({
   to: '',
-  cc: ''
+  cc: '',
+  subject: ''
 })
 
 // 上传模板文件检查
@@ -167,6 +175,40 @@ const addCC = (email: string) => {
   MailSend.value.cc = email
 }
 
+const delContact = (email: string) => {
+  invoke('del_contact', { email: email })
+    .then((res: any) => {
+      store.settings = JSON.parse(res)
+      ElMessage({
+        message: 'Del Contact Successfully!',
+        type: 'success'
+      })
+    })
+    .catch(() => {
+      ElMessage({
+        message: 'Del Contact Failed!',
+        type: 'error'
+      })
+    })
+}
+
+const sendEmail = () => {
+  console.log(sendMailHTML.value)
+  invoke('send_email', { from: store.settings.email, cc: MailSend.value.cc, to: MailSend.value.to, subject: MailSend.value.subject, content: sendMailHTML.value })
+    .then((res: any) => {
+      ElMessage({
+        message: res,
+        type: 'info'
+      })
+    })
+    .catch(e => {
+      ElMessage({
+        message: e,
+        type: 'error'
+      })
+    })
+}
+
 onMounted(() => {
   if (JSON.stringify(store.templateMailModel) != '{}') {
     mailModel.value = store.templateMailModel
@@ -195,7 +237,7 @@ $component: 'MailSend';
     height: inherit;
     width: 80%;
     @include build($component, 'tools') {
-      height: 100px;
+      height: 120px;
       background-color: $bg-color-dark-deep;
       display: flex;
       align-content: space-around;
@@ -204,7 +246,7 @@ $component: 'MailSend';
       flex-wrap: wrap;
       @include build('tool', 'item') {
         width: 100%;
-        height: 36px;
+        height: 40px;
         padding: 12px;
         box-sizing: border-box;
         display: flex;
@@ -222,7 +264,7 @@ $component: 'MailSend';
       }
     }
     .preview {
-      height: calc(90vh - 100px);
+      height: calc(90vh - 120px);
       width: 100%;
       overflow: scroll;
       display: flex;

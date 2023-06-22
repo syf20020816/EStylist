@@ -1,12 +1,12 @@
 <template>
   <div :id="buildView(component)">
-    <div :class="buildWrap(component,'left')">
+    <div :class="buildWrap(component,'left')" :style="`width:`+editLeftWidth+`%;`">
       <div :style="scaleViewStyle">
         <!-- todo: -->
         <BaseOutter id="targetTemplate" ref="targetTemplate" :data="mailModel"></BaseOutter>
       </div>
     </div>
-    <div :class="buildWrap(component,'right')">
+    <div :class="buildWrap(component,'right')" :style="`width:calc(100% - `+editLeftWidth+`%);`">
       <div :class="buildWrap(component,'templates')">
         <el-collapse accordion>
           <el-collapse-item name="1">
@@ -405,6 +405,14 @@ let scaleViewStyle = computed(() => {
     transform: 'scale(' + scaleViewSize.value + ')'
   }
 })
+
+let editLeftWidth = computed(() => {
+  let tmp_arr = store.settings.proportion.split(':')
+  let left = parseInt(tmp_arr[0])
+  let right = parseInt(tmp_arr[1])
+  let proportion_item = 100 / (left + right)
+  return proportion_item * left
+})
 const scaleView = (num: number) => {
   scaleViewSize.value += num
 }
@@ -487,22 +495,20 @@ const uploadPicture = (index: number, event: any) => {
 
 // 上传模板文件检查
 const uploadTemplateCheck = () => {
-  if (store.templates.length == 0) {
-    invoke('load_templates').then((res: any) => {
-      store.templates = res
-      if (res.length == 0) {
-        ElMessage({
-          message: 'You Have No Templates!',
-          type: 'info'
-        })
-      } else {
-        ElMessage({
-          message: 'Load Templates Successfully!',
-          type: 'info'
-        })
-      }
-    })
-  }
+  invoke('load_templates').then((res: any) => {
+    store.templates = res
+    if (res.length == 0) {
+      ElMessage({
+        message: 'You Have No Templates!',
+        type: 'info'
+      })
+    } else {
+      ElMessage({
+        message: 'Load Templates Successfully!',
+        type: 'info'
+      })
+    }
+  })
   uploadTemplateVisiable.value = true
 }
 
