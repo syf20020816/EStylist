@@ -4,7 +4,7 @@
 
 Firstly, let's take a look at the overall composition of the software. EStylist is currently composed of six modules
 
-![image-20230622233621386](E:\Rust\try\eStylist\README\HowToUse\imgs\image-20230622233621386.png)
+![image-20230622233621386](.\HowToUse\imgs\image-20230622233621386.png)
 
 1. 首页 Index
 2. 模板编辑 Template-Edit
@@ -23,7 +23,7 @@ Let's mainly learn about the three main functions: template editing, email sendi
 
 The first thing we need to understand is the settings. Through these settings, we can better use the program, and if you need to send email templates through EStylist, you must first understand these settings
 
-<img src="E:\Rust\try\eStylist\README\HowToUse\imgs\image-20230622234353511.png" alt="image-20230622234353511" style="zoom: 67%;" />
+<img src=".\HowToUse\imgs\image-20230622234353511.png" alt="image-20230622234353511" style="zoom: 67%;" />
 
 ### Configurations
 
@@ -58,7 +58,7 @@ The first thing we need to understand is the settings. Through these settings, w
 
 Template editing is the core function of EStylist. Its purpose is to design a satisfactory email template, or it can be a personal card. For users who have studied CSS, it may be easy to get started quickly, but if you have not studied it, please carefully study this section
 
-<img src="E:\Rust\try\eStylist\README\HowToUse\imgs\image-20230623010128337.png" alt="image-20230623010128337" style="zoom:67%;" />
+<img src=".\HowToUse\imgs\image-20230623010128337.png" alt="image-20230623010128337" style="zoom:67%;" />
 
 ### Configurations
 
@@ -89,7 +89,7 @@ Template editing is the core function of EStylist. Its purpose is to design a sa
 
 ### Understanding of Padding and Margins
 
-![image-20230623004342298](E:\Rust\try\eStylist\README\HowToUse\imgs\image-20230623004342298.png)
+![image-20230623004342298](.\HowToUse\imgs\image-20230623004342298.png)
 
 ### tools
 
@@ -97,16 +97,16 @@ Template editing is the core function of EStylist. Its purpose is to design a sa
 
 The tools are in the bottom right corner, currently there are a total of 6 types
 
-![image-20230623005030946](E:\Rust\try\eStylist\README\HowToUse\imgs\image-20230623005030946.png)
+![image-20230623005030946](.\HowToUse\imgs\image-20230623005030946.png)
 
 | icon                                                         | des                                                          |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![image-20230623005149823](E:\Rust\try\eStylist\README\HowToUse\imgs\image-20230623005149823.png) | 缩小模板编辑区<br />Shrink the template editing area         |
-| ![image-20230623005217185](E:\Rust\try\eStylist\README\HowToUse\imgs\image-20230623005217185.png) | 放大模板编辑区<br />Enlarge the template editing area        |
-| ![image-20230623005224310](E:\Rust\try\eStylist\README\HowToUse\imgs\image-20230623005224310.png) | 上传JSON模板文件<br />Upload JSON template file              |
-| ![image-20230623005233341](E:\Rust\try\eStylist\README\HowToUse\imgs\image-20230623005233341.png) | 下载JSON模板以及HTML文件<br />Download JSON templates and HTML files |
-| ![image-20230623005248274](E:\Rust\try\eStylist\README\HowToUse\imgs\image-20230623005248274.png) | 将模板存储到暂存区中，暂存区中的模板不会随着页面切换而消失，但关闭程序会消失<br />Store the template in the temporary storage area. The template in the temporary storage area will not disappear with page switching, but will disappear when the program is closed |
-| ![image-20230623005259709](E:\Rust\try\eStylist\README\HowToUse\imgs\image-20230623005259709.png) | 删除当前模板以及暂存区缓存<br />Delete the current template and temporary storage cache |
+| ![image-20230623005149823](.\HowToUse\imgs\image-20230623005149823.png) | 缩小模板编辑区<br />Shrink the template editing area         |
+| ![image-20230623005217185](.\HowToUse\imgs\image-20230623005217185.png) | 放大模板编辑区<br />Enlarge the template editing area        |
+| ![image-20230623005224310](.\HowToUse\imgs\image-20230623005224310.png) | 上传JSON模板文件<br />Upload JSON template file              |
+| ![image-20230623005233341](.\HowToUse\imgs\image-20230623005233341.png) | 下载JSON模板以及HTML文件<br />Download JSON templates and HTML files |
+| ![image-20230623005248274](.\HowToUse\imgs\image-20230623005248274.png) | 将模板存储到暂存区中，暂存区中的模板不会随着页面切换而消失，但关闭程序会消失<br />Store the template in the temporary storage area. The template in the temporary storage area will not disappear with page switching, but will disappear when the program is closed |
+| ![image-20230623005259709](.\HowToUse\imgs\image-20230623005259709.png) | 删除当前模板以及暂存区缓存<br />Delete the current template and temporary storage cache |
 
 > ❗下载下来的文件将存储到EStylist所在的templates目录下
 >
@@ -122,7 +122,7 @@ The tools are in the bottom right corner, currently there are a total of 6 types
 
 Finally, there is email sending. It is worth noting that EStylist aims to send built email templates. If you want to send regular emails, please move to regular email
 
-<img src="E:\Rust\try\eStylist\README\HowToUse\imgs\image-20230623004500093.png" alt="image-20230623004500093" style="zoom:67%;" />
+<img src=".\HowToUse\imgs\image-20230623004500093.png" alt="image-20230623004500093" style="zoom:67%;" />
 
 ### Buttons
 

@@ -25,25 +25,25 @@ These are common SMTP service providers, and you can choose the corresponding SM
 
 First, open the QQ email and select Settings
 
-![image-20230622231149817](E:\Rust\try\eStylist\README\Preparation\imgs\image-20230622231149817.png)
+![image-20230622231149817](.\Preparation\imgs\image-20230622231149817.png)
 
 选择邮箱设置中的账户
 
 Select an account in the email settings
 
-![image-20230622231314194](E:\Rust\try\eStylist\README\Preparation\imgs\image-20230622231314194.png)
+![image-20230622231314194](.\Preparation\imgs\image-20230622231314194.png)
 
 找到`POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV`服务，然后开启服务
 
 Find the` POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV `service and start the service
 
-![image-20230622231359770](E:\Rust\try\eStylist\README\Preparation\imgs\image-20230622231359770.png)
+![image-20230622231359770](.\Preparation\imgs\image-20230622231359770.png)
 
 选择安全设置，找到`POP3/IMAP/SMTP/Exchange/CardDAV `服务，然后生成授权码
 
 Select security settings, locate the` POP3/IMAP/SMTP/Exchange/CardDAV `service, and generate an authorization code
 
-![image-20230622231506917](E:\Rust\try\eStylist\README\Preparation\imgs\image-20230622231506917.png)
+![image-20230622231506917](.\Preparation\imgs\image-20230622231506917.png)
 
 > ❗生成的授权码请妥善保存
 >
