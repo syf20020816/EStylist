@@ -159,24 +159,33 @@ pub fn send_email(from: &str, cc: &str, to: &str, subject: &str, content: &str) 
     let mut from_mut = from;
     let mut to_mut = to;
     let mut cc_mut = cc;
-    let email = Message::builder()
-        .from(from_mut.parse().unwrap())
-        .to(to_mut.parse().unwrap())
-        .subject(subject)
-        .header(ContentType::TEXT_HTML)
-        .body(String::from(content))
-        .unwrap();
-
-
+    let smtp = settings.get_smtp();
     let cred = Credentials::new(from_mut.to_string(), pwd);
 
-    let mailer = SmtpTransport::relay("smtp.qq.com")
+    let mailer = SmtpTransport::relay(smtp)
         .unwrap().credentials(cred).build();
-
-
-    // Send
-    match mailer.send(&email) {
-        Ok(_) => "Send Successfully".to_string(),
-        Err(e) => e.to_string()
+    if cc.is_empty() {
+        let email = Message::builder()
+            .from(from_mut.parse().unwrap())
+            .to(to_mut.parse().unwrap())
+            .subject(subject)
+            .header(ContentType::TEXT_HTML).body(String::from(content)).unwrap();
+        // Send
+        match mailer.send(&email) {
+            Ok(_) => "Send Successfully".to_string(),
+            Err(e) => e.to_string()
+        }
+    } else {
+        let email = Message::builder()
+            .from(from_mut.parse().unwrap())
+            .reply_to(cc_mut.parse().unwrap())
+            .to(to_mut.parse().unwrap())
+            .subject(subject)
+            .header(ContentType::TEXT_HTML).body(String::from(content)).unwrap();
+        // Send
+        match mailer.send(&email) {
+            Ok(_) => "Send Successfully".to_string(),
+            Err(e) => e.to_string()
+        }
     }
 }

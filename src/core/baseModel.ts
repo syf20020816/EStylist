@@ -76,5 +76,6 @@ export interface Settings {
   language: string;
   email: string;
   password: string;
+  smtp: string;
   contacts: Array<string>;
 }

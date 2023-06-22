@@ -19,6 +19,7 @@ pub struct Settings {
     language: Language,
     email: String,
     password: String,
+    smtp:String,
     contacts: Vec<String>,
 }
 
@@ -38,6 +39,7 @@ impl Default for Settings {
             language: Language::Chinese,
             email: "".to_string(),
             password: "".to_string(),
+            smtp: "".to_string(),
             contacts: vec![],
         }
     }
@@ -67,6 +69,9 @@ impl Settings {
     }
     pub fn get_password(&self)->&str{
         &self.password
+    }
+    pub fn get_smtp(&self)->&str{
+        &self.smtp
     }
     pub fn store_config(&self) {
         // Settings -> Json
