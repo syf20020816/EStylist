@@ -29,7 +29,7 @@ Downloading EStylist is very simple. You can go to Gitee or GitHub to download t
 
 ## Directory Structure
 
-![image-20230622214506174](.\README\imgs\image-20230622214506174.png)
+<img src=".\README\imgs\image-20230622214506174.png">
 
 ## How To Use EStylist
 
