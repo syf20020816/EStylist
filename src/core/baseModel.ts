@@ -14,7 +14,8 @@
 export interface BaseModel {
   width: number;
   bgColor: string;
-  fontSize: number;
+  // 0.0.2版本被认为是不需要的，弃用
+  // fontSize: number;
   areaNum: number;
   direction: string;
   padding: number;
@@ -24,17 +25,21 @@ export interface BaseModel {
  * 内层容器样式表
  */
 export interface AreaModel {
-  height: number;
-  width: number;
+  // 0.0.2版本被认为是不需要的，弃用
+  // height: number;
+  // width: number;
   bgColor: string;
-  fontSize: number;
-  fontColor: string;
-  fontFamily: string;
+  // 0.0.2版本被认为是不需要的，弃用
+  // fontSize: number;
+  // fontColor: string;
+  // fontFamily: string;
   textAlign: string;
   areaNum: number;
   direction: string;
-  padding: Array<number>;
-  margin: Array<number>;
+  // 0.0.2版本被认为是不需要的，弃用
+  // padding: Array<number>;
+  // 0.0.2版本被认为是不需要的，弃用
+  // margin: Array<number>;
   span: number;
   areas: Array<AreaModel> | null;
   modelItem: ModelItem | undefined;

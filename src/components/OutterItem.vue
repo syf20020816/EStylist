@@ -15,7 +15,6 @@ export default {
 <script lang="ts" setup>
 import { ref, reactive, computed, defineProps, PropType } from 'vue'
 import { AreaModel } from '../core'
-import { parseArray } from '../util'
 
 const props = defineProps({
   data: {
@@ -25,13 +24,9 @@ const props = defineProps({
 })
 
 let ItemStyles = computed(() => {
-  let { bgColor, fontSize, fontColor, fontFamily, textAlign, direction, padding, margin, justifyContent } = props.data
-  let paddingParse = parseArray(padding)
-  let marginParse = parseArray(margin)
+  let { bgColor, textAlign, direction, justifyContent } = props.data
 
-  let mp = 'padding: ' + paddingParse + ';margin:' + marginParse + ';'
-
-  return 'font-size: ' + fontSize + 'pt; line-height: 0pt;' + 'background-color:' + bgColor + ' ;text-align: ' + textAlign + ';font-family:' + fontFamily + ' ;color: ' + fontColor + ';' + mp + 'display:flex;align-items:center;justify-content:' + justifyContent + ';'
+  return 'background-color:' + bgColor + ' ;text-align: ' + textAlign + ';' + 'display:flex;align-items:center;justify-content:' + justifyContent + ';'
 })
 
 let ItemColSpan = computed(() => {

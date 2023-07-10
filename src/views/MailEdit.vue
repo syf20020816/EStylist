@@ -14,7 +14,6 @@
               {{ getStr(store.settings.language,pagei18n.edit.basePlateTitle) }}
             </template>
             <div>
-
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.width) }}</div>
                 <el-input-number v-model="mailModel.base.width" :step="10" :max="800" />
@@ -22,10 +21,6 @@
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bgColor) }}</div>
                 <el-color-picker v-model="mailModel.base.bgColor" />
-              </div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontSize) }}</div>
-                <el-input-number v-model="mailModel.base.fontSize" :step="1" :max="60" />
               </div>
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.padding) }}</div>
@@ -51,31 +46,13 @@
               {{ getStr(store.settings.language,pagei18n.edit.areaTitle) }}{{ index+1 }}
             </template>
             <div>
-              <!-- <div :class="build('template','base')">
-                <div class="tmptitle">区域高度</div>
-                <el-input-number v-model="citem.height" :step="10" :max="800" />
-              </div> -->
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.colSpan) }}</div>
-                <el-input-number v-model="citem.span" :step="10" :max="800" />
+                <el-input-number v-model="citem.span" :step="1" :max="100" />
               </div>
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bgColor) }}</div>
                 <el-color-picker v-model="citem.bgColor" />
-              </div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontFamily) }}</div>
-                <el-select v-model="citem.fontFamily" placeholder="Select FontFamily">
-                  <el-option v-for="fitem in FontFamily" :key="fitem.value" :label="fitem.label" :value="fitem.value" />
-                </el-select>
-              </div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontColor) }}</div>
-                <el-color-picker v-model="citem.fontColor" />
-              </div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontSize) }}</div>
-                <el-input-number v-model="citem.fontSize" :step="1" :max="60" />
               </div>
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.contentPos) }}</div>
@@ -86,20 +63,6 @@
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.areaNum) }}</div>
                 <el-input-number v-model="citem.areaNum" :step="1" :max="20" />
-              </div>
-              <div :class="build('template','base')" style="flex-wrap: wrap;">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.padding) }}</div>
-                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.top) }}:<el-input-number v-model="citem.padding[0]" :step="1" :max="1000" /></div>
-                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.right) }}:<el-input-number v-model="citem.padding[1]" :step="1" :max="1000" /></div>
-                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.bottom) }}:<el-input-number v-model="citem.padding[2]" :step="1" :max="1000" /></div>
-                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.left) }}:<el-input-number v-model="citem.padding[3]" :step="1" :max="1000" /></div>
-              </div>
-              <div :class="build('template','base')" style="flex-wrap: wrap;">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.margin) }}</div>
-                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.top) }}:<el-input-number v-model="citem.margin[0]" :step="1" :max="1000" /></div>
-                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.right) }}:<el-input-number v-model="citem.margin[1]" :step="1" :max="1000" /></div>
-                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.bottom) }}:<el-input-number v-model="citem.margin[2]" :step="1" :max="1000" /></div>
-                <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.left) }}:<el-input-number v-model="citem.margin[3]" :step="1" :max="1000" /></div>
               </div>
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.direction) }}</div>
@@ -361,25 +324,17 @@ const JustifyContent = [
 
 let mailModel = ref<any>({
   base: {
-    width: 180,
+    width: 320,
     bgColor: '#fff',
-    fontSize: 16,
     areaNum: 1,
     direction: 'y',
-    padding: 0
+    padding: 46
   },
   areas: [
     {
-      height: 100,
-      width: 180,
       bgColor: '#fff',
-      fontSize: 16,
-      fontColor: '#000',
-      fontFamily: 'Helvetica',
       areaNum: 0,
       direction: 'y',
-      padding: [0, 0, 0, 0],
-      margin: [0, 0, 0, 0],
       textAlign: 'center',
       span: 1,
       areas: new Array(),
@@ -422,16 +377,9 @@ const saveBaseChange = () => {
   if (oldLen < mailModel.value.base.areaNum) {
     for (let i = oldLen; i < mailModel.value.base.areaNum; i++) {
       let tmp: AreaModel = {
-        height: 100,
-        width: 180,
         bgColor: '#fff',
-        fontSize: 16,
-        fontColor: '#000',
-        fontFamily: 'Helvetica',
         areaNum: 0,
         direction: 'y',
-        padding: [0, 0, 0, 0],
-        margin: [0, 0, 0, 0],
         textAlign: 'center',
         justifyContent: 'center',
         span: 1,
@@ -581,25 +529,17 @@ const delCache = () => {
       store.templateMailModel = {}
       mailModel.value = {
         base: {
-          width: 180,
+          width: 320,
           bgColor: '#fff',
-          fontSize: 16,
           areaNum: 1,
           direction: 'y',
-          padding: 0
+          padding: 46
         },
         areas: [
           {
-            height: 100,
-            width: 180,
             bgColor: '#fff',
-            fontSize: 16,
-            fontColor: '#000',
-            fontFamily: 'Helvetica',
             areaNum: 0,
             direction: 'y',
-            padding: [0, 0, 0, 0],
-            margin: [0, 0, 0, 0],
             textAlign: 'center',
             span: 1,
             areas: new Array(),

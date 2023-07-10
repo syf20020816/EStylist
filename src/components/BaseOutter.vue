@@ -44,8 +44,8 @@ const props = defineProps({
 })
 
 let baseOutterStyles = computed(() => {
-  let { width, fontSize } = props.data.base
-  return 'width: ' + width + 'px; min-width: ' + width + 'px; font-size: ' + fontSize + 'pt; line-height: 0pt; padding: 0; margin: 0; font-weight: normal'
+  let { width } = props.data.base
+  return 'width: ' + width + 'px; min-width: ' + width + 'px; line-height: 0pt; padding: 0; margin: 0; font-weight: normal'
 })
 
 let baseOutterPadding = computed(() => {
