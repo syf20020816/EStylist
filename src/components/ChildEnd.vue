@@ -34,7 +34,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, reactive, PropType, computed } from 'vue'
+import { ref, reactive, PropType, computed, watch, toRef } from 'vue'
 import { Operation } from '@element-plus/icons-vue'
 import { getStr, pagei18n, AreaModel, defaultAreaModel, JustifyContent, TextAlign, ModelTypes, Direction, FontFamily } from '../core'
 import { generateUUID, convertImageToBase64 } from '../util'
@@ -60,20 +60,26 @@ const props = defineProps({
   }
 })
 
-let areaData = computed(() => {
-  let { area } = props
-  return area
-})
+// let areaData = computed(() => {
+//   let { area } = props
+//   return area
+// })
 
-let areaItem = computed(() => {
-  let { index } = props
-  return index
-})
+// let areaItem = computed(() => {
+//   let { index } = props
+//   return index
+// })
 
-let areaFIndex = computed(() => {
-  let { fIndex } = props
-  return fIndex
-})
+// let areaFIndex = computed(() => {
+//   let { fIndex } = props
+//   return fIndex
+// })
+
+let areaData = toRef(props.area)
+
+let areaItem = toRef(props.index)
+
+let areaFIndex = toRef(props.fIndex)
 
 // 上传本地照片
 const uploadPicture = (file: any, index: number) => {

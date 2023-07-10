@@ -116,7 +116,7 @@ export default {
 
 <script lang="ts" setup>
 import { generateUUID, convertImageToBase64 } from '../util'
-import { ref, reactive, computed, onMounted, getCurrentInstance } from 'vue'
+import { ref, reactive, computed, onMounted, getCurrentInstance, watch, markRaw } from 'vue'
 import { build, buildView, buildWrap } from '../styles/name'
 import { ZoomIn, ZoomOut, InfoFilled, Operation, Download, Upload, UploadFilled, Delete } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
@@ -140,7 +140,7 @@ let addChildAreaIndex = ref(-1)
 const store = indexStore()
 
 //模板数据
-let mailModel = ref<any>({
+let mailModel = reactive<any>({
   base: {
     width: 320,
     bgColor: '#fff',
@@ -191,9 +191,9 @@ const scaleView = (num: number) => {
 }
 // 修改子区域个数
 const saveBaseChange = () => {
-  let oldLen = mailModel.value.areasLen
-  if (oldLen < mailModel.value.base.areaNum) {
-    for (let i = oldLen; i < mailModel.value.base.areaNum; i++) {
+  let oldLen = mailModel.areasLen
+  if (oldLen < mailModel.base.areaNum) {
+    for (let i = oldLen; i < mailModel.base.areaNum; i++) {
       let tmp: AreaModel = {
         bgColor: '#fff',
         areaNum: 0,
@@ -204,15 +204,15 @@ const saveBaseChange = () => {
         areas: new Array(),
         modelItem: undefined
       }
-      mailModel.value.areas.push(tmp)
+      mailModel.areas.push(tmp)
     }
-  } else if (oldLen > mailModel.value.base.areaNum) {
-    for (let i = oldLen; i > mailModel.value.base.areaNum; i--) {
-      mailModel.value.areas.pop()
+  } else if (oldLen > mailModel.base.areaNum) {
+    for (let i = oldLen; i > mailModel.base.areaNum; i--) {
+      mailModel.areas.pop()
     }
   } else {
   }
-  mailModel.value.areasLen = mailModel.value.areas.length
+  mailModel.areasLen = mailModel.areas.length
   ElMessage({
     message: 'Change Save Successfully',
     type: 'success'
@@ -226,7 +226,7 @@ const saveBaseChange = () => {
 const saveAreaChange = (index: number) => {
   addChildAreaIndex.value = index
   //判断是否有模块
-  if (mailModel.value.areas[index].modelItem != undefined) {
+  if (mailModel.areas[index].modelItem != undefined) {
     addChildAreaVisiable.value = true
   } else {
     addChildAreaConfirm()
@@ -243,7 +243,7 @@ const addChildAreaConfirm = () => {
     })
   } else {
     //统一删除下属模块
-    mailModel.value.areas[addChildAreaIndex.value].modelItem = undefined
+    mailModel.areas[addChildAreaIndex.value].modelItem = undefined
     //添加子区域
     let tmp = {
       bgColor: '#fff',
@@ -256,25 +256,25 @@ const addChildAreaConfirm = () => {
       modelItem: undefined
     } as AreaModel
 
-    let len = mailModel.value.areas[addChildAreaIndex.value].areaNum
-    let currentLen = mailModel.value.areas[addChildAreaIndex.value].areas.length
+    let len = mailModel.areas[addChildAreaIndex.value].areaNum
+    let currentLen = mailModel.areas[addChildAreaIndex.value].areas.length
 
     if (currentLen > len) {
       for (let i = currentLen; i > len; i--) {
-        mailModel.value.areas[addChildAreaIndex.value].areas.pop()
+        mailModel.areas[addChildAreaIndex.value].areas.pop()
       }
     } else if (currentLen < len) {
       for (let i = currentLen; i < len; i++) {
-        mailModel.value.areas[addChildAreaIndex.value].areas.push(tmp)
+        mailModel.areas[addChildAreaIndex.value].areas.push(tmp)
       }
     }
   }
   addChildAreaVisiable.value = false
-  console.log(mailModel.value.areas[addChildAreaIndex.value].areas)
+  console.log(mailModel.areas[addChildAreaIndex.value].areas)
 }
 // 添加模块
 const addModel = (index: number) => {
-  mailModel.value.areas[index].modelItem = {
+  mailModel.areas[index].modelItem = {
     type: 'div',
     height: '30px',
     width: '100%',
@@ -299,7 +299,7 @@ const addModel = (index: number) => {
 }
 
 const delModel = (index: number) => {
-  mailModel.value.areas[index].modelItem = undefined
+  mailModel.areas[index].modelItem = undefined
   ElMessage({
     message: 'Del Model Successfully',
     type: 'success'
@@ -309,7 +309,7 @@ const delModel = (index: number) => {
 const uploadPicture = (file: any, index: number) => {
   convertImageToBase64(file)
     .then((base64: any) => {
-      mailModel.value.areas[index].modelItem!.src = base64
+      mailModel.areas[index].modelItem!.src = base64
     })
     .catch(error => {
       console.error(error)
@@ -339,8 +339,8 @@ const uploadTemplateCheck = () => {
 const uploadTemplate = () => {
   invoke('upload_file', { name: uploadTemplateTarget.value })
     .then((res: any) => {
-      mailModel.value = JSON.parse(res)
-      store.templateMailModel = mailModel.value
+      mailModel = JSON.parse(res)
+      store.templateMailModel = mailModel
       ElMessage({
         message: 'Upload Template Successfully! Please Wait a moment!',
         type: 'success'
@@ -359,7 +359,7 @@ const uploadTemplate = () => {
 
 // 下载模板文件
 const downloadTemplate = () => {
-  let tmp = JSON.stringify(mailModel.value)
+  let tmp = JSON.stringify(mailModel)
   invoke('download_template', { name: downloadFileName.value, data: tmp, dom: targetTemplate.value.$el.outerHTML })
     .then(res => {
       ElMessage({
@@ -378,7 +378,7 @@ const downloadTemplate = () => {
 
 // 模板暂存到Pinia中，关闭页面消失
 const uploadToStore = () => {
-  store.templateMailModel = mailModel.value
+  store.templateMailModel = mailModel
   store.templateMailHtml = targetTemplate.value.$el.outerHTML
   if (JSON.stringify(store.templateMailModel) != '{}') {
     ElMessage({
@@ -400,30 +400,30 @@ const delCache = () => {
     type: 'warning'
   })
     .then(() => {
+      console.log(mailModel)
       store.templateMailHtml = ''
       store.templateMailModel = {}
-      mailModel.value = {
-        base: {
-          width: 320,
-          bgColor: '#fff',
-          areaNum: 1,
-          direction: 'y',
-          padding: 46
-        },
-        areas: [
-          {
-            bgColor: '#fff',
-            areaNum: 0,
-            direction: 'y',
-            textAlign: 'center',
-            span: 1,
-            areas: new Array(),
-            justifyContent: 'center',
-            modelItem: undefined
-          }
-        ] as Array<AreaModel>,
-        areasLen: 1
+      mailModel.base = {
+        width: 320,
+        bgColor: '#fff',
+        areaNum: 1,
+        direction: 'y',
+        padding: 46
       }
+      mailModel.areas = [
+        {
+          bgColor: '#fff',
+          areaNum: 0,
+          direction: 'y',
+          textAlign: 'center',
+          span: 1,
+          areas: new Array(),
+          justifyContent: 'center',
+          modelItem: undefined
+        }
+      ] as Array<AreaModel>
+      mailModel.areasLen = 1
+      console.log(mailModel)
       ElMessage({
         type: 'success',
         message: 'Delete completed'
@@ -437,23 +437,28 @@ const delCache = () => {
     })
 }
 
-const childEndSpanChange = (e: any, fIndex: number, index: number) => {
-  mailModel.value.areas[fIndex].areas[index].span = e
-  console.log(mailModel.value.areas[fIndex].areas[index].span)
+const childEndSpanChange = (e: number, fIndex: number, index: number) => {
+  mailModel.areas[fIndex].areas[index].span = e
 }
-const childEndBGChange = (e: any, fIndex: number, index: number) => {
-  mailModel.value.areas[fIndex].areas[index].bgColor = e
-  console.log(mailModel.value.areas[fIndex].areas[index].bgColor)
-  ctx.$forceUpdate()
+const childEndBGChange = (e: string, fIndex: number, index: number) => {
+  mailModel.areas[fIndex].areas[index].bgColor = e
 }
-const childEndJCChange = (e: any, fIndex: number, index: number) => {
-  mailModel.value.areas[fIndex].areas[index].justifyContent = e
-  console.log(mailModel.value.areas[fIndex].areas[index].justifyContent)
+const childEndJCChange = (e: string, fIndex: number, index: number) => {
+  mailModel.areas[fIndex].areas[index].justifyContent = e
 }
+
+watch(
+  mailModel,
+  (newVal: any, oldVal: any) => {
+    console.log(newVal)
+    mailModel = newVal
+  },
+  { deep: true }
+)
 
 onMounted(() => {
   if (JSON.stringify(store.templateMailModel) != '{}') {
-    mailModel.value = store.templateMailModel
+    mailModel = store.templateMailModel
   }
 })
 </script>
