@@ -88,7 +88,9 @@ impl Init {
         let conf_file_str = self.build_path(self.get_default_path(), self.get_conf_path(), self.get_conf_name(), self.get_conf_type());
         self.create_item(Path::new(&conf_file_str), true);
         // write config
-        let conf = Settings::new();
+        let mut conf = Settings::new();
+        let dir_path = Settings::get_software_dir();
+        conf.set_dir(&dir_path);
         conf.store_config();
         //init templates
         let template_dir_str = self.build_path(self.get_default_path(), self.get_templates_path(), "", "");

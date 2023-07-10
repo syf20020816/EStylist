@@ -246,6 +246,10 @@ export let pagei18n = {
     } as I18n,
   },
   buttons: {
+    checkUpdate:{
+      zh: "检查更新",
+      en: "Check Updates",
+    } as I18n,
     addModel: {
       zh: "添加模块",
       en: "Add Model",

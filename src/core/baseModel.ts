@@ -69,8 +69,10 @@ export interface ModelItem {
 }
 
 export interface Settings {
+  version: string;
   store: string;
   template: string;
+  dir: string;
   auto: boolean;
   proportion: string;
   language: string;

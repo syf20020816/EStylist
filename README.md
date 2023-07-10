@@ -9,6 +9,8 @@
 - des-tag：test
 - email：syf20020816@outlook.com
 
+<img src="https://img.shields.io/badge/EStylist-0.0.2-orange?style=flat-square&logo=tauri&logoColor=%23fff&labelColor=%2323B898&color=%2323B898">
+
 ## What is EStylist
 
 <img src="./public/EStylist.png">

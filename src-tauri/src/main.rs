@@ -11,12 +11,12 @@ mod api;
 mod util;
 
 pub use util::*;
-pub use api::{init,save_settings,download_template,load_templates,load_html_templates,upload_file,add_contact,del_contact,send_email};
+pub use api::{init, save_settings, download_template, load_templates, load_html_templates, upload_file, add_contact, del_contact, send_email, check_update};
 
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![init,save_settings,download_template,load_templates,load_html_templates,upload_file,add_contact,del_contact,send_email])
+        .invoke_handler(tauri::generate_handler![init,save_settings,download_template,load_templates,load_html_templates,upload_file,add_contact,del_contact,send_email,check_update])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
