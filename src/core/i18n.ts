@@ -40,6 +40,16 @@ export let pagei18n = {
     } as I18n,
   },
   edit: {
+    addChildArea: {
+      title: {
+        zh: "提示",
+        en: "Alert",
+      } as I18n,
+      word: {
+        zh: "当前区域下含有模块,是否添加子区域?确定则删除当前区域下的模块!",
+        en: "The current area contains modules. Do you want to add a sub area? Confirm to delete the module under the current area!",
+      } as I18n,
+    },
     basePlateTitle: {
       zh: "构建底板",
       en: "Building the base plate",
@@ -47,6 +57,10 @@ export let pagei18n = {
     areaTitle: {
       zh: "构建区域",
       en: "Build Area",
+    } as I18n,
+    childAreaTitle: {
+      zh: "构建子区域",
+      en: "Build Child Area",
     } as I18n,
     modelTitle: {
       zh: "构建模块",
@@ -261,6 +275,10 @@ export let pagei18n = {
     addModel: {
       zh: "添加模块",
       en: "Add Model",
+    } as I18n,
+    delModel: {
+      zh: "删除模块",
+      en: "Del Model",
     } as I18n,
     changeArea: {
       zh: "修改子区域个数",

@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr :style="flexGrow">
     <td :style="ItemStyles" :colspan="ItemColSpan">
       <slot></slot>
     </td>
@@ -24,7 +24,7 @@ const props = defineProps({
 })
 
 let ItemStyles = computed(() => {
-  let { bgColor, textAlign, direction, justifyContent } = props.data
+  let { bgColor, textAlign, direction, justifyContent, span } = props.data
 
   return 'background-color:' + bgColor + ' ;text-align: ' + textAlign + ';' + 'display:flex;align-items:center;justify-content:' + justifyContent + ';'
 })
@@ -32,6 +32,12 @@ let ItemStyles = computed(() => {
 let ItemColSpan = computed(() => {
   let { span } = props.data
   return span
+})
+
+let flexGrow = computed(() => {
+  let { span } = props.data
+  let growSpan = span - 1
+  return 'flex-grow:' + growSpan + ';'
 })
 </script>
 

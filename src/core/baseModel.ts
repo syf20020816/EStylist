@@ -86,3 +86,16 @@ export interface Settings {
   smtp: string;
   contacts: Array<string>;
 }
+
+export const defaultAreaModel: Array<AreaModel> = [
+  {
+    bgColor: "#fff",
+    areaNum: 0,
+    direction: "y",
+    textAlign: "center",
+    span: 1,
+    areas: new Array(),
+    justifyContent: "center",
+    modelItem: undefined,
+  } as AreaModel,
+];

@@ -8,7 +8,7 @@
     </div>
     <div :class="buildWrap(component,'right')" :style="`width:calc(100% - `+editLeftWidth+`%);`">
       <div :class="buildWrap(component,'templates')">
-        <el-collapse accordion>
+        <el-collapse>
           <el-collapse-item name="1">
             <template #title>
               {{ getStr(store.settings.language,pagei18n.edit.basePlateTitle) }}
@@ -41,124 +41,8 @@
               </div>
             </div>
           </el-collapse-item>
-          <el-collapse-item :name="generateUUID()" v-for="citem,index in mailModel.areas" :key="index">
-            <template #title>
-              {{ getStr(store.settings.language,pagei18n.edit.areaTitle) }}{{ index+1 }}
-            </template>
-            <div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.colSpan) }}</div>
-                <el-input-number v-model="citem.span" :step="1" :max="100" />
-              </div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bgColor) }}</div>
-                <el-color-picker v-model="citem.bgColor" />
-              </div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.contentPos) }}</div>
-                <el-select v-model="citem.justifyContent" placeholder="Select Type">
-                  <el-option v-for="jcitem in JustifyContent" :key="jcitem.value" :label="jcitem.label" :value="jcitem.value" />
-                </el-select>
-              </div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.areaNum) }}</div>
-                <el-input-number v-model="citem.areaNum" :step="1" :max="20" />
-              </div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.direction) }}</div>
-                <el-select v-model="citem.direction" placeholder="Select Direction">
-                  <el-option v-for="item in Direction" :key="item.value" :label="item.label" :value="item.value" />
-                </el-select>
-              </div>
-              <div style="display: flex;align-items: center;justify-content:end;margin-top: 1vh;">
-                <el-button type="primary" round @click="addModel(index)">{{ getStr(store.settings.language,pagei18n.buttons.addModel) }}</el-button>
-                <el-button type="success" round @click="saveAreaChange(index)">{{ getStr(store.settings.language,pagei18n.buttons.changeArea) }}</el-button>
-              </div>
-              <div :class="build('template','base')" v-if="citem.modelItem!=null" style="display: flex;flex-wrap: wrap;">
-                <div class="tmptitle" style="width: 100%;font-size:14px;"><el-icon>
-                    <Operation />
-                  </el-icon>{{ getStr(store.settings.language,pagei18n.edit.modelTitle) }}</div>
-                <div :class="build('template','base')">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.modelTypes) }}</div>
-                  <el-select v-model="citem.modelItem.type" placeholder="Select Type">
-                    <el-option v-for="titem in ModelTypes" :key="titem.value" :label="titem.label" :value="titem.value" />
-                  </el-select>
-                </div>
-                <div :class="build('template','base')">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.height) }}</div>
-                  <el-input placeholder="Please input height" v-model="citem.modelItem.height" />
-                </div>
-                <div :class="build('template','base')">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.width) }}</div>
-                  <el-input v-model="citem.modelItem.width" placeholder="Please input width" />
-                </div>
-                <div :class="build('template','base')">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.contentPos) }}</div>
-                  <el-select v-model="citem.modelItem.justifyContent" placeholder="Select Type">
-                    <el-option v-for="jcitem in JustifyContent" :key="jcitem.value" :label="jcitem.label" :value="jcitem.value" />
-                  </el-select>
-                </div>
-                <div :class="build('template','base')">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.radius) }}</div>
-                  <el-input v-model="citem.modelItem.borderRadius" placeholder="Please input radius" />
-                </div>
-                <div :class="build('template','base')">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.content) }}</div>
-                  <el-input v-model="citem.modelItem.content" placeholder="Please input text" />
-                </div>
-                <div :class="build('template','base')" v-if="citem.modelItem.type=='img'">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.upload) }}</div>
-                  <input type="file" name="" id="upload-picture" @change="uploadPicture(index,$event)">
-                </div>
-                <div :class="build('template','base')" v-if="citem.modelItem.type!='div'">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.src) }}</div>
-                  <el-input v-model="citem.modelItem.src" placeholder="Please input address" />
-                </div>
-                <div :class="build('template','base')">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bgColor) }}</div>
-                  <el-color-picker v-model="citem.modelItem.bgColor" />
-                </div>
-                <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontSize) }}</div>
-                  <el-input-number v-model="citem.modelItem.fontSize" :step="2" :max="80" />
-                </div>
-                <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontWeight) }}</div>
-                  <el-switch v-model="citem.modelItem.fontWeight" style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949" />
-                </div>
-                <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontFamily) }}</div>
-                  <el-select v-model="citem.modelItem.fontFamily" placeholder="Select FontFamily">
-                    <el-option v-for="fitem in FontFamily" :key="fitem.value" :label="fitem.label" :value="fitem.value" />
-                  </el-select>
-                </div>
-                <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontColor) }}</div>
-                  <el-color-picker v-model="citem.modelItem.fontColor" />
-                </div>
-                <div :class="build('template','base')" v-if="citem.modelItem.type!='img'">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.textAlign) }}</div>
-                  <el-select v-model="citem.modelItem.textAlign" placeholder="Select FontFamily">
-                    <el-option v-for="taitem in TextAlign" :key="taitem.value" :label="taitem.label" :value="taitem.value" />
-                  </el-select>
-                </div>
-                <div :class="build('template','base')" style="flex-wrap: wrap;">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.padding) }}</div>
-                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.top) }}:<el-input-number v-model="citem.modelItem.padding[0]" :step="1" :max="1000" /></div>
-                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.right) }}:<el-input-number v-model="citem.modelItem.padding[1]" :step="1" :max="1000" /></div>
-                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.bottom) }}:<el-input-number v-model="citem.modelItem.padding[2]" :step="1" :max="1000" /></div>
-                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.left) }}:<el-input-number v-model="citem.modelItem.padding[3]" :step="1" :max="1000" /></div>
-                </div>
-                <div :class="build('template','base')" style="flex-wrap: wrap;">
-                  <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.margin) }}</div>
-                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.top) }}:<el-input-number v-model="citem.modelItem.margin[0]" :step="1" :max="1000" /></div>
-                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.right) }}:<el-input-number v-model="citem.modelItem.margin[1]" :step="1" :max="1000" /></div>
-                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.bottom) }}:<el-input-number v-model="citem.modelItem.margin[2]" :step="1" :max="1000" /></div>
-                  <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.left) }}:<el-input-number v-model="citem.modelItem.margin[3]" :step="1" :max="1000" /></div>
-                </div>
-              </div>
-            </div>
-          </el-collapse-item>
+          <MailEditItem :areas="mailModel.areas" @upload-picture="uploadPicture" @add-model="addModel" @del-model="delModel" @save="saveAreaChange" @change-span="childEndSpanChange" @change-bg="childEndBGChange" @change-jc="childEndJCChange">
+          </MailEditItem>
         </el-collapse>
       </div>
       <!-- <div :class="buildWrap(component,'edit')"></div> -->
@@ -209,6 +93,19 @@
       </span>
     </template>
   </el-dialog>
+  <el-dialog v-model="addChildAreaVisiable" :title="getStr(store.settings.language,pagei18n.edit.addChildArea.title)" width="40%">
+    <div>
+      {{ getStr(store.settings.language,pagei18n.edit.addChildArea.word) }}
+    </div>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="addChildAreaVisiable = false">{{ getStr(store.settings.language,pagei18n.common.cancel) }}</el-button>
+        <el-button type="primary" @click="addChildAreaConfirm">
+          {{ getStr(store.settings.language,pagei18n.common.confirm) }}
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script lang="ts">
@@ -219,109 +116,30 @@ export default {
 
 <script lang="ts" setup>
 import { generateUUID, convertImageToBase64 } from '../util'
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, getCurrentInstance } from 'vue'
 import { build, buildView, buildWrap } from '../styles/name'
 import { ZoomIn, ZoomOut, InfoFilled, Operation, Download, Upload, UploadFilled, Delete } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { BaseModel, AreaModel, Model } from '../core'
+import { JustifyContent, TextAlign, ModelTypes, Direction, FontFamily } from '../core'
 import BaseOutter from '../components/BaseOutter.vue'
 import { pagei18n, getStr } from '../core'
 import { indexStore } from '../store/IndexPinia'
 import { invoke } from '@tauri-apps/api'
+import MailEditItem from '../components/MailEditItem.vue'
 
+const { ctx } = getCurrentInstance() as any
 const component = 'MailEdit'
 let targetTemplate = ref()
 let downloadFileName = ref('')
 let uploadTemplateVisiable = ref(false)
 let uploadTemplateTarget = ref('')
 let downloadTemplateVisable = ref(false)
+let addChildAreaVisiable = ref(false)
+let addChildAreaIndex = ref(-1)
 const store = indexStore()
-const Direction = [
-  {
-    value: 'x',
-    label: 'x'
-  },
-  {
-    value: 'y',
-    label: 'y'
-  }
-]
-const FontFamily = [
-  {
-    value: 'Helvetica',
-    label: 'Helvetica'
-  },
-  {
-    value: 'Arial Narrow',
-    label: 'Arial Narrow'
-  },
-  {
-    value: 'Verdana',
-    label: 'Verdana'
-  },
-  {
-    value: 'Arial',
-    label: 'Arial'
-  },
-  {
-    value: 'Franklin Gothic Medium',
-    label: 'Franklin Gothic Medium'
-  }
-]
 
-const ModelTypes = [
-  {
-    value: 'div',
-    label: '文字'
-  },
-  {
-    value: 'img',
-    label: '图片'
-  },
-  {
-    value: 'a',
-    label: '链接'
-  }
-]
-
-const TextAlign = [
-  {
-    value: 'left',
-    label: 'left'
-  },
-  {
-    value: 'right',
-    label: 'right'
-  },
-  {
-    value: 'center',
-    label: 'center'
-  },
-  {
-    value: 'justify',
-    label: 'justify'
-  }
-]
-
-const JustifyContent = [
-  {
-    value: 'start',
-    label: 'start'
-  },
-  {
-    value: 'end',
-    label: 'end'
-  },
-  {
-    value: 'center',
-    label: 'center'
-  },
-  {
-    value: 'baseline',
-    label: 'baseline'
-  }
-]
-
+//模板数据
 let mailModel = ref<any>({
   base: {
     width: 320,
@@ -401,7 +219,59 @@ const saveBaseChange = () => {
   })
 }
 
-const saveAreaChange = (index: number) => {}
+/**
+ * 添加子区域的子区域
+ * 若子区域添加子区域则会销毁当前的模块
+ */
+const saveAreaChange = (index: number) => {
+  addChildAreaIndex.value = index
+  //判断是否有模块
+  if (mailModel.value.areas[index].modelItem != undefined) {
+    addChildAreaVisiable.value = true
+  } else {
+    addChildAreaConfirm()
+  }
+}
+
+/**
+ * 确认添加子区域
+ */
+const addChildAreaConfirm = () => {
+  if (addChildAreaIndex.value == -1) {
+    ElMessage({
+      message: 'Error: Please contact the author : syf20020816@outlook.com!'
+    })
+  } else {
+    //统一删除下属模块
+    mailModel.value.areas[addChildAreaIndex.value].modelItem = undefined
+    //添加子区域
+    let tmp = {
+      bgColor: '#fff',
+      areaNum: 0,
+      direction: 'y',
+      textAlign: 'center',
+      span: 1,
+      areas: new Array(),
+      justifyContent: 'center',
+      modelItem: undefined
+    } as AreaModel
+
+    let len = mailModel.value.areas[addChildAreaIndex.value].areaNum
+    let currentLen = mailModel.value.areas[addChildAreaIndex.value].areas.length
+
+    if (currentLen > len) {
+      for (let i = currentLen; i > len; i--) {
+        mailModel.value.areas[addChildAreaIndex.value].areas.pop()
+      }
+    } else if (currentLen < len) {
+      for (let i = currentLen; i < len; i++) {
+        mailModel.value.areas[addChildAreaIndex.value].areas.push(tmp)
+      }
+    }
+  }
+  addChildAreaVisiable.value = false
+  console.log(mailModel.value.areas[addChildAreaIndex.value].areas)
+}
 // 添加模块
 const addModel = (index: number) => {
   mailModel.value.areas[index].modelItem = {
@@ -427,9 +297,16 @@ const addModel = (index: number) => {
     type: 'success'
   })
 }
+
+const delModel = (index: number) => {
+  mailModel.value.areas[index].modelItem = undefined
+  ElMessage({
+    message: 'Del Model Successfully',
+    type: 'success'
+  })
+}
 // 上传本地照片
-const uploadPicture = (index: number, event: any) => {
-  const file = event.target.files[0]
+const uploadPicture = (file: any, index: number) => {
   convertImageToBase64(file)
     .then((base64: any) => {
       mailModel.value.areas[index].modelItem!.src = base64
@@ -437,8 +314,6 @@ const uploadPicture = (index: number, event: any) => {
     .catch(error => {
       console.error(error)
     })
-
-  console.log()
 }
 
 // 上传模板文件检查
@@ -560,6 +435,20 @@ const delCache = () => {
         message: 'Delete canceled'
       })
     })
+}
+
+const childEndSpanChange = (e: any, fIndex: number, index: number) => {
+  mailModel.value.areas[fIndex].areas[index].span = e
+  console.log(mailModel.value.areas[fIndex].areas[index].span)
+}
+const childEndBGChange = (e: any, fIndex: number, index: number) => {
+  mailModel.value.areas[fIndex].areas[index].bgColor = e
+  console.log(mailModel.value.areas[fIndex].areas[index].bgColor)
+  ctx.$forceUpdate()
+}
+const childEndJCChange = (e: any, fIndex: number, index: number) => {
+  mailModel.value.areas[fIndex].areas[index].justifyContent = e
+  console.log(mailModel.value.areas[fIndex].areas[index].justifyContent)
 }
 
 onMounted(() => {

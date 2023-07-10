@@ -7,7 +7,7 @@
             <tbody>
               <tr>
                 <td :style="baseOutterPadding" :bgcolor="baseOtterColor">
-                  <Outter>
+                  <Outter :direction="itemDirection">
                     <OutterItem :data="item" v-for="item,index in areaItem" :key="index">
                       <ModelVue :data="item.modelItem" v-if="!modelItemExist(item.modelItem)"></ModelVue>
                     </OutterItem>
@@ -23,6 +23,7 @@
 </template>
 
 <script lang="ts">
+//对应BaseModel
 export default {
   name: 'BaseOutter'
 }
@@ -66,6 +67,11 @@ let areaItem = computed(() => {
 let modelItemExist = (obj: any): boolean => {
   return typeof obj == 'undefined'
 }
+
+let itemDirection = computed(() => {
+  let { direction } = props.data.base
+  return direction
+})
 </script>
 
 <style lang="scss" scoped>
