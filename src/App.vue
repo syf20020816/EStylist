@@ -49,6 +49,7 @@ onBeforeMount(() => {
   invoke('init')
     // `invoke` 返回的是一个 Promise
     .then((res: any) => {
+      console.log(res)
       store.settings = JSON.parse(res)
 
       if (store.settings.auto) {

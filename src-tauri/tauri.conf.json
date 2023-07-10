@@ -7,7 +7,7 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "eStylist",
+    "productName": "EStylist",
     "version": "0.0.1"
   },
   "tauri": {
@@ -16,6 +16,9 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "process": {
+        "exit": true
       }
     },
     "bundle": {

@@ -49,14 +49,18 @@ import { build, buildView, buildWrap } from '../styles/name'
 import { pagei18n, getStr } from '../core'
 import { indexStore } from '../store/IndexPinia'
 import { invoke } from '@tauri-apps/api'
+import { exit } from '@tauri-apps/api/process'
 import { ElMessage } from 'element-plus'
 const component = 'MailInfo'
 const store = indexStore()
 let updateVisiable = ref(false)
+// 更新提示
 let updateOrNot = ref('')
+// 进行更新
+let updateNow = ref(false)
 const tableData = [
   {
-    date: '2023-07-01',
+    date: '2023-06-23',
     version: '0.0.1',
     author: 'syf20020816@outlook.com'
   },
@@ -71,6 +75,7 @@ const checkUpdate = () => {
   invoke('check_update').then(res => {
     if (res) {
       updateOrNot.value = '并非最新版本,可以进行更新（请保证网络连接通畅,且能够正常连接到GitHub!）,您是否需要进行和更新?'
+      updateNow.value = true
     } else {
       updateOrNot.value = '当前已经是最新版本,无需进行更新!'
     }
@@ -79,8 +84,14 @@ const checkUpdate = () => {
   })
 }
 
+// 确定更新
 const updateConfirm = () => {
-  updateVisiable.value = false
+  if (updateNow.value) {
+    invoke('update_version').then(async () => {
+      updateVisiable.value = false
+      await exit(1)
+    })
+  }
 }
 </script>
 

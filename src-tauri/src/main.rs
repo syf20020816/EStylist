@@ -10,13 +10,23 @@
 mod api;
 mod util;
 
+use tauri::Manager;
 pub use util::*;
-pub use api::{init, save_settings, download_template, load_templates, load_html_templates, upload_file, add_contact, del_contact, send_email, check_update};
+pub use api::{
+    init, save_settings, download_template, load_templates, load_html_templates,
+    upload_file, add_contact, del_contact, send_email, check_update, update_version,
+};
 
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![init,save_settings,download_template,load_templates,load_html_templates,upload_file,add_contact,del_contact,send_email,check_update])
+        .invoke_handler(
+            tauri::generate_handler![
+                init,save_settings,download_template,load_templates,
+                load_html_templates,upload_file,add_contact,del_contact,
+                send_email,check_update,update_version
+            ]
+        )
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

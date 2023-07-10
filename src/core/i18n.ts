@@ -198,6 +198,14 @@ export let pagei18n = {
     } as I18n,
   },
   settings: {
+    dir: {
+      zh: "软件安装目录",
+      en: "Installation Dir",
+    } as I18n,
+    version: {
+      zh: "版本",
+      en: "Version",
+    } as I18n,
     email: {
       zh: "邮箱",
       en: "Email",
@@ -246,7 +254,7 @@ export let pagei18n = {
     } as I18n,
   },
   buttons: {
-    checkUpdate:{
+    checkUpdate: {
       zh: "检查更新",
       en: "Check Updates",
     } as I18n,

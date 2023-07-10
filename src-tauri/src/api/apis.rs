@@ -11,6 +11,7 @@ use crate::{init_or_not, version_to_number};
 use super::{Init, Settings, CONF_FILE, CONF_DIR, HTML, UPDATE_RELEASE};
 use std::fs::{write, read_to_string, read_dir};
 use std::path::Path;
+use std::process::Command;
 use lettre::{Message, SmtpTransport, Transport};
 use lettre::transport::smtp::authentication::Credentials;
 use lettre::message::header::ContentType;
@@ -30,7 +31,10 @@ pub fn init() -> String {
     }
     // get config
     let conf_path = Path::new("./conf/EStylist_config.json");
-    let settings: Settings = read_to_string(conf_path).unwrap().into();
+    let mut settings: Settings = read_to_string(conf_path).unwrap().into();
+    let dir_path = Settings::get_software_dir();
+    settings.set_dir(&dir_path);
+    settings.store_config();
     serde_json::to_string(&settings).unwrap()
 }
 
@@ -193,33 +197,7 @@ pub fn send_email(from: &str, cc: &str, to: &str, subject: &str, content: &str) 
     }
 }
 
-/// check update from github
-#[tauri::command]
-pub fn check_update() -> bool {
-    // use std::fs;
-    // use std::process::Command;
-    //
-    // fn check_and_update(version: &str) -> Result<(), Box<dyn std::error::Error>> {
-    //     let config_path = "conf/config.json";
-    //     let config_contents = fs::read_to_string(config_path)?;
-    //     let config_json: Value = serde_json::from_str(&config_contents)?;
-    //     let current_version = config_json["version"].as_str().unwrap();
-    //
-    //     if current_version != version {
-    //         // 下载最新release
-    //         let download_url = format!("https://github.com/syf20020816/EStylist/releases/download/{}/EStylist.zip", version);
-    //         let download_path = "EStylist.zip";
-    //         let mut download_command = Command::new("curl");
-    //         download_command.arg("-L").arg("-o").arg(download_path).arg(&download_url).output()?;
-    //
-    //         // 解压缩并安装
-    //         let install_dir = "<用户安装旧版本的目录>"; // 需要替换为实际的路径
-    //         let mut unzip_command = Command::new("unzip");
-    //         unzip_command.arg(download_path).arg("-d").arg(install_dir).output()?;
-    //     }
-    //
-    //     Ok(())
-    // }
+fn get_version_from_github() -> String {
     let url = UPDATE_RELEASE;
     let client = Client::new();
 
@@ -234,7 +212,16 @@ pub fn check_update() -> bool {
     let val: Value = serde_json::from_str(&res).unwrap();
     // github上发布的最新版本
     let version_pre = val["tag_name"].as_str().unwrap().to_owned();
-    let version_pre = version_pre.replace("v","");
+    version_pre
+}
+
+/// check update from github
+#[tauri::command]
+pub fn check_update() -> bool {
+    // use std::fs;
+    // use std::process::Command;
+    let version_pre = get_version_from_github();
+    let version_pre = version_pre.replace("v", "");
     // 获取当前版本
     let settings = Settings::get_settings();
     let version_current = settings.get_version();
@@ -248,4 +235,19 @@ pub fn check_update() -> bool {
         (pre_num - current_num) > 0_f32
     }
 }
+
+/// update from github
+#[tauri::command]
+pub fn update_version() -> () {
+    let version = get_version_from_github();
+    // 由于GitHub下载很可能断链或下载速度慢，所以使用公用CDN加速
+    // let download_url = format!("https://github.com/syf20020816/EStylist/releases/download/{}/EStylist.exe", &version);
+    let download_url = format!("https://ghps.cc/https://github.com/syf20020816/EStylist/releases/download/{}/EStylist.exe", &version);
+    let mut download_command = Command::new("curl");
+    download_command.arg("-O").arg(&download_url).output().unwrap();
+    // download_command.arg("-o").arg(dir).arg(&download_url).output().unwrap();
+    // 下载完毕
+    // 后续添加更多功能
+}
+
 

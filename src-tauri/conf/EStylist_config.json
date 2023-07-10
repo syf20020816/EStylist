@@ -1,11 +1,12 @@
 {
+  "version": "0.0.2",
   "store": "./conf/EStylist_config.json",
   "template": "./templates",
   "dir": "E:\\Rust\\try\\eStylist\\src-tauri",
   "auto": false,
   "proportion": "13:7",
   "language": "Chinese",
-  "email": "",
+  "email": "syf20020816@outlook.com",
   "password": "",
   "smtp": "",
   "contacts": []

@@ -3,6 +3,14 @@
     <div :class="build(component,'title')">{{ getStr(store.settings.language,pagei18n.settings.title) }}</div>
     <div :class="buildWrap(component,'content')">
       <div :class="build('content','item')">
+        <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.version) }}</div>
+        <el-input v-model="store.settings.version" disabled></el-input>
+      </div>
+      <div :class="build('content','item')">
+        <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.dir) }}</div>
+        <el-input v-model="store.settings.dir" disabled></el-input>
+      </div>
+      <div :class="build('content','item')">
         <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.confPath) }}</div>
         <el-input v-model="store.settings.store" disabled></el-input>
       </div>
@@ -38,7 +46,7 @@
           <el-option v-for="litem in Language" :key="litem.value" :label="litem.label" :value="litem.value" />
         </el-select>
       </div>
-      <div style="position: absolute;bottom: 10px;right: 10px;">
+      <div style="position: absolute;bottom: 16px;right: 32px;">
         <el-button type="primary" round @click="saveSettings">
           <div style="margin: 0 10px;display: flex;align-items: center;justify-content: center;"><el-icon size="18"><Select /></el-icon>
             {{ getStr(store.settings.language,pagei18n.buttons.save) }}</div>
@@ -137,12 +145,16 @@ const saveSettings = () => {
 $component: 'Setting';
 @include buildView($component) {
   height: inherit;
-  width: inherit;
+  width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
   align-content: flex-start;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  box-sizing: border-box;
+  padding: 16px 16px 48px 16px;
   @include build($component, 'title') {
     margin: 2.5vh;
     font-size: 5vh;
