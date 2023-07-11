@@ -1,11 +1,5 @@
 <template>
   <div v-if="modelData.type=='div'" :style="modelStyles">{{ modelContent}}</div>
-
-  <!-- <el-image v-else-if="modelData.type=='img'" :src="modelSrc" :style="modelStyles">
-    <template #error>
-      <div class="image-slot">{{ modelContent }}</div>
-    </template>
-  </el-image> -->
   <img v-else-if="modelData.type=='img'" :src="modelSrc" :alt="modelContent" :style="modelStyles">
   <a v-else-if="modelData.type=='a'" :href="modelSrc" :style="modelStyles" target="blank">{{ modelContent }}</a>
 </template>

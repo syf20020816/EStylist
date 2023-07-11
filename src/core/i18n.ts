@@ -10,6 +10,12 @@ export const getStr = (language: string, i18n: I18n): string => {
 
 export let pagei18n = {
   common: {
+    alert: {
+      addModel: {
+        zh: "当前已有子区域,添加模块将删除子区域",
+        en: "There are currently sub areas, adding a module will delete the sub area",
+      } as I18n,
+    },
     uploadTemplate: {
       title: {
         zh: "选择上传模板",

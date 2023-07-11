@@ -28,21 +28,18 @@ export interface AreaModel {
   // 0.0.2版本被认为是不需要的，弃用
   // height: number;
   // width: number;
-  bgColor: string;
-  // 0.0.2版本被认为是不需要的，弃用
+  // areaNum: number;
   // fontSize: number;
   // fontColor: string;
   // fontFamily: string;
-  textAlign: string;
-  areaNum: number;
-  direction: string;
-  // 0.0.2版本被认为是不需要的，弃用
   // padding: Array<number>;
-  // 0.0.2版本被认为是不需要的，弃用
   // margin: Array<number>;
+  // areas: Array<AreaModel> | null;
+  bgColor: string;
+  textAlign: string;
+  direction: string;
   span: number;
-  areas: Array<AreaModel> | null;
-  modelItem: ModelItem | undefined;
+  modelItem: Array<ModelItem>;
   justifyContent: string;
 }
 
@@ -55,6 +52,7 @@ export interface Model {
 }
 
 export interface ModelItem {
+  id: number;
   type: string;
   height: string;
   width: string;
@@ -87,15 +85,63 @@ export interface Settings {
   contacts: Array<string>;
 }
 
-export const defaultAreaModel: Array<AreaModel> = [
+export const defaultAreaModels: Array<AreaModel> = [
   {
     bgColor: "#fff",
-    areaNum: 0,
     direction: "y",
     textAlign: "center",
     span: 1,
-    areas: new Array(),
     justifyContent: "center",
-    modelItem: undefined,
+    modelItem: new Array(),
   } as AreaModel,
 ];
+
+export const defaultAreaModel: AreaModel = {
+  bgColor: "#fff",
+  direction: "y",
+  textAlign: "center",
+  span: 1,
+  justifyContent: "center",
+  modelItem: new Array(),
+};
+
+export const defalutModelItem: ModelItem = {
+  id: 0,
+  type: "div",
+  height: "30px",
+  width: "100%",
+  bgColor: "#fff",
+  fontSize: 16,
+  fontColor: "#000",
+  fontFamily: "Helvetica",
+  textAlign: "center",
+  direction: "x",
+  fontWeight: false,
+  padding: [0, 0, 0, 0],
+  margin: [0, 0, 0, 0],
+  content: "示例文字|地址",
+  borderRadius: "0px",
+  justifyContent: "center",
+  src: "",
+};
+
+export const defalutModel: Model = {
+  base: {
+    width: 320,
+    bgColor: "#fff",
+    areaNum: 1,
+    direction: "y",
+    padding: 46,
+  } as BaseModel,
+  areas: [
+    {
+      bgColor: "#fff",
+      direction: "y",
+      textAlign: "center",
+      span: 1,
+      justifyContent: "center",
+      modelItem: new Array<ModelItem>(),
+    },
+  ] as Array<AreaModel>,
+  areasLen: 1,
+};

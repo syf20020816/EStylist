@@ -4,10 +4,12 @@
   "template": "./templates",
   "dir": "E:\\Rust\\try\\eStylist\\src-tauri",
   "auto": false,
-  "proportion": "13:7",
+  "proportion": "6:4",
   "language": "Chinese",
   "email": "syf20020816@outlook.com",
   "password": "",
   "smtp": "",
-  "contacts": []
+  "contacts": [
+    "syf20020816@outlook.com"
+  ]
 }

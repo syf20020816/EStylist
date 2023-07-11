@@ -5,6 +5,9 @@ import {
   ModelItem,
   Settings,
   defaultAreaModel,
+  defaultAreaModels,
+  defalutModelItem,
+  defalutModel,
 } from "./baseModel";
 import { getStr, pagei18n } from "./i18n";
 import {
@@ -21,6 +24,9 @@ export {
   getStr,
   pagei18n,
   defaultAreaModel,
+  defalutModel,
+  defaultAreaModels,
+  defalutModelItem,
   JustifyContent,
   TextAlign,
   ModelTypes,

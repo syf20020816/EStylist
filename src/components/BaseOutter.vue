@@ -9,7 +9,9 @@
                 <td :style="baseOutterPadding" :bgcolor="baseOtterColor">
                   <Outter :direction="itemDirection">
                     <OutterItem :data="item" v-for="item,index in areaItem" :key="index">
-                      <ModelVue :data="item.modelItem" v-if="!modelItemExist(item.modelItem)"></ModelVue>
+                      <span :style="modelItemStyles(item.direction)">
+                        <ModelVue v-for="mItem,index in item.modelItem" :key="index" :data="mItem"></ModelVue>
+                      </span>
                     </OutterItem>
                   </Outter>
                 </td>
@@ -71,6 +73,15 @@ let modelItemExist = (obj: any): boolean => {
 let itemDirection = computed(() => {
   let { direction } = props.data.base
   return direction
+})
+
+let modelItemStyles = computed(() => (direction: string) => {
+  console.log(direction)
+  let flexDirection = 'column'
+  if (direction == 'x') {
+    flexDirection = 'row'
+  }
+  return 'display: flex;align-items: flex-start;flex-wrap:wrap;justify-content: flex-start;flex-direction:' + flexDirection + ';'
 })
 </script>
 

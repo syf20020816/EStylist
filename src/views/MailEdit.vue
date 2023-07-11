@@ -3,12 +3,12 @@
     <div :class="buildWrap(component,'left')" :style="`width:`+editLeftWidth+`%;`">
       <div :style="scaleViewStyle">
         <!-- todo: -->
-        <BaseOutter id="targetTemplate" ref="targetTemplate" :data="mailModel"></BaseOutter>
+        <BaseOutter id="targetTemplate" ref="targetTemplate" :data="store.currentMailModel"></BaseOutter>
       </div>
     </div>
     <div :class="buildWrap(component,'right')" :style="`width:calc(100% - `+editLeftWidth+`%);`">
       <div :class="buildWrap(component,'templates')">
-        <el-collapse>
+        <el-collapse accordion>
           <el-collapse-item name="1">
             <template #title>
               {{ getStr(store.settings.language,pagei18n.edit.basePlateTitle) }}
@@ -16,23 +16,23 @@
             <div>
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.width) }}</div>
-                <el-input-number v-model="mailModel.base.width" :step="10" :max="800" />
+                <el-input-number v-model="store.currentMailModel.base.width" :step="10" :max="800" />
               </div>
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bgColor) }}</div>
-                <el-color-picker v-model="mailModel.base.bgColor" />
+                <el-color-picker v-model="store.currentMailModel.base.bgColor" />
               </div>
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.padding) }}</div>
-                <el-input-number v-model="mailModel.base.padding" :step="2" :max="100" />
+                <el-input-number v-model="store.currentMailModel.base.padding" :step="2" :max="100" />
               </div>
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.areaNum) }}</div>
-                <el-input-number v-model="mailModel.base.areaNum" :step="1" :max="20" />
+                <el-input-number v-model="store.currentMailModel.base.areaNum" :step="1" :max="20" />
               </div>
               <div :class="build('template','base')">
                 <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.direction) }}</div>
-                <el-select v-model="mailModel.base.direction" placeholder="Select Direction">
+                <el-select v-model="store.currentMailModel.base.direction" placeholder="Select Direction">
                   <el-option v-for="item in Direction" :key="item.value" :label="item.label" :value="item.value" />
                 </el-select>
               </div>
@@ -41,11 +41,12 @@
               </div>
             </div>
           </el-collapse-item>
-          <MailEditItem :areas="mailModel.areas" @upload-picture="uploadPicture" @add-model="addModel" @del-model="delModel" @save="saveAreaChange" @change-span="childEndSpanChange" @change-bg="childEndBGChange" @change-jc="childEndJCChange">
+          <MailEditItem v-for="meItem,meIndex in store.currentMailModel.areas" :key="meIndex" :data="meItem" :index="meIndex" @add-model="addModel" @del-model="delModel">
+            <AreaOrModel v-for="amItem in meItem.modelItem" :key="amItem.id" :index="amItem.id" :data="amItem" :f-index="meIndex" @upload-picture="uploadPicture"></AreaOrModel>
           </MailEditItem>
         </el-collapse>
       </div>
-      <!-- <div :class="buildWrap(component,'edit')"></div> -->
+
       <div :class="buildWrap(component,'tools')">
         <el-icon size="18" @click="scaleView(-0.1)">
           <ZoomOut />
@@ -65,6 +66,7 @@
         <el-icon size="18" @click="delCache">
           <Delete />
         </el-icon>
+
       </div>
     </div>
   </div>
@@ -93,19 +95,7 @@
       </span>
     </template>
   </el-dialog>
-  <el-dialog v-model="addChildAreaVisiable" :title="getStr(store.settings.language,pagei18n.edit.addChildArea.title)" width="40%">
-    <div>
-      {{ getStr(store.settings.language,pagei18n.edit.addChildArea.word) }}
-    </div>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="addChildAreaVisiable = false">{{ getStr(store.settings.language,pagei18n.common.cancel) }}</el-button>
-        <el-button type="primary" @click="addChildAreaConfirm">
-          {{ getStr(store.settings.language,pagei18n.common.confirm) }}
-        </el-button>
-      </span>
-    </template>
-  </el-dialog>
+
 </template>
 
 <script lang="ts">
@@ -116,19 +106,21 @@ export default {
 
 <script lang="ts" setup>
 import { generateUUID, convertImageToBase64 } from '../util'
-import { ref, reactive, computed, onMounted, getCurrentInstance, watch, markRaw } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { build, buildView, buildWrap } from '../styles/name'
-import { ZoomIn, ZoomOut, InfoFilled, Operation, Download, Upload, UploadFilled, Delete } from '@element-plus/icons-vue'
+import { ZoomIn, ZoomOut, InfoFilled, Download, Upload, UploadFilled, Delete } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { BaseModel, AreaModel, Model } from '../core'
-import { JustifyContent, TextAlign, ModelTypes, Direction, FontFamily } from '../core'
+import { JustifyContent, TextAlign, ModelTypes, Direction, FontFamily, defalutModel, defaultAreaModel, defaultAreaModels, defalutModelItem } from '../core'
 import BaseOutter from '../components/BaseOutter.vue'
 import { pagei18n, getStr } from '../core'
 import { indexStore } from '../store/IndexPinia'
 import { invoke } from '@tauri-apps/api'
 import MailEditItem from '../components/MailEditItem.vue'
+import AreaOrModel from '../components/AreaOrModel.vue'
 
-const { ctx } = getCurrentInstance() as any
+const router = useRouter()
 const component = 'MailEdit'
 let targetTemplate = ref()
 let downloadFileName = ref('')
@@ -140,38 +132,8 @@ let addChildAreaIndex = ref(-1)
 const store = indexStore()
 
 //模板数据
-let mailModel = reactive<any>({
-  base: {
-    width: 320,
-    bgColor: '#fff',
-    areaNum: 1,
-    direction: 'y',
-    padding: 46
-  },
-  areas: [
-    {
-      bgColor: '#fff',
-      areaNum: 0,
-      direction: 'y',
-      textAlign: 'center',
-      span: 1,
-      areas: new Array(),
-      justifyContent: 'center',
-      modelItem: undefined
-    }
-  ] as Array<AreaModel>,
-  areasLen: 1
-})
+// let mailModel = reactive<any>(store.currentMailModel)
 
-// let mailArea = reactive({
-//   height: 240,
-//   width: 180,
-//   bgColor: '#fff',
-//   fontSize: 16,
-//   fontColor: '#000',
-//   areaNum: 1,
-//   direction: 'x'
-// })
 let scaleViewSize = ref(1)
 let scaleViewStyle = computed(() => {
   return {
@@ -180,118 +142,43 @@ let scaleViewStyle = computed(() => {
 })
 
 let editLeftWidth = computed(() => {
-  let tmp_arr = store.settings.proportion.split(':')
-  let left = parseInt(tmp_arr[0])
-  let right = parseInt(tmp_arr[1])
-  let proportion_item = 100 / (left + right)
-  return proportion_item * left
+  setTimeout(() => {
+    let tmp_arr = store.settings.proportion.split(':')
+    let left = parseInt(tmp_arr[0])
+    let right = parseInt(tmp_arr[1])
+    let proportion_item = 100 / (left + right)
+    return proportion_item * left
+  }, 500)
 })
 const scaleView = (num: number) => {
   scaleViewSize.value += num
 }
 // 修改子区域个数
 const saveBaseChange = () => {
-  let oldLen = mailModel.areasLen
-  if (oldLen < mailModel.base.areaNum) {
-    for (let i = oldLen; i < mailModel.base.areaNum; i++) {
-      let tmp: AreaModel = {
-        bgColor: '#fff',
-        areaNum: 0,
-        direction: 'y',
-        textAlign: 'center',
-        justifyContent: 'center',
-        span: 1,
-        areas: new Array(),
-        modelItem: undefined
-      }
-      mailModel.areas.push(tmp)
+  let oldLen = store.currentMailModel.areasLen
+  if (oldLen < store.currentMailModel.base.areaNum) {
+    for (let i = oldLen; i < store.currentMailModel.base.areaNum; i++) {
+      store.currentMailModel.areas.push(defaultAreaModel)
     }
-  } else if (oldLen > mailModel.base.areaNum) {
-    for (let i = oldLen; i > mailModel.base.areaNum; i--) {
-      mailModel.areas.pop()
+  } else if (oldLen > store.currentMailModel.base.areaNum) {
+    for (let i = oldLen; i > store.currentMailModel.base.areaNum; i--) {
+      store.currentMailModel.areas.pop()
     }
   } else {
   }
-  mailModel.areasLen = mailModel.areas.length
+  store.currentMailModel.areasLen = store.currentMailModel.areas.length
   ElMessage({
     message: 'Change Save Successfully',
     type: 'success'
   })
 }
 
-/**
- * 添加子区域的子区域
- * 若子区域添加子区域则会销毁当前的模块
- */
-const saveAreaChange = (index: number) => {
-  addChildAreaIndex.value = index
-  //判断是否有模块
-  if (mailModel.areas[index].modelItem != undefined) {
-    addChildAreaVisiable.value = true
-  } else {
-    addChildAreaConfirm()
-  }
-}
-
-/**
- * 确认添加子区域
- */
-const addChildAreaConfirm = () => {
-  if (addChildAreaIndex.value == -1) {
-    ElMessage({
-      message: 'Error: Please contact the author : syf20020816@outlook.com!'
-    })
-  } else {
-    //统一删除下属模块
-    mailModel.areas[addChildAreaIndex.value].modelItem = undefined
-    //添加子区域
-    let tmp = {
-      bgColor: '#fff',
-      areaNum: 0,
-      direction: 'y',
-      textAlign: 'center',
-      span: 1,
-      areas: new Array(),
-      justifyContent: 'center',
-      modelItem: undefined
-    } as AreaModel
-
-    let len = mailModel.areas[addChildAreaIndex.value].areaNum
-    let currentLen = mailModel.areas[addChildAreaIndex.value].areas.length
-
-    if (currentLen > len) {
-      for (let i = currentLen; i > len; i--) {
-        mailModel.areas[addChildAreaIndex.value].areas.pop()
-      }
-    } else if (currentLen < len) {
-      for (let i = currentLen; i < len; i++) {
-        mailModel.areas[addChildAreaIndex.value].areas.push(tmp)
-      }
-    }
-  }
-  addChildAreaVisiable.value = false
-  console.log(mailModel.areas[addChildAreaIndex.value].areas)
-}
 // 添加模块
 const addModel = (index: number) => {
-  mailModel.areas[index].modelItem = {
-    type: 'div',
-    height: '30px',
-    width: '100%',
-    bgColor: 'transparent',
-    fontSize: 16,
-    fontColor: '#000',
-    fontFamily: 'Helvetica',
-    textAlign: 'center',
-    direction: 'x',
-    fontWeight: false,
-    padding: [0, 0, 0, 0],
-    margin: [0, 0, 0, 0],
-    content: '示例文字|地址',
-    borderRadius: '0px',
-    justifyContent: 'center',
-    src: ''
-  }
+  let tmp = defalutModelItem
+
+  store.pushCurrentMailModel(index, tmp)
+
   ElMessage({
     message: 'Add Model Successfully',
     type: 'success'
@@ -299,21 +186,19 @@ const addModel = (index: number) => {
 }
 
 const delModel = (index: number) => {
-  mailModel.areas[index].modelItem = undefined
+  store.currentMailModel.areas[index].modelItem.pop()
   ElMessage({
     message: 'Del Model Successfully',
     type: 'success'
   })
 }
 // 上传本地照片
-const uploadPicture = (file: any, index: number) => {
+const uploadPicture = (file: any, fIndex: number, index: number) => {
   convertImageToBase64(file)
     .then((base64: any) => {
-      mailModel.areas[index].modelItem!.src = base64
+      store.currentMailModel.areas[fIndex].modelItem[index].src = base64
     })
-    .catch(error => {
-      console.error(error)
-    })
+    .catch(error => {})
 }
 
 // 上传模板文件检查
@@ -339,8 +224,8 @@ const uploadTemplateCheck = () => {
 const uploadTemplate = () => {
   invoke('upload_file', { name: uploadTemplateTarget.value })
     .then((res: any) => {
-      mailModel = JSON.parse(res)
-      store.templateMailModel = mailModel
+      store.currentMailModel = JSON.parse(res)
+      store.templateMailModel = store.currentMailModel
       ElMessage({
         message: 'Upload Template Successfully! Please Wait a moment!',
         type: 'success'
@@ -359,7 +244,7 @@ const uploadTemplate = () => {
 
 // 下载模板文件
 const downloadTemplate = () => {
-  let tmp = JSON.stringify(mailModel)
+  let tmp = JSON.stringify(store.currentMailModel)
   invoke('download_template', { name: downloadFileName.value, data: tmp, dom: targetTemplate.value.$el.outerHTML })
     .then(res => {
       ElMessage({
@@ -378,7 +263,7 @@ const downloadTemplate = () => {
 
 // 模板暂存到Pinia中，关闭页面消失
 const uploadToStore = () => {
-  store.templateMailModel = mailModel
+  store.templateMailModel = store.currentMailModel
   store.templateMailHtml = targetTemplate.value.$el.outerHTML
   if (JSON.stringify(store.templateMailModel) != '{}') {
     ElMessage({
@@ -400,30 +285,12 @@ const delCache = () => {
     type: 'warning'
   })
     .then(() => {
-      console.log(mailModel)
       store.templateMailHtml = ''
-      store.templateMailModel = {}
-      mailModel.base = {
-        width: 320,
-        bgColor: '#fff',
-        areaNum: 1,
-        direction: 'y',
-        padding: 46
-      }
-      mailModel.areas = [
-        {
-          bgColor: '#fff',
-          areaNum: 0,
-          direction: 'y',
-          textAlign: 'center',
-          span: 1,
-          areas: new Array(),
-          justifyContent: 'center',
-          modelItem: undefined
-        }
-      ] as Array<AreaModel>
-      mailModel.areasLen = 1
-      console.log(mailModel)
+      store.templateMailModel = {} as Model
+
+      store.currentMailModel = defalutModel
+      //刷新视图
+      router.go(0)
       ElMessage({
         type: 'success',
         message: 'Delete completed'
@@ -437,28 +304,11 @@ const delCache = () => {
     })
 }
 
-const childEndSpanChange = (e: number, fIndex: number, index: number) => {
-  mailModel.areas[fIndex].areas[index].span = e
-}
-const childEndBGChange = (e: string, fIndex: number, index: number) => {
-  mailModel.areas[fIndex].areas[index].bgColor = e
-}
-const childEndJCChange = (e: string, fIndex: number, index: number) => {
-  mailModel.areas[fIndex].areas[index].justifyContent = e
-}
-
-watch(
-  mailModel,
-  (newVal: any, oldVal: any) => {
-    console.log(newVal)
-    mailModel = newVal
-  },
-  { deep: true }
-)
-
 onMounted(() => {
   if (JSON.stringify(store.templateMailModel) != '{}') {
-    mailModel = store.templateMailModel
+    store.currentMailModel = store.templateMailModel
+  } else {
+    store.currentMailModel = store.currentMailModel
   }
 })
 </script>
