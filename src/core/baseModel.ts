@@ -35,6 +35,7 @@ export interface AreaModel {
   // padding: Array<number>;
   // margin: Array<number>;
   // areas: Array<AreaModel> | null;
+  id: number;
   bgColor: string;
   textAlign: string;
   direction: string;
@@ -97,6 +98,7 @@ export const defaultAreaModels: Array<AreaModel> = [
 ];
 
 export const defaultAreaModel: AreaModel = {
+  id: 0,
   bgColor: "#fff",
   direction: "y",
   textAlign: "center",
@@ -135,6 +137,7 @@ export const defalutModel: Model = {
   } as BaseModel,
   areas: [
     {
+      id: 0,
       bgColor: "#fff",
       direction: "y",
       textAlign: "center",

@@ -13,6 +13,9 @@
       <el-tab-pane label="Example">
         <Example></Example>
       </el-tab-pane>
+      <el-tab-pane label="Update">
+        <Update></Update>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -28,6 +31,7 @@ import Preparation from '../components/docs/Preparation.vue'
 import Introduction from '../components/docs/Introduction.vue'
 import HowToUse from '../components/docs/HowToUse.vue'
 import Example from '../components/docs/Example.vue'
+import Update from '../components/docs/Update.vue'
 
 const component = 'Doc'
 const store = indexStore()

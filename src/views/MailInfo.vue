@@ -19,6 +19,21 @@
         <el-table-column prop="date" label="Date" />
         <el-table-column prop="author" label="Author" />
       </el-table>
+      <div>
+        <ul>
+          <li> 降低用户使用门槛，提升用户体验</li>
+          <li> 增加设置：版本、软件安装目录</li>
+          <li> 增加检查更新功能</li>
+          <li> 优化模板编辑结构</li>
+          <li> 增加模板编辑排版方向属性</li>
+          <li> 增加区域跨度属性</li>
+          <li> 修改模板删除（删除后刷新重加载）</li>
+          <li> 优化内部页面结构</li>
+          <li> 优化内部数据结构</li>
+          <li> 去除区域冗余属性</li>
+          <li> 文档修改</li>
+        </ul>
+      </div>
     </div>
     <el-button type="primary" class="updateBtn" @click="checkUpdate">{{  getStr(store.settings.language,pagei18n.buttons.checkUpdate)  }}</el-button>
   </div>

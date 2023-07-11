@@ -73,17 +73,17 @@
       </div>
       <div :class="build('template','base')" style="flex-wrap: wrap;">
         <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.padding) }}</div>
-        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.top) }}:<el-input-number v-model="itemData.padding[0]" :step="1" :max="1000" /></div>
-        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.right) }}:<el-input-number v-model="itemData.padding[1]" :step="1" :max="1000" /></div>
-        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.bottom) }}:<el-input-number v-model="itemData.padding[2]" :step="1" :max="1000" /></div>
-        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.left) }}:<el-input-number v-model="itemData.padding[3]" :step="1" :max="1000" /></div>
+        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.top) }}:<el-input-number @change="(currentValue:number,oldValue:number)=>paddingChange(currentValue,oldValue,0)" v-model="itemData.padding[0]" :step="1" :max="1000" /></div>
+        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.right) }}:<el-input-number @change="(currentValue:number,oldValue:number)=>paddingChange(currentValue,oldValue,1)" v-model="itemData.padding[1]" :step="1" :max="1000" /></div>
+        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.bottom) }}:<el-input-number @change="(currentValue:number,oldValue:number)=>paddingChange(currentValue,oldValue,2)" v-model="itemData.padding[2]" :step="1" :max="1000" /></div>
+        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.left) }}:<el-input-number @change="(currentValue:number,oldValue:number)=>paddingChange(currentValue,oldValue,3)" v-model="itemData.padding[3]" :step="1" :max="1000" /></div>
       </div>
       <div :class="build('template','base')" style="flex-wrap: wrap;">
         <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.margin) }}</div>
-        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.top) }}:<el-input-number v-model="itemData.margin[0]" :step="1" :max="1000" /></div>
-        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.right) }}:<el-input-number v-model="itemData.margin[1]" :step="1" :max="1000" /></div>
-        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.bottom) }}:<el-input-number v-model="itemData.margin[2]" :step="1" :max="1000" /></div>
-        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.left) }}:<el-input-number v-model="itemData.margin[3]" :step="1" :max="1000" /></div>
+        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.top) }}:<el-input-number @change="(currentValue:number,oldValue:number)=>marginChange(currentValue,oldValue,0)" v-model="itemData.margin[0]" :step="1" :max="1000" /></div>
+        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.right) }}:<el-input-number @change="(currentValue:number,oldValue:number)=>marginChange(currentValue,oldValue,1)" v-model="itemData.margin[1]" :step="1" :max="1000" /></div>
+        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.bottom) }}:<el-input-number @change="(currentValue:number,oldValue:number)=>marginChange(currentValue,oldValue,2)" v-model="itemData.margin[2]" :step="1" :max="1000" /></div>
+        <div class="wrapline">{{ getStr(store.settings.language,pagei18n.edit.left) }}:<el-input-number @change="(currentValue:number,oldValue:number)=>marginChange(currentValue,oldValue,3)" v-model="itemData.margin[3]" :step="1" :max="1000" /></div>
       </div>
     </span>
   </div>
@@ -104,7 +104,8 @@ import { indexStore } from '../store/IndexPinia'
 import { build, buildView, buildWrap } from '../styles/name'
 const store = indexStore()
 let flexArea = ref(false)
-const emits = defineEmits(['upload-picture'])
+
+const emits = defineEmits(['upload-picture', 'margin-change', 'padding-change'])
 const props = defineProps({
   data: {
     type: Object as PropType<ModelItem>,
@@ -143,6 +144,14 @@ const uploadPicture = (index: number, event: any) => {
 
 const showFlex = () => {
   flexArea.value = !flexArea.value
+}
+
+const marginChange = (currentValue: any, oldValue: any, index: number) => {
+  emits('margin-change', itemfIndex.value, itemIndex.value, index, currentValue)
+}
+
+const paddingChange = (currentValue: any, oldValue: any, index: number) => {
+  emits('padding-change', itemfIndex.value, itemIndex.value, index, currentValue)
 }
 </script>
 

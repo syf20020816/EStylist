@@ -193,7 +193,6 @@ const delContact = (email: string) => {
 }
 
 const sendEmail = () => {
-  console.log(sendMailHTML.value)
   invoke('send_email', { from: store.settings.email, cc: MailSend.value.cc, to: MailSend.value.to, subject: MailSend.value.subject, content: sendMailHTML.value })
     .then((res: any) => {
       ElMessage({

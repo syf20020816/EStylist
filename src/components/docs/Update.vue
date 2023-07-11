@@ -1,65 +1,115 @@
 <template>
-
   <div class='typora-export os-windows'>
     <div class='typora-export-content'>
       <div id='write' class=''>
-        <h1 id='estylist'><span>EStylist</span></h1>
+        <h1 id='update'><span>Update</span></h1>
+        <figure class='table-figure'>
+          <table>
+            <thead>
+              <tr>
+                <th><span>version</span></th>
+                <th><span>date</span></th>
+                <th><span>author</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span>0.0.1</span></td>
+                <td><span>20230626</span></td>
+                <td><a href='mailto:syf20020816@outlook.com' target='_blank' class='url'>syf20020816@outlook.com</a></td>
+              </tr>
+              <tr>
+                <td><span>0.0.2</span></td>
+                <td><span>20230712</span></td>
+                <td><a href='mailto:syf20020816@outlook.com' target='_blank' class='url'>syf20020816@outlook.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </figure>
+        <h2 id='update-log'><span>Update Log</span></h2>
+        <h3 id='v002'><span>v0.0.2</span></h3>
         <ul>
           <li>
-            <p><span>author：</span><a href='mailto:syf20020816@outlook.com' target='_blank' class='url'>syf20020816@outlook.com</a></p>
+            <p><span>降低用户使用门槛，提升用户体验</span></p>
           </li>
           <li>
-            <p><span>docName：EStylist README</span></p>
+            <p><span>增加设置：版本、软件安装目录</span></p>
           </li>
           <li>
-            <p><span>createDate：202306019</span></p>
+            <p><span>增加检查更新功能</span></p>
           </li>
           <li>
-            <p><span>updateDate：20230711</span></p>
+            <p><span>优化模板编辑结构</span></p>
           </li>
           <li>
-            <p><span>version：0.0.2</span></p>
+            <p><span>增加模板编辑排版方向属性</span></p>
           </li>
           <li>
-            <p><span>des-tag：release</span></p>
+            <p><span>增加区域跨度属性</span></p>
           </li>
           <li>
-            <p><span>email：</span><a href='mailto:syf20020816@outlook.com' target='_blank' class='url'>syf20020816@outlook.com</a></p>
+            <p><span>修改模板删除（删除后刷新重加载）</span></p>
+          </li>
+          <li>
+            <p><span>优化内部页面结构</span></p>
+          </li>
+          <li>
+            <p><span>优化内部数据结构</span></p>
+          </li>
+          <li>
+            <p><span>去除区域冗余属性</span></p>
+          </li>
+          <li>
+            <p><span>文档修改</span></p>
           </li>
         </ul>
-        <p><img src="https://img.shields.io/badge/EStylist-0.0.2-orange?style=flat-square&logo=tauri&logoColor=%23fff&labelColor=%2323B898&color=%2323B898"></p>
-        <h2 id='why-estylist'><span>Why EStylist</span></h2>
-        <p><span>邮件服务公司通常不会在软件中构建邮件模板服务，因为这会增加他们的开发成本和维护成本。此外，邮件模板服务需要大量的数据管理和安全措施，以确保用户的隐私和数据安全。相反，许多邮件服务公司提供了API和SDK,使得开发人员可以轻松地集成邮件模板服务到他们的应用程序中。这些API和SDK通常提供了一系列功能，如发送电子邮件、管理收件人列表、设置主题、添加附件等。但这对于普通人想要构建一个精美的模板而言显得较为困难，也几乎找不到提供的API或SDK进行发布。</span></p>
-        <p><span>Email service companies typically do not build email template services in their software, as this increases their development and maintenance costs. In addition, email template services require extensive data management and security measures to ensure user privacy and data security. On the contrary, many email service companies provide APIs and SDKs, allowing developers to easily integrate email template services into their applications. These APIs and SDKs typically provide a series of functions, such as sending emails, managing recipient lists, setting themes, and adding attachments. But this is relatively difficult for ordinary people to build a beautiful template, and there is almost no API or SDK provided for publishing.</span></p>
-        <h2 id='what-is-estylist'><span>What is EStylist</span></h2>
-        <p><img src="../../assets/EStylist.png" style="filter:drop-shadow(0 0 20px #8399fa)"></p>
-        <p><span>EStylist 是一款第三方应用软件，旨在帮助用户编写邮件模板。无论是商务邮件、求职信、感谢信还是其他类型的邮件，EStylist 都可以提供专业的模板和编辑功能，让用户能够轻松地撰写出富有表达力和专业感的邮件。如果你经常被丑陋的电子邮件所困扰，并想追求电子邮件的布局和风格。想要像Stream或GitHub那样精致的电子邮件，EStylist将帮助您构建精美的电子邮件！</span></p>
-        <p><span>EStylist is a third-party application designed to assist users in writing email templates. EStylist can provide professional templates and editing functions for business emails, Cover letter, thank-you letters and other types of emails, so that users can easily write expressive and professional emails. If you are often troubled by ugly emails and want to pursue the layout and style of emails. If you want exquisite emails like Stream or GitHub, EStylist will help you build exquisite emails!</span></p>
-        <h2 id='download-estylist'><span>Download EStylist</span></h2>
-        <p><span>下载EStylist十分简单，你可以前往Gitee或者GitHub上直接进行下载exe文件，然后将exe放到自己喜欢的目录下直接启动即可，程序会帮助您构建需要的文件以及目录。</span></p>
-        <p><span>Downloading EStylist is very simple. You can go to Gitee or GitHub to download the exe file directly, and then place the exe in your favorite directory to start directly. The program will help you build the necessary files and directories.</span></p>
-        <h2 id='license'><span>License</span></h2>
-        <p><img src="https://img.shields.io/badge/build-MIT-%2321B191?style=flat&label=License&color=%2321B191"></p>
-        <h2 id='directory-structure'><span>Directory Structure</span></h2>
-        <p><img src="../../assets/image-20230622214506174.png"></p>
-        <h2 id='how-to-use-estylist'><span>How To Use EStylist</span></h2>
+        <h2 id='update-preview'><span>Update Preview</span></h2>
+        <h3 id='v010'><span>v0.1.0</span></h3>
+        <p><span> 下一个更新版本设定为v0.1.0</span></p>
         <ul>
           <li>
-            <p><span>You can read GitHub or Gitee wiki : </span><a href='https://github.com/syf20020816/EStylist/wiki' target='_blank' class='url'>https://github.com/syf20020816/EStylist/wiki</a></p>
+            <p><span>增加模块边框属性</span></p>
           </li>
           <li>
-            <p><span>Clicking on the document icon in the program can also read and use the document</span></p>
+            <p><span>增加自定义模块组件（支持用户自定义组件进行复用，提升效率）</span></p>
+          </li>
+          <li>
+            <p><span>增加模块节点复制功能</span></p>
+          </li>
+          <li>
+            <p><span>优化模块节点删除</span></p>
+          </li>
+          <li>
+            <p><span>提升模板编辑交互性</span></p>
+          </li>
+          <li>
+            <p><span>增加文字拼写自动检测提示</span></p>
+          </li>
+          <li>
+            <p><span>增加预定义模板（安装时自动安装）</span></p>
+          </li>
+          <li>
+            <p><span>增加用户模板直接预览</span></p>
+          </li>
+          <li>
+            <p><span>增加模板库（用户可在线获取模板）</span></p>
+          </li>
+          <li>
+            <p><span>增加组件库（用户在线获取组件）</span></p>
+          </li>
+          <li>
+            <p><span>嵌入人工智能进行智能推荐（或许会在更晚的版本推出）</span></p>
           </li>
         </ul>
+        <p>&nbsp;</p>
       </div>
     </div>
   </div>
-
 </template>
 
 <script lang="ts">
 export default {
-  name: 'Introduction'
+  name: 'Update'
 }
 </script>
 

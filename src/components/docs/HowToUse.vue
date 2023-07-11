@@ -7,21 +7,33 @@
         <p><span>Firstly, let&#39;s take a look at the overall composition of the software. EStylist is currently composed of six modules</span></p>
         <p><img src="../../assets/image-20230622233621386.png" referrerpolicy="no-referrer" alt="image-20230622233621386"></p>
         <ol start=''>
-          <li><span>首页 Index</span></li>
-          <li><span>模板编辑 Template-Edit</span></li>
-          <li><span>邮件发送 Email-Send</span></li>
-          <li><span>文档 Doc</span></li>
-          <li><span>更新信息 Update-Info</span></li>
-          <li><span>设置 Settings</span></li>
+          <li>
+            <p><span>首页 Index</span></p>
+          </li>
+          <li>
+            <p><span>模板编辑 Template-Edit</span></p>
+          </li>
+          <li>
+            <p><span>邮件发送 Email-Send</span></p>
+          </li>
+          <li>
+            <p><span>文档 Doc</span></p>
+          </li>
+          <li>
+            <p><span>更新信息 Update-Info</span></p>
+          </li>
+          <li>
+            <p><span>设置 Settings</span></p>
+          </li>
         </ol>
         <p><span>我们主要来了解一下：模板编辑、邮件发送、设置这三大主要功能</span></p>
         <p><span>Let&#39;s mainly learn about the three main functions: template editing, email sending, and settings</span></p>
         <h2 id='settings'><span>Settings</span></h2>
         <p><span>首先我们要了解的是设置，通过设置，我们能够更好的使用程序，并且如果您需要通过EStylist发送邮件模板则必须先了解这些设置</span></p>
         <p><span>The first thing we need to understand is the settings. Through these settings, we can better use the program, and if you need to send email templates through EStylist, you must first understand these settings</span></p>
-        <p><img src="../../assets/image-20230622234353511.png" alt="image-20230622234353511" style="zoom: 67%;" /></p>
-        <h3 id='configurations-1'><span>Configurations</span></h3>
-        <figure>
+        <p><img src="../../assets/settings.png" style="zoom: 67%;" /></p>
+        <h3 id='configurations'><span>Configurations</span></h3>
+        <figure class='table-figure'>
           <table>
             <thead>
               <tr>
@@ -31,6 +43,16 @@
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td><span>版本</span><strong><span>Version</span></strong></td>
+                <td><span>eg: 0.0.2</span></td>
+                <td><span>🚫</span></td>
+              </tr>
+              <tr>
+                <td><span>软件安装目录</span><strong><span>Installation Dir</span></strong></td>
+                <td><span>eg:E:\estylist</span></td>
+                <td><span>🚫</span></td>
+              </tr>
               <tr>
                 <td><span>配置路径 </span><strong><span>Config Path!</span></strong></td>
                 <td><span>./conf/EStylist_config.json</span></td>
@@ -53,47 +75,45 @@
               </tr>
               <tr>
                 <td><span>SMTP</span></td>
-                <td><span>Any SMTP Service Address</span><br><span>such as : smtp.gmail.com</span></td>
+                <td><span>Any SMTP Service Address</span><br /><span>such as : smtp.gmail.com</span></td>
                 <td><span>✅</span></td>
               </tr>
               <tr>
                 <td><span>自动加载模板 </span><strong><span>Automatically load templates</span></strong></td>
-                <td><span>true</span><br><span>false</span></td>
+                <td><span>true</span><br /><span>false</span></td>
                 <td><span>❤️</span></td>
               </tr>
               <tr>
                 <td><span>工作区占比 </span><strong><span>Proportion of workspaces</span></strong></td>
-                <td><span>1:1</span><br><span>2:3</span><br><span>3:2</span><br><span>6:4</span><br><span>4:6</span><br><span>13:7</span><br><span>7:13</span><br><span>3:1</span></td>
+                <td><span>1:1</span><br /><span>2:3</span><br /><span>3:2</span><br /><span>6:4</span><br /><span>4:6</span><br /><span>13:7</span><br /><span>7:13</span><br /><span>3:1</span></td>
                 <td><span>❤️</span></td>
               </tr>
               <tr>
                 <td><span>语言 Language</span></td>
-                <td><span>中文</span><br><span>English</span></td>
+                <td><span>中文</span><br /><span>English</span></td>
                 <td><span>❤️</span></td>
               </tr>
             </tbody>
           </table>
         </figure>
         <blockquote>
-          <p><span>✅：important and must be configured</span>
-            <span>🚫：No configuration required</span>
-            <span>❎：It is not recommended to modify the configuration</span>
-            <span>❤️：Please configure according to your preferences</span>
-          </p>
-          <p><span>✅：重要且必须配置</span>
-            <span>🚫：无需配置</span>
-            <span>❎：不建议修改配置</span>
-            <span>❤️：请根据您的偏好进行配置</span>
-          </p>
+          <p><span>✅：important and must be configured</span></p>
+          <p><span>🚫：No configuration required</span></p>
+          <p><span>❎：It is not recommended to modify the configuration</span></p>
+          <p><span>❤️：Please configure according to your preferences</span></p>
+          <p><span>✅：重要且必须配置</span></p>
+          <p><span>🚫：无需配置</span></p>
+          <p><span>❎：不建议修改配置</span></p>
+          <p><span>❤️：请根据您的偏好进行配置</span></p>
         </blockquote>
         <p><span>❗请记住修改配置后请保存</span></p>
         <p><span>❗Please remember to save after modifying the configuration</span></p>
         <h2 id='template-edit'><span>Template-Edit</span></h2>
         <p><span>模板编辑是EStylist的核心功能，他的目的是设计出你满意的邮箱模板，或者可以是个人卡片，对于学习过CSS的用户来说可能能够快速上手，但是若你没有学过，请一定要仔细学习这个部分</span></p>
         <p><span>Template editing is the core function of EStylist. Its purpose is to design a satisfactory email template, or it can be a personal card. For users who have studied CSS, it may be easy to get started quickly, but if you have not studied it, please carefully study this section</span></p>
-        <p><img src="../../assets/image-20230623010128337.png" alt="image-20230623010128337" style="zoom:67%;" /></p>
+        <p><img src="../../assets/edit.png" style="zoom: 67%;" /></p>
         <h3 id='configurations-2'><span>Configurations</span></h3>
-        <figure>
+        <figure class='table-figure'>
           <table>
             <thead>
               <tr>
@@ -106,62 +126,62 @@
               <tr>
                 <td><span>构建底板</span></td>
                 <td><span>Building the base plate</span></td>
-                <td><span>构建邮件的底板，底板是邮件的主要底色和主内容间距</span><br><span>Build the bottom plate of the email, which is the main color and content spacing of the email</span></td>
+                <td><span>构建邮件的底板，底板是邮件的主要底色和主内容间距</span><br /><span>Build the bottom plate of the email, which is the main color and content spacing of the email</span></td>
               </tr>
               <tr>
                 <td><span>构建区域</span></td>
                 <td><span>Build Area</span></td>
-                <td><span>区域是模板内容的外层，一个区域可以放置一个模块</span><br><span>Regions are the outer layer of template content, and each region can accommodate one module</span></td>
+                <td><span>区域是模板内容的外层，一个区域可以放置一个模块</span><br /><span>Regions are the outer layer of template content, and each region can accommodate one module</span></td>
               </tr>
               <tr>
                 <td><span>构建模块</span></td>
                 <td><span>Build Model</span></td>
-                <td><span>模块则是核心内容，当前分为文字、链接、图片三种</span><br><span>The module is the core content, currently divided into three types: text, links, and images</span></td>
+                <td><span>模块则是核心内容，当前分为文字、链接、图片三种</span><br /><span>The module is the core content, currently divided into three types: text, links, and images</span></td>
               </tr>
               <tr>
                 <td><span>高度</span></td>
                 <td><span>Height</span></td>
-                <td><span>只有模块会有高度</span><br><span>Only the module will have a height</span></td>
+                <td><span>只有模块会有高度</span><br /><span>Only the module will have a height</span></td>
               </tr>
               <tr>
                 <td><span>宽度</span></td>
                 <td><span>Width</span></td>
-                <td><span>宽度指的是模块或区域宽度</span><br><span>Width refers to the width of a module or area</span></td>
+                <td><span>宽度指的是模块或区域宽度</span><br /><span>Width refers to the width of a module or area</span></td>
               </tr>
               <tr>
                 <td><span>内容位置</span></td>
                 <td><span>Content Position</span></td>
-                <td><span>内容位置将修改内容在模块容器中的位置，左、右、中间</span><br><span>The content location will modify the position of the content in the module container, left, right, and center</span></td>
+                <td><span>内容位置将修改内容在模块容器中的位置，左、右、中间</span><br /><span>The content location will modify the position of the content in the module container, left, right, and center</span></td>
               </tr>
               <tr>
                 <td><span>圆角</span></td>
                 <td><span>Radius</span></td>
-                <td><span>圆角主要用于设置模块边角是否圆滑</span><br><span>Round corners are mainly used to set whether the module corners are smooth</span></td>
+                <td><span>圆角主要用于设置模块边角是否圆滑</span><br /><span>Round corners are mainly used to set whether the module corners are smooth</span></td>
               </tr>
               <tr>
                 <td><span>上传</span></td>
                 <td><span>Upload</span></td>
-                <td><span>上传只用于图片模块，用于上传本地图片</span><br><span>Upload only for image module, for uploading local images</span></td>
+                <td><span>上传只用于图片模块，用于上传本地图片</span><br /><span>Upload only for image module, for uploading local images</span></td>
               </tr>
               <tr>
                 <td><span>地址</span></td>
                 <td><span>Url</span></td>
-                <td><span>地址指的一般是图片的地址，用于上传网络图片或者是链接的地址</span><br><span>Address generally refers to the address of the image, which is used for uploading network images or links</span></td>
+                <td><span>地址指的一般是图片的地址，用于上传网络图片或者是链接的地址</span><br /><span>Address generally refers to the address of the image, which is used for uploading network images or links</span></td>
               </tr>
               <tr>
                 <td><span>模块类型</span></td>
                 <td><span>Model Types</span></td>
-                <td><span>模块类型主要有图片、文字、链接</span><br><span>The main types of modules include images, text, and links</span></td>
+                <td><span>模块类型主要有图片、文字、链接</span><br /><span>The main types of modules include images, text, and links</span></td>
               </tr>
               <tr>
                 <td><span>文字位置</span></td>
                 <td><span>Text Pos</span></td>
-                <td><span>设置文字的位置，后续可能会去除以变得更加简单使用</span><br><span>Set the position of the text, which may be removed later to make it easier to use</span></td>
+                <td><span>设置文字的位置，后续可能会去除以变得更加简单使用</span><br /><span>Set the position of the text, which may be removed later to make it easier to use</span></td>
               </tr>
               <tr>
                 <td><span>内容</span></td>
                 <td><span>Content</span></td>
-                <td><span>内容文字</span><br><span>Content Text</span></td>
+                <td><span>内容文字</span><br /><span>Content Text</span></td>
               </tr>
               <tr>
                 <td><span>字体颜色</span></td>
@@ -176,7 +196,7 @@
               <tr>
                 <td><span>区域跨度</span></td>
                 <td><span>Column Span</span></td>
-                <td><span>区域跨度是指区域的横向占比</span><br><span>Regional span refers to the horizontal proportion of an area</span></td>
+                <td><span>区域跨度是指区域的横向占比</span><br /><span>Regional span refers to the horizontal proportion of an area</span></td>
               </tr>
               <tr>
                 <td><span>背景色</span></td>
@@ -186,7 +206,7 @@
               <tr>
                 <td><span>排版方向</span></td>
                 <td><span>Direction</span></td>
-                <td><span>用于设置排版的方向是横向还是纵向</span><br><span>Used to set whether the layout direction is horizontal or vertical</span></td>
+                <td><span>用于设置排版的方向是横向还是纵向</span><br /><span>Used to set whether the layout direction is horizontal or vertical</span></td>
               </tr>
               <tr>
                 <td><span>字体</span></td>
@@ -201,28 +221,28 @@
               <tr>
                 <td><span>内边距</span></td>
                 <td><span>Padding</span></td>
-                <td><span>模块、区域、底板的边距离内容的距离</span><br><span>The distance between the edges of the module, area, and base plate and the content</span></td>
+                <td><span>模块、区域、底板的边距离内容的距离</span><br /><span>The distance between the edges of the module, area, and base plate and the content</span></td>
               </tr>
               <tr>
                 <td><span>外边距</span></td>
                 <td><span>Margin</span></td>
-                <td><span>模块、区域、底板的边距离外部其他区域的距离</span><br><span>The distance between the edges of modules, areas, and base plates and other external areas</span></td>
+                <td><span>模块、区域、底板的边距离外部其他区域的距离</span><br /><span>The distance between the edges of modules, areas, and base plates and other external areas</span></td>
               </tr>
               <tr>
                 <td><span>子区域个数</span></td>
                 <td><span>Child Area Num</span></td>
-                <td><span>区域中的子区域个数</span><br><span>Number of sub regions in the region</span></td>
+                <td><span>区域中的子区域个数</span><br /><span>Number of sub regions in the region</span></td>
               </tr>
             </tbody>
           </table>
         </figure>
         <h3 id='understanding-of-padding-and-margins'><span>Understanding of Padding and Margins</span></h3>
-        <p><img src="../../assets/image-20230623004342298.png" referrerpolicy="no-referrer" alt="image-20230623004342298"></p>
+        <p><img src="../../assets/image-20230623004342298.png" style="zoom: 86%;" /></p>
         <h3 id='tools'><span>tools</span></h3>
         <p><span>工具在右下角，当前一共有6种</span></p>
         <p><span>The tools are in the bottom right corner, currently there are a total of 6 types</span></p>
-        <p><img src="../../assets/image-20230623005030946.png" referrerpolicy="no-referrer" alt="image-20230623005030946"></p>
-        <figure>
+        <p><img src="../../assets/image-20230623005030946.png" /></p>
+        <figure class='table-figure'>
           <table>
             <thead>
               <tr>
@@ -232,28 +252,28 @@
             </thead>
             <tbody>
               <tr>
-                <td><img src="../../assets/image-20230623005149823.png" referrerpolicy="no-referrer" alt="image-20230623005149823"></td>
-                <td><span>缩小模板编辑区</span><br><span>Shrink the template editing area</span></td>
+                <td><img src="../../assets/image-20230623005149823.png" /></td>
+                <td><span>缩小模板编辑区</span><br /><span>Shrink the template editing area</span></td>
               </tr>
               <tr>
                 <td><img src="../../assets/image-20230623005217185.png" referrerpolicy="no-referrer" alt="image-20230623005217185"></td>
-                <td><span>放大模板编辑区</span><br><span>Enlarge the template editing area</span></td>
+                <td><span>放大模板编辑区</span><br /><span>Enlarge the template editing area</span></td>
               </tr>
               <tr>
                 <td><img src="../../assets/image-20230623005224310.png" referrerpolicy="no-referrer" alt="image-20230623005224310"></td>
-                <td><span>上传JSON模板文件</span><br><span>Upload JSON template file</span></td>
+                <td><span>上传JSON模板文件</span><br /><span>Upload JSON template file</span></td>
               </tr>
               <tr>
                 <td><img src="../../assets/image-20230623005233341.png" referrerpolicy="no-referrer" alt="image-20230623005233341"></td>
-                <td><span>下载JSON模板以及HTML文件</span><br><span>Download JSON templates and HTML files</span></td>
+                <td><span>下载JSON模板以及HTML文件</span><br /><span>Download JSON templates and HTML files</span></td>
               </tr>
               <tr>
                 <td><img src="../../assets/image-20230623005248274.png" referrerpolicy="no-referrer" alt="image-20230623005248274"></td>
-                <td><span>将模板存储到暂存区中，暂存区中的模板不会随着页面切换而消失，但关闭程序会消失</span><br><span>Store the template in the temporary storage area. The template in the temporary storage area will not disappear with page switching, but will disappear when the program is closed</span></td>
+                <td><span>将模板存储到暂存区中，暂存区中的模板不会随着页面切换而消失，但关闭程序会消失</span><br /><span>Store the template in the temporary storage area. The template in the temporary storage area will not disappear with page switching, but will disappear when the program is closed</span></td>
               </tr>
               <tr>
                 <td><img src="../../assets/image-20230623005259709.png" referrerpolicy="no-referrer" alt="image-20230623005259709"></td>
-                <td><span>删除当前模板以及暂存区缓存</span><br><span>Delete the current template and temporary storage cache</span></td>
+                <td><span>删除当前模板以及暂存区缓存</span><br /><span>Delete the current template and temporary storage cache</span></td>
               </tr>
             </tbody>
           </table>
@@ -269,7 +289,7 @@
         <p><span>Finally, there is email sending. It is worth noting that EStylist aims to send built email templates. If you want to send regular emails, please move to regular email</span></p>
         <p><img src="../../assets/image-20230623004500093.png" alt="image-20230623004500093" style="zoom:67%;" /></p>
         <h3 id='buttons'><span>Buttons</span></h3>
-        <figure>
+        <figure class='table-figure'>
           <table>
             <thead>
               <tr>
@@ -280,15 +300,15 @@
             <tbody>
               <tr>
                 <td><span>Choose</span></td>
-                <td><span>选择你需要发送的模板</span><br><span>Choose the template you need to send</span></td>
+                <td><span>选择你需要发送的模板</span><br /><span>Choose the template you need to send</span></td>
               </tr>
               <tr>
                 <td><span>Send</span></td>
-                <td><span>发送邮件</span><br><span>Send Email</span></td>
+                <td><span>发送邮件</span><br /><span>Send Email</span></td>
               </tr>
               <tr>
                 <td><span>Add Contact</span></td>
-                <td><span>添加联系人邮件</span><br><span>Add contact email</span></td>
+                <td><span>添加联系人邮件</span><br /><span>Add contact email</span></td>
               </tr>
             </tbody>
           </table>
@@ -331,6 +351,13 @@ html {
   color: var(--text-color);
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  white-space: pre-wrap;
 }
 body {
   margin: 0px;
@@ -404,12 +431,6 @@ body.typora-export {
   #write {
     padding-left: 20px;
     padding-right: 20px;
-  }
-  .CodeMirror-sizer {
-    margin-left: 0px !important;
-  }
-  .CodeMirror-gutters {
-    display: none !important;
   }
 }
 #write li > figure:last-child {
@@ -544,6 +565,7 @@ figure {
 figure > table {
   margin: 0px;
 }
+thead,
 tr {
   break-inside: avoid;
   break-after: auto;
@@ -631,6 +653,9 @@ div.hr:focus {
 twitterwidget {
   break-inside: avoid;
 }
+svg {
+  break-inside: avoid;
+}
 .footnotes {
   opacity: 0.8;
   font-size: 0.9rem;
@@ -706,8 +731,9 @@ li > :first-child {
   }
   #write {
     margin-top: 0px;
-    padding-top: 0px;
     border-color: transparent !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
   }
   .typora-export * {
     -webkit-print-color-adjust: exact;
@@ -721,8 +747,14 @@ li > :first-child {
   .is-mac table {
     break-inside: avoid;
   }
+  #write > p:nth-child(1) {
+    margin-top: 0px;
+  }
   .typora-export-show-outline .typora-export-sidebar {
     display: none;
+  }
+  figure {
+    overflow-x: visible;
   }
 }
 .footnote-line {
@@ -860,6 +892,9 @@ a.md-toc-inner {
 }
 .footnote-line a:not(.reversefootnote) {
   color: inherit;
+}
+.reversefootnote {
+  font-family: ui-monospace, sans-serif;
 }
 .md-attr {
   display: none;
@@ -1028,6 +1063,7 @@ mark .md-meta {
   padding-left: 0px;
   padding-right: 0px;
   list-style: none;
+  overflow-wrap: anywhere;
 }
 .outline-content ul {
   margin-top: 0px;
@@ -1147,6 +1183,9 @@ mark .md-meta {
 }
 .md-inline-math-container mjx-container {
   zoom: 0.95;
+}
+mjx-container {
+  break-inside: avoid;
 }
 
 :root {
@@ -2326,5 +2365,10 @@ footer.ty-footer {
 
 .clear-btn-icon {
   top: 8px;
+}
+
+/* try fix https://github.com/typora/typora-issues/issues/5253 */
+.file-node-expanded > .file-node-children {
+  display: grid;
 }
 </style>

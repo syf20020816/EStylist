@@ -205,8 +205,8 @@ export let pagei18n = {
       en: "What is EStylist",
     } as I18n,
     des: {
-      zh: "EStylist的意思是电子邮件设计者。我想知道你是否经常被丑陋的电子邮件所困扰，并想追求电子邮件的布局和风格。你想要像Stream或GitHub那样精致的电子邮件吗？让EStylist帮助您构建精美的电子邮件！",
-      en: "EStylist means email designer. I wonder if you are often troubled by ugly emails and want to pursue the layout and style of emails. Do you want emails as exquisite as Stream or GitHub? Let EStylist help you build exquisite emails!",
+      zh: "EStylist 是一款第三方应用软件，旨在帮助用户编写邮件模板。无论是商务邮件、求职信、感谢信还是其他类型的邮件，EStylist 都可以提供专业的模板和编辑功能，让用户能够轻松地撰写出富有表达力和专业感的邮件。如果你经常被丑陋的电子邮件所困扰，并想追求电子邮件的布局和风格。想要像Stream或GitHub那样精致的电子邮件，EStylist将帮助您构建精美的电子邮件！",
+      en: "EStylist is a third-party application designed to assist users in writing email templates. EStylist can provide professional templates and editing functions for business emails, Cover letter, thank-you letters and other types of emails, so that users can easily write expressive and professional emails. If you are often troubled by ugly emails and want to pursue the layout and style of emails. If you want exquisite emails like Stream or GitHub, EStylist will help you build exquisite emails!",
     } as I18n,
     promise: {
       zh: "承诺",

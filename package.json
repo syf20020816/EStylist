@@ -1,7 +1,7 @@
 {
   "name": "EStylist",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,6 +13,7 @@
     "@element-plus/icons-vue": "^2.1.0",
     "@tauri-apps/api": "^1.4.0",
     "element-plus": "^2.3.6",
+    "lodash": "^4.17.21",
     "node-sass": "^9.0.0",
     "pinia": "^2.1.4",
     "sass": "^1.63.4",

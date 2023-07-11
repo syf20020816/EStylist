@@ -23,14 +23,12 @@ Let's mainly learn about the three main functions: template editing, email sendi
 
 The first thing we need to understand is the settings. Through these settings, we can better use the program, and if you need to send email templates through EStylist, you must first understand these settings
 
-<img src="./imgs/v0.0.2/settings.png" style="zoom: 67%;" />
+<img src=".\HowToUse\imgs\image-20230622234353511.png" alt="image-20230622234353511" style="zoom: 67%;" />
 
 ### Configurations
 
 | Configuration         | Option | Main |
 | --------------------- | ------ | ---- |
-| 版本**Version** | eg: 0.0.2 | 🚫 |
-| 软件安装目录**Installation Dir** | eg:E:\estylist | 🚫 |
 | 配置路径 **Config Path!** | ./conf/EStylist_config.json | 🚫 |
 | 模板路径 **Template Path!** | ./templates | ❎ |
 | 邮箱 **Email**    | Your SMTP Email | ✅ |
@@ -41,19 +39,13 @@ The first thing we need to understand is the settings. Through these settings, w
 | 语言 Language | 中文<br />English | ❤️ |
 
 >✅：important and must be configured
->
 >🚫：No configuration required
->
 >❎：It is not recommended to modify the configuration
->
 >❤️：Please configure according to your preferences
 >
 >✅：重要且必须配置
->
 >🚫：无需配置
->
 >❎：不建议修改配置
->
 >❤️：请根据您的偏好进行配置
 
 ❗请记住修改配置后请保存
@@ -66,7 +58,7 @@ The first thing we need to understand is the settings. Through these settings, w
 
 Template editing is the core function of EStylist. Its purpose is to design a satisfactory email template, or it can be a personal card. For users who have studied CSS, it may be easy to get started quickly, but if you have not studied it, please carefully study this section
 
-<img src="./imgs/v0.0.2/edit.png" style="zoom: 67%;" />
+<img src=".\HowToUse\imgs\image-20230623010128337.png" alt="image-20230623010128337" style="zoom:67%;" />
 
 ### Configurations
 
@@ -97,7 +89,7 @@ Template editing is the core function of EStylist. Its purpose is to design a sa
 
 ### Understanding of Padding and Margins
 
-<img src="./imgs/v0.0.2/pmc.png" style="zoom: 86%;" />
+![image-20230623004342298](.\HowToUse\imgs\image-20230623004342298.png)
 
 ### tools
 
@@ -105,11 +97,11 @@ Template editing is the core function of EStylist. Its purpose is to design a sa
 
 The tools are in the bottom right corner, currently there are a total of 6 types
 
-<img src="./imgs/v0.0.2/image-20230623005030946.png" />
+![image-20230623005030946](.\HowToUse\imgs\image-20230623005030946.png)
 
 | icon                                                         | des                                                          |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| <img src="E:\Rust\try\eStylist\README\HowToUse\imgs\image-20230623005149823.png" /> | 缩小模板编辑区<br />Shrink the template editing area         |
+| ![image-20230623005149823](.\HowToUse\imgs\image-20230623005149823.png) | 缩小模板编辑区<br />Shrink the template editing area         |
 | ![image-20230623005217185](.\HowToUse\imgs\image-20230623005217185.png) | 放大模板编辑区<br />Enlarge the template editing area        |
 | ![image-20230623005224310](.\HowToUse\imgs\image-20230623005224310.png) | 上传JSON模板文件<br />Upload JSON template file              |
 | ![image-20230623005233341](.\HowToUse\imgs\image-20230623005233341.png) | 下载JSON模板以及HTML文件<br />Download JSON templates and HTML files |

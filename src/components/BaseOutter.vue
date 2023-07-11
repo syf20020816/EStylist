@@ -76,7 +76,6 @@ let itemDirection = computed(() => {
 })
 
 let modelItemStyles = computed(() => (direction: string) => {
-  console.log(direction)
   let flexDirection = 'column'
   if (direction == 'x') {
     flexDirection = 'row'

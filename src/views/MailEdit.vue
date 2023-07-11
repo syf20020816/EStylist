@@ -41,8 +41,8 @@
               </div>
             </div>
           </el-collapse-item>
-          <MailEditItem v-for="meItem,meIndex in store.currentMailModel.areas" :key="meIndex" :data="meItem" :index="meIndex" @add-model="addModel" @del-model="delModel">
-            <AreaOrModel v-for="amItem in meItem.modelItem" :key="amItem.id" :index="amItem.id" :data="amItem" :f-index="meIndex" @upload-picture="uploadPicture"></AreaOrModel>
+          <MailEditItem v-for="meItem in store.currentMailModel.areas" :key="meItem.id" :data="meItem" :index="meItem.id" @add-model="addModel" @del-model="delModel">
+            <AreaOrModel v-for="amItem in meItem.modelItem" :key="amItem.id" :index="amItem.id" :data="amItem" :f-index="meItem.id" @upload-picture="uploadPicture" @margin-change="marginChange" @padding-change="paddingChange"></AreaOrModel>
           </MailEditItem>
         </el-collapse>
       </div>
@@ -158,7 +158,7 @@ const saveBaseChange = () => {
   let oldLen = store.currentMailModel.areasLen
   if (oldLen < store.currentMailModel.base.areaNum) {
     for (let i = oldLen; i < store.currentMailModel.base.areaNum; i++) {
-      store.currentMailModel.areas.push(defaultAreaModel)
+      store.pushAreaToCurrentMailModel(defaultAreaModel)
     }
   } else if (oldLen > store.currentMailModel.base.areaNum) {
     for (let i = oldLen; i > store.currentMailModel.base.areaNum; i--) {
@@ -176,9 +176,7 @@ const saveBaseChange = () => {
 // 添加模块
 const addModel = (index: number) => {
   let tmp = defalutModelItem
-
-  store.pushCurrentMailModel(index, tmp)
-
+  store.pushCurrentMailModel(index)
   ElMessage({
     message: 'Add Model Successfully',
     type: 'success'
@@ -304,6 +302,12 @@ const delCache = () => {
     })
 }
 
+const paddingChange = (fIndex: number, sIndex: number, index: number, value: number) => {
+  store.paddingChange(fIndex, sIndex, index, value)
+}
+const marginChange = (fIndex: number, sIndex: number, index: number, value: number) => {
+  store.marginChange(fIndex, sIndex, index, value)
+}
 onMounted(() => {
   if (JSON.stringify(store.templateMailModel) != '{}') {
     store.currentMailModel = store.templateMailModel

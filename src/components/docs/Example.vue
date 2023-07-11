@@ -1,47 +1,97 @@
 <template>
+
   <div class='typora-export os-windows'>
     <div class='typora-export-content'>
       <div id='write' class=''>
-        <h1 id='example'><span>Example</span></h1>
-        <p><span>接下来，我们将学习一个例子来验证学习成果！</span></p>
-        <p><span>Next, we will learn an example to verify the learning outcomes!</span></p>
+        <h1 id='examplepersonal-cardv002）'><span>Example：Personal Card（v0.0.2）</span></h1>
+        <p><span>你可以选择看v0.0.1的例子，那同样十分优秀，不过这取决于你</span></p>
+        <p><span>You can choose to look at the example of v0.0.1, which is also excellent, but it depends on you</span></p>
+        <blockquote>
+          <p><span>❗note：</span></p>
+          <p><span>更高的版本出于用户体验去除了一些冗余属性The higher</span></p>
+          <p><span>version removes some redundant attributes due to user experience</span></p>
+        </blockquote>
         <h2 id='build-the-base-plate'><span>Build the base plate</span></h2>
-        <p><span>第一步，修改底板中的宽度、背景色、内边距以及子区域个数</span></p>
-        <p><span>The first step is to modify the width, background color, padding, and number of sub areas in the base plate</span></p>
-        <p><img src="../../assets/image-20230623012344704.png" alt="image-20230623012344704" style="zoom:67%;" /></p>
-        <h2 id='add-logo'><span>Add Logo</span></h2>
-        <p><span>接下来在区域中添加模块，设置模块类型为图片，修改高度、宽度、并选择一个你的Logo图片，并修改背景色</span></p>
-        <p><span>Next, add a module to the area, set the module type to Image, modify the height and width, choose a logo image, and modify the background color</span></p>
-        <p><img src="../../assets/image-20230623012749580.png" alt="image-20230623012749580" style="zoom:67%;" /></p>
-        <p><span>但是我们发现有白色的区域，这时候我们就需要到当前的区域中修改区域的背景色即可</span></p>
-        <p><span>But we found a white area, so we need to modify the background color of the area in the current area</span></p>
-        <p><img src="../../assets/image-20230623013036339.png" alt="image-20230623013036339" style="zoom:67%;" /></p>
-        <h2 id='add-text'><span>Add Text</span></h2>
-        <p><span>接下来到第二个区域中添加模块，选择模块类型为文字，修改文字内容、模块的高度、背景色、文字颜色</span></p>
-        <p><span>Next, add a module to the second area, select the module type as text, modify the text content, module height, background color, and text color</span></p>
-        <p><img src="../../assets/image-20230623013407886.png" alt="image-20230623013407886" style="zoom:67%;" /></p>
-        <p><span>下面为了对齐文字，我们需要将文字位置改为justify</span></p>
-        <p><span>To align the text below, we need to change the text position to justify</span></p>
-        <p><img src="../../assets/image-20230623013833227.png" alt="image-20230623013833227" style="zoom:67%;" /></p>
+        <p><span>第一步，修改底板中的宽度、背景色、内边距以及子区域个数，然后点击修改区域数量</span></p>
+        <p><span>The first step is to modify the width, background color, padding, and number of sub areas in the base plate,then click change area num button</span></p>
+        <p><img src="../../assets/step1.png" alt="image-20230711145821569" style="zoom:67%;" /></p>
+        <h2 id='add-title'><span>Add Title</span></h2>
+        <p><span>打开区域1，修改背景色并添加一个模块，在模块中响应对文字模块的高度，内容，背景色，文字颜色，文字大小进行修改</span></p>
+        <p><span>Open Area 1, modify the background color and add a module that responds to the height, content, background color, text color, and text size of the text module</span></p>
+        <p><img src="../../assets/step2.png" style="zoom:67%" /></p>
         <h2 id='add-link'><span>Add Link</span></h2>
         <p><span>选择使用链接，设置链接文字，然后设置链接地址，当然emoji表情😎你也可以使用</span></p>
         <p><span>Choose to use links, set the link text, and then set the link address, of course emoji emoji emoji 😎 You can also use</span></p>
-        <p><img src="../../assets/image-20230623014325854.png" alt="image-20230623014325854" style="zoom:67%;" /></p>
-        <h2 id='download-template'><span>Download Template</span></h2>
-        <p><span>完成模板后我们就可以将模板下载到本地进行保存以便于后续的编辑或发送模板</span></p>
-        <p><span>After completing the template, we can download it locally and save it for future editing or sending</span></p>
-        <p><img src="../../assets/image-20230623014834229.png" alt="image-20230623014834229" style="zoom:67%;" /></p>
-        <p><img src="../../assets/image-20230623014946958.png" referrerpolicy="no-referrer" alt="image-20230623014946958"></p>
-        <p><span>我们点击保存按钮，并设置名称，完成后我们在templates目录下就可以看到两个文件，分别是json和html格式的，html格式支持您直接进行预览</span></p>
-        <p><span>We click the save button and set the name. After completion, we can see two files in the templates directory, which are JSON and HTML formats. The HTML format allows you to preview directly</span></p>
-        <h2 id='send-email'><span>Send Email</span></h2>
-        <p><span>最后我们到发送页面，点击选择按钮，选择我们需要的模板，设置好邮件名称和收件人您就可以发送了</span></p>
-        <p><span>Finally, we will go to the send page, click the select button, select the template we need, set the email name and recipient, and you can send it</span></p>
-        <p><img src="../../assets/image-20230623015125653.png" alt="image-20230623015125653" style="zoom:67%;" /></p>
-        <h2 id='res'><span>Res</span></h2>
-        <p><img src="../../assets/image-20230623015640717.png" referrerpolicy="no-referrer" alt="image-20230623015640717"></p>
+        <p><img src="../../assets/step3.png" style="zoom:67%" /></p>
+        <h2 id='add-picture'><span>Add Picture</span></h2>
+        <p><img src="../../assets/step4.png" style="zoom:67%"></p>
+        <h2 id='more-models'><span>More Models</span></h2>
+        <p><span>事实上你可以在一个区域内创建多个模块，并修改方向控制模块沿着x轴或y轴排序</span></p>
+        <p><span>In fact, you can create multiple modules within an area and modify the direction control module to sort along the x or y axis</span></p>
+        <p><img src="../../assets/step5.png" style="zoom:67%"></p>
+        <h3 id='json-file'><span>JSON File</span></h3>
+        <p><span>你可以将json文件导入到编辑，然后自己查看设置</span></p>
+        <p><span>You can import the JSON file into the editor and view the settings yourself</span></p>
+        <p><span>当然这里我去除了图片</span></p>
+        <p><span>Of course, I removed the image here</span></p>
+        <pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="json"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="json"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 10.9px; left: 31px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 27px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -27px; width: 27px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -27px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 18px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">{<span class="cm-string cm-property">"base"</span>:{<span class="cm-string cm-property">"width"</span>:<span class="cm-number">420</span>,<span class="cm-string cm-property">"bgColor"</span>:<span class="cm-string">"#EE9116"</span>,<span class="cm-string cm-property">"areaNum"</span>:<span class="cm-number">4</span>,<span class="cm-string cm-property">"direction"</span>:<span class="cm-string">"y"</span>,<span class="cm-string cm-property">"padding"</span>:<span class="cm-number">24</span>},<span class="cm-string cm-property">"areas"</span>:[{<span class="cm-string cm-property">"id"</span>:<span class="cm-number">0</span>,<span class="cm-string cm-property">"bgColor"</span>:<span class="cm-string">"#EE9116"</span>,<span class="cm-string cm-property">"direction"</span>:<span class="cm-string">"y"</span>,<span class="cm-string cm-property">"textAlign"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"span"</span>:<span class="cm-number">1</span>,<span class="cm-string cm-property">"justifyContent"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"modelItem"</span>:[{<span class="cm-string cm-property">"id"</span>:<span class="cm-number">0</span>,<span class="cm-string cm-property">"type"</span>:<span class="cm-string">"div"</span>,<span class="cm-string cm-property">"height"</span>:<span class="cm-string">"136px"</span>,<span class="cm-string cm-property">"width"</span>:<span class="cm-string">"100%"</span>,<span class="cm-string cm-property">"bgColor"</span>:<span class="cm-string">"#EE9116"</span>,<span class="cm-string cm-property">"fontSize"</span>:<span class="cm-number">36</span>,<span class="cm-string cm-property">"fontColor"</span>:<span class="cm-string">"#FFFFFF"</span>,<span class="cm-string cm-property">"fontFamily"</span>:<span class="cm-string">"Arial Narrow"</span>,<span class="cm-string cm-property">"textAlign"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"direction"</span>:<span class="cm-string">"x"</span>,<span class="cm-string cm-property">"fontWeight"</span>:<span class="cm-atom">true</span>,<span class="cm-string cm-property">"padding"</span>:[<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>],<span class="cm-string cm-property">"margin"</span>:[<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>],<span class="cm-string cm-property">"content"</span>:<span class="cm-string">"Great Programmer"</span>,<span class="cm-string cm-property">"borderRadius"</span>:<span class="cm-string">"0px"</span>,<span class="cm-string cm-property">"justifyContent"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"src"</span>:<span class="cm-string">""</span>}]},{<span class="cm-string cm-property">"id"</span>:<span class="cm-number">1</span>,<span class="cm-string cm-property">"bgColor"</span>:<span class="cm-string">"#EE9116"</span>,<span class="cm-string cm-property">"direction"</span>:<span class="cm-string">"y"</span>,<span class="cm-string cm-property">"textAlign"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"span"</span>:<span class="cm-number">1</span>,<span class="cm-string cm-property">"justifyContent"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"modelItem"</span>:[{<span class="cm-string cm-property">"id"</span>:<span class="cm-number">0</span>,<span class="cm-string cm-property">"type"</span>:<span class="cm-string">"a"</span>,<span class="cm-string cm-property">"height"</span>:<span class="cm-string">"30px"</span>,<span class="cm-string cm-property">"width"</span>:<span class="cm-string">"100%"</span>,<span class="cm-string cm-property">"bgColor"</span>:<span class="cm-string">"#EE9116"</span>,<span class="cm-string cm-property">"fontSize"</span>:<span class="cm-number">18</span>,<span class="cm-string cm-property">"fontColor"</span>:<span class="cm-string">"#EA5515"</span>,<span class="cm-string cm-property">"fontFamily"</span>:<span class="cm-string">"Helvetica"</span>,<span class="cm-string cm-property">"textAlign"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"direction"</span>:<span class="cm-string">"x"</span>,<span class="cm-string cm-property">"fontWeight"</span>:<span class="cm-atom">true</span>,<span class="cm-string cm-property">"padding"</span>:[<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>],<span class="cm-string cm-property">"margin"</span>:[<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">30</span>,<span class="cm-number">0</span>],<span class="cm-string cm-property">"content"</span>:<span class="cm-string">"EStylist@syf20020816"</span>,<span class="cm-string cm-property">"borderRadius"</span>:<span class="cm-string">"0px"</span>,<span class="cm-string cm-property">"justifyContent"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"src"</span>:<span class="cm-string">"https://github.com/syf20020816/EStylist"</span>}]},{<span class="cm-string cm-property">"id"</span>:<span class="cm-number">2</span>,<span class="cm-string cm-property">"bgColor"</span>:<span class="cm-string">"#EE9116"</span>,<span class="cm-string cm-property">"direction"</span>:<span class="cm-string">"y"</span>,<span class="cm-string cm-property">"textAlign"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"span"</span>:<span class="cm-number">1</span>,<span class="cm-string cm-property">"justifyContent"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"modelItem"</span>:[{<span class="cm-string cm-property">"id"</span>:<span class="cm-number">0</span>,<span class="cm-string cm-property">"type"</span>:<span class="cm-string">"img"</span>,<span class="cm-string cm-property">"height"</span>:<span class="cm-string">"300px"</span>,<span class="cm-string cm-property">"width"</span>:<span class="cm-string">"auto"</span>,<span class="cm-string cm-property">"bgColor"</span>:<span class="cm-string">"#fff"</span>,<span class="cm-string cm-property">"fontSize"</span>:<span class="cm-number">16</span>,<span class="cm-string cm-property">"fontColor"</span>:<span class="cm-string">"#000"</span>,<span class="cm-string cm-property">"fontFamily"</span>:<span class="cm-string">"Helvetica"</span>,<span class="cm-string cm-property">"textAlign"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"direction"</span>:<span class="cm-string">"x"</span>,<span class="cm-string cm-property">"fontWeight"</span>:<span class="cm-atom">false</span>,<span class="cm-string cm-property">"padding"</span>:[<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>],<span class="cm-string cm-property">"margin"</span>:[<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">30</span>,<span class="cm-number">0</span>],<span class="cm-string cm-property">"content"</span>:<span class="cm-string">"示例文字|地址"</span>,<span class="cm-string cm-property">"borderRadius"</span>:<span class="cm-string">"150px"</span>,<span class="cm-string cm-property">"justifyContent"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"src"</span>:<span class="cm-string">""</span>}]},{<span class="cm-string cm-property">"id"</span>:<span class="cm-number">3</span>,<span class="cm-string cm-property">"bgColor"</span>:<span class="cm-string">"#EF972E"</span>,<span class="cm-string cm-property">"direction"</span>:<span class="cm-string">"y"</span>,<span class="cm-string cm-property">"textAlign"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"span"</span>:<span class="cm-number">1</span>,<span class="cm-string cm-property">"justifyContent"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"modelItem"</span>:[{<span class="cm-string cm-property">"id"</span>:<span class="cm-number">0</span>,<span class="cm-string cm-property">"type"</span>:<span class="cm-string">"div"</span>,<span class="cm-string cm-property">"height"</span>:<span class="cm-string">"32px"</span>,<span class="cm-string cm-property">"width"</span>:<span class="cm-string">"100%"</span>,<span class="cm-string cm-property">"bgColor"</span>:<span class="cm-string">"#EF972E"</span>,<span class="cm-string cm-property">"fontSize"</span>:<span class="cm-number">14</span>,<span class="cm-string cm-property">"fontColor"</span>:<span class="cm-string">"#000"</span>,<span class="cm-string cm-property">"fontFamily"</span>:<span class="cm-string">"Arial"</span>,<span class="cm-string cm-property">"textAlign"</span>:<span class="cm-string">"left"</span>,<span class="cm-string cm-property">"direction"</span>:<span class="cm-string">"x"</span>,<span class="cm-string cm-property">"fontWeight"</span>:<span class="cm-atom">true</span>,<span class="cm-string cm-property">"padding"</span>:[<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>],<span class="cm-string cm-property">"margin"</span>:[<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">40</span>],<span class="cm-string cm-property">"content"</span>:<span class="cm-string">"📧Email : syf20020816@outlook.com"</span>,<span class="cm-string cm-property">"borderRadius"</span>:<span class="cm-string">"0px"</span>,<span class="cm-string cm-property">"justifyContent"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"src"</span>:<span class="cm-string">""</span>},{<span class="cm-string cm-property">"id"</span>:<span class="cm-number">1</span>,<span class="cm-string cm-property">"type"</span>:<span class="cm-string">"div"</span>,<span class="cm-string cm-property">"height"</span>:<span class="cm-string">"60px"</span>,<span class="cm-string cm-property">"width"</span>:<span class="cm-string">"100%"</span>,<span class="cm-string cm-property">"bgColor"</span>:<span class="cm-string">"#EF972E"</span>,<span class="cm-string cm-property">"fontSize"</span>:<span class="cm-number">46</span>,<span class="cm-string cm-property">"fontColor"</span>:<span class="cm-string">"#FFFFFF"</span>,<span class="cm-string cm-property">"fontFamily"</span>:<span class="cm-string">"Verdana"</span>,<span class="cm-string cm-property">"textAlign"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"direction"</span>:<span class="cm-string">"x"</span>,<span class="cm-string cm-property">"fontWeight"</span>:<span class="cm-atom">true</span>,<span class="cm-string cm-property">"padding"</span>:[<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>],<span class="cm-string cm-property">"margin"</span>:[<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>,<span class="cm-number">0</span>],<span class="cm-string cm-property">"content"</span>:<span class="cm-string">"TRY"</span>,<span class="cm-string cm-property">"borderRadius"</span>:<span class="cm-string">"0px"</span>,<span class="cm-string cm-property">"justifyContent"</span>:<span class="cm-string">"center"</span>,<span class="cm-string cm-property">"src"</span>:<span class="cm-string">""</span>}]}],<span class="cm-string cm-property">"areasLen"</span>:<span class="cm-number">4</span>}</span></pre>
       </div>
     </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 546px;"></div>
+  <div class="CodeMirror-gutters" style="height: 546px;">
+    <div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 26px;"></div>
+  </div>
+  </div>
+  </div>
+  </pre>
+  <h2 id='send-email'><span>Send Email</span></h2>
+  <p><span>最后我们到发送页面，点击选择按钮，选择我们需要的模板，设置好邮件名称和收件人您就可以发送了</span></p>
+  <p><span>Finally, we will go to the send page, click the select button, select the template we need, set the email name and recipient, and you can send it</span></p>
+  <p><img src="../../assets/step6.png" style="zoom:67%"></p>
+  <h1 id='exampleinvitation-letter-v001）'><span>Example：invitation letter （v0.0.1）</span></h1>
+  <p><span>接下来，我们将学习一个例子来验证学习成果！</span></p>
+  <p><span>Next, we will learn an example to verify the learning outcomes!</span></p>
+  <h2 id='build-the-base-plate-2'><span>Build the base plate</span></h2>
+  <p><span>第一步，修改底板中的宽度、背景色、内边距以及子区域个数</span></p>
+  <p><span>The first step is to modify the width, background color, padding, and number of sub areas in the base plate</span></p>
+  <p><img src="../../assets/image-20230623012344704.png" alt="image-20230623012344704" style="zoom:67%;" /></p>
+  <h2 id='add-logo'><span>Add Logo</span></h2>
+  <p><span>接下来在区域中添加模块，设置模块类型为图片，修改高度、宽度、并选择一个你的Logo图片，并修改背景色</span></p>
+  <p><span>Next, add a module to the area, set the module type to Image, modify the height and width, choose a logo image, and modify the background color</span></p>
+  <p><img src="../../assets/image-20230623012749580.png" alt="image-20230623012749580" style="zoom:67%;" /></p>
+  <p><span>但是我们发现有白色的区域，这时候我们就需要到当前的区域中修改区域的背景色即可</span></p>
+  <p><span>But we found a white area, so we need to modify the background color of the area in the current area</span></p>
+  <p><img src="../../assets/image-20230623013036339.png" alt="image-20230623013036339" style="zoom:67%;" /></p>
+  <h2 id='add-text'><span>Add Text</span></h2>
+  <p><span>接下来到第二个区域中添加模块，选择模块类型为文字，修改文字内容、模块的高度、背景色、文字颜色</span></p>
+  <p><span>Next, add a module to the second area, select the module type as text, modify the text content, module height, background color, and text color</span></p>
+  <p><img src="../../assets/image-20230623013407886.png" alt="image-20230623013407886" style="zoom:67%;" /></p>
+  <p><span>下面为了对齐文字，我们需要将文字位置改为justify</span></p>
+  <p><span>To align the text below, we need to change the text position to justify</span></p>
+  <p><img src="../../assets/image-20230623013833227.png" alt="image-20230623013833227" style="zoom:67%;" /></p>
+  <h2 id='add-link-2'><span>Add Link</span></h2>
+  <p><span>选择使用链接，设置链接文字，然后设置链接地址，当然emoji表情😎你也可以使用</span></p>
+  <p><span>Choose to use links, set the link text, and then set the link address, of course emoji emoji emoji 😎 You can also use</span></p>
+  <p><img src="../../assets/image-20230623014325854.png" alt="image-20230623014325854" style="zoom:67%;" /></p>
+  <h2 id='download-template'><span>Download Template</span></h2>
+  <p><span>完成模板后我们就可以将模板下载到本地进行保存以便于后续的编辑或发送模板</span></p>
+  <p><span>After completing the template, we can download it locally and save it for future editing or sending</span></p>
+  <p><img src="../../assets/image-20230623014834229.png" alt="image-20230623014834229" style="zoom:67%;" /></p>
+  <p><img src="../../assets/image-20230623014946958.png" referrerpolicy="no-referrer" alt="image-20230623014946958"></p>
+  <p><span>我们点击保存按钮，并设置名称，完成后我们在templates目录下就可以看到两个文件，分别是json和html格式的，html格式支持您直接进行预览</span></p>
+  <p><span>We click the save button and set the name. After completion, we can see two files in the templates directory, which are JSON and HTML formats. The HTML format allows you to preview directly</span></p>
+  <h2 id='send-email-2'><span>Send Email</span></h2>
+  <p><span>最后我们到发送页面，点击选择按钮，选择我们需要的模板，设置好邮件名称和收件人您就可以发送了</span></p>
+  <p><span>Finally, we will go to the send page, click the select button, select the template we need, set the email name and recipient, and you can send it</span></p>
+  <p><img src="../../assets/image-20230623015125653.png" alt="image-20230623015125653" style="zoom:67%;" /></p>
+  <h2 id='res'><span>Res</span></h2>
+  <p><img src="../../assets/image-20230623015640717.png" referrerpolicy="no-referrer" alt="image-20230623015640717"></p>
+  </div>
+  </div>
   </div>
 </template>
 
@@ -77,6 +127,13 @@ html {
   color: var(--text-color);
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  white-space: pre-wrap;
 }
 body {
   margin: 0px;
@@ -150,12 +207,6 @@ body.typora-export {
   #write {
     padding-left: 20px;
     padding-right: 20px;
-  }
-  .CodeMirror-sizer {
-    margin-left: 0px !important;
-  }
-  .CodeMirror-gutters {
-    display: none !important;
   }
 }
 #write li > figure:last-child {
@@ -290,6 +341,7 @@ figure {
 figure > table {
   margin: 0px;
 }
+thead,
 tr {
   break-inside: avoid;
   break-after: auto;
@@ -377,6 +429,9 @@ div.hr:focus {
 twitterwidget {
   break-inside: avoid;
 }
+svg {
+  break-inside: avoid;
+}
 .footnotes {
   opacity: 0.8;
   font-size: 0.9rem;
@@ -452,8 +507,9 @@ li > :first-child {
   }
   #write {
     margin-top: 0px;
-    padding-top: 0px;
     border-color: transparent !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
   }
   .typora-export * {
     -webkit-print-color-adjust: exact;
@@ -467,8 +523,14 @@ li > :first-child {
   .is-mac table {
     break-inside: avoid;
   }
+  #write > p:nth-child(1) {
+    margin-top: 0px;
+  }
   .typora-export-show-outline .typora-export-sidebar {
     display: none;
+  }
+  figure {
+    overflow-x: visible;
   }
 }
 .footnote-line {
@@ -606,6 +668,9 @@ a.md-toc-inner {
 }
 .footnote-line a:not(.reversefootnote) {
   color: inherit;
+}
+.reversefootnote {
+  font-family: ui-monospace, sans-serif;
 }
 .md-attr {
   display: none;
@@ -774,6 +839,7 @@ mark .md-meta {
   padding-left: 0px;
   padding-right: 0px;
   list-style: none;
+  overflow-wrap: anywhere;
 }
 .outline-content ul {
   margin-top: 0px;
@@ -893,6 +959,323 @@ mark .md-meta {
 }
 .md-inline-math-container mjx-container {
   zoom: 0.95;
+}
+mjx-container {
+  break-inside: avoid;
+}
+
+.CodeMirror {
+  height: auto;
+}
+.CodeMirror.cm-s-inner {
+  background: inherit;
+}
+.CodeMirror-scroll {
+  overflow: auto hidden;
+  z-index: 3;
+}
+.CodeMirror-gutter-filler,
+.CodeMirror-scrollbar-filler {
+  background-color: rgb(255, 255, 255);
+}
+.CodeMirror-gutters {
+  border-right: 1px solid rgb(221, 221, 221);
+  background: inherit;
+  white-space: nowrap;
+}
+.CodeMirror-linenumber {
+  padding: 0px 3px 0px 5px;
+  text-align: right;
+  color: rgb(153, 153, 153);
+}
+.cm-s-inner .cm-keyword {
+  color: rgb(119, 0, 136);
+}
+.cm-s-inner .cm-atom,
+.cm-s-inner.cm-atom {
+  color: rgb(34, 17, 153);
+}
+.cm-s-inner .cm-number {
+  color: rgb(17, 102, 68);
+}
+.cm-s-inner .cm-def {
+  color: rgb(0, 0, 255);
+}
+.cm-s-inner .cm-variable {
+  color: rgb(0, 0, 0);
+}
+.cm-s-inner .cm-variable-2 {
+  color: rgb(0, 85, 170);
+}
+.cm-s-inner .cm-variable-3 {
+  color: rgb(0, 136, 85);
+}
+.cm-s-inner .cm-string {
+  color: rgb(170, 17, 17);
+}
+.cm-s-inner .cm-property {
+  color: rgb(0, 0, 0);
+}
+.cm-s-inner .cm-operator {
+  color: rgb(152, 26, 26);
+}
+.cm-s-inner .cm-comment,
+.cm-s-inner.cm-comment {
+  color: rgb(170, 85, 0);
+}
+.cm-s-inner .cm-string-2 {
+  color: rgb(255, 85, 0);
+}
+.cm-s-inner .cm-meta {
+  color: rgb(85, 85, 85);
+}
+.cm-s-inner .cm-qualifier {
+  color: rgb(85, 85, 85);
+}
+.cm-s-inner .cm-builtin {
+  color: rgb(51, 0, 170);
+}
+.cm-s-inner .cm-bracket {
+  color: rgb(153, 153, 119);
+}
+.cm-s-inner .cm-tag {
+  color: rgb(17, 119, 0);
+}
+.cm-s-inner .cm-attribute {
+  color: rgb(0, 0, 204);
+}
+.cm-s-inner .cm-header,
+.cm-s-inner.cm-header {
+  color: rgb(0, 0, 255);
+}
+.cm-s-inner .cm-quote,
+.cm-s-inner.cm-quote {
+  color: rgb(0, 153, 0);
+}
+.cm-s-inner .cm-hr,
+.cm-s-inner.cm-hr {
+  color: rgb(153, 153, 153);
+}
+.cm-s-inner .cm-link,
+.cm-s-inner.cm-link {
+  color: rgb(0, 0, 204);
+}
+.cm-negative {
+  color: rgb(221, 68, 68);
+}
+.cm-positive {
+  color: rgb(34, 153, 34);
+}
+.cm-header,
+.cm-strong {
+  font-weight: 700;
+}
+.cm-del {
+  text-decoration: line-through;
+}
+.cm-em {
+  font-style: italic;
+}
+.cm-link {
+  text-decoration: underline;
+}
+.cm-error {
+  color: red;
+}
+.cm-invalidchar {
+  color: red;
+}
+.cm-constant {
+  color: rgb(38, 139, 210);
+}
+.cm-defined {
+  color: rgb(181, 137, 0);
+}
+div.CodeMirror span.CodeMirror-matchingbracket {
+  color: rgb(0, 255, 0);
+}
+div.CodeMirror span.CodeMirror-nonmatchingbracket {
+  color: rgb(255, 34, 34);
+}
+.cm-s-inner .CodeMirror-activeline-background {
+  background: inherit;
+}
+.CodeMirror {
+  position: relative;
+  overflow: hidden;
+}
+.CodeMirror-scroll {
+  height: 100%;
+  outline: 0px;
+  position: relative;
+  box-sizing: content-box;
+  background: inherit;
+}
+.CodeMirror-sizer {
+  position: relative;
+}
+.CodeMirror-gutter-filler,
+.CodeMirror-hscrollbar,
+.CodeMirror-scrollbar-filler,
+.CodeMirror-vscrollbar {
+  position: absolute;
+  z-index: 6;
+  display: none;
+  outline: 0px;
+}
+.CodeMirror-vscrollbar {
+  right: 0px;
+  top: 0px;
+  overflow: hidden;
+}
+.CodeMirror-hscrollbar {
+  bottom: 0px;
+  left: 0px;
+  overflow: auto hidden;
+}
+.CodeMirror-scrollbar-filler {
+  right: 0px;
+  bottom: 0px;
+}
+.CodeMirror-gutter-filler {
+  left: 0px;
+  bottom: 0px;
+}
+.CodeMirror-gutters {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding-bottom: 10px;
+  z-index: 3;
+  overflow-y: hidden;
+}
+.CodeMirror-gutter {
+  white-space: normal;
+  height: 100%;
+  box-sizing: content-box;
+  padding-bottom: 30px;
+  margin-bottom: -32px;
+  display: inline-block;
+}
+.CodeMirror-gutter-wrapper {
+  position: absolute;
+  z-index: 4;
+  background: 0px 0px !important;
+  border: none !important;
+}
+.CodeMirror-gutter-background {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  z-index: 4;
+}
+.CodeMirror-gutter-elt {
+  position: absolute;
+  cursor: default;
+  z-index: 4;
+}
+.CodeMirror-lines {
+  cursor: text;
+}
+.CodeMirror pre {
+  border-radius: 0px;
+  border-width: 0px;
+  background: 0px 0px;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0px;
+  white-space: pre;
+  overflow-wrap: normal;
+  color: inherit;
+  z-index: 2;
+  position: relative;
+  overflow: visible;
+}
+.CodeMirror-wrap pre {
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: normal;
+}
+.CodeMirror-code pre {
+  border-right: 30px solid transparent;
+  width: fit-content;
+}
+.CodeMirror-wrap .CodeMirror-code pre {
+  border-right: none;
+  width: auto;
+}
+.CodeMirror-linebackground {
+  position: absolute;
+  inset: 0px;
+  z-index: 0;
+}
+.CodeMirror-linewidget {
+  position: relative;
+  z-index: 2;
+  overflow: auto;
+}
+.CodeMirror-wrap .CodeMirror-scroll {
+  overflow-x: hidden;
+}
+.CodeMirror-measure {
+  position: absolute;
+  width: 100%;
+  height: 0px;
+  overflow: hidden;
+  visibility: hidden;
+}
+.CodeMirror-measure pre {
+  position: static;
+}
+.CodeMirror div.CodeMirror-cursor {
+  position: absolute;
+  visibility: hidden;
+  border-right: none;
+  width: 0px;
+}
+.CodeMirror div.CodeMirror-cursor {
+  visibility: hidden;
+}
+.CodeMirror-focused div.CodeMirror-cursor {
+  visibility: inherit;
+}
+.cm-searching {
+  background: rgba(255, 255, 0, 0.4);
+}
+span.cm-underlined {
+  text-decoration: underline;
+}
+span.cm-strikethrough {
+  text-decoration: line-through;
+}
+.cm-tw-syntaxerror {
+  color: rgb(255, 255, 255);
+  background-color: rgb(153, 0, 0);
+}
+.cm-tw-deleted {
+  text-decoration: line-through;
+}
+.cm-tw-header5 {
+  font-weight: 700;
+}
+.cm-tw-listitem:first-child {
+  padding-left: 10px;
+}
+.cm-tw-box {
+  border-style: solid;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-color: inherit;
+  border-top-width: 0px !important;
+}
+.cm-tw-underline {
+  text-decoration: underline;
+}
+@media print {
+  .CodeMirror div.CodeMirror-cursor {
+    visibility: hidden;
+  }
 }
 
 :root {
@@ -2072,5 +2455,10 @@ footer.ty-footer {
 
 .clear-btn-icon {
   top: 8px;
+}
+
+/* try fix https://github.com/typora/typora-issues/issues/5253 */
+.file-node-expanded > .file-node-children {
+  display: grid;
 }
 </style>
