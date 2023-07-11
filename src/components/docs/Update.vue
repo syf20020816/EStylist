@@ -20,7 +20,7 @@
               </tr>
               <tr>
                 <td><span>0.0.2</span></td>
-                <td><span>20230712</span></td>
+                <td><span>20230711</span></td>
                 <td><a href='mailto:syf20020816@outlook.com' target='_blank' class='url'>syf20020816@outlook.com</a></td>
               </tr>
             </tbody>
