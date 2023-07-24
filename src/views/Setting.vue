@@ -113,11 +113,11 @@ const Proportion = [
   {
     label: '7:13',
     value: '7:13'
-  },
-  {
-    label: '3:1',
-    value: '3:1'
   }
+  // {
+  //   label: '3:1',
+  //   value: '3:1'
+  // }
 ]
 
 const saveSettings = () => {

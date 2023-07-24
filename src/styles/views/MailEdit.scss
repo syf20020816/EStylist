@@ -12,7 +12,7 @@ $component: 'MailEdit';
   align-items: center;
   justify-content: space-between;
   @include buildWrap($component, 'left') {
-    width: 65%;
+    width: 55%;
     height: inherit;
     overflow: scroll;
     scrollbar-width: thin;
@@ -22,8 +22,15 @@ $component: 'MailEdit';
     padding: 30px;
     box-sizing: border-box;
   }
+  @include buildWrap($component, 'mid'){
+    width: 20%;
+    height: inherit;
+    background-color: $bg-color-dark-weak;
+    border-right: 1px solid #fff;
+    border-left: 1px solid #fff;
+  }
   @include buildWrap($component, 'right') {
-    width: 35%;
+    width: 25%;
     height: inherit;
     background-color: $bg-color-dark-deep;
 

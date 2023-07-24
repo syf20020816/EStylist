@@ -6,7 +6,10 @@
         <BaseOutter id="targetTemplate" ref="targetTemplate" :data="store.currentMailModel"></BaseOutter>
       </div>
     </div>
-    <div :class="buildWrap(component,'right')" :style="`width:calc(100% - `+editLeftWidth+`%);`">
+    <div :class="buildWrap(component,'mid')" style="min-width: 200px;">
+      <EditTools></EditTools>
+    </div>
+    <div :class="buildWrap(component,'right')" :style="`width:calc(80% - `+editLeftWidth+`%);`">
       <div :class="buildWrap(component,'templates')">
         <el-collapse accordion>
           <el-collapse-item name="1">
@@ -119,6 +122,7 @@ import { indexStore } from '../store/IndexPinia'
 import { invoke } from '@tauri-apps/api'
 import MailEditItem from '../components/MailEditItem.vue'
 import AreaOrModel from '../components/AreaOrModel.vue'
+import EditTools from '../components/EditTools.vue'
 
 const router = useRouter()
 const component = 'MailEdit'
@@ -142,13 +146,12 @@ let scaleViewStyle = computed(() => {
 })
 
 let editLeftWidth = computed(() => {
-  setTimeout(() => {
-    let tmp_arr = store.settings.proportion.split(':')
-    let left = parseInt(tmp_arr[0])
-    let right = parseInt(tmp_arr[1])
-    let proportion_item = 100 / (left + right)
-    return proportion_item * left
-  }, 500)
+  let tmp_arr = store.settings.proportion.split(':')
+  let left = parseInt(tmp_arr[0])
+  let right = parseInt(tmp_arr[1])
+  let proportion_item = 100 / (left + right)
+  console.log(left)
+  return proportion_item * left
 })
 const scaleView = (num: number) => {
   scaleViewSize.value += num
