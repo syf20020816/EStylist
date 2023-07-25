@@ -14,6 +14,10 @@ export const indexStore = defineStore("index", {
   // other options...
   state: () => {
     return {
+      activeTarget: {
+        name: "",
+        info: "",
+      },
       currentMailModel: defalutModel as Model,
       settings: {} as Settings,
       templates: [] as Array<string>,

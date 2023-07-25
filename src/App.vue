@@ -6,6 +6,12 @@
         <el-icon size="20" @click="toPage('edit')">
           <Edit />
         </el-icon>
+        <el-icon size="20">
+          <Shop />
+        </el-icon>
+        <el-icon size="20">
+          <Box />
+        </el-icon>
         <el-icon size="20" @click="toPage('send')">
           <Message />
         </el-icon>
@@ -30,7 +36,7 @@
 
 <script setup lang="ts">
 import { build, buildView, buildWrap } from './styles/name'
-import { Edit, Message, InfoFilled, Tools, Document } from '@element-plus/icons-vue'
+import { Edit, Message, InfoFilled, Tools, Document, Box, Shop } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import { onBeforeMount } from 'vue'
 import { invoke } from '@tauri-apps/api'

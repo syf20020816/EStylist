@@ -1,55 +1,43 @@
 <template>
   <div :id="buildView(component)">
     <div :class="buildWrap(component,'left')" :style="`width:`+editLeftWidth+`%;`">
-      <div :style="scaleViewStyle">
-        <!-- todo: -->
-        <BaseOutter id="targetTemplate" ref="targetTemplate" :data="store.currentMailModel"></BaseOutter>
-      </div>
+      <el-tabs v-model="activeEdit" class="demo-tabs">
+        <el-tab-pane label="设计邮件" name="mail">
+          <div :style="scaleViewStyle" style="cursor: pointer;">
+            <!-- todo: -->
+            <!-- <BaseOutter id="targetTemplate" ref="targetTemplate" :data="store.currentMailModel"></BaseOutter> -->
+            <BasePlate></BasePlate>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="设计组件" name="model">
+          <div :style="scaleViewStyle" style="cursor: pointer;">
+            邮件组件
+          </div>
+        </el-tab-pane>
+
+      </el-tabs>
+
     </div>
     <div :class="buildWrap(component,'mid')" style="min-width: 200px;">
       <EditTools></EditTools>
     </div>
     <div :class="buildWrap(component,'right')" :style="`width:calc(80% - `+editLeftWidth+`%);`">
-      <div :class="buildWrap(component,'templates')">
-        <el-collapse accordion>
-          <el-collapse-item name="1">
-            <template #title>
-              {{ getStr(store.settings.language,pagei18n.edit.basePlateTitle) }}
+      <div :class="buildWrap(component, 'templates')">
+        <div class="title">
+          <span style="font-weight: 700;">模板层级</span>
+          <el-tooltip placement="bottom">
+            <template #content>
+              模板层级表示底板、区域、组件形成的组合设计层级
             </template>
-            <div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.width) }}</div>
-                <el-input-number v-model="store.currentMailModel.base.width" :step="10" :max="800" />
-              </div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bgColor) }}</div>
-                <el-color-picker v-model="store.currentMailModel.base.bgColor" />
-              </div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.padding) }}</div>
-                <el-input-number v-model="store.currentMailModel.base.padding" :step="2" :max="100" />
-              </div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.areaNum) }}</div>
-                <el-input-number v-model="store.currentMailModel.base.areaNum" :step="1" :max="20" />
-              </div>
-              <div :class="build('template','base')">
-                <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.direction) }}</div>
-                <el-select v-model="store.currentMailModel.base.direction" placeholder="Select Direction">
-                  <el-option v-for="item in Direction" :key="item.value" :label="item.label" :value="item.value" />
-                </el-select>
-              </div>
-              <div style="display: flex;align-items: center;justify-content:end;margin-top: 1vh;">
-                <el-button type="success" round @click="saveBaseChange">{{ getStr(store.settings.language,pagei18n.buttons.changeArea) }}</el-button>
-              </div>
-            </div>
-          </el-collapse-item>
-          <MailEditItem v-for="meItem in store.currentMailModel.areas" :key="meItem.id" :data="meItem" :index="meItem.id" @add-model="addModel" @del-model="delModel">
-            <AreaOrModel v-for="amItem in meItem.modelItem" :key="amItem.id" :index="amItem.id" :data="amItem" :f-index="meItem.id" @upload-picture="uploadPicture" @margin-change="marginChange" @padding-change="paddingChange"></AreaOrModel>
-          </MailEditItem>
-        </el-collapse>
+            <el-icon size="16">
+              <QuestionFilled />
+            </el-icon>
+          </el-tooltip>
+        </div>
+        <div>
+          <el-tree :data="mailLevelTree" :props="defaultProps" @node-click="handleNodeClick" />
+        </div>
       </div>
-
       <div :class="buildWrap(component,'tools')">
         <el-icon size="18" @click="scaleView(-0.1)">
           <ZoomOut />
@@ -69,7 +57,6 @@
         <el-icon size="18" @click="delCache">
           <Delete />
         </el-icon>
-
       </div>
     </div>
   </div>
@@ -112,7 +99,7 @@ import { generateUUID, convertImageToBase64 } from '../util'
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { build, buildView, buildWrap } from '../styles/name'
-import { ZoomIn, ZoomOut, InfoFilled, Download, Upload, UploadFilled, Delete } from '@element-plus/icons-vue'
+import { ZoomIn, ZoomOut, InfoFilled, Download, Upload, UploadFilled, Delete, QuestionFilled } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { BaseModel, AreaModel, Model } from '../core'
 import { JustifyContent, TextAlign, ModelTypes, Direction, FontFamily, defalutModel, defaultAreaModel, defaultAreaModels, defalutModelItem } from '../core'
@@ -123,7 +110,9 @@ import { invoke } from '@tauri-apps/api'
 import MailEditItem from '../components/MailEditItem.vue'
 import AreaOrModel from '../components/AreaOrModel.vue'
 import EditTools from '../components/EditTools.vue'
+import BasePlate from '../components/core/BasePlate.vue'
 
+let activeEdit = ref('mail')
 const router = useRouter()
 const component = 'MailEdit'
 let targetTemplate = ref()
@@ -318,6 +307,36 @@ onMounted(() => {
     store.currentMailModel = store.currentMailModel
   }
 })
+
+interface Tree {
+  label: string
+  children?: Tree[]
+}
+
+const defaultProps = {
+  children: 'children',
+  label: 'label'
+}
+
+const handleNodeClick = (data: Tree) => {
+  console.log(data)
+}
+
+const mailLevelTree: Tree[] = [
+  {
+    label: '邮件底板',
+    children: [
+      {
+        label: '区域',
+        children: [
+          {
+            label: '组件'
+          }
+        ]
+      }
+    ]
+  }
+]
 </script>
 
 <style lang="scss" >
