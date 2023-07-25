@@ -1,7 +1,7 @@
 <template>
   <div :id="buildView(component)">
     <div :class="buildWrap(component,'tool1')">
-      <div :class="buildWrap(component,'color')">
+      <div :class="buildWrap(component,'color')" v-if="fontOrColor">
         <div :class="build('color','main')" :style="colors" @click="showColorPicker">
           <input ref="colorPickerRef" type="color" v-model="globalColor" name="" id="color-picker" style="display: none;">
         </div>
@@ -15,7 +15,58 @@
               <QuestionFilled />
             </el-icon>
           </el-tooltip>
+          <el-tooltip placement="top">
+            <template #content>
+              切换工具:工具有调色器和字体调节器
+            </template>
+            <el-icon size="16" @click="switchTools">
+              <Switch />
+            </el-icon>
+          </el-tooltip>
           <el-input v-model="globalColor" placeholder="transparent" clearable></el-input>
+        </div>
+      </div>
+      <div :class="buildWrap(component,'font')" v-else>
+        <div class="details">
+          <span style="font-weight: 700;">字体调节器</span>
+          <el-tooltip placement="top">
+            <template #content>
+              字体调节器用于控制字体样式<br>
+              样式:颜色、大小、字体、粗细等
+            </template>
+            <el-icon size="16">
+              <QuestionFilled />
+            </el-icon>
+          </el-tooltip>
+          <el-tooltip placement="top">
+            <template #content>
+              切换工具:工具有调色器和字体调节器
+            </template>
+            <el-icon size="16" @click="switchTools">
+              <Switch />
+            </el-icon>
+          </el-tooltip>
+          <div :class="build('font','main')" @click="showColorPicker">
+            <div :class="build('template','base')">
+              <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontSize) }}</div>
+              <el-input-number v-model="store.fontStyles.fontSize" :step="2" :max="80" />
+            </div>
+            <div :class="build('template','base')">
+              <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontWeight) }}</div>
+              <el-switch v-model="store.fontStyles.fontWeight" style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949" />
+            </div>
+            <div :class="build('template','base')">
+              <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontFamily) }}</div>
+              <el-select v-model="store.fontStyles.fontFamily" placeholder="Select FontFamily">
+                <el-option v-for="fitem in FontFamily" :key="fitem.value" :label="fitem.label" :value="fitem.value" />
+              </el-select>
+            </div>
+            <div :class="build('template','base')">
+              <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontColor) }}</div>
+              <el-color-picker v-model="store.fontStyles.fontColor" />
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -57,7 +108,8 @@ export default {
 <script lang="ts" setup>
 import { ref, reactive, computed, nextTick } from 'vue'
 import { build, buildView, buildWrap } from '../styles/name'
-import { QuestionFilled } from '@element-plus/icons-vue'
+import { QuestionFilled, Switch } from '@element-plus/icons-vue'
+import { getStr, pagei18n, FontFamily } from '../core'
 import { indexStore } from '../store/IndexPinia'
 import { mailStore } from '../store/MailPinia'
 import EditBasePlate from './edit/EditBasePlate.vue'
@@ -68,6 +120,7 @@ const store = indexStore()
 const colorPickerRef = ref()
 const component = 'EditTools'
 let globalColor = ref('#dedeff')
+let fontOrColor = ref(true)
 let targetChoose = reactive({
   basePlate: false,
   area: false,
@@ -91,6 +144,10 @@ const copyColor = (areaId: number) => {
     store.currentMailModel.areas[areaId].bgColor = globalColor.value
   }
 }
+
+const switchTools = () => {
+  fontOrColor.value = !fontOrColor.value
+}
 </script>
 
 <style lang="scss" scoped>
@@ -104,7 +161,7 @@ $component: 'EditTools';
   width: 100%;
   @include buildWrap($component, 'tool1') {
     width: 100%;
-    height: 120px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -122,10 +179,14 @@ $component: 'EditTools';
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        align-content: center;
         flex-wrap: wrap;
         .el-icon {
-          margin: 0 10px;
+          margin: 0 6px;
           cursor: pointer;
+        }
+        .el-input {
+          margin: 10px 0;
         }
       }
       @include build('color', 'main') {
@@ -136,9 +197,56 @@ $component: 'EditTools';
         box-shadow: 0 0 4px 2px #000;
       }
     }
+    @include buildWrap($component, 'font') {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      .details {
+        width: 100%;
+        height: 30px;
+        box-sizing: border-box;
+        padding: 0 6px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        .el-icon {
+          margin: 0 6px;
+          cursor: pointer;
+        }
+      }
+      @include build('font', 'main') {
+        width: 100%;
+        height: calc(100% - 30px);
+        @include build('template', 'base') {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          width: 100%;
+          height: auto;
+          margin: 0.5vh 0;
+
+          .tmptitle {
+            white-space: nowrap;
+            margin-right: 16px;
+            font-size: 13px;
+          }
+          .wrapline {
+            width: 100%;
+            margin: 0.5vh 0;
+            .el-input-number {
+              margin-left: 16px;
+            }
+          }
+        }
+      }
+    }
   }
   @include buildWrap($component, 'tool2') {
-    height: calc(100% - 120px);
+    height: calc(100% - 180px);
     box-sizing: border-box;
     padding: 0 2.5%;
     @include build('tool2', 'info') {
@@ -148,7 +256,7 @@ $component: 'EditTools';
     }
     @include build('tool2', 'config') {
       width: 100%;
-      height: calc(100% - 160px);
+      height: calc(100% - 190px);
       .configs_title {
         height: 30px;
         display: flex;

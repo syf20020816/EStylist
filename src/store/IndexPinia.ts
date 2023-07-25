@@ -14,6 +14,12 @@ export const indexStore = defineStore("index", {
   // other options...
   state: () => {
     return {
+      fontStyles: {
+        fontSize: 16,
+        fontFamily: "Helvetica",
+        fontColor: "#000000",
+        fontWeight: false,
+      },
       activeTarget: {
         name: "",
         info: "",
