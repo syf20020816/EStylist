@@ -6,7 +6,10 @@
     </div>
     <div :class="build('template','base')">
       <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bgColor) }}</div>
-      <el-color-picker v-model="store.currentMailModel.base.bgColor" />
+      <el-input v-model="store.currentMailModel.base.bgColor" placeholder="设置颜色,透明为transparent" clearable></el-input>
+      <el-tooltip class="box-item" effect="dark" content="复制调色器的颜色" placement="right">
+        <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="emits('copyColor')"></el-button>
+      </el-tooltip>
     </div>
     <div :class="build('template','base')">
       <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.padding) }}</div>
@@ -38,9 +41,11 @@ export default {
 import { ref, reactive } from 'vue'
 import { build, buildView, buildWrap } from '../../styles/name'
 import { pagei18n, getStr, Direction } from '../../core'
+import { CopyDocument } from '@element-plus/icons-vue'
 import { indexStore } from '../../store/IndexPinia'
 const component = 'EditBasePlate'
 const store = indexStore()
+const emits = defineEmits(['copyColor'])
 </script>
 
 <style lang="scss" scoped>

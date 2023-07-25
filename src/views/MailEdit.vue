@@ -135,12 +135,16 @@ let scaleViewStyle = computed(() => {
 })
 
 let editLeftWidth = computed(() => {
-  let tmp_arr = store.settings.proportion.split(':')
-  let left = parseInt(tmp_arr[0])
-  let right = parseInt(tmp_arr[1])
-  let proportion_item = 100 / (left + right)
-  console.log(left)
-  return proportion_item * left
+  if (JSON.stringify(store.settings) != '{}') {
+    let tmp_arr = store.settings.proportion.split(':')
+    let left = parseInt(tmp_arr[0])
+    let right = parseInt(tmp_arr[1])
+    let proportion_item = 100 / (left + right)
+    console.log(left)
+    return proportion_item * left
+  } else {
+    return 60
+  }
 })
 const scaleView = (num: number) => {
   scaleViewSize.value += num

@@ -21,7 +21,7 @@
     </div>
     <hr>
     <div :class="buildWrap(component,'tool2')">
-      <el-input v-model="store.activeTarget.name" placeholder="choose name">
+      <el-input v-model="store.activeTarget.name" placeholder="choose name" disabled>
         <template #prepend>目标:</template>
       </el-input>
       <div :class="build('tool2','info')">
@@ -41,7 +41,8 @@
             </el-icon>
           </el-tooltip>
         </div>
-        <EditBasePlate v-if="mailRep.targetChoose.basePlate.active"></EditBasePlate>
+        <EditBasePlate v-if="mailRep.targetChoose.basePlate.active" @copy-color="copyColor"></EditBasePlate>
+        <EditArea v-else-if="mailRep.targetChoose.area.active" :data="store.currentMailModel.areas[mailRep.areaId]" @copy-color="copyColor(mailRep.areaId)"></EditArea>
       </div>
     </div>
   </div>
@@ -60,6 +61,7 @@ import { QuestionFilled } from '@element-plus/icons-vue'
 import { indexStore } from '../store/IndexPinia'
 import { mailStore } from '../store/MailPinia'
 import EditBasePlate from './edit/EditBasePlate.vue'
+import EditArea from './edit/EditArea.vue'
 
 const mailRep = mailStore()
 const store = indexStore()
@@ -80,6 +82,14 @@ let colors = computed(() => {
 
 const showColorPicker = () => {
   colorPickerRef.value.click()
+}
+
+const copyColor = (areaId: number) => {
+  if (areaId == undefined) {
+    store.currentMailModel.base.bgColor = globalColor.value
+  } else {
+    store.currentMailModel.areas[areaId].bgColor = globalColor.value
+  }
 }
 </script>
 

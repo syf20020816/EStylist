@@ -91,17 +91,17 @@
 
 <script lang="ts">
 export default {
-  name: 'AreaOrModel'
+  name: 'EditModel'
 }
 </script>
 
 <script lang="ts" setup>
 import { ref, reactive, PropType, computed, toRef } from 'vue'
 import { Operation } from '@element-plus/icons-vue'
-import { getStr, pagei18n, AreaModel, defaultAreaModel, JustifyContent, TextAlign, ModelTypes, Direction, FontFamily, ModelItem, defalutModelItem } from '../core'
-import { generateUUID, convertImageToBase64 } from '../util'
-import { indexStore } from '../store/IndexPinia'
-import { build, buildView, buildWrap } from '../styles/name'
+import { getStr, pagei18n, AreaModel, defaultAreaModel, JustifyContent, TextAlign, ModelTypes, Direction, FontFamily, ModelItem, defalutModelItem } from '../../core'
+import { generateUUID, convertImageToBase64 } from '../../util'
+import { indexStore } from '../../store/IndexPinia'
+import { build, buildView, buildWrap } from '../../styles/name'
 const store = indexStore()
 let flexArea = ref(false)
 
