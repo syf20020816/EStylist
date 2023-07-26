@@ -97,24 +97,11 @@ export const defaultAreaModels: Array<AreaModel> = [
   } as AreaModel,
 ];
 
-/**
- * 默认的区域模型
- */
-export const defaultAreaModel: AreaModel = {
-  id: 0,
-  bgColor: "#fff",
-  direction: "y",
-  textAlign: "center",
-  span: 1,
-  justifyContent: "center",
-  modelItem: new Array(),
-};
-
 export const defalutModelItem: ModelItem = {
   id: 0,
   type: "div",
   height: "30px",
-  width: "100%",
+  width: "auto",
   bgColor: "#fff",
   fontSize: 16,
   fontColor: "#000",
@@ -128,6 +115,19 @@ export const defalutModelItem: ModelItem = {
   borderRadius: "0px",
   justifyContent: "center",
   src: "",
+};
+
+/**
+ * 默认的区域模型
+ */
+export const defaultAreaModel: AreaModel = {
+  id: 0,
+  bgColor: "#fff",
+  direction: "y",
+  textAlign: "center",
+  span: 1,
+  justifyContent: "center",
+  modelItem: [defalutModelItem],
 };
 
 export const defalutModel: Model = {
@@ -146,7 +146,7 @@ export const defalutModel: Model = {
       textAlign: "center",
       span: 1,
       justifyContent: "center",
-      modelItem: new Array<ModelItem>(),
+      modelItem: [defalutModelItem],
     },
   ] as Array<AreaModel>,
   areasLen: 1,

@@ -33,7 +33,7 @@ export const indexStore = defineStore("index", {
     };
   },
   actions: {
-    pushCurrentMailModel(index: number) {
+    pushModelToArea(index: number) {
       const len = this.currentMailModel.areas[index].modelItem.length;
 
       const newItem = { ...defalutModelItem, id: len };
@@ -44,8 +44,13 @@ export const indexStore = defineStore("index", {
       this.currentMailModel.areas[index].modelItem = areas;
     },
     pushAreaToCurrentMailModel(item: AreaModel) {
-      const len = this.currentMailModel.areas.length;
-      const newItem = { ...item, id: len };
+      let len = 0;
+      if (this.currentMailModel.areas.length != 0) {
+        len =
+          this.currentMailModel.areas[this.currentMailModel.areas.length - 1]
+            .id;
+      }
+      const newItem = { ...item, id: len + 1 };
       this.currentMailModel.areas.push(newItem);
     },
     paddingChange(

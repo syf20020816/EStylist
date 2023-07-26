@@ -6,7 +6,7 @@
           <div :style="scaleViewStyle" style="cursor: pointer;">
             <!-- todo: -->
             <!-- <BaseOutter id="targetTemplate" ref="targetTemplate" :data="store.currentMailModel"></BaseOutter> -->
-            <BasePlate></BasePlate>
+            <BasePlate ref="targetTemplate"></BasePlate>
           </div>
         </el-tab-pane>
         <el-tab-pane label="设计组件" name="model">
@@ -140,7 +140,7 @@ let editLeftWidth = computed(() => {
     let left = parseInt(tmp_arr[0])
     let right = parseInt(tmp_arr[1])
     let proportion_item = 100 / (left + right)
-    console.log(left)
+
     return proportion_item * left
   } else {
     return 60

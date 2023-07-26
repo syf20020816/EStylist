@@ -6,10 +6,10 @@
         <el-icon size="20" @click="toPage('edit')">
           <Edit />
         </el-icon>
-        <el-icon size="20">
+        <el-icon size="20" @click="toPage('modelRep')">
           <Shop />
         </el-icon>
-        <el-icon size="20">
+        <el-icon size="20" @click="toPage('setting')">
           <Box />
         </el-icon>
         <el-icon size="20" @click="toPage('send')">

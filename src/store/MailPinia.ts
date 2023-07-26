@@ -14,6 +14,11 @@ export const mailStore = defineStore("mail", {
   // other options...
   state: () => {
     return {
+      //选择的组件
+      modelId: {
+        areaIndex: 0,
+        modelIndex: 0,
+      },
       //选择的区域ID
       areaId: 0,
       targetChoose: {
@@ -57,6 +62,10 @@ export const mailStore = defineStore("mail", {
         default:
           break;
       }
+    },
+    chooseModel(areaIndex: number, modelIndex: number) {
+      this.modelId.areaIndex = areaIndex;
+      this.modelId.modelIndex = modelIndex;
     },
   },
 });
