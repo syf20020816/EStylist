@@ -17,6 +17,7 @@ import {
   FontFamily,
   Direction,
 } from "./selectOptions";
+import { buildRef } from "./macro";
 
 export type { BaseModel, AreaModel, Model, ModelItem, Settings };
 
@@ -32,4 +33,5 @@ export {
   ModelTypes,
   Direction,
   FontFamily,
+  buildRef,
 };

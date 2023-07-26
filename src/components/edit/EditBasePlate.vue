@@ -17,7 +17,7 @@
     </div>
     <div :class="build('template','base')">
       <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.areaNum) }}</div>
-      <el-input-number v-model="store.currentMailModel.base.areaNum" :step="1" :max="20" />
+      <el-input-number v-model="store.currentMailModel.areas.length" :step="1" :max="20" disabled />
     </div>
     <div :class="build('template','base')">
       <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.direction) }}</div>

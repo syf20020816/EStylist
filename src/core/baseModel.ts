@@ -97,6 +97,9 @@ export const defaultAreaModels: Array<AreaModel> = [
   } as AreaModel,
 ];
 
+/**
+ * 默认的区域模型
+ */
 export const defaultAreaModel: AreaModel = {
   id: 0,
   bgColor: "#fff",
