@@ -1,3 +1,5 @@
+import { BorderType } from "./baseModel";
+
 export const Direction = [
   {
     value: "x",
@@ -81,5 +83,24 @@ export const JustifyContent = [
   {
     value: "baseline",
     label: "baseline",
+  },
+];
+
+export const BorderTypes = [
+  {
+    label: "solid",
+    value: BorderType.solid,
+  },
+  {
+    label: "dashed",
+    value: BorderType.dashed,
+  },
+  {
+    label: "dotted",
+    value: BorderType.dotted,
+  },
+  {
+    label: "double",
+    value: BorderType.double,
   },
 ];

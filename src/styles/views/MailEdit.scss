@@ -67,19 +67,7 @@ $component: 'MailEdit';
           margin: 0 10px;
         }
       }
-      .el-collapse {
-        color: $bg-color-light;
-      }
-      .el-collapse-item__header {
-        background-color: transparent;
-        color: $bg-color-light;
-        text-indent: 10px;
-      }
-      .el-collapse-item__content {
-        background-color: $bg-color-dark;
-        color: $bg-color-light;
-        padding: 1vh 0.5vw;
-      }
+      
     }
     // @include buildWrap($component, 'edit') {
     //   height: calc(5% - 24px);

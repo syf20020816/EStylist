@@ -14,9 +14,6 @@
 export interface BaseModel {
   width: number;
   bgColor: string;
-  // 0.0.2版本被认为是不需要的，弃用
-  // fontSize: number;
-  areaNum: number;
   direction: string;
   padding: number;
 }
@@ -25,16 +22,6 @@ export interface BaseModel {
  * 内层容器样式表
  */
 export interface AreaModel {
-  // 0.0.2版本被认为是不需要的，弃用
-  // height: number;
-  // width: number;
-  // areaNum: number;
-  // fontSize: number;
-  // fontColor: string;
-  // fontFamily: string;
-  // padding: Array<number>;
-  // margin: Array<number>;
-  // areas: Array<AreaModel> | null;
   id: number;
   bgColor: string;
   textAlign: string;
@@ -44,12 +31,28 @@ export interface AreaModel {
   justifyContent: string;
 }
 
-// export type FontFamily =
-
 export interface Model {
   base: BaseModel;
   areas: Array<AreaModel>;
   areasLen: number;
+}
+export enum BorderType {
+  solid = "solid",
+  dotted = "dotted",
+  double = "double",
+  dashed = "dashed",
+}
+export interface BorderItem {
+  width: number;
+  borderType: BorderType;
+  color: string;
+}
+
+export interface Border {
+  top: BorderItem;
+  right: BorderItem;
+  bottom: BorderItem;
+  left: BorderItem;
 }
 
 export interface ModelItem {
@@ -68,8 +71,9 @@ export interface ModelItem {
   margin: Array<number>;
   src: string;
   content: string;
-  borderRadius: string;
+  borderRadius: number;
   justifyContent: string;
+  border: Border;
 }
 
 export interface Settings {
@@ -112,9 +116,31 @@ export const defalutModelItem: ModelItem = {
   padding: [0, 0, 0, 0],
   margin: [0, 0, 0, 0],
   content: "示例文字|地址",
-  borderRadius: "0px",
+  borderRadius: 0,
   justifyContent: "center",
   src: "",
+  border: {
+    left: {
+      width: 0,
+      borderType: BorderType.solid,
+      color: "#fff",
+    },
+    top: {
+      width: 0,
+      borderType: BorderType.solid,
+      color: "#fff",
+    },
+    right: {
+      width: 0,
+      borderType: BorderType.solid,
+      color: "#fff",
+    },
+    bottom: {
+      width: 0,
+      borderType: BorderType.solid,
+      color: "#fff",
+    },
+  },
 };
 
 /**

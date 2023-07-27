@@ -94,6 +94,7 @@
         </div>
         <EditBasePlate v-if="mailRep.targetChoose.basePlate.active" @copy-color="copyColor"></EditBasePlate>
         <EditArea v-else-if="mailRep.targetChoose.area.active" :data="store.currentMailModel.areas[mailRep.areaId]" @copy-color="copyColor(mailRep.areaId)"></EditArea>
+        <EditModel v-else-if="mailRep.targetChoose.model.active" :data="store.currentMailModel.areas[mailRep.modelId.areaIndex].modelItem[mailRep.modelId.modelIndex]" @copy-color="copyColor(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)"></EditModel>
       </div>
     </div>
   </div>
@@ -114,6 +115,7 @@ import { indexStore } from '../store/IndexPinia'
 import { mailStore } from '../store/MailPinia'
 import EditBasePlate from './edit/EditBasePlate.vue'
 import EditArea from './edit/EditArea.vue'
+import EditModel from './edit/EditModel.vue'
 
 const mailRep = mailStore()
 const store = indexStore()
@@ -137,11 +139,15 @@ const showColorPicker = () => {
   colorPickerRef.value.click()
 }
 
-const copyColor = (areaId: number) => {
-  if (areaId == undefined) {
+const copyColor = (areaIndex?: number, modelIndex?: number) => {
+  if (areaIndex == undefined) {
     store.currentMailModel.base.bgColor = globalColor.value
   } else {
-    store.currentMailModel.areas[areaId].bgColor = globalColor.value
+    if (modelIndex == undefined) {
+      store.currentMailModel.areas[areaIndex].bgColor = globalColor.value
+    } else {
+      store.currentMailModel.areas[areaIndex].modelItem[modelIndex].bgColor = globalColor.value
+    }
   }
 }
 

@@ -11,7 +11,7 @@
                     <td :style="baseOutterPadding" :bgcolor="baseOtterColor" @click="basePlateTipVisible = !basePlateTipVisible">
                       <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         <tbody :style="itemDirection">
-                          <el-popover trigger="contextmenu" :visible="areaTipVisibles[areaIndex]" placement="bottom" title="添加|删除" :width="100" v-for="areaItem,areaIndex in store.currentMailModel.areas" :key="areaItem.id">
+                          <el-popover trigger="contextmenu" :visible="areaTipVisibles[areaIndex]" placement="bottom" :width="100" v-for="areaItem,areaIndex in store.currentMailModel.areas" :key="areaItem.id">
                             <template #reference>
                               <tr ref="AreaRef" @click.stop="chooseArea(areaIndex)">
                                 <td :style="areaStyle(areaIndex)">
@@ -54,6 +54,12 @@
                               </tr>
                             </template>
                             <template #default>
+                              <div class="info_title">
+                                <span>添加|删除</span>
+                                <el-icon size="18" @click="areaTipVisibles[areaIndex] = false">
+                                  <CircleCloseFilled />
+                                </el-icon>
+                              </div>
                               <div class="info_line">
                                 <el-button type="primary" @click="addModel(areaIndex)">添加组件</el-button>
                                 <el-tooltip placement="bottom">
@@ -111,7 +117,7 @@ import { ref, reactive, computed, defineProps, PropType } from 'vue'
 import { useRouter } from 'vue-router'
 import { build, buildView, buildWrap } from '../../styles/name'
 import { BaseModel, Model, defaultAreaModel, defalutModelItem } from '../../core'
-import { InfoFilled } from '@element-plus/icons-vue'
+import { InfoFilled, CircleCloseFilled } from '@element-plus/icons-vue'
 import { indexStore } from '../../store/IndexPinia'
 import { mailStore } from '../../store/MailPinia'
 import ModelItem from './ModelItem.vue'
@@ -205,7 +211,6 @@ const chooseArea = (areaIndex: number) => {
   store.activeTarget.info = mailRep.targetChoose.area.info
   store.activeTarget.name = mailRep.targetChoose.area.name
   mailRep.areaId = areaIndex
-  console.log(areaTipVisibles[areaIndex])
 }
 //区域样式
 let areaStyle = computed(() => (areaIndex: number) => {
@@ -233,7 +238,6 @@ const chooseModel = (areaIndex: number, mIndex: number) => {
 }
 
 const addModel = (areaIndex: number) => {
-  let tmp = defalutModelItem
   store.pushModelToArea(areaIndex)
   console.log(store.currentMailModel.areas)
 }
@@ -245,6 +249,19 @@ const delModel = (areaIndex: number, mIndex: number) => {
 </script>
 
 <style lang="scss" scoped>
+.info_title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 6px 0;
+  font-size: 16px;
+  font-weight: 700;
+  .el-icon {
+    cursor: pointer;
+  }
+}
 .info_line {
   width: 100%;
   display: flex;

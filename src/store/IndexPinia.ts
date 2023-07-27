@@ -33,6 +33,7 @@ export const indexStore = defineStore("index", {
     };
   },
   actions: {
+    //添加组件到区域中
     pushModelToArea(index: number) {
       const len = this.currentMailModel.areas[index].modelItem.length;
 
@@ -42,7 +43,9 @@ export const indexStore = defineStore("index", {
 
       // this.currentMailModel.areas[index].modelItem.push(item);
       this.currentMailModel.areas[index].modelItem = areas;
+      console.log(this.currentMailModel.areas[index].modelItem);
     },
+    //添加区域到底板中
     pushAreaToCurrentMailModel(item: AreaModel) {
       let len = 0;
       if (this.currentMailModel.areas.length != 0) {
