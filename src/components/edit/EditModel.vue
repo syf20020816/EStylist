@@ -27,7 +27,7 @@
       </div>
       <div :class="build('template','base')">
         <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.radius) }}</div>
-        <el-input v-model="itemData.borderRadius" placeholder="Please input radius" />
+        <el-input-number v-model="itemData.borderRadius" :step="2" :max="10000" />
       </div>
       <div :class="build('template','base')">
         <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.content) }}</div>
@@ -35,7 +35,7 @@
       </div>
       <div :class="build('template','base')" v-if="itemData.type=='img'">
         <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.upload) }}</div>
-        <input type="file" name="" id="upload-picture" @change="uploadPicture(mailRep.modelId.modelIndex,$event)">
+        <input type="file" name="" id="upload-picture" @change="uploadPicture">
       </div>
       <div :class="build('template','base')" v-if="itemData.type!='div'">
         <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.src) }}</div>
@@ -187,7 +187,7 @@ const store = indexStore()
 const mailRep = mailStore()
 let flexArea = ref(false)
 
-const emits = defineEmits(['copyColor', 'copyFont', 'copyBorderColor', 'marginChange', 'paddingChange'])
+const emits = defineEmits(['copyColor', 'copyFont', 'copyBorderColor', 'marginChange', 'paddingChange', 'uploadPicture'])
 const props = defineProps({
   data: {
     type: Object as PropType<ModelItem>,
@@ -201,9 +201,9 @@ let itemData = computed(() => {
 })
 
 // 上传本地照片
-const uploadPicture = (index: number, event: any) => {
+const uploadPicture = (event: any) => {
   const file = event.target.files[0]
-  // emits('upload-picture', file, itemfIndex.value, index)
+  emits('uploadPicture', file)
 }
 
 const showFlex = () => {

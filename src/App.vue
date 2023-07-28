@@ -3,29 +3,43 @@
     <div :class="buildWrap(component,'left')">
       <img @click="toPage('')" src="./assets/EStylist.png" alt="" style="height: 40px;width: 40px;border-radius: 50%;filter: drop-shadow(0 0 16px #8fa2f8);cursor: pointer;">
       <div :class="buildWrap(component,'nav-top')">
-        <el-icon size="20" @click="toPage('edit')">
-          <Edit />
-        </el-icon>
-        <el-icon size="20" @click="toPage('modelRep')">
-          <Shop />
-        </el-icon>
-        <el-icon size="20" @click="toPage('setting')">
-          <Box />
-        </el-icon>
-        <el-icon size="20" @click="toPage('send')">
-          <Message />
-        </el-icon>
-        <el-icon size="20" @click="toPage('doc')">
-          <Document />
-        </el-icon>
+        <el-tooltip class="box-item" effect="dark" content="模板编辑" placement="right">
+          <el-icon size="20" @click="toPage('edit')">
+            <Edit />
+          </el-icon>
+        </el-tooltip>
+        <el-tooltip class="box-item" effect="dark" content="组件超市" placement="right">
+          <el-icon size="20" @click="toPage('modelRep')">
+            <Shop />
+          </el-icon>
+        </el-tooltip>
+        <el-tooltip class="box-item" effect="dark" content="模板超市" placement="right">
+          <el-icon size="20" @click="toPage('setting')">
+            <Box />
+          </el-icon>
+        </el-tooltip>
+        <el-tooltip class="box-item" effect="dark" content="邮件发送" placement="right">
+          <el-icon size="20" @click="toPage('send')">
+            <Message />
+          </el-icon>
+        </el-tooltip>
+        <el-tooltip class="box-item" effect="dark" content="文档教程" placement="right">
+          <el-icon size="20" @click="toPage('doc')">
+            <Document />
+          </el-icon>
+        </el-tooltip>
       </div>
       <div :class="buildWrap(component,'nav-bottom')">
-        <el-icon size="20" @click="toPage('info')">
-          <InfoFilled />
-        </el-icon>
-        <el-icon size="20" @click="toPage('setting')">
-          <Tools />
-        </el-icon>
+        <el-tooltip class="box-item" effect="dark" content="更新信息" placement="right">
+          <el-icon size="20" @click="toPage('info')">
+            <InfoFilled />
+          </el-icon>
+        </el-tooltip>
+        <el-tooltip class="box-item" effect="dark" content="设置" placement="right">
+          <el-icon size="20" @click="toPage('setting')">
+            <Tools />
+          </el-icon>
+        </el-tooltip>
       </div>
     </div>
     <div :class="buildWrap(component,'right')">

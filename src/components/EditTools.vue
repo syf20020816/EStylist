@@ -94,7 +94,7 @@
         </div>
         <EditBasePlate v-if="mailRep.targetChoose.basePlate.active" @copy-color="copyColor"></EditBasePlate>
         <EditArea v-else-if="mailRep.targetChoose.area.active" :data="store.currentMailModel.areas[mailRep.areaId]" @copy-color="copyColor(mailRep.areaId)"></EditArea>
-        <EditModel v-else-if="mailRep.targetChoose.model.active" :data="store.currentMailModel.areas[mailRep.modelId.areaIndex].modelItem[mailRep.modelId.modelIndex]" @copy-color="copyColor(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-font="copyFont(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-border-color="copyBorderColor" @margin-change="marginChange" @padding-change="paddingChange">
+        <EditModel v-else-if="mailRep.targetChoose.model.active" :data="store.currentMailModel.areas[mailRep.modelId.areaIndex].modelItem[mailRep.modelId.modelIndex]" @copy-color="copyColor(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-font="copyFont(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-border-color="copyBorderColor" @margin-change="marginChange" @padding-change="paddingChange" @upload-picture="uploadPicture">
         </EditModel>
       </div>
     </div>
@@ -114,6 +114,7 @@ import { QuestionFilled, Switch } from '@element-plus/icons-vue'
 import { getStr, pagei18n, FontFamily } from '../core'
 import { indexStore } from '../store/IndexPinia'
 import { mailStore } from '../store/MailPinia'
+import { convertImageToBase64 } from '../util'
 import EditBasePlate from './edit/EditBasePlate.vue'
 import EditArea from './edit/EditArea.vue'
 import EditModel from './edit/EditModel.vue'
@@ -179,6 +180,17 @@ const marginChange = (value: number, direction: number) => {
   let { areaIndex } = mailRep.modelId
   let { modelIndex } = mailRep.modelId
   store.marginChange(areaIndex, modelIndex, direction, value)
+}
+
+// 上传本地照片
+const uploadPicture = (file: any) => {
+  let { areaIndex } = mailRep.modelId
+  let { modelIndex } = mailRep.modelId
+  convertImageToBase64(file)
+    .then((base64: any) => {
+      store.currentMailModel.areas[areaIndex].modelItem[modelIndex].src = base64
+    })
+    .catch(error => {})
 }
 </script>
 

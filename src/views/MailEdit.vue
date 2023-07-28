@@ -269,12 +269,6 @@ const delCache = () => {
     })
 }
 
-const paddingChange = (fIndex: number, sIndex: number, index: number, value: number) => {
-  store.paddingChange(fIndex, sIndex, index, value)
-}
-const marginChange = (fIndex: number, sIndex: number, index: number, value: number) => {
-  store.marginChange(fIndex, sIndex, index, value)
-}
 onMounted(() => {
   if (JSON.stringify(store.templateMailModel) != '{}') {
     store.currentMailModel = store.templateMailModel

@@ -72,7 +72,7 @@ let modelStyles = computed(() => {
     fontFamily +
     ';border-radius:' +
     borderRadius +
-    ';display: flex;align-items: center;justify-content: ' +
+    'px;display: flex;align-items: center;justify-content: ' +
     justifyContent +
     ';border-left:' +
     border.left.width +
