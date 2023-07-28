@@ -121,6 +121,7 @@ import { InfoFilled, CircleCloseFilled } from '@element-plus/icons-vue'
 import { indexStore } from '../../store/IndexPinia'
 import { mailStore } from '../../store/MailPinia'
 import ModelItem from './ModelItem.vue'
+import { generateUUID } from '../../util'
 
 const router = useRouter()
 const mailRep = mailStore()
@@ -196,7 +197,10 @@ const addArea = () => {
   areaTipVisibles.push(false)
   modelTipVisibles.push([false])
   let tmp = defaultAreaModel
+
   store.pushAreaToCurrentMailModel(tmp)
+  //添加一个组件到区域中
+  store.pushModelToArea(store.currentMailModel.areas.length - 1)
 }
 
 //选择区域
@@ -239,12 +243,10 @@ const chooseModel = (areaIndex: number, mIndex: number) => {
 
 const addModel = (areaIndex: number) => {
   store.pushModelToArea(areaIndex)
-  console.log(store.currentMailModel.areas)
 }
 
 const delModel = (areaIndex: number, mIndex: number) => {
   store.currentMailModel.areas[areaIndex].modelItem.splice(mIndex, 1)
-  console.log(store.currentMailModel.areas)
 }
 </script>
 

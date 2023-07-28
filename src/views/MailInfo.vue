@@ -95,7 +95,6 @@ const checkUpdate = () => {
       updateOrNot.value = '当前已经是最新版本,无需进行更新!'
     }
     updateVisiable.value = true
-    console.log(res)
   })
 }
 
@@ -111,49 +110,5 @@ const updateConfirm = () => {
 </script>
 
 <style lang="scss" scoped>
-@use '../styles/name.scss' as *;
-@use '../styles/src/var.scss' as *;
-
-$component: 'MailInfo';
-
-@include buildView($component) {
-  height: inherit;
-  width: calc(100vw - 60px);
-  text-align: left;
-  color: $bg-color-light;
-
-  @include build($component, 'title') {
-    height: 6vh;
-    font-size: 5vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    text-shadow: 1px 0px 2px #fff;
-    margin: 1.5vh 0;
-  }
-  @include buildWrap($component, 'content') {
-    padding: 0 16px;
-
-    @include build('content', 'title') {
-      font-size: 3vh;
-      font-weight: 700;
-      margin: 1vh 0;
-      box-sizing: border-box;
-    }
-    @include build('content', 'des') {
-      font-size: 2.5vh;
-      text-align: justify;
-      margin: 1vh 1vw;
-      box-sizing: border-box;
-      line-height: 1.5em;
-    }
-  }
-  .updateBtn {
-    position: absolute;
-    bottom: 10px;
-    right: 0%;
-    transform: translate(-50%, 0);
-  }
-}
+@use '../styles/views/MailInfo.scss';
 </style>

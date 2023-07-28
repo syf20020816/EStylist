@@ -2,8 +2,12 @@
   <div :id="buildView(component)">
     <span v-if="!flexArea">
       <div :class="build('template','base')">
+        <div class="tmptitle">组件名称</div>
+        <el-input placeholder="Please input model name" v-model="itemData.name" />
+      </div>
+      <div :class="build('template','base')">
         <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.modelTypes) }}</div>
-        <el-select v-model="itemData.type" placeholder="Select Type">
+        <el-select v-model="itemData.type" placeholder="Select Type" @change="changeModelType">
           <el-option v-for="titem in ModelTypes" :key="titem.value" :label="titem.label" :value="titem.value" />
         </el-select>
       </div>
@@ -49,24 +53,24 @@
           <template #title>
             文字样式
             <el-tooltip class="box-item" effect="dark" content="复制字体调节器" placement="right">
-              <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="emits('copyColor')"></el-button>
+              <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="emits('copyFont')"></el-button>
             </el-tooltip>
           </template>
-          <div :class="build('template','base')" v-if="itemData.type!='img'">
+          <div :class="build('template','base')">
             <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontSize) }}</div>
             <el-input-number v-model="itemData.fontSize" :step="2" :max="80" />
           </div>
-          <div :class="build('template','base')" v-if="itemData.type!='img'">
+          <div :class="build('template','base')">
             <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontWeight) }}</div>
             <el-switch v-model="itemData.fontWeight" style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949" />
           </div>
-          <div :class="build('template','base')" v-if="itemData.type!='img'">
+          <div :class="build('template','base')">
             <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontFamily) }}</div>
             <el-select v-model="itemData.fontFamily" placeholder="Select FontFamily">
               <el-option v-for="fitem in FontFamily" :key="fitem.value" :label="fitem.label" :value="fitem.value" />
             </el-select>
           </div>
-          <div :class="build('template','base')" v-if="itemData.type!='img'">
+          <div :class="build('template','base')">
             <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.fontColor) }}</div>
             <el-color-picker v-model="itemData.fontColor" />
           </div>
@@ -97,7 +101,7 @@
           <template #title>
             边框
           </template>
-          <div :class="build('template','base2')" v-if="itemData.type!='img'">
+          <div :class="build('template','base2')">
             <span class="baseline">
               <div class="tmptitle">上:</div>
               <el-input-number v-model="itemData.border.top.width" :step="0.5" :max="80" />
@@ -108,11 +112,11 @@
               </el-select>
               <el-input style="width: 40%;" v-model="itemData.border.top.color" placeholder="设置颜色,透明为transparent" clearable></el-input>
               <el-tooltip class="box-item" effect="dark" content="复制调色器的颜色" placement="right">
-                <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="emits('copyColor')"></el-button>
+                <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="copyBorderColor('top')"></el-button>
               </el-tooltip>
             </span>
           </div>
-          <div :class="build('template','base2')" v-if="itemData.type!='img'">
+          <div :class="build('template','base2')">
             <span class="baseline">
               <div class="tmptitle">右:</div>
               <el-input-number v-model="itemData.border.right.width" :step="0.5" :max="80" />
@@ -123,11 +127,11 @@
               </el-select>
               <el-input style="width: 40%;" v-model="itemData.border.right.color" placeholder="设置颜色,透明为transparent" clearable></el-input>
               <el-tooltip class="box-item" effect="dark" content="复制调色器的颜色" placement="right">
-                <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="emits('copyColor')"></el-button>
+                <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="copyBorderColor('right')"></el-button>
               </el-tooltip>
             </span>
           </div>
-          <div :class="build('template','base2')" v-if="itemData.type!='img'">
+          <div :class="build('template','base2')">
             <span class="baseline">
               <div class="tmptitle">下:</div>
               <el-input-number v-model="itemData.border.bottom.width" :step="0.5" :max="80" />
@@ -138,11 +142,11 @@
               </el-select>
               <el-input style="width: 40%;" v-model="itemData.border.bottom.color" placeholder="设置颜色,透明为transparent" clearable></el-input>
               <el-tooltip class="box-item" effect="dark" content="复制调色器的颜色" placement="right">
-                <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="emits('copyColor')"></el-button>
+                <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="copyBorderColor('bottom')"></el-button>
               </el-tooltip>
             </span>
           </div>
-          <div :class="build('template','base2')" v-if="itemData.type!='img'">
+          <div :class="build('template','base2')">
             <span class="baseline">
               <div class="tmptitle">左:</div>
               <el-input-number v-model="itemData.border.left.width" :step="0.5" :max="80" />
@@ -153,7 +157,7 @@
               </el-select>
               <el-input style="width: 40%;" v-model="itemData.border.left.color" placeholder="设置颜色,透明为transparent" clearable></el-input>
               <el-tooltip class="box-item" effect="dark" content="复制调色器的颜色" placement="right">
-                <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="emits('copyColor')"></el-button>
+                <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="copyBorderColor('left')"></el-button>
               </el-tooltip>
             </span>
           </div>
@@ -183,19 +187,11 @@ const store = indexStore()
 const mailRep = mailStore()
 let flexArea = ref(false)
 
-const emits = defineEmits(['copyColor'])
+const emits = defineEmits(['copyColor', 'copyFont', 'copyBorderColor', 'marginChange', 'paddingChange'])
 const props = defineProps({
   data: {
     type: Object as PropType<ModelItem>,
     default: defalutModelItem
-  },
-  index: {
-    type: Number,
-    default: 0
-  },
-  fIndex: {
-    type: Number,
-    default: 0
   }
 })
 
@@ -214,12 +210,35 @@ const showFlex = () => {
   flexArea.value = !flexArea.value
 }
 
-const marginChange = (currentValue: any, oldValue: any, index: number) => {
-  // emits('margin-change', itemfIndex.value, itemIndex.value, index, currentValue)
+const marginChange = (currentValue: any, oldValue: any, direction: number) => {
+  emits('marginChange', currentValue, direction)
 }
 
-const paddingChange = (currentValue: any, oldValue: any, index: number) => {
-  // emits('padding-change', itemfIndex.value, itemIndex.value, index, currentValue)
+const paddingChange = (currentValue: any, oldValue: any, direction: number) => {
+  emits('paddingChange', currentValue, direction)
+}
+
+const changeModelType = (e: string) => {
+  let res = ''
+  switch (e) {
+    case 'div':
+      res = '文字'
+      break
+    case 'img':
+      res = '图片'
+      break
+    case 'a':
+      res = '链接'
+      break
+    default:
+      res = '自定义组件'
+      break
+  }
+  itemData.value.name = res
+}
+
+const copyBorderColor = (direction: string) => {
+  emits('copyBorderColor', direction)
 }
 </script>
 

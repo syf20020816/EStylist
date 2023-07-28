@@ -149,35 +149,6 @@ let editLeftWidth = computed(() => {
 const scaleView = (num: number) => {
   scaleViewSize.value += num
 }
-// 修改子区域个数
-const saveBaseChange = () => {
-  let oldLen = store.currentMailModel.areasLen
-  if (oldLen < store.currentMailModel.base.areaNum) {
-    for (let i = oldLen; i < store.currentMailModel.base.areaNum; i++) {
-      store.pushAreaToCurrentMailModel(defaultAreaModel)
-    }
-  } else if (oldLen > store.currentMailModel.base.areaNum) {
-    for (let i = oldLen; i > store.currentMailModel.base.areaNum; i--) {
-      store.currentMailModel.areas.pop()
-    }
-  } else {
-  }
-  store.currentMailModel.areasLen = store.currentMailModel.areas.length
-  ElMessage({
-    message: 'Change Save Successfully',
-    type: 'success'
-  })
-}
-
-// 添加模块
-const addModel = (index: number) => {
-  let tmp = defalutModelItem
-  store.pushCurrentMailModel(index)
-  ElMessage({
-    message: 'Add Model Successfully',
-    type: 'success'
-  })
-}
 
 const delModel = (index: number) => {
   store.currentMailModel.areas[index].modelItem.pop()
@@ -325,22 +296,32 @@ const defaultProps = {
 const handleNodeClick = (data: Tree) => {
   console.log(data)
 }
+//生成邮件层级树
+let mailLevelTree = computed(() => {
+  //get the mail model data
+  let { base, areas } = store.currentMailModel
+  let areaLen = areas.length
+  let treeList: Tree[] = []
 
-const mailLevelTree: Tree[] = [
-  {
+  treeList.push({
     label: '邮件底板',
-    children: [
-      {
-        label: '区域',
-        children: [
-          {
-            label: '组件'
-          }
-        ]
-      }
-    ]
+    children: [] as Tree[]
+  })
+
+  for (let i = 0; i < areaLen; i++) {
+    let item = {
+      label: '区域' + (i + 1),
+      children: [] as Tree[]
+    }
+    for (let j = 0; j < areas[i].modelItem.length; j++) {
+      let modelItem = { label: '组件' + (j + 1) + ':' + areas[i].modelItem[j].name }
+      item.children.push(modelItem)
+    }
+    treeList[0].children?.push(item)
   }
-]
+
+  return treeList
+})
 </script>
 
 <style lang="scss" >

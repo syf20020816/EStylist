@@ -3,7 +3,7 @@
     <div :class="buildWrap(component,'tool1')">
       <div :class="buildWrap(component,'color')" v-if="fontOrColor">
         <div :class="build('color','main')" :style="colors" @click="showColorPicker">
-          <input ref="colorPickerRef" type="color" v-model="globalColor" name="" id="color-picker" style="display: none;">
+          <input ref="colorPickerRef" type="color" v-model="store.globalColor" name="" id="color-picker" style="display: none;">
         </div>
         <div class="details">
           <span style="font-weight: 700;">调色器</span>
@@ -23,7 +23,7 @@
               <Switch />
             </el-icon>
           </el-tooltip>
-          <el-input v-model="globalColor" placeholder="transparent" clearable></el-input>
+          <el-input v-model="store.globalColor" placeholder="transparent" clearable></el-input>
         </div>
       </div>
       <div :class="buildWrap(component,'font')" v-else>
@@ -94,7 +94,8 @@
         </div>
         <EditBasePlate v-if="mailRep.targetChoose.basePlate.active" @copy-color="copyColor"></EditBasePlate>
         <EditArea v-else-if="mailRep.targetChoose.area.active" :data="store.currentMailModel.areas[mailRep.areaId]" @copy-color="copyColor(mailRep.areaId)"></EditArea>
-        <EditModel v-else-if="mailRep.targetChoose.model.active" :data="store.currentMailModel.areas[mailRep.modelId.areaIndex].modelItem[mailRep.modelId.modelIndex]" @copy-color="copyColor(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)"></EditModel>
+        <EditModel v-else-if="mailRep.targetChoose.model.active" :data="store.currentMailModel.areas[mailRep.modelId.areaIndex].modelItem[mailRep.modelId.modelIndex]" @copy-color="copyColor(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-font="copyFont(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-border-color="copyBorderColor" @margin-change="marginChange" @padding-change="paddingChange">
+        </EditModel>
       </div>
     </div>
   </div>
@@ -121,7 +122,6 @@ const mailRep = mailStore()
 const store = indexStore()
 const colorPickerRef = ref()
 const component = 'EditTools'
-let globalColor = ref('#dedeff')
 let fontOrColor = ref(true)
 let targetChoose = reactive({
   basePlate: false,
@@ -130,7 +130,7 @@ let targetChoose = reactive({
 })
 
 let colors = computed(() => {
-  let mainColor = globalColor.value
+  let mainColor = store.globalColor
   let weakColor = '#ff' + mainColor.slice(3, mainColor.length)
   return 'background: linear-gradient(90deg,' + weakColor + ',' + mainColor + ',' + weakColor + ');'
 })
@@ -138,15 +138,15 @@ let colors = computed(() => {
 const showColorPicker = () => {
   colorPickerRef.value.click()
 }
-
+//复制颜色
 const copyColor = (areaIndex?: number, modelIndex?: number) => {
   if (areaIndex == undefined) {
-    store.currentMailModel.base.bgColor = globalColor.value
+    store.currentMailModel.base.bgColor = store.globalColor
   } else {
     if (modelIndex == undefined) {
-      store.currentMailModel.areas[areaIndex].bgColor = globalColor.value
+      store.currentMailModel.areas[areaIndex].bgColor = store.globalColor
     } else {
-      store.currentMailModel.areas[areaIndex].modelItem[modelIndex].bgColor = globalColor.value
+      store.currentMailModel.areas[areaIndex].modelItem[modelIndex].bgColor = store.globalColor
     }
   }
 }
@@ -154,127 +154,34 @@ const copyColor = (areaIndex?: number, modelIndex?: number) => {
 const switchTools = () => {
   fontOrColor.value = !fontOrColor.value
 }
+//复制字体
+const copyFont = (areaIndex: number, modelIndex: number) => {
+  let { fontColor, fontFamily, fontSize, fontWeight } = store.fontStyles
+  store.currentMailModel.areas[areaIndex].modelItem[modelIndex].fontColor = fontColor
+  store.currentMailModel.areas[areaIndex].modelItem[modelIndex].fontFamily = fontFamily
+  store.currentMailModel.areas[areaIndex].modelItem[modelIndex].fontSize = fontSize
+  store.currentMailModel.areas[areaIndex].modelItem[modelIndex].fontWeight = fontWeight
+}
+
+//复制边框颜色
+const copyBorderColor = (direction: string) => {
+  let { areaIndex } = mailRep.modelId
+  let { modelIndex } = mailRep.modelId
+  store.deepCloneBorderColor(areaIndex, modelIndex, direction)
+}
+
+const paddingChange = (value: number, direction: number) => {
+  let { areaIndex } = mailRep.modelId
+  let { modelIndex } = mailRep.modelId
+  store.paddingChange(areaIndex, modelIndex, direction, value)
+}
+const marginChange = (value: number, direction: number) => {
+  let { areaIndex } = mailRep.modelId
+  let { modelIndex } = mailRep.modelId
+  store.marginChange(areaIndex, modelIndex, direction, value)
+}
 </script>
 
 <style lang="scss" scoped>
-@use '../styles/name.scss' as *;
-@use '../styles/src/var.scss' as *;
-
-$component: 'EditTools';
-
-@include buildView($component) {
-  height: 100%;
-  width: 100%;
-  @include buildWrap($component, 'tool1') {
-    width: 100%;
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    @include buildWrap($component, 'color') {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      .details {
-        width: calc(100% - 120px);
-        height: 100%;
-        box-sizing: border-box;
-        padding: 20px 0;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        align-content: center;
-        flex-wrap: wrap;
-        .el-icon {
-          margin: 0 6px;
-          cursor: pointer;
-        }
-        .el-input {
-          margin: 10px 0;
-        }
-      }
-      @include build('color', 'main') {
-        cursor: pointer;
-        height: 80px;
-        width: 80px;
-        border-radius: 50%;
-        box-shadow: 0 0 4px 2px #000;
-      }
-    }
-    @include buildWrap($component, 'font') {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      .details {
-        width: 100%;
-        height: 30px;
-        box-sizing: border-box;
-        padding: 0 6px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        .el-icon {
-          margin: 0 6px;
-          cursor: pointer;
-        }
-      }
-      @include build('font', 'main') {
-        width: 100%;
-        height: calc(100% - 30px);
-        @include build('template', 'base') {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          width: 100%;
-          height: auto;
-          margin: 0.5vh 0;
-
-          .tmptitle {
-            white-space: nowrap;
-            margin-right: 16px;
-            font-size: 13px;
-          }
-          .wrapline {
-            width: 100%;
-            margin: 0.5vh 0;
-            .el-input-number {
-              margin-left: 16px;
-            }
-          }
-        }
-      }
-    }
-  }
-  @include buildWrap($component, 'tool2') {
-    height: calc(100% - 180px);
-    box-sizing: border-box;
-    padding: 0 2.5%;
-    @include build('tool2', 'info') {
-      height: auto;
-      box-sizing: border-box;
-      padding-top: 8px;
-    }
-    @include build('tool2', 'config') {
-      width: 100%;
-      height: calc(100% - 190px);
-      .configs_title {
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        width: 100%;
-        .el-icon {
-          cursor: pointer;
-          margin: 0 10px;
-        }
-      }
-    }
-  }
-}
+@use '../styles/components/EditTools.scss';
 </style>

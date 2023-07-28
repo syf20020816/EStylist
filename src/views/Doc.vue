@@ -38,13 +38,5 @@ const store = indexStore()
 </script>
 
 <style lang="scss" scoped>
-@use '../styles/name.scss' as *;
-@use '../styles/src/var.scss' as *;
-
-$component: 'Doc';
-
-@include buildView($component) {
-  height: 100%;
-  width: 100%;
-}
+@use '../styles/views/Doc.scss';
 </style>

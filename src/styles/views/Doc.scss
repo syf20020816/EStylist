@@ -1,0 +1,9 @@
+@use '../name.scss' as *;
+@use '../src/var.scss' as *;
+
+$component: 'Doc';
+
+@include buildView($component) {
+  height: 100%;
+  width: 100%;
+}

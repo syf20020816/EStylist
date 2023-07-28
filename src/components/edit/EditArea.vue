@@ -28,11 +28,6 @@
         <el-option v-for="item in Direction" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
     </div>
-    <div style="display: flex;align-items: center;justify-content:end;margin-top: 1vh;flex-wrap: wrap;">
-      <el-button style="margin: 4px;" type="primary" round @click="addModel(index)">{{ getStr(store.settings.language,pagei18n.buttons.addModel) }}</el-button>
-      <el-button style="margin: 4px;" type="warning" round @click="delModel(index)">{{ getStr(store.settings.language,pagei18n.buttons.delModel) }}</el-button>
-      <!-- <el-button style="margin: 4px;" type="success" round @click="saveAreaChange(index)">{{ getStr(store.settings.language,pagei18n.buttons.changeArea) }}</el-button> -->
-    </div>
 
   </div>
 </template>
@@ -57,28 +52,14 @@ const props = defineProps({
   data: {
     type: Object as PropType<AreaModel>,
     default: defaultAreaModel
-  },
-  index: {
-    type: Number,
-    default: 0
   }
 })
 
 // let areaConfigs = toRef(props.data)
 let areaConfigs = computed(() => {
   let { data } = props
-  console.log(data)
   return data
 })
-let itemIndex = computed(() => {
-  let { index } = props
-  return index
-})
-
-// 添加模块
-const addModel = (index: number) => {}
-
-const delModel = (index: number) => {}
 </script>
 
 <style lang="scss" scoped>

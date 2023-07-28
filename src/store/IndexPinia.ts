@@ -6,8 +6,11 @@ import {
   ModelItem,
   AreaModel,
   defalutModelItem,
+  BorderType,
 } from "../core";
+import { generateUUID } from "../util";
 import cloneDeep from "lodash/cloneDeep";
+
 // useStore 可以是 useUser、useCart 之类的任何东西
 // 第一个参数是应用程序中 store 的唯一 id
 export const indexStore = defineStore("index", {
@@ -24,6 +27,7 @@ export const indexStore = defineStore("index", {
         name: "",
         info: "",
       },
+      globalColor: "#dedeff",
       currentMailModel: defalutModel as Model,
       settings: {} as Settings,
       templates: [] as Array<string>,
@@ -35,15 +39,17 @@ export const indexStore = defineStore("index", {
   actions: {
     //添加组件到区域中
     pushModelToArea(index: number) {
-      const len = this.currentMailModel.areas[index].modelItem.length;
-
-      const newItem = { ...defalutModelItem, id: len };
+      // const len = this.currentMailModel.areas[index].modelItem.length;
+      let len = generateUUID();
+      const newItem = {
+        ...defalutModelItem,
+        id: len,
+      };
       const areas = cloneDeep(this.currentMailModel.areas[index].modelItem);
       areas.push(newItem);
 
       // this.currentMailModel.areas[index].modelItem.push(item);
       this.currentMailModel.areas[index].modelItem = areas;
-      console.log(this.currentMailModel.areas[index].modelItem);
     },
     //添加区域到底板中
     pushAreaToCurrentMailModel(item: AreaModel) {
@@ -53,7 +59,8 @@ export const indexStore = defineStore("index", {
           this.currentMailModel.areas[this.currentMailModel.areas.length - 1]
             .id;
       }
-      const newItem = { ...item, id: len + 1 };
+      let newItem = { ...item, id: len + 1 };
+
       this.currentMailModel.areas.push(newItem);
     },
     paddingChange(
@@ -74,6 +81,34 @@ export const indexStore = defineStore("index", {
       );
       margins[index] = value;
       this.currentMailModel.areas[fIndex].modelItem[sIndex].margin = margins;
+    },
+    deepCloneBorderColor(
+      areaIndex: number,
+      modelIndex: number,
+      direction: string
+    ) {
+      const border = cloneDeep(
+        this.currentMailModel.areas[areaIndex].modelItem[modelIndex].border
+      );
+
+      switch (direction) {
+        case "top":
+          border.top.color = this.globalColor;
+          break;
+        case "right":
+          border.right.color = this.globalColor;
+          break;
+        case "bottom":
+          border.bottom.color = this.globalColor;
+          break;
+        case "left":
+          border.left.color = this.globalColor;
+          break;
+        default:
+          break;
+      }
+      this.currentMailModel.areas[areaIndex].modelItem[modelIndex].border =
+        border;
     },
   },
 });

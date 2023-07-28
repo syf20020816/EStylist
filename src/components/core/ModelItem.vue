@@ -38,7 +38,7 @@ let modelSrc = computed(() => {
 })
 
 let modelStyles = computed(() => {
-  let { type, height, width, fontWeight, bgColor, fontSize, fontColor, fontFamily, textAlign, padding, margin, borderRadius, justifyContent } = props.data
+  let { type, height, width, fontWeight, bgColor, fontSize, fontColor, fontFamily, textAlign, padding, margin, borderRadius, justifyContent, border } = props.data
   let styles = ''
   let paddingParse = parseArray(padding)
   let marginParse = parseArray(margin)
@@ -74,6 +74,30 @@ let modelStyles = computed(() => {
     borderRadius +
     ';display: flex;align-items: center;justify-content: ' +
     justifyContent +
+    ';border-left:' +
+    border.left.width +
+    'px ' +
+    border.left.borderType +
+    ' ' +
+    border.left.color +
+    ';border-top:' +
+    border.top.width +
+    'px ' +
+    border.top.borderType +
+    ' ' +
+    border.top.color +
+    ';border-right:' +
+    border.right.width +
+    'px ' +
+    border.right.borderType +
+    ' ' +
+    border.right.color +
+    ';border-bottom:' +
+    border.bottom.width +
+    'px ' +
+    border.bottom.borderType +
+    ' ' +
+    border.bottom.color +
     ';'
   return styles
 })

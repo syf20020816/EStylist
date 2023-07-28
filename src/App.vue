@@ -1,7 +1,7 @@
 <template>
   <div :id="buildView(component)">
     <div :class="buildWrap(component,'left')">
-      <el-avatar @click="toPage('')"> 🦀 </el-avatar>
+      <img @click="toPage('')" src="./assets/EStylist.png" alt="" style="height: 40px;width: 40px;border-radius: 50%;filter: drop-shadow(0 0 16px #8fa2f8);cursor: pointer;">
       <div :class="buildWrap(component,'nav-top')">
         <el-icon size="20" @click="toPage('edit')">
           <Edit />

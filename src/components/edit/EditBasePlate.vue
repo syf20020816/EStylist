@@ -25,9 +25,6 @@
         <el-option v-for="item in Direction" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
     </div>
-    <div style="display: flex;align-items: center;justify-content:end;margin-top: 1vh;">
-      <el-button type="success" round>{{ getStr(store.settings.language,pagei18n.buttons.changeArea) }}</el-button>
-    </div>
   </div>
 </template>
 

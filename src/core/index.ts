@@ -8,6 +8,7 @@ import {
   defaultAreaModels,
   defalutModelItem,
   defalutModel,
+  BorderType,
 } from "./baseModel";
 import { getStr, pagei18n } from "./i18n";
 import {
@@ -36,4 +37,5 @@ export {
   FontFamily,
   buildRef,
   BorderTypes,
+  BorderType,
 };

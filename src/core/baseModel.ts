@@ -8,6 +8,8 @@
  * ============================================
  */
 
+import { generateUUID } from "../util";
+
 /**
  * 外层容器样式表
  */
@@ -34,7 +36,6 @@ export interface AreaModel {
 export interface Model {
   base: BaseModel;
   areas: Array<AreaModel>;
-  areasLen: number;
 }
 export enum BorderType {
   solid = "solid",
@@ -56,7 +57,8 @@ export interface Border {
 }
 
 export interface ModelItem {
-  id: number;
+  id: string;
+  name: string;
   type: string;
   height: string;
   width: string;
@@ -102,7 +104,8 @@ export const defaultAreaModels: Array<AreaModel> = [
 ];
 
 export const defalutModelItem: ModelItem = {
-  id: 0,
+  id: generateUUID(),
+  name: "文字",
   type: "div",
   height: "30px",
   width: "auto",
@@ -153,7 +156,7 @@ export const defaultAreaModel: AreaModel = {
   textAlign: "center",
   span: 1,
   justifyContent: "center",
-  modelItem: [defalutModelItem],
+  modelItem: [],
 };
 
 export const defalutModel: Model = {
@@ -175,5 +178,4 @@ export const defalutModel: Model = {
       modelItem: [defalutModelItem],
     },
   ] as Array<AreaModel>,
-  areasLen: 1,
 };
