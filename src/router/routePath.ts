@@ -13,7 +13,8 @@ import MailInfo from "../views/MailInfo.vue";
 import MailSend from "../views/MailSend.vue";
 import MailEdit from "../views/MailEdit.vue";
 import Setting from "../views/Setting.vue";
-import ModelRep from "../views/ModelRep.vue";
+import TemplateLib from "../views/TemplateLib.vue";
+import ComponentLib from "../views/ComponentLib.vue";
 import Doc from "../views/Doc.vue";
 import { RouteRecordRaw } from "vue-router";
 export const routes: Array<RouteRecordRaw> = [
@@ -42,7 +43,11 @@ export const routes: Array<RouteRecordRaw> = [
     component: Doc,
   },
   {
-    path: "/modelRep",
-    component: ModelRep,
+    path: "/templateLib",
+    component: TemplateLib,
+  },
+  {
+    path: "/componentLib",
+    component: ComponentLib,
   },
 ];

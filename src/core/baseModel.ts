@@ -28,7 +28,6 @@ export interface AreaModel {
   bgColor: string;
   textAlign: string;
   direction: string;
-  span: number;
   modelItem: Array<ModelItem>;
   justifyContent: string;
 }
@@ -97,7 +96,6 @@ export const defaultAreaModels: Array<AreaModel> = [
     bgColor: "#fff",
     direction: "y",
     textAlign: "center",
-    span: 1,
     justifyContent: "center",
     modelItem: new Array(),
   } as AreaModel,
@@ -154,7 +152,6 @@ export const defaultAreaModel: AreaModel = {
   bgColor: "#fff",
   direction: "y",
   textAlign: "center",
-  span: 1,
   justifyContent: "center",
   modelItem: [],
 };
@@ -173,7 +170,6 @@ export const defalutModel: Model = {
       bgColor: "#fff",
       direction: "y",
       textAlign: "center",
-      span: 1,
       justifyContent: "center",
       modelItem: [defalutModelItem],
     },

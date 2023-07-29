@@ -189,6 +189,7 @@ const uploadTemplateCheck = () => {
 const uploadTemplate = () => {
   invoke('upload_file', { name: uploadTemplateTarget.value })
     .then((res: any) => {
+      console.log(res)
       store.currentMailModel = JSON.parse(res)
       store.templateMailModel = store.currentMailModel
       ElMessage({

@@ -110,5 +110,29 @@ export const indexStore = defineStore("index", {
       this.currentMailModel.areas[areaIndex].modelItem[modelIndex].border =
         border;
     },
+    deepCloneBorderChange(areaIndex:number,modelIndex:number,direction:string,newValue:number){
+      const border = cloneDeep(
+        this.currentMailModel.areas[areaIndex].modelItem[modelIndex].border
+      );
+      switch (direction) {
+        case "top":
+          border.top.width = newValue
+          break;
+        case "right":
+          border.right.width = newValue
+          break;
+        case "bottom":
+          border.bottom.width = newValue
+          break;
+        case "left":
+          border.left.width = newValue
+          break;
+        default:
+          break;
+      }
+
+      this.currentMailModel.areas[areaIndex].modelItem[modelIndex].border =
+        border;
+    }
   },
 });

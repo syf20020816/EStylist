@@ -9,12 +9,12 @@
           </el-icon>
         </el-tooltip>
         <el-tooltip class="box-item" effect="dark" content="组件超市" placement="right">
-          <el-icon size="20" @click="toPage('modelRep')">
+          <el-icon size="20" @click="toPage('componentLib')">
             <Shop />
           </el-icon>
         </el-tooltip>
         <el-tooltip class="box-item" effect="dark" content="模板超市" placement="right">
-          <el-icon size="20" @click="toPage('setting')">
+          <el-icon size="20" @click="toPage('templateLib')">
             <Box />
           </el-icon>
         </el-tooltip>

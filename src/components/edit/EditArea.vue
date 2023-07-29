@@ -1,9 +1,6 @@
 <template>
   <div :class="buildWrap(component,'area')">
-    <div :class="build('template','base')">
-      <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.colSpan) }}</div>
-      <el-input-number v-model="areaConfigs.span" :step="1" :max="100" />
-    </div>
+
     <div :class="build('template','base')">
       <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bgColor) }}</div>
 

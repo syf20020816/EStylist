@@ -11,7 +11,7 @@
                     <td :style="baseOutterPadding" :bgcolor="baseOtterColor" @click="basePlateTipVisible = !basePlateTipVisible">
                       <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         <tbody :style="itemDirection">
-                          <el-popover trigger="contextmenu" :visible="areaTipVisibles[areaIndex]" placement="bottom" :width="100" v-for="areaItem,areaIndex in store.currentMailModel.areas" :key="areaItem.id">
+                          <el-popover trigger="contextmenu" :visible="areaTipVisibles[areaIndex]" placement="bottom" :width="100" v-for="areaItem,areaIndex in store.currentMailModel.areas" :key="areaIndex">
                             <template #reference>
                               <tr ref="AreaRef" @click.stop="chooseArea(areaIndex)">
                                 <td :style="areaStyle(areaIndex)">
@@ -128,26 +128,46 @@ const mailRep = mailStore()
 const store = indexStore()
 const emits = defineEmits(['choose'])
 let basePlateTipVisible = ref(false)
-let areaTipVisibles = reactive<Array<boolean>>([])
-let modelTipVisibles = reactive<Array<Array<boolean>>>([])
-const initAreaTipVisibles = () => {
+// let areaTipVisibles = reactive<Array<boolean>>([])
+// let modelTipVisibles = reactive<Array<Array<boolean>>>([])
+let areaTipVisibles = computed(() => {
+  let arr = []
   let { areas } = store.currentMailModel
   for (let i = 0; i < areas.length; i++) {
-    areaTipVisibles.push(false)
+    arr.push(false)
   }
-}
-const initModelTipVisibles = () => {
+  return arr
+})
+let modelTipVisibles = computed(() => {
   let { areas } = store.currentMailModel
+  let arr = []
   for (let i = 0; i < areas.length; i++) {
     let row = []
     for (let j = 0; j < areas[i].modelItem.length; j++) {
       row.push(false)
     }
-    modelTipVisibles.push(row)
+    arr.push(row)
   }
-}
-initAreaTipVisibles()
-initModelTipVisibles()
+  return arr
+})
+// const initAreaTipVisibles = () => {
+//   let { areas } = store.currentMailModel
+//   for (let i = 0; i < areas.length; i++) {
+//     areaTipVisibles.push(false)
+//   }
+// }
+// const initModelTipVisibles = () => {
+//   let { areas } = store.currentMailModel
+//   for (let i = 0; i < areas.length; i++) {
+//     let row = []
+//     for (let j = 0; j < areas[i].modelItem.length; j++) {
+//       row.push(false)
+//     }
+//     modelTipVisibles.push(row)
+//   }
+// }
+// initAreaTipVisibles()
+// initModelTipVisibles()
 let modelTipVisible = ref(false)
 let AreaRef = ref()
 
@@ -194,8 +214,8 @@ const chooseBasePlate = () => {
 }
 //添加区域到底板中
 const addArea = () => {
-  areaTipVisibles.push(false)
-  modelTipVisibles.push([false])
+  areaTipVisibles.value.push(false)
+  modelTipVisibles.value.push([false])
   let tmp = defaultAreaModel
 
   store.pushAreaToCurrentMailModel(tmp)
@@ -205,8 +225,8 @@ const addArea = () => {
 
 //选择区域
 const chooseArea = (areaIndex: number) => {
-  areaTipVisibles[areaIndex] = !areaTipVisibles[areaIndex]
-  if (areaTipVisibles[areaIndex]) {
+  areaTipVisibles.value[areaIndex] = !areaTipVisibles.value[areaIndex]
+  if (areaTipVisibles.value[areaIndex]) {
     AreaRef.value[areaIndex].style.border = '0.5px dashed #ee4553'
   } else {
     AreaRef.value[areaIndex].style.border = '0px'
@@ -218,14 +238,17 @@ const chooseArea = (areaIndex: number) => {
 }
 //区域样式
 let areaStyle = computed(() => (areaIndex: number) => {
-  let { bgColor, textAlign, direction, justifyContent, span } = store.currentMailModel.areas[areaIndex]
-
-  return 'background-color:' + bgColor + ' ;text-align: ' + textAlign + ';' + 'display:flex;align-items:center;justify-content:' + justifyContent + ';'
+  let { bgColor, textAlign, direction, justifyContent } = store.currentMailModel.areas[areaIndex]
+  let directionStyle = 'flex-direction:column;'
+  if (direction == 'x') {
+    directionStyle = 'flex-direction:row;'
+  }
+  return 'background-color:' + bgColor + ' ;text-align: ' + textAlign + ';' + 'display:flex;align-items:center;justify-content:' + justifyContent + ';' + directionStyle
 })
 
 //删除区域
 const delArea = (areaIndex: number) => {
-  areaTipVisibles.splice(areaIndex, 1)
+  areaTipVisibles.value.splice(areaIndex, 1)
   store.activeTarget.info = ''
   store.activeTarget.name = ''
   store.currentMailModel.areas.splice(areaIndex, 1)
@@ -234,7 +257,7 @@ const delArea = (areaIndex: number) => {
 
 //选择组件
 const chooseModel = (areaIndex: number, mIndex: number) => {
-  modelTipVisibles[areaIndex][mIndex] = !modelTipVisibles[areaIndex][mIndex]
+  modelTipVisibles.value[areaIndex][mIndex] = !modelTipVisibles.value[areaIndex][mIndex]
   mailRep.activeTarget(2)
   store.activeTarget.info = mailRep.targetChoose.model.info
   store.activeTarget.name = mailRep.targetChoose.model.name

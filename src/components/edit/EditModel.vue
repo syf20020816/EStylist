@@ -104,7 +104,7 @@
           <div :class="build('template','base2')">
             <span class="baseline">
               <div class="tmptitle">上:</div>
-              <el-input-number v-model="itemData.border.top.width" :step="0.5" :max="80" />
+              <el-input-number v-model="itemData.border.top.width" :step="0.5" :max="80" @change="(newValue:number,oldValue:number)=>borderWidthChange(newValue,oldValue,'top')" />
             </span>
             <span class="baseline">
               <el-select v-model="itemData.border.top.borderType" placeholder="Select Type">
@@ -119,7 +119,7 @@
           <div :class="build('template','base2')">
             <span class="baseline">
               <div class="tmptitle">右:</div>
-              <el-input-number v-model="itemData.border.right.width" :step="0.5" :max="80" />
+              <el-input-number v-model="itemData.border.right.width" :step="0.5" :max="80" @change="(newValue:number,oldValue:number)=>borderWidthChange(newValue,oldValue,'right')" />
             </span>
             <span class="baseline">
               <el-select v-model="itemData.border.right.borderType" placeholder="Select Type">
@@ -134,7 +134,7 @@
           <div :class="build('template','base2')">
             <span class="baseline">
               <div class="tmptitle">下:</div>
-              <el-input-number v-model="itemData.border.bottom.width" :step="0.5" :max="80" />
+              <el-input-number v-model="itemData.border.bottom.width" :step="0.5" :max="80" @change="(newValue:number,oldValue:number)=>borderWidthChange(newValue,oldValue,'bottom')" />
             </span>
             <span class="baseline">
               <el-select v-model="itemData.border.bottom.borderType" placeholder="Select Type">
@@ -149,7 +149,7 @@
           <div :class="build('template','base2')">
             <span class="baseline">
               <div class="tmptitle">左:</div>
-              <el-input-number v-model="itemData.border.left.width" :step="0.5" :max="80" />
+              <el-input-number v-model="itemData.border.left.width" :step="0.5" :max="80" @change="(newValue:number,oldValue:number)=>borderWidthChange(newValue,oldValue,'left')" />
             </span>
             <span class="baseline">
               <el-select v-model="itemData.border.left.borderType" placeholder="Select Type">
@@ -239,6 +239,12 @@ const changeModelType = (e: string) => {
 
 const copyBorderColor = (direction: string) => {
   emits('copyBorderColor', direction)
+}
+
+const borderWidthChange = (newValue: number, oldValue: number, direction: string) => {
+  let { areaIndex } = mailRep.modelId
+  let { modelIndex } = mailRep.modelId
+  store.deepCloneBorderChange(areaIndex, modelIndex, direction, newValue)
 }
 </script>
 
