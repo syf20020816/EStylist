@@ -1,7 +1,7 @@
 <template>
   <div :id="buildView(component)">
     <div :class="buildWrap(component,'left')" :style="`width:`+editLeftWidth+`%;`">
-      <el-tabs v-model="activeEdit" class="demo-tabs">
+      <el-tabs v-model="activeEdit" class="demo-tabs" @tab-change="tabChange">
         <el-tab-pane label="设计邮件" name="mail">
           <div :style="scaleViewStyle" style="cursor: pointer;">
             <!-- todo: -->
@@ -37,28 +37,37 @@
           </el-tooltip>
         </div>
         <div>
-          <el-tree :data="mailLevelTree" :props="defaultProps" @node-click="handleNodeClick" />
+          <el-tree v-if="activeEdit=='mail'" :data="mailLevelTree" :props="defaultProps" @node-click="handleNodeClick" />
+          <el-tree v-else-if="activeEdit=='model'" :data="componentLevelTree" :props="defaultProps" @node-click="handleNodeClick" />
         </div>
       </div>
       <div :class="buildWrap(component,'tools')">
-        <el-icon size="18" @click="scaleView(-0.1)">
-          <ZoomOut />
-        </el-icon>
-        <el-icon size="18" @click="scaleView(0.1)">
-          <ZoomIn />
-        </el-icon>
-        <el-icon size="18" @click="uploadTemplateCheck">
-          <Upload />
-        </el-icon>
-        <el-icon size="18" @click="downloadTemplateVisable = true">
-          <Download />
-        </el-icon>
-        <el-icon size="18" @click="uploadToStore">
-          <UploadFilled />
-        </el-icon>
-        <el-icon size="18" @click="delCache">
-          <Delete />
-        </el-icon>
+        <el-tooltip effect="dark" content="缩小" placement="top">
+          <el-icon size="18" @click="scaleView(-0.1)">
+            <ZoomOut />
+          </el-icon>
+        </el-tooltip>
+        <el-tooltip effect="dark" content="放大" placement="top">
+          <el-icon size="18" @click="scaleView(0.1)">
+            <ZoomIn />
+          </el-icon>
+        </el-tooltip>
+        <el-tooltip effect="dark" content="上传邮件模板" placement="top">
+          <el-icon size="18" @click="uploadTemplateCheck">
+            <Upload />
+          </el-icon>
+        </el-tooltip>
+        <el-tooltip effect="dark" content="下载邮件模板" placement="top">
+          <img src="../assets/download_mail.svg" alt="" class="el-icon2" @click="downloadTemplateVisable = true">
+        </el-tooltip>
+        <el-tooltip effect="dark" content="下载组件" placement="top">
+          <img src="../assets/download_component.svg" alt="" class="el-icon2" @click="downloadComponentVisable = true">
+        </el-tooltip>
+        <el-tooltip effect="dark" content="删除缓存" placement="top">
+          <el-icon size="18" @click="delCache">
+            <Delete />
+          </el-icon>
+        </el-tooltip>
       </div>
     </div>
   </div>
@@ -68,6 +77,17 @@
       <span class="dialog-footer">
         <el-button @click="downloadTemplateVisable = false">{{ getStr(store.settings.language,pagei18n.common.cancel) }}</el-button>
         <el-button type="primary" @click="downloadTemplate">
+          {{ getStr(store.settings.language,pagei18n.common.confirm) }}
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
+  <el-dialog v-model="downloadComponentVisable" :title="getStr(store.settings.language,pagei18n.common.dowloadTemplate.title)" width="40%">
+    <el-input v-model="downloadFileName" :placeholder="getStr(store.settings.language,pagei18n.common.dowloadTemplate.placeholder)" clearable></el-input>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="downloadComponentVisable = false">{{ getStr(store.settings.language,pagei18n.common.cancel) }}</el-button>
+        <el-button type="primary" @click="downloadComponent">
           {{ getStr(store.settings.language,pagei18n.common.confirm) }}
         </el-button>
       </span>
@@ -125,8 +145,7 @@ let downloadFileName = ref('')
 let uploadTemplateVisiable = ref(false)
 let uploadTemplateTarget = ref('')
 let downloadTemplateVisable = ref(false)
-let addChildAreaVisiable = ref(false)
-let addChildAreaIndex = ref(-1)
+let downloadComponentVisable = ref(false)
 const store = indexStore()
 
 //模板数据
@@ -153,22 +172,6 @@ let editLeftWidth = computed(() => {
 })
 const scaleView = (num: number) => {
   scaleViewSize.value += num
-}
-
-const delModel = (index: number) => {
-  store.currentMailModel.areas[index].modelItem.pop()
-  ElMessage({
-    message: 'Del Model Successfully',
-    type: 'success'
-  })
-}
-// 上传本地照片
-const uploadPicture = (file: any, fIndex: number, index: number) => {
-  convertImageToBase64(file)
-    .then((base64: any) => {
-      store.currentMailModel.areas[fIndex].modelItem[index].src = base64
-    })
-    .catch(error => {})
 }
 
 // 上传模板文件检查
@@ -234,23 +237,27 @@ const downloadTemplate = () => {
   downloadTemplateVisable.value = false
 }
 
-// 模板暂存到Pinia中，关闭页面消失
-const uploadToStore = () => {
-  store.templateMailModel = store.currentMailModel
-  store.templateMailHtml = targetTemplate.value.$el.outerHTML
-  if (JSON.stringify(store.templateMailModel) != '{}') {
-    ElMessage({
-      message: 'Upload To Temp Store Successfully!',
-      type: 'success'
+const downloadComponent = () => {
+  let tmp = JSON.stringify(store.currentComponent)
+  invoke('download_template', { name: downloadFileName.value, data: tmp, dom: targetComponent.value.$el.outerHTML })
+    .then(res => {
+      ElMessage({
+        message: 'Download Component Successfully! Please Check Your Component Store Dir!',
+        type: 'success'
+      })
     })
-  } else {
-    ElMessage({
-      message: 'Upload To Temp Store Failure!',
-      type: 'error'
+    .catch(() => {
+      ElMessage({
+        message: 'Download Component Failed!',
+        type: 'error'
+      })
     })
-  }
+  downloadComponentVisable.value = false
 }
 
+/**
+ * 删除缓存,将刷新页面
+ */
 const delCache = () => {
   ElMessageBox.confirm('Delete The Template And Cache?', 'Warning', {
     confirmButtonText: 'OK',
@@ -285,6 +292,11 @@ onMounted(() => {
   }
 })
 
+const tabChange = (tabName: string) => {
+  activeEdit.value = tabName
+}
+
+//-----------------模板层级生成------------------------
 interface Tree {
   label: string
   children?: Tree[]
@@ -318,6 +330,26 @@ let mailLevelTree = computed(() => {
     for (let j = 0; j < areas[i].modelItem.length; j++) {
       let modelItem = { label: '组件' + (j + 1) + ':' + areas[i].modelItem[j].name }
       item.children.push(modelItem)
+    }
+    treeList[0].children?.push(item)
+  }
+
+  return treeList
+})
+
+let componentLevelTree = computed(() => {
+  let { modelItem } = store.currentComponent
+  let areaLen = modelItem.length
+  let treeList: Tree[] = []
+
+  treeList.push({
+    label: '组件域',
+    children: [] as Tree[]
+  })
+
+  for (let i = 0; i < areaLen; i++) {
+    let item = {
+      label: '组件' + (i + 1) + ':' + modelItem[i].name
     }
     treeList[0].children?.push(item)
   }

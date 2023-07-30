@@ -11,7 +11,7 @@
                     <td :style="baseOutterPadding" :bgcolor="baseOtterColor" @click="basePlateTipVisible = !basePlateTipVisible">
                       <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         <tbody :style="itemDirection">
-                          <el-popover trigger="contextmenu" :visible="areaTipVisibles[areaIndex]" placement="bottom" :width="100" v-for="areaItem,areaIndex in store.currentMailModel.areas" :key="areaItem.id">
+                          <el-popover trigger="contextmenu" :visible="areaTipVisibles[areaIndex]" placement="bottom" :width="100" v-for="areaItem,areaIndex in store.currentMailModel.areas" :key="areaIndex">
                             <template #reference>
                               <tr ref="AreaRef" @click.stop="chooseArea(areaIndex)">
                                 <td :style="areaStyle(areaIndex)">

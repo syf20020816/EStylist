@@ -1,7 +1,7 @@
 <template>
   <tr ref="AreaRef" @click="chooseArea">
     <td :style="areaStyle">
-      <el-popover trigger="contextmenu" :visible="modelTipVisibles[index]" title="添加|删除" placement="bottom" :width="100" v-for="item,index in store.currentComponent.modelItem" :key="item.id">
+      <el-popover trigger="contextmenu" :visible="modelTipVisibles[index]" title="添加|删除" placement="bottom" :width="100" v-for="item,index in store.currentComponent.modelItem" :key="index">
         <template #reference>
           <ModelItem :data="item" @click.stop="chooseModel(index)"></ModelItem>
         </template>
@@ -60,7 +60,11 @@ const mailRep = mailStore()
 const store = indexStore()
 let modelTipVisibles = reactive<Array<boolean>>([])
 const initComponent = () => {
-  store.pushComponentToArea()
+  if (store.currentComponent.modelItem.length == 0) {
+    store.pushComponentToArea()
+  } else {
+    return
+  }
 }
 initComponent()
 const initModelTipVisibles = () => {
@@ -86,9 +90,13 @@ let areaStyle = computed(() => {
   return 'background-color:' + bgColor + ' ;text-align: ' + textAlign + ';' + 'display:flex;align-items:center;justify-content:' + justifyContent + ';' + directionStyle
 })
 
-const addModel = () => {}
-const delArea = () => {}
-const delModel = (index: number) => {}
+const addModel = () => {
+  store.pushComponentToArea()
+}
+
+const delModel = (index: number) => {
+  store.currentComponent.modelItem.splice(index, 1)
+}
 const chooseArea = () => {
   mailRep.activeTarget(3)
   mailRep.componentIndex = -1

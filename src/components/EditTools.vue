@@ -94,10 +94,10 @@
         </div>
         <EditBasePlate v-if="mailRep.targetChoose.basePlate.active" @copy-color="copyColor"></EditBasePlate>
         <EditArea v-else-if="mailRep.targetChoose.area.active" :data="store.currentMailModel.areas[mailRep.areaId]" @copy-color="copyColor(mailRep.areaId)"></EditArea>
-        <EditModel v-else-if="mailRep.targetChoose.model.active" :data="store.currentMailModel.areas[mailRep.modelId.areaIndex].modelItem[mailRep.modelId.modelIndex]" @copy-color="copyColor(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-font="copyFont(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-border-color="copyBorderColor" @margin-change="marginChange" @padding-change="paddingChange" @upload-picture="uploadPicture">
+        <EditModel v-else-if="mailRep.targetChoose.model.active" :data="store.currentMailModel.areas[mailRep.modelId.areaIndex].modelItem[mailRep.modelId.modelIndex]" @copy-border-change="copyBorderChange" @copy-color="copyColor(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-font="copyFont(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-border-color="copyBorderColor" @margin-change="marginChange" @padding-change="paddingChange" @upload-picture="uploadPicture">
         </EditModel>
         <EditArea v-else-if="mailRep.targetChoose.componentArea.active" :data="store.currentComponent" @copy-color="copyColorComponentArea"></EditArea>
-        <EditModel v-else-if="mailRep.targetChoose.component.active" :data="store.currentComponent.modelItem[mailRep.componentIndex]" @copy-color="copyColorComponent" @copy-font="copyFont(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-border-color="copyBorderColor" @margin-change="marginChange" @padding-change="paddingChange" @upload-picture="uploadPicture">
+        <EditModel v-else-if="mailRep.targetChoose.component.active" :data="store.currentComponent.modelItem[mailRep.componentIndex]" @copy-color="copyColorComponent" @copy-border-change="copyBorderChangeComponent" @copy-font="copyFontComponent" @copy-border-color="copyBorderColorComponent" @margin-change="marginChangeComponent" @padding-change="paddingChangeComponent" @upload-picture="uploadPictureComponent">
         </EditModel>
       </div>
     </div>
@@ -209,6 +209,54 @@ const uploadPicture = (file: any) => {
       store.currentMailModel.areas[areaIndex].modelItem[modelIndex].src = base64
     })
     .catch(error => {})
+}
+
+//修改组件内边距
+//使用deep clone
+const paddingChangeComponent = (value: number, direction: number) => {
+  let { componentIndex: index } = mailRep
+  store.paddingChangeComponent(index, direction, value)
+}
+//修改组件外边距
+//使用deep clone
+const marginChangeComponent = (value: number, direction: number) => {
+  let { componentIndex: index } = mailRep
+  store.marginChangeComponent(index, direction, value)
+}
+
+// 上传本地照片到组件中
+const uploadPictureComponent = (file: any) => {
+  let { componentIndex: index } = mailRep
+  convertImageToBase64(file)
+    .then((base64: any) => {
+      store.currentComponent.modelItem[index].src = base64
+    })
+    .catch(error => {})
+}
+
+const copyFontComponent = () => {
+  let { componentIndex: index } = mailRep
+  let { fontColor, fontFamily, fontSize, fontWeight } = store.fontStyles
+  store.currentComponent.modelItem[index].fontColor = fontColor
+  store.currentComponent.modelItem[index].fontFamily = fontFamily
+  store.currentComponent.modelItem[index].fontSize = fontSize
+  store.currentComponent.modelItem[index].fontWeight = fontWeight
+}
+
+const copyBorderChange = (newValue: number, direction: string) => {
+  let { areaIndex } = mailRep.modelId
+  let { modelIndex } = mailRep.modelId
+  store.deepCloneBorderChange(areaIndex, modelIndex, direction, newValue)
+}
+
+const copyBorderColorComponent = (direction: string) => {
+  let { componentIndex: index } = mailRep
+  store.deepCloneBorderColorComponent(index, direction)
+}
+
+const copyBorderChangeComponent = (newValue: number, direction: string) => {
+  let { componentIndex: index } = mailRep
+  store.deepCloneBorderChangeComponent(index, direction, newValue)
 }
 </script>
 

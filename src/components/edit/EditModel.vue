@@ -187,7 +187,7 @@ const store = indexStore()
 const mailRep = mailStore()
 let flexArea = ref(false)
 
-const emits = defineEmits(['copyColor', 'copyFont', 'copyBorderColor', 'marginChange', 'paddingChange', 'uploadPicture'])
+const emits = defineEmits(['copyColor', 'copyFont', 'copyBorderColor', 'marginChange', 'paddingChange', 'uploadPicture', 'copyBorderChange'])
 const props = defineProps({
   data: {
     type: Object as PropType<ModelItem>,
@@ -242,9 +242,7 @@ const copyBorderColor = (direction: string) => {
 }
 
 const borderWidthChange = (newValue: number, oldValue: number, direction: string) => {
-  let { areaIndex } = mailRep.modelId
-  let { modelIndex } = mailRep.modelId
-  store.deepCloneBorderChange(areaIndex, modelIndex, direction, newValue)
+  emits('copyBorderChange', newValue, direction)
 }
 </script>
 

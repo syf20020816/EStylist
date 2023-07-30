@@ -62,6 +62,7 @@ pub fn download_template(name: &str, data: &str, dom: &str) {
     let _ = write(template_data_path, html_dom).expect("Couldn't Download Template");
 }
 
+
 /// 上传模板
 #[tauri::command]
 pub fn load_templates() -> Vec<String> {

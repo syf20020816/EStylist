@@ -34,7 +34,7 @@ $component: 'MailEdit';
     .el-tabs__content{
       width: 100%;
       height: calc(100% - 60px);
-      overflow-y: scroll;
+      overflow: scroll;
       scrollbar-width: thin;
     }
   }
@@ -82,6 +82,17 @@ $component: 'MailEdit';
 
       .el-icon {
         cursor: pointer;
+        transition: all 0.4s ease-in-out;
+        &:hover {
+          filter: drop-shadow(0 0 4px $force-color) brightness(1.5);
+          transform: scale(0.9);
+        }
+      }
+      .el-icon2 {
+        cursor: pointer;
+        height: 18px;
+      
+        
         transition: all 0.4s ease-in-out;
         &:hover {
           filter: drop-shadow(0 0 4px $force-color) brightness(1.5);
