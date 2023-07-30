@@ -9,6 +9,7 @@ import {
   defalutModelItem,
   defalutModel,
   BorderType,
+  defaultComponent,
 } from "./baseModel";
 import { getStr, pagei18n } from "./i18n";
 import {
@@ -38,4 +39,5 @@ export {
   buildRef,
   BorderTypes,
   BorderType,
+  defaultComponent,
 };

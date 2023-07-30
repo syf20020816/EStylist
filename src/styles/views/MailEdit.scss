@@ -33,7 +33,7 @@ $component: 'MailEdit';
     }
     .el-tabs__content{
       width: 100%;
-      height: 100%;
+      height: calc(100% - 60px);
       overflow-y: scroll;
       scrollbar-width: thin;
     }

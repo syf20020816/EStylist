@@ -11,10 +11,12 @@
         </el-tab-pane>
         <el-tab-pane label="设计组件" name="model">
           <div :style="scaleViewStyle" style="cursor: pointer;">
-            邮件组件
+            <ComponentVue ref="targetComponent"></ComponentVue>
           </div>
         </el-tab-pane>
-
+        <el-tab-pane label="Tips" name="tips">
+          <Tips></Tips>
+        </el-tab-pane>
       </el-tabs>
 
     </div>
@@ -111,11 +113,14 @@ import MailEditItem from '../components/MailEditItem.vue'
 import AreaOrModel from '../components/AreaOrModel.vue'
 import EditTools from '../components/EditTools.vue'
 import BasePlate from '../components/core/BasePlate.vue'
+import ComponentVue from '../components/core/Component.vue'
+import Tips from '../components/Tips.vue'
 
 let activeEdit = ref('mail')
 const router = useRouter()
 const component = 'MailEdit'
 let targetTemplate = ref()
+let targetComponent = ref()
 let downloadFileName = ref('')
 let uploadTemplateVisiable = ref(false)
 let uploadTemplateTarget = ref('')
@@ -192,6 +197,8 @@ const uploadTemplate = () => {
       console.log(res)
       store.currentMailModel = JSON.parse(res)
       store.templateMailModel = store.currentMailModel
+      targetTemplate.value.reInitAreaTipVisibles()
+      targetTemplate.value.reInitModelTipVisibles()
       ElMessage({
         message: 'Upload Template Successfully! Please Wait a moment!',
         type: 'success'

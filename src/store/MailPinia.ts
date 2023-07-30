@@ -14,6 +14,8 @@ export const mailStore = defineStore("mail", {
   // other options...
   state: () => {
     return {
+      //选择组件设计的组件
+      componentIndex: 0,
       //选择的组件
       modelId: {
         areaIndex: 0,
@@ -37,6 +39,16 @@ export const mailStore = defineStore("mail", {
           name: "组件",
           info: "组件是模板的最小构成单位,在EStylist中组件由系统组件、自定义组件、第三方组件",
         },
+        componentArea: {
+          active: false,
+          name: "区域",
+          info: "区域是邮件底板的内部容器,区域依旧是一个容器,区域中可以存在很多组件,这些组件的外部属性是相同的",
+        },
+        component: {
+          active: false,
+          name: "组件",
+          info: "组件是模板的最小构成单位,在EStylist中组件由系统组件、自定义组件、第三方组件",
+        },
       },
     };
   },
@@ -48,16 +60,36 @@ export const mailStore = defineStore("mail", {
           this.targetChoose.basePlate.active = true;
           this.targetChoose.area.active = false;
           this.targetChoose.model.active = false;
+          this.targetChoose.componentArea.active = false;
+          this.targetChoose.component.active = false;
           break;
         case 1:
           this.targetChoose.basePlate.active = false;
           this.targetChoose.area.active = true;
           this.targetChoose.model.active = false;
+          this.targetChoose.componentArea.active = false;
+          this.targetChoose.component.active = false;
           break;
         case 2:
           this.targetChoose.basePlate.active = false;
           this.targetChoose.area.active = false;
           this.targetChoose.model.active = true;
+          this.targetChoose.componentArea.active = false;
+          this.targetChoose.component.active = false;
+          break;
+        case 3:
+          this.targetChoose.basePlate.active = false;
+          this.targetChoose.area.active = false;
+          this.targetChoose.model.active = false;
+          this.targetChoose.componentArea.active = true;
+          this.targetChoose.component.active = false;
+          break;
+        case 4:
+          this.targetChoose.basePlate.active = false;
+          this.targetChoose.area.active = false;
+          this.targetChoose.model.active = false;
+          this.targetChoose.componentArea.active = false;
+          this.targetChoose.component.active = true;
           break;
         default:
           break;

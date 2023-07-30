@@ -175,3 +175,12 @@ export const defalutModel: Model = {
     },
   ] as Array<AreaModel>,
 };
+
+export const defaultComponent: AreaModel = {
+  id: 0,
+  bgColor: "#fff",
+  direction: "y",
+  textAlign: "center",
+  justifyContent: "center",
+  modelItem: [],
+};

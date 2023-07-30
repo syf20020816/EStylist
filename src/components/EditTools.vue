@@ -96,6 +96,9 @@
         <EditArea v-else-if="mailRep.targetChoose.area.active" :data="store.currentMailModel.areas[mailRep.areaId]" @copy-color="copyColor(mailRep.areaId)"></EditArea>
         <EditModel v-else-if="mailRep.targetChoose.model.active" :data="store.currentMailModel.areas[mailRep.modelId.areaIndex].modelItem[mailRep.modelId.modelIndex]" @copy-color="copyColor(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-font="copyFont(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-border-color="copyBorderColor" @margin-change="marginChange" @padding-change="paddingChange" @upload-picture="uploadPicture">
         </EditModel>
+        <EditArea v-else-if="mailRep.targetChoose.componentArea.active" :data="store.currentComponent" @copy-color="copyColorComponentArea"></EditArea>
+        <EditModel v-else-if="mailRep.targetChoose.component.active" :data="store.currentComponent.modelItem[mailRep.componentIndex]" @copy-color="copyColorComponent" @copy-font="copyFont(mailRep.modelId.areaIndex,mailRep.modelId.modelIndex)" @copy-border-color="copyBorderColor" @margin-change="marginChange" @padding-change="paddingChange" @upload-picture="uploadPicture">
+        </EditModel>
       </div>
     </div>
   </div>
@@ -170,12 +173,27 @@ const copyBorderColor = (direction: string) => {
   let { modelIndex } = mailRep.modelId
   store.deepCloneBorderColor(areaIndex, modelIndex, direction)
 }
+//复制颜色到组件的区域中
+const copyColorComponentArea = () => {
+  store.currentComponent.bgColor = store.globalColor
+}
 
+const copyColorComponent = () => {
+  let { componentIndex: index } = mailRep
+  store.currentComponent.modelItem[index].bgColor = store.globalColor
+  console.log(store.currentComponent)
+  console.log(store.currentMailModel.areas)
+}
+
+//修改内边距
+//使用deep clone
 const paddingChange = (value: number, direction: number) => {
   let { areaIndex } = mailRep.modelId
   let { modelIndex } = mailRep.modelId
   store.paddingChange(areaIndex, modelIndex, direction, value)
 }
+//修改外边距
+//使用deep clone
 const marginChange = (value: number, direction: number) => {
   let { areaIndex } = mailRep.modelId
   let { modelIndex } = mailRep.modelId

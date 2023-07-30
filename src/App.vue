@@ -8,15 +8,11 @@
             <Edit />
           </el-icon>
         </el-tooltip>
-        <el-tooltip class="box-item" effect="dark" content="组件超市" placement="right">
-          <el-icon size="20" @click="toPage('componentLib')">
-            <Shop />
-          </el-icon>
+        <el-tooltip class="box-item" effect="dark" content="组件商店" placement="right">
+          <img src="./assets/shop.svg" alt="" class="el-icon2" @click="toPage('componentLib')">
         </el-tooltip>
-        <el-tooltip class="box-item" effect="dark" content="模板超市" placement="right">
-          <el-icon size="20" @click="toPage('templateLib')">
-            <Box />
-          </el-icon>
+        <el-tooltip class="box-item" effect="dark" content="模板商店" placement="right">
+          <img src="./assets/shop2.svg" alt="" class="el-icon2" @click="toPage('templateLib')">
         </el-tooltip>
         <el-tooltip class="box-item" effect="dark" content="邮件发送" placement="right">
           <el-icon size="20" @click="toPage('send')">
@@ -110,6 +106,16 @@ $component: 'TaApp';
     flex-wrap: wrap;
     .el-icon {
       margin: 16px;
+      cursor: pointer;
+      transition: all 0.4s ease-in-out;
+      &:hover {
+        filter: drop-shadow(0 0 4px $force-color) brightness(1.5);
+        transform: scale(0.9);
+      }
+    }
+    .el-icon2 {
+      margin: 16px;
+      height: 20px;
       cursor: pointer;
       transition: all 0.4s ease-in-out;
       &:hover {

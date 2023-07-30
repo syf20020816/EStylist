@@ -7,6 +7,7 @@ import {
   AreaModel,
   defalutModelItem,
   BorderType,
+  defaultComponent,
 } from "../core";
 import { generateUUID } from "../util";
 import cloneDeep from "lodash/cloneDeep";
@@ -17,6 +18,7 @@ export const indexStore = defineStore("index", {
   // other options...
   state: () => {
     return {
+      currentComponent: defaultComponent as AreaModel,
       fontStyles: {
         fontSize: 16,
         fontFamily: "Helvetica",
@@ -37,9 +39,19 @@ export const indexStore = defineStore("index", {
     };
   },
   actions: {
-    //添加组件到区域中
+    //添加组件到组件设计的区域中
+    pushComponentToArea() {
+      let len = generateUUID();
+      const newItem = {
+        ...defalutModelItem,
+        id: len,
+      };
+      const modelItem = cloneDeep(this.currentComponent.modelItem);
+      modelItem.push(newItem);
+      this.currentComponent.modelItem = modelItem;
+    },
+    //添加组件到区域中currentMailModel
     pushModelToArea(index: number) {
-      // const len = this.currentMailModel.areas[index].modelItem.length;
       let len = generateUUID();
       const newItem = {
         ...defalutModelItem,
@@ -47,8 +59,6 @@ export const indexStore = defineStore("index", {
       };
       const areas = cloneDeep(this.currentMailModel.areas[index].modelItem);
       areas.push(newItem);
-
-      // this.currentMailModel.areas[index].modelItem.push(item);
       this.currentMailModel.areas[index].modelItem = areas;
     },
     //添加区域到底板中
@@ -110,22 +120,27 @@ export const indexStore = defineStore("index", {
       this.currentMailModel.areas[areaIndex].modelItem[modelIndex].border =
         border;
     },
-    deepCloneBorderChange(areaIndex:number,modelIndex:number,direction:string,newValue:number){
+    deepCloneBorderChange(
+      areaIndex: number,
+      modelIndex: number,
+      direction: string,
+      newValue: number
+    ) {
       const border = cloneDeep(
         this.currentMailModel.areas[areaIndex].modelItem[modelIndex].border
       );
       switch (direction) {
         case "top":
-          border.top.width = newValue
+          border.top.width = newValue;
           break;
         case "right":
-          border.right.width = newValue
+          border.right.width = newValue;
           break;
         case "bottom":
-          border.bottom.width = newValue
+          border.bottom.width = newValue;
           break;
         case "left":
-          border.left.width = newValue
+          border.left.width = newValue;
           break;
         default:
           break;
@@ -133,6 +148,6 @@ export const indexStore = defineStore("index", {
 
       this.currentMailModel.areas[areaIndex].modelItem[modelIndex].border =
         border;
-    }
+    },
   },
 });
