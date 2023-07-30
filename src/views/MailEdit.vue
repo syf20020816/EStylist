@@ -53,14 +53,15 @@
           </el-icon>
         </el-tooltip>
         <el-tooltip effect="dark" content="上传邮件模板" placement="top">
-          <el-icon size="18" @click="uploadTemplateCheck">
-            <Upload />
-          </el-icon>
+          <img src="../assets/upload_template.svg" alt="" class="el-icon2" @click="uploadTemplateCheck">
         </el-tooltip>
         <el-tooltip effect="dark" content="下载邮件模板" placement="top">
           <img src="../assets/download_mail.svg" alt="" class="el-icon2" @click="downloadTemplateVisable = true">
         </el-tooltip>
-        <el-tooltip effect="dark" content="下载组件" placement="top">
+        <el-tooltip effect="dark" content="上传组件模板" placement="top">
+          <img src="../assets/upload_component.svg" alt="" class="el-icon2" @click="uploadComponentCheck">
+        </el-tooltip>
+        <el-tooltip effect="dark" content="下载组件模板" placement="top">
           <img src="../assets/download_component.svg" alt="" class="el-icon2" @click="downloadComponentVisable = true">
         </el-tooltip>
         <el-tooltip effect="dark" content="删除缓存" placement="top">
@@ -107,7 +108,19 @@
       </span>
     </template>
   </el-dialog>
-
+  <el-dialog v-model="uploadComponentVisiable" :title="getStr(store.settings.language,pagei18n.common.uploadTemplate.title)" width="40%">
+    <el-select v-model="uploadComponentTarget" :placeholder="getStr(store.settings.language,pagei18n.common.uploadTemplate.placeholder)" style="width: 90%;">
+      <el-option v-for="titem in store.components" :key="titem" :label="titem" :value="titem" />
+    </el-select>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="uploadComponentVisiable = false">{{ getStr(store.settings.language,pagei18n.common.cancel) }}</el-button>
+        <el-button type="primary" @click="uploadComponent">
+          {{ getStr(store.settings.language,pagei18n.common.confirm) }}
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script lang="ts">
@@ -143,7 +156,9 @@ let targetTemplate = ref()
 let targetComponent = ref()
 let downloadFileName = ref('')
 let uploadTemplateVisiable = ref(false)
+let uploadComponentVisiable = ref(false)
 let uploadTemplateTarget = ref('')
+let uploadComponentTarget = ref('')
 let downloadTemplateVisable = ref(false)
 let downloadComponentVisable = ref(false)
 const store = indexStore()
@@ -193,9 +208,28 @@ const uploadTemplateCheck = () => {
   uploadTemplateVisiable.value = true
 }
 
+// 上传组件模板文件检查
+const uploadComponentCheck = () => {
+  invoke('load_components').then((res: any) => {
+    store.components = res
+    if (res.length == 0) {
+      ElMessage({
+        message: 'You Have No Templates!',
+        type: 'info'
+      })
+    } else {
+      ElMessage({
+        message: 'Load Templates Successfully!',
+        type: 'info'
+      })
+    }
+  })
+  uploadComponentVisiable.value = true
+}
+
 // 上传文件
 const uploadTemplate = () => {
-  invoke('upload_file', { name: uploadTemplateTarget.value })
+  invoke('upload_file', { name: uploadTemplateTarget.value, isTemplate: true })
     .then((res: any) => {
       console.log(res)
       store.currentMailModel = JSON.parse(res)
@@ -216,6 +250,29 @@ const uploadTemplate = () => {
   setTimeout(() => {
     uploadTemplateVisiable.value = false
   }, 1500)
+}
+
+const uploadComponent = () => {
+  invoke('upload_file', { name: uploadComponentTarget.value, isTemplate: false })
+    .then((res: any) => {
+      console.log(res)
+      store.currentComponent = JSON.parse(res)
+      targetComponent.value.reinitModelTipVisibles()
+      ElMessage({
+        message: 'Upload Template Successfully! Please Wait a moment!',
+        type: 'success'
+      })
+    })
+    .catch(e => {
+      console.log(e)
+      ElMessage({
+        message: 'Upload Template Failure!',
+        type: 'error'
+      })
+    })
+  setTimeout(() => {
+    uploadComponentVisiable.value = false
+  }, 500)
 }
 
 // 下载模板文件
@@ -239,7 +296,7 @@ const downloadTemplate = () => {
 
 const downloadComponent = () => {
   let tmp = JSON.stringify(store.currentComponent)
-  invoke('download_template', { name: downloadFileName.value, data: tmp, dom: targetComponent.value.$el.outerHTML })
+  invoke('download_component', { name: downloadFileName.value, data: tmp, dom: targetComponent.value.$el.outerHTML })
     .then(res => {
       ElMessage({
         message: 'Download Component Successfully! Please Check Your Component Store Dir!',

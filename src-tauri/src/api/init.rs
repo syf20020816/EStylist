@@ -8,7 +8,7 @@
 use std::fs::{create_dir, File, read_to_string, write};
 use std::path::{Path};
 use serde::{Serialize, Deserialize};
-use super::{Settings, CONF_DIR, CONF_FILE, TEMPLATE_DIR, DOC_DIR, DOC_FILE, DOC_DOWNLOAD_URL, README, README_CONTENT};
+use super::{Settings, CONF_DIR, CONF_FILE, TEMPLATE_DIR, DOC_DIR, DOC_FILE, DOC_DOWNLOAD_URL, README, README_CONTENT,COMPONENT_DIR};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Init {
@@ -16,6 +16,7 @@ pub struct Init {
     conf_path: String,
     conf_name: String,
     conf_type: String,
+    components_path:String,
     templates_path: String,
     templates_type: String,
     templates_data_type: String,
@@ -33,6 +34,7 @@ impl Default for Init {
             conf_path: CONF_DIR.to_string(),
             conf_name: CONF_FILE.to_string(),
             conf_type: "json".to_string(),
+            components_path: COMPONENT_DIR.to_string(),
             templates_path: TEMPLATE_DIR.to_string(),
             templates_type: "html".to_string(),
             templates_data_type: "json".to_string(),
@@ -55,6 +57,7 @@ impl Init {
     fn get_conf_name(&self) -> &str { &self.conf_name }
     fn get_conf_type(&self) -> &str { &self.conf_type }
     fn get_templates_path(&self) -> &str { &self.templates_path }
+    fn get_components_path(&self) -> &str { &self.components_path }
     fn get_templates_type(&self) -> &str { &self.templates_type }
     fn get_templates_data_type(&self) -> &str { &self.templates_data_type }
     fn get_doc_path(&self) -> &str { &self.doc_path }
@@ -94,6 +97,10 @@ impl Init {
         let template_dir_str = self.build_path(self.get_default_path(), self.get_templates_path(), "", "");
         let template_dir_path = Path::new(&template_dir_str);
         self.create_item(template_dir_path, false);
+        //init components
+        let component_dir_str = self.build_path(self.get_default_path(), self.get_components_path(), "", "");
+        let component_dir_path = Path::new(&component_dir_str);
+        self.create_item(component_dir_path, false);
         //init doc
         let doc_dir_str = self.build_path(self.get_default_path(), self.get_doc_path(), "", "");
         let doc_dir_path = Path::new(&doc_dir_str);

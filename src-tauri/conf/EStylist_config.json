@@ -1,15 +1,15 @@
 {
-  "version": "0.0.2",
+  "version": "0.1.0",
   "store": "./conf/EStylist_config.json",
   "template": "./templates",
+  "component": "./components",
   "dir": "E:\\Rust\\try\\eStylist\\src-tauri",
   "auto": false,
-  "proportion": "3:2",
+  "proportion": "13:7",
   "language": "Chinese",
-  "email": "2654029407@qq.com",
-  "password": "gmaonrqdkygkecgg",
-  "smtp": "smtp.qq.com",
-  "contacts": [
-    "syf20020816@outlook.com"
-  ]
+  "email": "",
+  "password": "",
+  "smtp": "",
+  "contacts": [],
+  "download": "https://github.com/syf20020816/EStylist-TemplateLib"
 }

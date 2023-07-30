@@ -33,6 +33,7 @@ export const indexStore = defineStore("index", {
       currentMailModel: defalutModel as Model,
       settings: {} as Settings,
       templates: [] as Array<string>,
+      components: [] as Array<string>,
       htmlTemplates: [] as Array<string>,
       templateMailModel: {} as Model,
       templateMailHtml: "",

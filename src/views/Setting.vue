@@ -16,7 +16,18 @@
       </div>
       <div :class="build('content','item')">
         <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.templatePath) }}</div>
-        <el-input v-model="store.settings.template" clearable></el-input>
+        <el-input v-model="store.settings.component" disabled></el-input>
+      </div>
+      <div :class="build('content','item')">
+        <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.templatePath) }}</div>
+
+        <el-select v-model="store.settings.download" class="m-2" placeholder="Select" style="width: 100%;">
+          <el-option v-for="item in Downloads" :key="item.value" :label="item.label" :value="item.value" />
+        </el-select>
+      </div>
+      <div :class="build('content','item')">
+        <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.templatePath) }}</div>
+        <el-input v-model="store.settings.template" disabled></el-input>
       </div>
       <div :class="build('content','item')">
         <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.email) }}</div>
@@ -82,6 +93,17 @@ const Language = [
   {
     label: 'English',
     value: 'English'
+  }
+]
+
+const Downloads = [
+  {
+    label: 'GitHub:https://github.com/syf20020816/EStylist-TemplateLib',
+    value: 'https://github.com/syf20020816/EStylist-TemplateLib'
+  },
+  {
+    label: 'Gitee:',
+    value: 'https://'
   }
 ]
 

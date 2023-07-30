@@ -62,6 +62,21 @@ pub fn download_template(name: &str, data: &str, dom: &str) {
     let _ = write(template_data_path, html_dom).expect("Couldn't Download Template");
 }
 
+/// 下载组件到本地
+#[tauri::command]
+pub fn download_component(name: &str, data: &str, dom: &str) {
+    // read configuration file
+    let conf_path = Path::new("./conf/EStylist_config.json");
+    let conf: Settings = read_to_string(conf_path).unwrap().into();
+    let component_path = format!("{}/{}.json", conf.get_component(), name);
+    let component_data_path = format!("{}/{}.html", conf.get_component(), name);
+    let component_path = Path::new(&component_path);
+    let component_data_path = Path::new(&component_data_path);
+    let _ = write(component_path, data).expect("Couldn't Download");
+    let mut html_dom = HTML.replace("$name$", name);
+    html_dom = html_dom.replace("$content$", dom);
+    let _ = write(component_data_path, html_dom).expect("Couldn't Download Template");
+}
 
 /// 上传模板
 #[tauri::command]
@@ -91,6 +106,36 @@ pub fn load_templates() -> Vec<String> {
     }
     return json_files;
 }
+
+/// 上传组件模板
+#[tauri::command]
+pub fn load_components() -> Vec<String> {
+    let conf_path = Path::new("./conf/EStylist_config.json");
+    let conf: Settings = read_to_string(conf_path).unwrap().into();
+    let component_path = Path::new(conf.get_component());
+    let files = read_dir(component_path).unwrap();
+    let mut json_files = vec![];
+    for file_entry in files {
+        let file = file_entry.unwrap();
+        if file.file_type().unwrap().is_file() {
+            let file_path = file.path();
+            //获取扩展名
+            if let Some(extension) = file_path.extension() {
+                if extension.eq("json") {
+                    let file_name = file_path.file_name();
+                    match file_name {
+                        Some(name) => {
+                            json_files.push(name.to_str().unwrap().to_string())
+                        }
+                        None => ()
+                    }
+                }
+            }
+        }
+    }
+    return json_files;
+}
+
 
 /// 上传html预览模板
 #[tauri::command]
@@ -123,10 +168,15 @@ pub fn load_html_templates() -> Vec<String> {
 
 /// 上传文件
 #[tauri::command]
-pub fn upload_file(name: &str) -> String {
+pub fn upload_file(name: &str,is_template:bool) -> String {
     let conf_path = Path::new("./conf/EStylist_config.json");
     let conf: Settings = read_to_string(conf_path).unwrap().into();
-    let template_path = format!("{}/{}", conf.get_template(), name);
+    let mut  template_path = String::new();
+    if is_template{
+        template_path = format!("{}/{}", conf.get_template(), name)
+    }else{
+        template_path = format!("{}/{}", conf.get_component(), name)
+    }
     let template_path = Path::new(&template_path);
     // read and get json str
     let res = read_to_string(template_path).unwrap();

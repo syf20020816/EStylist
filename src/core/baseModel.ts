@@ -81,6 +81,7 @@ export interface Settings {
   version: string;
   store: string;
   template: string;
+  component: string;
   dir: string;
   auto: boolean;
   proportion: string;
@@ -89,6 +90,7 @@ export interface Settings {
   password: string;
   smtp: string;
   contacts: Array<string>;
+  download: string;
 }
 
 export const defaultAreaModels: Array<AreaModel> = [

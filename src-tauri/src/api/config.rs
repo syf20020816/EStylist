@@ -6,18 +6,21 @@
 //! @description:
 //! ```
 use serde::{Serialize, Deserialize};
-use super::{CONF_DIR, CONF_FILE, TEMPLATE_DIR, CONF_PATH};
+use super::{CONF_DIR, CONF_FILE, TEMPLATE_DIR, CONF_PATH, COMPONENT_DIR, DOWNLOAD_URL};
 use std::fs::{read_to_string, write};
 use std::path::Path;
 use std::env;
 
 /// 配置类
 /// 从0.0.2开始有version字段
+/// 0.1.0开始有component字段表示组件存储目录
+/// 0.1.0开始有download字段表示下载组件模板的地址
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct Settings {
     version: String,
     store: String,
     template: String,
+    component: String,
     // 运行目录
     dir: String,
     auto: bool,
@@ -27,6 +30,7 @@ pub struct Settings {
     password: String,
     smtp: String,
     contacts: Vec<String>,
+    download: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -38,9 +42,10 @@ pub enum Language {
 impl Default for Settings {
     fn default() -> Self {
         Settings {
-            version: "0.0.2".to_string(),
+            version: "0.1.0".to_string(),
             store: format!("./{}/{}.json", CONF_DIR, CONF_FILE),
             template: format!("./{}", TEMPLATE_DIR),
+            component: format!("./{}", COMPONENT_DIR),
             dir: "".to_string(),
             auto: false,
             proportion: "13:7".to_string(),
@@ -49,6 +54,7 @@ impl Default for Settings {
             password: "".to_string(),
             smtp: "".to_string(),
             contacts: vec![],
+            download: DOWNLOAD_URL.to_string(),
         }
     }
 }
@@ -69,6 +75,7 @@ impl Settings {
         &self.store
     }
     pub fn get_template(&self) -> &str { &self.template }
+    pub fn get_component(&self) -> &str { &self.component }
     pub fn push_contact(&mut self, contact: &str) {
         self.contacts.push(contact.to_string())
     }
