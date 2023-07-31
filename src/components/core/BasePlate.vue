@@ -6,7 +6,7 @@
           <table width="100%" cellspacing="0" cellpadding="0" border="0">
             <tbody>
               <tr>
-                <el-popover :visible="basePlateTipVisible" placement="top-start" title="添加" :width="100">
+                <el-popover :visible="basePlateTipVisible" placement="top-start" title="添加" :width="200">
                   <template #reference>
                     <td :style="baseOutterPadding" :bgcolor="baseOtterColor" @click="basePlateTipVisible = !basePlateTipVisible">
                       <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -94,6 +94,15 @@
                         </el-icon>
                       </el-tooltip>
                     </div>
+                    <div class="info_line">
+                      <el-button type="primary" @click="addDefineComponent">添加自定义组件</el-button>
+                      <el-tooltip placement="bottom">
+                        <template #content>自定义组件将被添加到底板中</template>
+                        <el-icon size="16">
+                          <InfoFilled />
+                        </el-icon>
+                      </el-tooltip>
+                    </div>
                   </template>
                 </el-popover>
               </tr>
@@ -103,6 +112,7 @@
       </tr>
     </tbody>
   </table>
+
 </template>
 
 <script lang="ts">
@@ -126,7 +136,7 @@ import { generateUUID } from '../../util'
 const router = useRouter()
 const mailRep = mailStore()
 const store = indexStore()
-const emits = defineEmits(['choose'])
+const emits = defineEmits(['choose', 'addComponent'])
 let basePlateTipVisible = ref(false)
 //-------------初始化提示信息---------------------------------------------
 let areaTipVisibles = reactive<Array<boolean>>([])
@@ -267,6 +277,10 @@ const delModel = (areaIndex: number, mIndex: number) => {
   store.currentMailModel.areas[areaIndex].modelItem.splice(mIndex, 1)
 }
 
+const addDefineComponent = () => {
+  emits('addComponent')
+}
+
 defineExpose({
   reInitAreaTipVisibles,
   reInitModelTipVisibles
@@ -291,7 +305,7 @@ defineExpose({
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
   margin: 6px 0;
   .el-icon {

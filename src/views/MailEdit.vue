@@ -6,7 +6,7 @@
           <div :style="scaleViewStyle" style="cursor: pointer;">
             <!-- todo: -->
             <!-- <BaseOutter id="targetTemplate" ref="targetTemplate" :data="store.currentMailModel"></BaseOutter> -->
-            <BasePlate ref="targetTemplate"></BasePlate>
+            <BasePlate ref="targetTemplate" @add-component="addDefineComponent"></BasePlate>
           </div>
         </el-tab-pane>
         <el-tab-pane label="设计组件" name="model">
@@ -121,6 +121,20 @@
       </span>
     </template>
   </el-dialog>
+  <el-dialog v-model="adcVisible" title="Choose Component" width="40%">
+    <el-select v-model="currentComponent" placeholder="请选择" style="width: 90%;">
+      <el-option v-for="item in store.components" :label="item" :value="item" :key="item">
+      </el-option>
+    </el-select>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="adcVisible = false">{{ getStr(store.settings.language,pagei18n.common.cancel) }}</el-button>
+        <el-button type="primary" @click="confirmUploadComponent">
+          {{ getStr(store.settings.language,pagei18n.common.confirm) }}
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script lang="ts">
@@ -152,6 +166,9 @@ import Tips from '../components/Tips.vue'
 let activeEdit = ref('mail')
 const router = useRouter()
 const component = 'MailEdit'
+// add define component visibility
+let adcVisible = ref(false)
+let currentComponent = ref('')
 let targetTemplate = ref()
 let targetComponent = ref()
 let downloadFileName = ref('')
@@ -227,7 +244,7 @@ const uploadComponentCheck = () => {
   uploadComponentVisiable.value = true
 }
 
-// 上传文件
+// 上传文件到邮件模板
 const uploadTemplate = () => {
   invoke('upload_file', { name: uploadTemplateTarget.value, isTemplate: true })
     .then((res: any) => {
@@ -251,7 +268,7 @@ const uploadTemplate = () => {
     uploadTemplateVisiable.value = false
   }, 1500)
 }
-
+//上传组件到组件设计
 const uploadComponent = () => {
   invoke('upload_file', { name: uploadComponentTarget.value, isTemplate: false })
     .then((res: any) => {
@@ -413,6 +430,49 @@ let componentLevelTree = computed(() => {
 
   return treeList
 })
+//----------------------模板层级树生成完毕----------------------
+const addDefineComponent = () => {
+  invoke('load_components').then((res: any) => {
+    store.components = res
+    if (res.length == 0) {
+      ElMessage({
+        message: 'You Have No Templates!',
+        type: 'info'
+      })
+    } else {
+      ElMessage({
+        message: 'Load Templates Successfully!',
+        type: 'info'
+      })
+    }
+    adcVisible.value = true
+  })
+}
+//上传自定义组件到邮件模板中
+const confirmUploadComponent = () => {
+  invoke('upload_file', { name: currentComponent.value, isTemplate: false })
+    .then((res: any) => {
+      console.log(res)
+      let tmp = JSON.parse(res)
+      store.currentMailModel.areas.push(tmp)
+      targetTemplate.value.reInitAreaTipVisibles()
+      targetTemplate.value.reInitModelTipVisibles()
+      ElMessage({
+        message: 'Upload Template Successfully! Please Wait a moment!',
+        type: 'success'
+      })
+    })
+    .catch(e => {
+      console.log(e)
+      ElMessage({
+        message: 'Upload Template Failure!',
+        type: 'error'
+      })
+    })
+  setTimeout(() => {
+    adcVisible.value = false
+  }, 500)
+}
 </script>
 
 <style lang="scss" >
