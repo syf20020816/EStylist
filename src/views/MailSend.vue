@@ -131,7 +131,7 @@ const uploadTemplateCheck = () => {
 
 // 上传文件
 const uploadTemplate = () => {
-  invoke('upload_file', { name: uploadTemplateTarget.value })
+  invoke('upload_file', { name: uploadTemplateTarget.value, isTemplate: true })
     .then((res: any) => {
       sendMailHTML.value = res
 
@@ -148,7 +148,7 @@ const uploadTemplate = () => {
     })
   setTimeout(() => {
     uploadTemplateVisiable.value = false
-  }, 1500)
+  }, 750)
 }
 
 const addContact = () => {

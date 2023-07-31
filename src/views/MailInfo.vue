@@ -105,6 +105,8 @@ const updateConfirm = () => {
       updateVisiable.value = false
       await exit(1)
     })
+  } else {
+    updateVisiable.value = false
   }
 }
 </script>

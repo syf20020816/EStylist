@@ -15,7 +15,8 @@ pub use util::*;
 pub use api::{
     init, save_settings, download_template, load_templates, load_html_templates,
     upload_file, add_contact, del_contact, send_email, check_update, update_version,
-    download_component,load_components
+    download_component,load_components,get_data_from_github,get_preview_html,
+    download_json_from_github
 };
 
 
@@ -26,7 +27,8 @@ fn main() {
                 init,save_settings,download_template,load_templates,
                 load_html_templates,upload_file,add_contact,del_contact,
                 send_email,check_update,update_version,download_component,
-                load_components
+                load_components,get_data_from_github,get_preview_html,
+                download_json_from_github
             ]
         )
         .run(tauri::generate_context!())

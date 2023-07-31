@@ -168,13 +168,13 @@ pub fn load_html_templates() -> Vec<String> {
 
 /// 上传文件
 #[tauri::command]
-pub fn upload_file(name: &str,is_template:bool) -> String {
+pub fn upload_file(name: &str, is_template: bool) -> String {
     let conf_path = Path::new("./conf/EStylist_config.json");
     let conf: Settings = read_to_string(conf_path).unwrap().into();
-    let mut  template_path = String::new();
-    if is_template{
+    let mut template_path = String::new();
+    if is_template {
         template_path = format!("{}/{}", conf.get_template(), name)
-    }else{
+    } else {
         template_path = format!("{}/{}", conf.get_component(), name)
     }
     let template_path = Path::new(&template_path);
@@ -301,4 +301,71 @@ pub fn update_version() -> () {
     // 后续添加更多功能
 }
 
+///get templates vec from github
+#[tauri::command]
+pub fn get_data_from_github(is_template:bool) -> Value {
+    let base_url = "https://api.github.com";
+    let owner = "syf20020816";
+    let repo = "EStylist-TemplateLib";
+    let mut path = "";
+    if is_template{
+        path = "templates";
+    }else{
+        path = "components"
+    }
+    // url
+    let url = format!("{}/repos/{}/{}/contents/{}", base_url, owner, repo, path);
+    // new client
+    let client = Client::new();
+    // send request and get templates vec from github
+    let response = client
+        .get(&url)
+        .header("User-Agent", "syf20020816")
+        .send()
+        .unwrap()
+        .text()
+        .unwrap();
 
+    let val: Value = serde_json::from_str(&response).unwrap();
+    val
+}
+
+//get preview html data from github
+#[tauri::command]
+pub fn get_preview_html(url: &str) -> String {
+    let res = String::new();
+    let client = Client::new();
+    let response = client.get(url).header("User-Agent", "syf20020816")
+        .send()
+        .unwrap()
+        .text()
+        .unwrap();
+    response
+}
+
+#[tauri::command]
+pub fn download_json_from_github(name: &str, url: &str, is_template: bool) -> () {
+    // read configuration file
+    let conf_path = Path::new("./conf/EStylist_config.json");
+    let conf: Settings = read_to_string(conf_path).unwrap().into();
+
+    let client = Client::new();
+    let response = client
+        .get(url)
+        .header("User-Agent", "syf20020816")
+        .send()
+        .unwrap()
+        .text()
+        .unwrap();
+
+    // write to template / component
+    let mut path = String::new();
+    if is_template {
+        path = format!("{}/{}", conf.get_template(), name);
+    } else {
+        path = format!("{}/{}", conf.get_component(), name);
+    }
+
+    let store_path = Path::new(&path);
+    let _ = write(store_path, &response).expect("Couldn't Download");
+}
