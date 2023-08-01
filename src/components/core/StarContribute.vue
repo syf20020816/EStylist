@@ -1,15 +1,14 @@
 <template>
   <div :id="buildView(component)">
     <div class="title">
-
-      Star|Contribute
+      {{ getStr(store.settings.language,pagei18n.edit.starContribute) }}
     </div>
     <div class="tips">
 
-      <a href="https://github.com/syf20020816/EStylist" target="_blank">Star Project</a>
-      <a href="https://github.com/syf20020816/EStylist-TemplateLib" target="_blank">Star Lib</a>
-      <div class="a" @click="toPage">Learn Contribute</div>
-      <a href="https://github.com/syf20020816/EStylist-TemplateLib" target="_blank">Contribute</a>
+      <a href="https://github.com/syf20020816/EStylist" target="_blank">{{ getStr(store.settings.language,pagei18n.buttons.star.project) }}</a>
+      <a href="https://github.com/syf20020816/EStylist-TemplateLib" target="_blank">{{ getStr(store.settings.language,pagei18n.buttons.star.lib) }}</a>
+      <div class="a" @click="toPage">{{ getStr(store.settings.language,pagei18n.buttons.star.learn) }}</div>
+      <a href="https://github.com/syf20020816/EStylist-TemplateLib" target="_blank">{{ getStr(store.settings.language,pagei18n.buttons.star.contribute) }}</a>
     </div>
   </div>
 </template>
@@ -25,6 +24,7 @@ import { ref, reactive, computed } from 'vue'
 import { buildWrap, build, buildView } from '../../styles/name'
 import { indexStore } from '../../store/IndexPinia'
 import { useRouter } from 'vue-router'
+import { getStr, pagei18n } from '../../core'
 
 const router = useRouter()
 const component = 'StarContribute'
@@ -64,7 +64,7 @@ $component: 'StarContribute';
     flex-wrap: wrap;
     a {
       margin: 0;
-      width: 80%;
+      width: 90%;
       display: inline-block;
       height: 2.5em;
       background-color: #263d48;
@@ -77,7 +77,7 @@ $component: 'StarContribute';
     .a {
       cursor: pointer;
       margin: 0;
-      width: 80%;
+      width: 90%;
       display: inline-block;
       height: 2.5em;
       background-color: #263d48;

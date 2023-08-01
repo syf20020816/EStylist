@@ -1,15 +1,17 @@
+<img src="https://img.shields.io/badge/EStylist-0.1.0-orange?style=flat-square&logo=tauri&logoColor=%23fff&labelColor=%2323B898&color=%2323B898"> <img src="https://img.shields.io/badge/License-MIT-orange?style=flat-square&logoColor=%23fff&labelColor=%2323B898&color=%2323B898">
+
 # EStylist
 
 
 - author：syf20020816@outlook.com
 - docName：EStylist README
-- createDate：202306019
-- updateDate：20230711
-- version：0.0.2
+- createDate：20230619
+- updateDate：20230801
+- version：0.1.0
 - des-tag：release
 - email：syf20020816@outlook.com
 
-<img src="https://img.shields.io/badge/EStylist-0.0.2-orange?style=flat-square&logo=tauri&logoColor=%23fff&labelColor=%2323B898&color=%2323B898">
+<img src="https://img.shields.io/badge/EStylist-0.1.0-orange?style=flat-square&logo=tauri&logoColor=%23fff&labelColor=%2323B898&color=%2323B898">
 
 ## Why EStylist
 
@@ -25,6 +27,9 @@ EStylist 是一款第三方应用软件，旨在帮助用户编写邮件模板�
 
 EStylist is a third-party application designed to assist users in writing email templates. EStylist can provide professional templates and editing functions for business emails, Cover letter, thank-you letters and other types of emails, so that users can easily write expressive and professional emails. If you are often troubled by ugly emails and want to pursue the layout and style of emails. If you want exquisite emails like Stream or GitHub, EStylist will help you build exquisite emails!
 
+## License
+
+<img src="https://img.shields.io/badge/License-MIT-orange?style=flat-square&logoColor=%23fff&labelColor=%2323B898&color=%2323B898">
 
 ## Download EStylist
 
@@ -32,13 +37,9 @@ EStylist is a third-party application designed to assist users in writing email 
 
 Downloading EStylist is very simple. You can go to Gitee or GitHub to download the exe file directly, and then place the exe in your favorite directory to start directly. The program will help you build the necessary files and directories.
 
-## License
-
-<img src="https://img.shields.io/badge/build-MIT-%2321B191?style=flat&label=License&color=%2321B191">
-
 ## Directory Structure
 
-<img src=".\README\imgs\image-20230622214506174.png">
+<img src="./README/imgs/dir.png">
 
 ## How To Use EStylist
 

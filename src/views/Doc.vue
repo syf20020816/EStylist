@@ -1,20 +1,23 @@
 <template>
   <div :id="buildView(component)">
     <el-tabs tab-position="left" style="height: 100%" class="demo-tabs">
-      <el-tab-pane label="Introduction">
+      <el-tab-pane :label="getStr(store.settings.language,pagei18n.doc.intro)">
         <Introduction></Introduction>
       </el-tab-pane>
-      <el-tab-pane label="Preparation">
+      <el-tab-pane :label="getStr(store.settings.language,pagei18n.doc.prepare)">
         <Preparation></Preparation>
       </el-tab-pane>
-      <el-tab-pane label="How To Use">
+      <el-tab-pane :label="getStr(store.settings.language,pagei18n.doc.use)">
         <HowToUse></HowToUse>
       </el-tab-pane>
-      <el-tab-pane label="Example">
+      <el-tab-pane :label="getStr(store.settings.language,pagei18n.doc.example)">
         <Example></Example>
       </el-tab-pane>
-      <el-tab-pane label="Update">
+      <el-tab-pane :label="getStr(store.settings.language,pagei18n.doc.update)">
         <Update></Update>
+      </el-tab-pane>
+      <el-tab-pane :label="getStr(store.settings.language,pagei18n.doc.contribute)">
+        <div></div>
       </el-tab-pane>
     </el-tabs>
   </div>

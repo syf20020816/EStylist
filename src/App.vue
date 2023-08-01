@@ -3,35 +3,35 @@
     <div :class="buildWrap(component,'left')">
       <img @click="toPage('')" src="./assets/EStylist.png" alt="" style="height: 40px;width: 40px;border-radius: 50%;filter: drop-shadow(0 0 16px #8fa2f8);cursor: pointer;">
       <div :class="buildWrap(component,'nav-top')">
-        <el-tooltip class="box-item" effect="dark" content="模板编辑" placement="right">
+        <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.edit)" placement="right">
           <el-icon size="20" @click="toPage('edit')">
             <Edit />
           </el-icon>
         </el-tooltip>
-        <el-tooltip class="box-item" effect="dark" content="组件商店" placement="right">
+        <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.componentLib)" placement="right">
           <img src="./assets/shop.svg" alt="" class="el-icon2" @click="toPage('componentLib')">
         </el-tooltip>
-        <el-tooltip class="box-item" effect="dark" content="模板商店" placement="right">
+        <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.templateLib)" placement="right">
           <img src="./assets/shop2.svg" alt="" class="el-icon2" @click="toPage('templateLib')">
         </el-tooltip>
-        <el-tooltip class="box-item" effect="dark" content="邮件发送" placement="right">
+        <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.send)" placement="right">
           <el-icon size="20" @click="toPage('send')">
             <Message />
           </el-icon>
         </el-tooltip>
-        <el-tooltip class="box-item" effect="dark" content="文档教程" placement="right">
+        <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.doc)" placement="right">
           <el-icon size="20" @click="toPage('doc')">
             <Document />
           </el-icon>
         </el-tooltip>
       </div>
       <div :class="buildWrap(component,'nav-bottom')">
-        <el-tooltip class="box-item" effect="dark" content="更新信息" placement="right">
+        <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.info)" placement="right">
           <el-icon size="20" @click="toPage('info')">
             <InfoFilled />
           </el-icon>
         </el-tooltip>
-        <el-tooltip class="box-item" effect="dark" content="设置" placement="right">
+        <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.settings)" placement="right">
           <el-icon size="20" @click="toPage('setting')">
             <Tools />
           </el-icon>
@@ -52,6 +52,7 @@ import { onBeforeMount } from 'vue'
 import { invoke } from '@tauri-apps/api'
 import { ElMessage } from 'element-plus'
 import { indexStore } from './store/IndexPinia'
+import { getStr, pagei18n } from './core'
 
 const store = indexStore()
 const component = 'TaApp'

@@ -6,10 +6,10 @@
           <input ref="colorPickerRef" type="color" v-model="store.globalColor" name="" id="color-picker" style="display: none;">
         </div>
         <div class="details">
-          <span style="font-weight: 700;">调色器</span>
+          <span style="font-weight: 700;">{{ getStr(store.settings.language,pagei18n.edit.tool.color)}}</span>
           <el-tooltip placement="top">
             <template #content>
-              调色器可以控制全局颜色以及组件颜色
+              {{ getStr(store.settings.language,pagei18n.edit.tool.colorInfo)}}
             </template>
             <el-icon size="16">
               <QuestionFilled />
@@ -17,7 +17,7 @@
           </el-tooltip>
           <el-tooltip placement="top">
             <template #content>
-              切换工具:工具有调色器和字体调节器
+              {{ getStr(store.settings.language,pagei18n.edit.tool.switch)}}
             </template>
             <el-icon size="16" @click="switchTools">
               <Switch />
@@ -28,11 +28,10 @@
       </div>
       <div :class="buildWrap(component,'font')" v-else>
         <div class="details">
-          <span style="font-weight: 700;">字体调节器</span>
+          <span style="font-weight: 700;">{{ getStr(store.settings.language,pagei18n.edit.tool.font)}}</span>
           <el-tooltip placement="top">
             <template #content>
-              字体调节器用于控制字体样式<br>
-              样式:颜色、大小、字体、粗细等
+              {{ getStr(store.settings.language,pagei18n.edit.tool.fontInfo)}}
             </template>
             <el-icon size="16">
               <QuestionFilled />
@@ -40,7 +39,7 @@
           </el-tooltip>
           <el-tooltip placement="top">
             <template #content>
-              切换工具:工具有调色器和字体调节器
+              {{ getStr(store.settings.language,pagei18n.edit.tool.switch)}}
             </template>
             <el-icon size="16" @click="switchTools">
               <Switch />
@@ -72,20 +71,20 @@
     </div>
     <hr>
     <div :class="buildWrap(component,'tool2')">
-      <el-input v-model="store.activeTarget.name" placeholder="choose name" disabled>
-        <template #prepend>目标:</template>
+      <el-input :value="getStr(store.settings.language,store.activeTarget.name)" placeholder="choose name" disabled>
+        <template #prepend>{{ getStr(store.settings.language,pagei18n.edit.tool.target) }}:</template>
       </el-input>
       <div :class="build('tool2','info')">
-        ❗note: <span style="font-size: 14px;">{{ store.activeTarget.info }}</span>
+        ❗note: <span style="font-size: 14px;">{{ getStr(store.settings.language,store.activeTarget.info) }}</span>
       </div>
       <hr />
       <div :class="build('tool2','config')">
         <div class="configs_title">
-          <span style="font-weight: 700;">参数配置</span>
+          <span style="font-weight: 700;">{{ getStr(store.settings.language,pagei18n.edit.tool.config) }}</span>
           <el-tooltip placement="bottom">
             <template #content>
-              底板|区域|组件都是由下方参数定义的<br>
-              通过修改参数定义自己的设计
+              {{ getStr(store.settings.language,pagei18n.edit.tool.configInfo[0]) }}<br>
+              {{ getStr(store.settings.language,pagei18n.edit.tool.configInfo[1]) }}
             </template>
             <el-icon size="16">
               <QuestionFilled />

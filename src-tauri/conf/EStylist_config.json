@@ -10,6 +10,8 @@
   "email": "2654029407@qq.com",
   "password": "gmaonrqdkygkecgg",
   "smtp": "smtp.qq.com",
-  "contacts": [],
+  "contacts": [
+    "syf20020816@outlook.com"
+  ],
   "download": "https://github.com/syf20020816/EStylist-TemplateLib"
 }

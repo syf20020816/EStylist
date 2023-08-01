@@ -106,7 +106,7 @@ export const defaultAreaModels: Array<AreaModel> = [
 
 export const defalutModelItem: ModelItem = {
   id: generateUUID(),
-  name: "文字",
+  name: "Font",
   type: "div",
   height: "30px",
   width: "auto",
@@ -119,7 +119,7 @@ export const defalutModelItem: ModelItem = {
   fontWeight: false,
   padding: [0, 0, 0, 0],
   margin: [0, 0, 0, 0],
-  content: "示例文字|地址",
+  content: "Hello World!",
   borderRadius: 0,
   justifyContent: "center",
   src: "",

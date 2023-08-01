@@ -2,19 +2,19 @@
   <div :id="buildView(component)">
     <div :class="buildWrap(component,'left')" :style="`width:`+editLeftWidth+`%;`">
       <el-tabs v-model="activeEdit" class="demo-tabs" @tab-change="tabChange">
-        <el-tab-pane label="设计邮件" name="mail">
+        <el-tab-pane :label="getStr(store.settings.language,pagei18n.edit.designMail) " name="mail">
           <div :style="scaleViewStyle" style="cursor: pointer;">
             <!-- todo: -->
             <!-- <BaseOutter id="targetTemplate" ref="targetTemplate" :data="store.currentMailModel"></BaseOutter> -->
             <BasePlate ref="targetTemplate" @add-component="addDefineComponent"></BasePlate>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="设计组件" name="model">
+        <el-tab-pane :label="getStr(store.settings.language,pagei18n.edit.designComponent)" name="model">
           <div :style="scaleViewStyle" style="cursor: pointer;">
             <ComponentVue ref="targetComponent"></ComponentVue>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="Tips" name="tips">
+        <el-tab-pane :label="getStr(store.settings.language,pagei18n.edit.tips)" name="tips">
           <Tips></Tips>
         </el-tab-pane>
       </el-tabs>
@@ -26,10 +26,10 @@
     <div :class="buildWrap(component,'right')" :style="`width:calc(80% - `+editLeftWidth+`%);`">
       <div :class="buildWrap(component, 'templates')">
         <div class="title">
-          <span style="font-weight: 700;">模板层级</span>
+          <span style="font-weight: 700;">{{ getStr(store.settings.language,pagei18n.edit.tool.level) }}</span>
           <el-tooltip placement="bottom">
             <template #content>
-              模板层级表示底板、区域、组件形成的组合设计层级
+              {{ getStr(store.settings.language,pagei18n.edit.tool.levelInfo) }}
             </template>
             <el-icon size="16">
               <QuestionFilled />
@@ -45,29 +45,29 @@
         <StarContribute></StarContribute>
       </div>
       <div :class="buildWrap(component,'tools')">
-        <el-tooltip effect="dark" content="缩小" placement="top">
+        <el-tooltip effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.zoomOut)" placement="top">
           <el-icon size="18" @click="scaleView(-0.1)">
             <ZoomOut />
           </el-icon>
         </el-tooltip>
-        <el-tooltip effect="dark" content="放大" placement="top">
+        <el-tooltip effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.zoomIn)" placement="top">
           <el-icon size="18" @click="scaleView(0.1)">
             <ZoomIn />
           </el-icon>
         </el-tooltip>
-        <el-tooltip effect="dark" content="上传邮件模板" placement="top">
+        <el-tooltip effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.uploadTemplate)" placement="top">
           <img src="../assets/upload_template.svg" alt="" class="el-icon2" @click="uploadTemplateCheck">
         </el-tooltip>
-        <el-tooltip effect="dark" content="下载邮件模板" placement="top">
+        <el-tooltip effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.downloadTemplate)" placement="top">
           <img src="../assets/download_mail.svg" alt="" class="el-icon2" @click="downloadTemplateVisable = true">
         </el-tooltip>
-        <el-tooltip effect="dark" content="上传组件模板" placement="top">
+        <el-tooltip effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.uploadComponent)" placement="top">
           <img src="../assets/upload_component.svg" alt="" class="el-icon2" @click="uploadComponentCheck">
         </el-tooltip>
-        <el-tooltip effect="dark" content="下载组件模板" placement="top">
+        <el-tooltip effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.downloadComponent)" placement="top">
           <img src="../assets/download_component.svg" alt="" class="el-icon2" @click="downloadComponentVisable = true">
         </el-tooltip>
-        <el-tooltip effect="dark" content="删除缓存" placement="top">
+        <el-tooltip effect="dark" :content="getStr(store.settings.language,pagei18n.tips.icon.delCache)" placement="top">
           <el-icon size="18" @click="delCache">
             <Delete />
           </el-icon>
@@ -125,7 +125,7 @@
     </template>
   </el-dialog>
   <el-dialog v-model="adcVisible" title="Choose Component" width="40%">
-    <el-select v-model="currentComponent" placeholder="请选择" style="width: 90%;">
+    <el-select v-model="currentComponent" placeholder="Select" style="width: 90%;">
       <el-option v-for="item in store.components" :label="item" :value="item" :key="item">
       </el-option>
     </el-select>
@@ -157,7 +157,7 @@ import { useRouter } from 'vue-router'
 import { build, buildView, buildWrap } from '../styles/name'
 import { ZoomIn, ZoomOut, InfoFilled, Download, Upload, UploadFilled, Delete, QuestionFilled } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import type { BaseModel, AreaModel, Model } from '../core'
+import type { BaseModel, AreaModel, Model, I18n } from '../core'
 import { JustifyContent, TextAlign, ModelTypes, Direction, FontFamily, defalutModel, defaultAreaModel, defaultAreaModels, defalutModelItem } from '../core'
 import BaseOutter from '../components/BaseOutter.vue'
 import { pagei18n, getStr } from '../core'
@@ -196,7 +196,20 @@ let uploadComponentTarget = ref('')
 let downloadTemplateVisable = ref(false)
 let downloadComponentVisable = ref(false)
 const store = indexStore()
-
+let labels = [
+  {
+    zh: '邮件底板',
+    en: 'Base Plate'
+  } as I18n,
+  {
+    zh: '区域',
+    en: 'Area'
+  } as I18n,
+  {
+    zh: '组件',
+    en: 'Component'
+  } as I18n
+]
 //模板数据
 // let mailModel = reactive<any>(store.currentMailModel)
 
@@ -229,12 +242,12 @@ const uploadTemplateCheck = () => {
     store.templates = res
     if (res.length == 0) {
       ElMessage({
-        message: 'You Have No Templates!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.noTemplate),
         type: 'info'
       })
     } else {
       ElMessage({
-        message: 'Load Templates Successfully!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.loadTemplateSuccess),
         type: 'info'
       })
     }
@@ -248,12 +261,12 @@ const uploadComponentCheck = () => {
     store.components = res
     if (res.length == 0) {
       ElMessage({
-        message: 'You Have No Templates!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.noTemplate),
         type: 'info'
       })
     } else {
       ElMessage({
-        message: 'Load Templates Successfully!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.loadTemplateSuccess),
         type: 'info'
       })
     }
@@ -271,13 +284,13 @@ const uploadTemplate = () => {
       targetTemplate.value.reInitAreaTipVisibles()
       targetTemplate.value.reInitModelTipVisibles()
       ElMessage({
-        message: 'Upload Template Successfully! Please Wait a moment!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.uploadTemplateSuccess),
         type: 'success'
       })
     })
     .catch(e => {
       ElMessage({
-        message: 'Upload Template Failure!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.uploadTemplateFail),
         type: 'error'
       })
     })
@@ -293,14 +306,13 @@ const uploadComponent = () => {
       store.currentComponent = JSON.parse(res)
       targetComponent.value.reinitModelTipVisibles()
       ElMessage({
-        message: 'Upload Template Successfully! Please Wait a moment!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.uploadComponentSuccess),
         type: 'success'
       })
     })
     .catch(e => {
-      console.log(e)
       ElMessage({
-        message: 'Upload Template Failure!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.uploadComponentFail),
         type: 'error'
       })
     })
@@ -315,13 +327,13 @@ const downloadTemplate = () => {
   invoke('download_template', { name: downloadFileName.value, data: tmp, dom: targetTemplate.value.$el.outerHTML })
     .then(res => {
       ElMessage({
-        message: 'Download Template Successfully! Please Check Your Template Store Dir!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.downloadTemplateSuccess),
         type: 'success'
       })
     })
     .catch(() => {
       ElMessage({
-        message: 'Download Template Failed!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.downloadTemplateFail),
         type: 'error'
       })
     })
@@ -333,13 +345,13 @@ const downloadComponent = () => {
   invoke('download_component', { name: downloadFileName.value, data: tmp, dom: targetComponent.value.$el.outerHTML })
     .then(res => {
       ElMessage({
-        message: 'Download Component Successfully! Please Check Your Component Store Dir!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.downloadComponentSuccess),
         type: 'success'
       })
     })
     .catch(() => {
       ElMessage({
-        message: 'Download Component Failed!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.downloadComponentFail),
         type: 'error'
       })
     })
@@ -350,9 +362,9 @@ const downloadComponent = () => {
  * 删除缓存,将刷新页面
  */
 const delCache = () => {
-  ElMessageBox.confirm('Delete The Template And Cache?', 'Warning', {
-    confirmButtonText: 'OK',
-    cancelButtonText: 'Cancel',
+  ElMessageBox.confirm(getStr(store.settings.language, pagei18n.tips.infos.delCache), 'Warning', {
+    confirmButtonText: getStr(store.settings.language, pagei18n.common.confirm),
+    cancelButtonText: getStr(store.settings.language, pagei18n.common.cancel),
     type: 'warning'
   })
     .then(() => {
@@ -405,21 +417,23 @@ const handleNodeClick = (data: Tree) => {
 let mailLevelTree = computed(() => {
   //get the mail model data
   let { base, areas } = store.currentMailModel
+  let { language } = store.settings
+
   let areaLen = areas.length
   let treeList: Tree[] = []
 
   treeList.push({
-    label: '邮件底板',
+    label: getStr(language, labels[0]),
     children: [] as Tree[]
   })
 
   for (let i = 0; i < areaLen; i++) {
     let item = {
-      label: '区域' + (i + 1),
+      label: getStr(language, labels[1]) + (i + 1),
       children: [] as Tree[]
     }
     for (let j = 0; j < areas[i].modelItem.length; j++) {
-      let modelItem = { label: '组件' + (j + 1) + ':' + areas[i].modelItem[j].name }
+      let modelItem = { label: getStr(language, labels[2]) + (j + 1) + ':' + areas[i].modelItem[j].name }
       item.children.push(modelItem)
     }
     treeList[0].children?.push(item)
@@ -432,15 +446,15 @@ let componentLevelTree = computed(() => {
   let { modelItem } = store.currentComponent
   let areaLen = modelItem.length
   let treeList: Tree[] = []
-
+  let { language } = store.settings
   treeList.push({
-    label: '组件域',
+    label: getStr(language, labels[1]),
     children: [] as Tree[]
   })
 
   for (let i = 0; i < areaLen; i++) {
     let item = {
-      label: '组件' + (i + 1) + ':' + modelItem[i].name
+      label: getStr(language, labels[2]) + (i + 1) + ':' + modelItem[i].name
     }
     treeList[0].children?.push(item)
   }
@@ -453,12 +467,12 @@ const addDefineComponent = () => {
     store.components = res
     if (res.length == 0) {
       ElMessage({
-        message: 'You Have No Templates!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.noTemplate),
         type: 'info'
       })
     } else {
       ElMessage({
-        message: 'Load Templates Successfully!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.loadTemplateSuccess),
         type: 'info'
       })
     }
@@ -474,14 +488,13 @@ const confirmUploadComponent = () => {
       targetTemplate.value.reInitAreaTipVisibles()
       targetTemplate.value.reInitModelTipVisibles()
       ElMessage({
-        message: 'Upload Template Successfully! Please Wait a moment!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.uploadComponentSuccess),
         type: 'success'
       })
     })
     .catch(e => {
-      console.log(e)
       ElMessage({
-        message: 'Upload Template Failure!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.uploadComponentFail),
         type: 'error'
       })
     })

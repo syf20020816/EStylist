@@ -2,7 +2,6 @@
   <div :id="buildView(component)">
     <div :class="buildWrap(component,'title')">
       <div :class="build(component,'title')">EStylist</div>
-      <div :class="build(component,'des')">Email @ Fashion</div>
     </div>
     <div :class="buildWrap(component,'des')">
       {{ getStr(store.settings.language,pagei18n.index.des) }}

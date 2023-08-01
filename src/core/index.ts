@@ -11,7 +11,7 @@ import {
   BorderType,
   defaultComponent,
 } from "./baseModel";
-import { getStr, pagei18n } from "./i18n";
+import { getStr, pagei18n, I18n } from "./i18n";
 import {
   JustifyContent,
   TextAlign,
@@ -22,7 +22,7 @@ import {
 } from "./selectOptions";
 import { buildRef } from "./macro";
 
-export type { BaseModel, AreaModel, Model, ModelItem, Settings };
+export type { I18n, BaseModel, AreaModel, Model, ModelItem, Settings };
 
 export {
   getStr,

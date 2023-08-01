@@ -1,18 +1,18 @@
-@use '../name.scss' as *;
-@use '../src/var.scss' as *;
+@use "../name.scss" as *;
+@use "../src/var.scss" as *;
 
-$component: 'EditTools';
+$component: "EditTools";
 
 @include buildView($component) {
   height: 100%;
   width: 100%;
-  @include buildWrap($component, 'tool1') {
+  @include buildWrap($component, "tool1") {
     width: 100%;
     height: 180px;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    @include buildWrap($component, 'color') {
+    @include buildWrap($component, "color") {
       height: 100%;
       width: 100%;
       display: flex;
@@ -36,7 +36,7 @@ $component: 'EditTools';
           margin: 10px 0;
         }
       }
-      @include build('color', 'main') {
+      @include build("color", "main") {
         cursor: pointer;
         height: 80px;
         width: 80px;
@@ -44,7 +44,7 @@ $component: 'EditTools';
         box-shadow: 0 0 4px 2px #000;
       }
     }
-    @include buildWrap($component, 'font') {
+    @include buildWrap($component, "font") {
       height: 100%;
       width: 100%;
       display: flex;
@@ -65,10 +65,10 @@ $component: 'EditTools';
           cursor: pointer;
         }
       }
-      @include build('font', 'main') {
+      @include build("font", "main") {
         width: 100%;
         height: calc(100% - 30px);
-        @include build('template', 'base') {
+        @include build("template", "base") {
           display: flex;
           align-items: center;
           justify-content: flex-start;
@@ -92,20 +92,21 @@ $component: 'EditTools';
       }
     }
   }
-  @include buildWrap($component, 'tool2') {
+  @include buildWrap($component, "tool2") {
     height: calc(100% - 180px);
     box-sizing: border-box;
-   .el-input{
-    width: 96%;
-    margin: 0 2%;
-   }
-    @include build('tool2', 'info') {
+    .el-input {
+      width: 96%;
+      margin: 0 2%;
+    }
+    @include build("tool2", "info") {
       height: auto;
       box-sizing: border-box;
       padding-top: 8px;
-       padding: 0 2.5%;
+      padding: 0 2.5%;
+      text-align: justify;
     }
-    @include build('tool2', 'config') {
+    @include build("tool2", "config") {
       width: 100%;
       height: calc(100% - 190px);
       box-sizing: border-box;

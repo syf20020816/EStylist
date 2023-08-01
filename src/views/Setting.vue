@@ -15,11 +15,11 @@
         <el-input v-model="store.settings.store" disabled></el-input>
       </div>
       <div :class="build('content','item')">
-        <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.templatePath) }}</div>
+        <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.componentPath) }}</div>
         <el-input v-model="store.settings.component" disabled></el-input>
       </div>
       <div :class="build('content','item')">
-        <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.templatePath) }}</div>
+        <div :class="build('item','title')">{{ getStr(store.settings.language,pagei18n.settings.downloadUrl) }}</div>
         <el-input v-model="store.settings.download" disabled></el-input>
       </div>
       <div :class="build('content','item')">

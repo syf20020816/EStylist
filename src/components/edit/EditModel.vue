@@ -2,13 +2,13 @@
   <div :id="buildView(component)">
     <span v-if="!flexArea">
       <div :class="build('template','base')">
-        <div class="tmptitle">组件名称</div>
+        <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.componentName) }}</div>
         <el-input placeholder="Please input model name" v-model="itemData.name" />
       </div>
       <div :class="build('template','base')">
         <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.modelTypes) }}</div>
         <el-select v-model="itemData.type" placeholder="Select Type" @change="changeModelType">
-          <el-option v-for="titem in ModelTypes" :key="titem.value" :label="titem.label" :value="titem.value" />
+          <el-option v-for="titem in ModelTypes" :key="titem.value" :label="getStr(store.settings.language,titem.label)" :value="titem.value" />
         </el-select>
       </div>
       <div :class="build('template','base')">
@@ -43,16 +43,16 @@
       </div>
       <div :class="build('template','base')">
         <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bgColor) }}</div>
-        <el-input v-model="itemData.bgColor" placeholder="设置颜色,透明为transparent" clearable></el-input>
-        <el-tooltip class="box-item" effect="dark" content="复制调色器的颜色" placement="right">
+        <el-input v-model="itemData.bgColor" :placeholder="getStr(store.settings.language,pagei18n.placeholder.color)" clearable></el-input>
+        <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.buttons.copyColor)" placement="right">
           <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="emits('copyColor')"></el-button>
         </el-tooltip>
       </div>
       <el-collapse accordion>
         <el-collapse-item name="1">
           <template #title>
-            文字样式
-            <el-tooltip class="box-item" effect="dark" content="复制字体调节器" placement="right">
+            {{ getStr(store.settings.language,pagei18n.edit.fontStyles) }}
+            <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.buttons.copyFont)" placement="right">
               <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="emits('copyFont')"></el-button>
             </el-tooltip>
           </template>
@@ -99,64 +99,64 @@
       <el-collapse accordion>
         <el-collapse-item name="1">
           <template #title>
-            边框
+            {{ getStr(store.settings.language,pagei18n.edit.border) }}
           </template>
           <div :class="build('template','base2')">
             <span class="baseline">
-              <div class="tmptitle">上:</div>
+              <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.top) }}:</div>
               <el-input-number v-model="itemData.border.top.width" :step="0.5" :max="80" @change="(newValue:number,oldValue:number)=>borderWidthChange(newValue,oldValue,'top')" />
             </span>
             <span class="baseline">
               <el-select v-model="itemData.border.top.borderType" placeholder="Select Type">
                 <el-option v-for="titem in BorderTypes" :key="titem.value" :label="titem.label" :value="titem.value" />
               </el-select>
-              <el-input style="width: 40%;" v-model="itemData.border.top.color" placeholder="设置颜色,透明为transparent" clearable></el-input>
-              <el-tooltip class="box-item" effect="dark" content="复制调色器的颜色" placement="right">
+              <el-input style="width: 40%;" v-model="itemData.border.top.color" :placeholder="getStr(store.settings.language,pagei18n.placeholder.color)" clearable></el-input>
+              <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.buttons.copyColor)" placement="right">
                 <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="copyBorderColor('top')"></el-button>
               </el-tooltip>
             </span>
           </div>
           <div :class="build('template','base2')">
             <span class="baseline">
-              <div class="tmptitle">右:</div>
+              <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.right) }}:</div>
               <el-input-number v-model="itemData.border.right.width" :step="0.5" :max="80" @change="(newValue:number,oldValue:number)=>borderWidthChange(newValue,oldValue,'right')" />
             </span>
             <span class="baseline">
               <el-select v-model="itemData.border.right.borderType" placeholder="Select Type">
                 <el-option v-for="titem in BorderTypes" :key="titem.value" :label="titem.label" :value="titem.value" />
               </el-select>
-              <el-input style="width: 40%;" v-model="itemData.border.right.color" placeholder="设置颜色,透明为transparent" clearable></el-input>
-              <el-tooltip class="box-item" effect="dark" content="复制调色器的颜色" placement="right">
+              <el-input style="width: 40%;" v-model="itemData.border.right.color" :placeholder="getStr(store.settings.language,pagei18n.placeholder.color)" clearable></el-input>
+              <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.buttons.copyColor)" placement="right">
                 <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="copyBorderColor('right')"></el-button>
               </el-tooltip>
             </span>
           </div>
           <div :class="build('template','base2')">
             <span class="baseline">
-              <div class="tmptitle">下:</div>
+              <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bottom) }}:</div>
               <el-input-number v-model="itemData.border.bottom.width" :step="0.5" :max="80" @change="(newValue:number,oldValue:number)=>borderWidthChange(newValue,oldValue,'bottom')" />
             </span>
             <span class="baseline">
               <el-select v-model="itemData.border.bottom.borderType" placeholder="Select Type">
                 <el-option v-for="titem in BorderTypes" :key="titem.value" :label="titem.label" :value="titem.value" />
               </el-select>
-              <el-input style="width: 40%;" v-model="itemData.border.bottom.color" placeholder="设置颜色,透明为transparent" clearable></el-input>
-              <el-tooltip class="box-item" effect="dark" content="复制调色器的颜色" placement="right">
+              <el-input style="width: 40%;" v-model="itemData.border.bottom.color" :placeholder="getStr(store.settings.language,pagei18n.placeholder.color)" clearable></el-input>
+              <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.buttons.copyColor)" placement="right">
                 <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="copyBorderColor('bottom')"></el-button>
               </el-tooltip>
             </span>
           </div>
           <div :class="build('template','base2')">
             <span class="baseline">
-              <div class="tmptitle">左:</div>
+              <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.left) }}:</div>
               <el-input-number v-model="itemData.border.left.width" :step="0.5" :max="80" @change="(newValue:number,oldValue:number)=>borderWidthChange(newValue,oldValue,'left')" />
             </span>
             <span class="baseline">
               <el-select v-model="itemData.border.left.borderType" placeholder="Select Type">
                 <el-option v-for="titem in BorderTypes" :key="titem.value" :label="titem.label" :value="titem.value" />
               </el-select>
-              <el-input style="width: 40%;" v-model="itemData.border.left.color" placeholder="设置颜色,透明为transparent" clearable></el-input>
-              <el-tooltip class="box-item" effect="dark" content="复制调色器的颜色" placement="right">
+              <el-input style="width: 40%;" v-model="itemData.border.left.color" :placeholder="getStr(store.settings.language,pagei18n.placeholder.color)" clearable></el-input>
+              <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.buttons.copyColor)" placement="right">
                 <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="copyBorderColor('left')"></el-button>
               </el-tooltip>
             </span>
@@ -174,10 +174,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, reactive, PropType, computed, toRef } from 'vue'
-import { Operation } from '@element-plus/icons-vue'
+import { ref, reactive, PropType, computed } from 'vue'
 import { getStr, pagei18n, AreaModel, defaultAreaModel, BorderTypes, JustifyContent, TextAlign, ModelTypes, Direction, FontFamily, ModelItem, defalutModelItem } from '../../core'
-import { generateUUID, convertImageToBase64 } from '../../util'
 import { indexStore } from '../../store/IndexPinia'
 import { build, buildView, buildWrap } from '../../styles/name'
 import { CopyDocument } from '@element-plus/icons-vue'

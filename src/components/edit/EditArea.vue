@@ -4,8 +4,8 @@
     <div :class="build('template','base')">
       <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.bgColor) }}</div>
 
-      <el-input v-model="areaConfigs.bgColor" placeholder="设置颜色,透明为transparent" clearable></el-input>
-      <el-tooltip class="box-item" effect="dark" content="复制调色器的颜色" placement="right">
+      <el-input v-model="areaConfigs.bgColor" :placeholder="getStr(store.settings.language,pagei18n.placeholder.color)" clearable></el-input>
+      <el-tooltip class="box-item" effect="dark" :content="getStr(store.settings.language,pagei18n.buttons.copyColor)" placement="right">
         <el-button type="primary" :icon="CopyDocument" circle style="margin: 0 6px;" @click="emits('copyColor')"></el-button>
       </el-tooltip>
     </div>

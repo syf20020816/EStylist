@@ -6,42 +6,42 @@
           <table width="100%" cellspacing="0" cellpadding="0" border="0">
             <tbody>
               <tr>
-                <el-popover :visible="basePlateTipVisible" placement="top-start" title="添加" :width="200">
+                <el-popover :visible="basePlateTipVisible" placement="top-start" :title="getStr(store.settings.language,pagei18n.tips.work)" :width="260">
                   <template #reference>
                     <td :style="baseOutterPadding" :bgcolor="baseOtterColor" @click="basePlateTipVisible = !basePlateTipVisible">
                       <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         <tbody :style="itemDirection">
-                          <el-popover trigger="contextmenu" :visible="areaTipVisibles[areaIndex]" placement="bottom" :width="100" v-for="areaItem,areaIndex in store.currentMailModel.areas" :key="areaItem.id">
+                          <el-popover trigger="contextmenu" :visible="areaTipVisibles[areaIndex]" placement="bottom" :width="200" v-for="areaItem,areaIndex in store.currentMailModel.areas" :key="areaItem.id">
                             <template #reference>
                               <tr ref="AreaRef" @click.stop="chooseArea(areaIndex)">
                                 <td :style="areaStyle(areaIndex)">
-                                  <el-popover trigger="contextmenu" :visible="modelTipVisibles[areaIndex][mIndex]" title="添加|删除" placement="bottom" :width="100" v-for="mItem,mIndex in areaItem.modelItem" :key="mItem.id">
+                                  <el-popover trigger="contextmenu" :visible="modelTipVisibles[areaIndex][mIndex]" :title="getStr(store.settings.language,pagei18n.tips.work)" placement="bottom" :width="200" v-for="mItem,mIndex in areaItem.modelItem" :key="mItem.id">
                                     <template #reference>
                                       <ModelItem :data="mItem" @click.stop="chooseModel(areaIndex,mIndex)"></ModelItem>
                                     </template>
                                     <template #default>
                                       <div class="info_line">
-                                        <el-button type="primary" @click="addModel(areaIndex)">添加组件</el-button>
+                                        <el-button type="primary" @click="addModel(areaIndex)">{{getStr(store.settings.language,pagei18n.buttons.addComponent)}}</el-button>
                                         <el-tooltip placement="bottom">
-                                          <template #content>组件会被添加到区域中<br />组件是模板的主要构成要素</template>
+                                          <template #content>{{getStr(store.settings.language,pagei18n.buttons.addComponentInfo[0])}}<br />{{getStr(store.settings.language,pagei18n.buttons.addComponentInfo[1])}}</template>
                                           <el-icon size="16">
                                             <InfoFilled />
                                           </el-icon>
                                         </el-tooltip>
                                       </div>
                                       <div class="info_line">
-                                        <el-button type="primary" @click="delModel(areaIndex,mIndex)">删除组件</el-button>
+                                        <el-button type="primary" @click="delModel(areaIndex,mIndex)">{{getStr(store.settings.language,pagei18n.buttons.delComponent)}}</el-button>
                                         <el-tooltip placement="bottom">
-                                          <template #content>当前组件将会从该区域移除</template>
+                                          <template #content>{{getStr(store.settings.language,pagei18n.buttons.delComponentInfo)}}</template>
                                           <el-icon size="16">
                                             <InfoFilled />
                                           </el-icon>
                                         </el-tooltip>
                                       </div>
                                       <div class="info_line">
-                                        <el-button type="primary" @click="delArea(areaIndex)">删除区域</el-button>
+                                        <el-button type="primary" @click="delArea(areaIndex)">{{getStr(store.settings.language,pagei18n.buttons.delArea)}}</el-button>
                                         <el-tooltip placement="bottom">
-                                          <template #content>删除当前区域,同时删除包含的组件</template>
+                                          <template #content>{{getStr(store.settings.language,pagei18n.buttons.delAreaInfo)}}</template>
                                           <el-icon size="16">
                                             <InfoFilled />
                                           </el-icon>
@@ -55,24 +55,28 @@
                             </template>
                             <template #default>
                               <div class="info_title">
-                                <span>添加|删除</span>
+                                <span>{{ getStr(store.settings.language,pagei18n.tips.work) }}</span>
                                 <el-icon size="18" @click="closeAreaTip(areaIndex)">
                                   <CircleCloseFilled />
                                 </el-icon>
                               </div>
                               <div class="info_line">
-                                <el-button type="primary" @click="addModel(areaIndex)">添加组件</el-button>
+                                <el-button type="primary" @click="addModel(areaIndex)">{{getStr(store.settings.language,pagei18n.buttons.addComponent)}}</el-button>
                                 <el-tooltip placement="bottom">
-                                  <template #content>组件会被添加到区域中<br />组件是模板的主要构成要素</template>
+                                  <template #content>
+                                    {{getStr(store.settings.language,pagei18n.buttons.addComponentInfo[0])}}
+                                    <br />
+                                    {{getStr(store.settings.language,pagei18n.buttons.addComponentInfo[1])}}
+                                  </template>
                                   <el-icon size="16">
                                     <InfoFilled />
                                   </el-icon>
                                 </el-tooltip>
                               </div>
                               <div class="info_line">
-                                <el-button type="primary" @click="delArea(areaIndex)">删除区域</el-button>
+                                <el-button type="primary" @click="delArea(areaIndex)">{{getStr(store.settings.language,pagei18n.buttons.delArea)}}</el-button>
                                 <el-tooltip placement="bottom">
-                                  <template #content>删除当前区域,同时删除包含的组件</template>
+                                  <template #content>{{getStr(store.settings.language,pagei18n.buttons.delAreaInfo)}}</template>
                                   <el-icon size="16">
                                     <InfoFilled />
                                   </el-icon>
@@ -86,18 +90,19 @@
                   </template>
                   <template #default>
                     <div class="info_line">
-                      <el-button type="primary" @click="addArea">添加区域</el-button>
+                      <el-button type="primary" @click="addArea">{{getStr(store.settings.language,pagei18n.buttons.addArea)}}</el-button>
                       <el-tooltip placement="bottom">
-                        <template #content>区域会被添加到底板中<br />区域是一个可以容纳一组组件的容器</template>
+                        <template #content>{{getStr(store.settings.language,pagei18n.buttons.addAreaInfo[0])}}
+                          <br />{{getStr(store.settings.language,pagei18n.buttons.addAreaInfo[1])}}</template>
                         <el-icon size="16">
                           <InfoFilled />
                         </el-icon>
                       </el-tooltip>
                     </div>
                     <div class="info_line">
-                      <el-button type="primary" @click="addDefineComponent">添加自定义组件</el-button>
+                      <el-button type="primary" @click="addDefineComponent">{{getStr(store.settings.language,pagei18n.buttons.addDefineComponent)}}</el-button>
                       <el-tooltip placement="bottom">
-                        <template #content>自定义组件将被添加到底板中</template>
+                        <template #content>{{getStr(store.settings.language,pagei18n.buttons.addDefineComponentInfo)}}</template>
                         <el-icon size="16">
                           <InfoFilled />
                         </el-icon>
@@ -126,7 +131,7 @@ export default {
 import { ref, reactive, computed, defineProps, PropType } from 'vue'
 import { useRouter } from 'vue-router'
 import { build, buildView, buildWrap } from '../../styles/name'
-import { BaseModel, Model, defaultAreaModel, defalutModelItem } from '../../core'
+import { BaseModel, Model, defaultAreaModel, defalutModelItem, getStr, pagei18n, I18n } from '../../core'
 import { InfoFilled, CircleCloseFilled } from '@element-plus/icons-vue'
 import { indexStore } from '../../store/IndexPinia'
 import { mailStore } from '../../store/MailPinia'
@@ -254,9 +259,15 @@ let areaStyle = computed(() => (areaIndex: number) => {
 //删除区域
 const delArea = (areaIndex: number) => {
   areaTipVisibles.splice(areaIndex, 1)
-  store.activeTarget.info = ''
-  store.activeTarget.name = ''
-  store.currentMailModel.areas.splice(areaIndex, 1)
+  ;(store.activeTarget.info = {
+    zh: '',
+    en: ''
+  } as I18n),
+    (store.activeTarget.name = {
+      zh: '',
+      en: ''
+    } as I18n),
+    store.currentMailModel.areas.splice(areaIndex, 1)
   mailRep.areaId = store.currentMailModel.areas.length - 1
 }
 

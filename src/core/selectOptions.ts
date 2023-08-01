@@ -1,4 +1,5 @@
 import { BorderType } from "./baseModel";
+import { I18n } from "./i18n";
 
 export const Direction = [
   {
@@ -36,15 +37,24 @@ export const FontFamily = [
 export const ModelTypes = [
   {
     value: "div",
-    label: "文字",
+    label: {
+      zh: "文字",
+      en: "Font",
+    } as I18n,
   },
   {
     value: "img",
-    label: "图片",
+    label: {
+      zh: "图片",
+      en: "Image",
+    } as I18n,
   },
   {
     value: "a",
-    label: "链接",
+    label: {
+      zh: "链接",
+      en: "Link",
+    } as I18n,
   },
 ];
 

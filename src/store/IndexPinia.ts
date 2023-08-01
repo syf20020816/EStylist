@@ -8,6 +8,7 @@ import {
   defalutModelItem,
   BorderType,
   defaultComponent,
+  I18n,
 } from "../core";
 import { generateUUID } from "../util";
 import cloneDeep from "lodash/cloneDeep";
@@ -26,8 +27,14 @@ export const indexStore = defineStore("index", {
         fontWeight: false,
       },
       activeTarget: {
-        name: "",
-        info: "",
+        name: {
+          zh: "",
+          en: "",
+        } as I18n,
+        info: {
+          zh: "",
+          en: "",
+        } as I18n,
       },
       globalColor: "#dedeff",
       currentMailModel: defalutModel as Model,

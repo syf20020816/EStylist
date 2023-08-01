@@ -16,36 +16,36 @@
             </el-tag>
           </el-tooltip>
           <img class="jsonImg" src="../assets/template.svg" alt="json">
-          <el-button type="primary" size="small" :icon="View" @click="preview(item)">预览</el-button>
-          <el-button type="primary" size="small" :icon="Download" @click="download(index)">下载</el-button>
+          <el-button type="primary" size="small" :icon="View" @click="preview(item)">{{getStr(store.settings.language,pagei18n.buttons.preview)}}</el-button>
+          <el-button type="primary" size="small" :icon="Download" @click="download(index)">{{getStr(store.settings.language,pagei18n.buttons.download)}}</el-button>
         </div>
       </div>
       <div :class="buildWrap('left','bottom')">
 
-        <el-button type="primary" :icon="Refresh" @click="reRresh">刷新</el-button>
+        <el-button type="primary" :icon="Refresh" @click="reRresh">{{ getStr(store.settings.language,pagei18n.buttons.refresh) }}</el-button>
       </div>
     </div>
     <div :class="buildWrap(component,'right')">
       <div :class="buildWrap('right','title')">
-        模板预览
+        {{ getStr(store.settings.language,pagei18n.lib.preview) }}
       </div>
       <div :class="buildWrap('right','preview')">
         <div class="info">
           <div class="info_line">
-            <div>文件名称:</div>
-            <el-input v-model="currentInfo.name" placeholder="请输入内容" disabled></el-input>
+            <div>{{ getStr(store.settings.language,pagei18n.lib.fileName) }}:</div>
+            <el-input v-model="currentInfo.name" disabled></el-input>
           </div>
           <div class="info_line">
-            <div>文件大小(单位:B):</div>
-            <el-input v-model="currentInfo.size" placeholder="请输入内容" disabled></el-input>
+            <div>{{ getStr(store.settings.language,pagei18n.lib.fileSize) }}:</div>
+            <el-input v-model="currentInfo.size" disabled></el-input>
           </div>
           <div class="info_line">
             <div>sha:</div>
-            <el-input v-model="currentInfo.sha" placeholder="请输入内容" disabled></el-input>
+            <el-input v-model="currentInfo.sha" disabled></el-input>
           </div>
           <div class="info_line">
-            <div>下载地址:</div>
-            <el-input v-model="currentInfo.download_url" placeholder="请输入内容" disabled></el-input>
+            <div>{{ getStr(store.settings.language,pagei18n.lib.download) }}:</div>
+            <el-input v-model="currentInfo.download_url" disabled></el-input>
           </div>
         </div>
         <div class="preview" v-html="currentPreview"></div>
@@ -66,8 +66,10 @@ import { build, buildView, buildWrap } from '../styles/name'
 import { Search, Refresh, Download, View } from '@element-plus/icons-vue'
 import { invoke } from '@tauri-apps/api'
 import { ElMessage } from 'element-plus'
+import { getStr, pagei18n } from '../core'
+import { indexStore } from '../store/IndexPinia'
 const component = 'TemplateLib'
-
+const store = indexStore()
 let searchInput = ref('')
 let currentPreview = ref('')
 let currentInfo = reactive<any>({})
@@ -102,14 +104,14 @@ const download = (index: number) => {
   invoke('download_json_from_github', { name: name, url: url, isTemplate: true })
     .then(() => {
       ElMessage({
-        message: 'Download Template Successfully! Please Check Your Template Store Dir!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.downloadTemplateSuccess),
         type: 'success'
       })
     })
     .catch(e => {
       console.log(e)
       ElMessage({
-        message: 'Download Template Failed!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.downloadTemplateFail),
         type: 'error'
       })
     })

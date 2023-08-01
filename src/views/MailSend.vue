@@ -22,8 +22,8 @@
         <!-- <BaseOutter id="targetTemplate" ref="targetTemplate" :data="mailModel"></BaseOutter> -->
       </div>
       <div class="send">
-        <el-button type="primary" @click="uploadTemplateCheck">Choose</el-button>
-        <el-button type="primary" @click="sendEmail">Send</el-button>
+        <el-button type="primary" @click="uploadTemplateCheck">{{ getStr(store.settings.language,pagei18n.buttons.choose) }}</el-button>
+        <el-button type="primary" @click="sendEmail">{{ getStr(store.settings.language,pagei18n.buttons.send) }}</el-button>
       </div>
     </div>
     <div :class="buildWrap(component,'right')">
@@ -45,7 +45,7 @@
         </div>
       </div>
       <div :class="build(component,'connectBottom')">
-        <el-button type="primary" @click="addContactVisiable = true">Add Contact</el-button>
+        <el-button type="primary" @click="addContactVisiable = true">{{ getStr(store.settings.language,pagei18n.buttons.addContract) }}</el-button>
       </div>
     </div>
   </div>
@@ -116,12 +116,12 @@ const uploadTemplateCheck = () => {
 
     if (res.length == 0) {
       ElMessage({
-        message: 'You Have No Templates!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.noTemplate),
         type: 'info'
       })
     } else {
       ElMessage({
-        message: 'Load Templates Successfully!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.loadTemplateSuccess),
         type: 'info'
       })
     }
@@ -136,13 +136,13 @@ const uploadTemplate = () => {
       sendMailHTML.value = res
 
       ElMessage({
-        message: 'Upload Template Successfully! Please Wait a moment!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.uploadTemplateSuccess),
         type: 'success'
       })
     })
     .catch(e => {
       ElMessage({
-        message: 'Upload Template Failure!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.uploadTemplateFail),
         type: 'error'
       })
     })
@@ -156,7 +156,7 @@ const addContact = () => {
     .then((res: any) => {
       store.settings = JSON.parse(res)
       ElMessage({
-        message: 'Add Contact Successfully!',
+        message: getStr(store.settings.language, pagei18n.tips.infos.addContractSuccess),
         type: 'success'
       })
     })
@@ -166,6 +166,8 @@ const addContact = () => {
         type: 'error'
       })
     })
+
+  addContactVisiable.value = false
 }
 
 const addRecipient = (email: string) => {
