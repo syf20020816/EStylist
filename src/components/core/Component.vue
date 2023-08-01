@@ -46,7 +46,6 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import ModelItemVue from './ModelItem.vue'
 import { defalutModelItem } from '../../core'
 import { ref, reactive, computed, PropType } from 'vue'
 import { indexStore } from '../../store/IndexPinia'

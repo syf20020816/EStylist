@@ -51,7 +51,7 @@ $component: 'MailEdit';
     background-color: $bg-color-dark-deep;
 
     @include buildWrap($component, 'templates') {
-      height: calc(100% - 24px);
+      height: calc(100% - 284px);
       width: 100%;
       overflow-y: scroll;
       scrollbar-width: thin;
@@ -69,12 +69,14 @@ $component: 'MailEdit';
       }
       
     }
-    // @include buildWrap($component, 'edit') {
-    //   height: calc(5% - 24px);
-    //   width: 100%;
-    // }
+    @include buildWrap($component, 'StarContribute') {
+      height: 260px;
+      width: 100%;
+    }
     @include buildWrap($component, 'tools') {
+      border-top: 1px solid #fff;
       height: 24px;
+      box-sizing: border-box;
       width: 100%;
       display: flex;
       align-items: center;
@@ -118,5 +120,17 @@ $component: 'MailEdit';
 }
 .el-tree-node__content:focus {
   background-color: #111621 !important;
+}
+
+.previewComponent{
+  height: 300px;
+  width: 100%;
+  overflow: scroll;
+  scrollbar-width: thin;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
 }
 

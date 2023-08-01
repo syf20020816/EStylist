@@ -4,7 +4,7 @@
       <div :class="buildWrap('left','top')">
         <el-input v-model="searchInput" placeholder="Please input" class="input-with-select">
           <template #append>
-            <el-button :icon="Search" />
+            <el-button :icon="Search" @click="search" />
           </template>
         </el-input>
       </div>
@@ -22,7 +22,7 @@
       </div>
       <div :class="buildWrap('left','bottom')">
 
-        <el-button type="primary" :icon="Refresh">刷新</el-button>
+        <el-button type="primary" :icon="Refresh" @click="reRresh">刷新</el-button>
       </div>
     </div>
     <div :class="buildWrap(component,'right')">
@@ -119,6 +119,21 @@ const reRresh = () => {
   downloadList.splice(0, downloadList.length)
   downloadJsonList.splice(0, downloadJsonList.length)
   initPage()
+}
+
+const search = () => {
+  if (searchInput.value != '') {
+    let tmp = []
+    for (let i = 0; i < downloadList.length; i++) {
+      if (downloadList[i].name.includes(searchInput.value)) {
+        tmp.push(downloadList[i])
+      }
+    }
+    downloadList.splice(0, downloadList.length)
+    tmp.forEach(res => {
+      downloadList.push(res)
+    })
+  }
 }
 </script>
 

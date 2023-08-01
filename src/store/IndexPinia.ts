@@ -64,13 +64,9 @@ export const indexStore = defineStore("index", {
     },
     //添加区域到底板中
     pushAreaToCurrentMailModel(item: AreaModel) {
-      let len = 0;
-      if (this.currentMailModel.areas.length != 0) {
-        len =
-          this.currentMailModel.areas[this.currentMailModel.areas.length - 1]
-            .id;
-      }
-      let newItem = { ...item, id: len + 1 };
+      let len = generateUUID();
+
+      let newItem = { ...item, id: len };
 
       this.currentMailModel.areas.push(newItem);
     },

@@ -24,7 +24,7 @@ export interface BaseModel {
  * 内层容器样式表
  */
 export interface AreaModel {
-  id: number;
+  id: string;
   bgColor: string;
   textAlign: string;
   direction: string;
@@ -95,6 +95,7 @@ export interface Settings {
 
 export const defaultAreaModels: Array<AreaModel> = [
   {
+    id: generateUUID(),
     bgColor: "#fff",
     direction: "y",
     textAlign: "center",
@@ -150,7 +151,7 @@ export const defalutModelItem: ModelItem = {
  * 默认的区域模型
  */
 export const defaultAreaModel: AreaModel = {
-  id: 0,
+  id: generateUUID(),
   bgColor: "#fff",
   direction: "y",
   textAlign: "center",
@@ -168,7 +169,7 @@ export const defalutModel: Model = {
   } as BaseModel,
   areas: [
     {
-      id: 0,
+      id: generateUUID(),
       bgColor: "#fff",
       direction: "y",
       textAlign: "center",
@@ -179,7 +180,7 @@ export const defalutModel: Model = {
 };
 
 export const defaultComponent: AreaModel = {
-  id: 0,
+  id: generateUUID(),
   bgColor: "#fff",
   direction: "y",
   textAlign: "center",

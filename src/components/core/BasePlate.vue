@@ -11,7 +11,7 @@
                     <td :style="baseOutterPadding" :bgcolor="baseOtterColor" @click="basePlateTipVisible = !basePlateTipVisible">
                       <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         <tbody :style="itemDirection">
-                          <el-popover trigger="contextmenu" :visible="areaTipVisibles[areaIndex]" placement="bottom" :width="100" v-for="areaItem,areaIndex in store.currentMailModel.areas" :key="areaIndex">
+                          <el-popover trigger="contextmenu" :visible="areaTipVisibles[areaIndex]" placement="bottom" :width="100" v-for="areaItem,areaIndex in store.currentMailModel.areas" :key="areaItem.id">
                             <template #reference>
                               <tr ref="AreaRef" @click.stop="chooseArea(areaIndex)">
                                 <td :style="areaStyle(areaIndex)">
@@ -56,7 +56,7 @@
                             <template #default>
                               <div class="info_title">
                                 <span>添加|删除</span>
-                                <el-icon size="18" @click="areaTipVisibles[areaIndex] = false">
+                                <el-icon size="18" @click="closeAreaTip(areaIndex)">
                                   <CircleCloseFilled />
                                 </el-icon>
                               </div>
@@ -279,6 +279,10 @@ const delModel = (areaIndex: number, mIndex: number) => {
 
 const addDefineComponent = () => {
   emits('addComponent')
+}
+const closeAreaTip = (areaIndex: number) => {
+  areaTipVisibles[areaIndex] = false
+  AreaRef.value[areaIndex].style.border = '0px'
 }
 
 defineExpose({

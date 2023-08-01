@@ -41,6 +41,9 @@
           <el-tree v-else-if="activeEdit=='model'" :data="componentLevelTree" :props="defaultProps" @node-click="handleNodeClick" />
         </div>
       </div>
+      <div :class="buildWrap(component,'StarContribute')">
+        <StarContribute></StarContribute>
+      </div>
       <div :class="buildWrap(component,'tools')">
         <el-tooltip effect="dark" content="缩小" placement="top">
           <el-icon size="18" @click="scaleView(-0.1)">
@@ -126,9 +129,13 @@
       <el-option v-for="item in store.components" :label="item" :value="item" :key="item">
       </el-option>
     </el-select>
+    <div class="previewComponent">
+      <TempComponent :data="previewComponentTarget"></TempComponent>
+    </div>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="adcVisible = false">{{ getStr(store.settings.language,pagei18n.common.cancel) }}</el-button>
+        <el-button @click="previewComponent" type="info">preview</el-button>
         <el-button type="primary" @click="confirmUploadComponent">
           {{ getStr(store.settings.language,pagei18n.common.confirm) }}
         </el-button>
@@ -162,6 +169,8 @@ import EditTools from '../components/EditTools.vue'
 import BasePlate from '../components/core/BasePlate.vue'
 import ComponentVue from '../components/core/Component.vue'
 import Tips from '../components/Tips.vue'
+import TempComponent from '../components/core/TempComponent.vue'
+import StarContribute from '../components/core/StarContribute.vue'
 
 let activeEdit = ref('mail')
 const router = useRouter()
@@ -169,6 +178,14 @@ const component = 'MailEdit'
 // add define component visibility
 let adcVisible = ref(false)
 let currentComponent = ref('')
+let previewComponentTarget = reactive<AreaModel>({
+  id: generateUUID(),
+  bgColor: '#fff',
+  direction: 'y',
+  textAlign: 'center',
+  justifyContent: 'center',
+  modelItem: new Array()
+})
 let targetTemplate = ref()
 let targetComponent = ref()
 let downloadFileName = ref('')
@@ -452,7 +469,6 @@ const addDefineComponent = () => {
 const confirmUploadComponent = () => {
   invoke('upload_file', { name: currentComponent.value, isTemplate: false })
     .then((res: any) => {
-      console.log(res)
       let tmp = JSON.parse(res)
       store.currentMailModel.areas.push(tmp)
       targetTemplate.value.reInitAreaTipVisibles()
@@ -472,6 +488,18 @@ const confirmUploadComponent = () => {
   setTimeout(() => {
     adcVisible.value = false
   }, 500)
+}
+
+const previewComponent = () => {
+  invoke('upload_file', { name: currentComponent.value, isTemplate: false }).then((res: any) => {
+    let tmp = JSON.parse(res)
+    previewComponentTarget.id = tmp.id
+    previewComponentTarget.bgColor = tmp.bgColor
+    previewComponentTarget.direction = tmp.direction
+    previewComponentTarget.justifyContent = tmp.justifyContent
+    previewComponentTarget.textAlign = tmp.textAlign
+    previewComponentTarget.modelItem = tmp.modelItem
+  })
 }
 </script>
 

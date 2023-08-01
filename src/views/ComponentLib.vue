@@ -4,12 +4,12 @@
       <div :class="buildWrap('left','top')">
         <el-input v-model="searchInput" placeholder="Please input" class="input-with-select">
           <template #append>
-            <el-button :icon="Search" />
+            <el-button :icon="Search" @click="search" />
           </template>
         </el-input>
       </div>
       <div :class="buildWrap('left','mid')">
-        <div class="jsonBox" v-for="item,index in downloadList" :key="index">
+        <div class="jsonBox" v-for="item,index in downloadJsonList" :key="index">
           <el-tooltip effect="dark" :content="item.name" placement="top">
             <el-tag type="dark" class="tagName" effect="dark">
               {{ item.name }}
@@ -48,7 +48,9 @@
             <el-input v-model="currentInfo.download_url" placeholder="请输入内容" disabled></el-input>
           </div>
         </div>
-        <div class="preview" v-html="currentPreview"></div>
+        <div class="preview">
+          <TempComponent :data="currentPreview"></TempComponent>
+        </div>
       </div>
     </div>
   </div>
@@ -66,10 +68,11 @@ import { build, buildView, buildWrap } from '../styles/name'
 import { Search, Refresh, Download, View } from '@element-plus/icons-vue'
 import { invoke } from '@tauri-apps/api'
 import { ElMessage } from 'element-plus'
+import TempComponent from '../components/core/TempComponent.vue'
 const component = 'ComponentLib'
 
 let searchInput = ref('')
-let currentPreview = ref('')
+let currentPreview = reactive<any>({})
 let currentInfo = reactive<any>({})
 let downloadJsonList = reactive<Array<any>>([])
 let downloadList = reactive<Array<any>>([])
@@ -90,9 +93,18 @@ const initPage = () => {
 initPage()
 
 const preview = (item: any) => {
-  currentInfo = item
+  currentInfo.name = item.name
+  currentInfo.size = item.size
+  currentInfo.download_url = item.download_url
+  currentInfo.sha = item.sha
   invoke('get_preview_html', { url: item.download_url }).then((res: any) => {
-    currentPreview.value = res
+    let tmp = JSON.parse(res)
+    currentPreview.id = tmp.id
+    currentPreview.bgColor = tmp.bgColor
+    currentPreview.direction = tmp.direction
+    currentPreview.justifyContent = tmp.justifyContent
+    currentPreview.textAlign = tmp.textAlign
+    currentPreview.modelItem = tmp.modelItem
   })
 }
 
@@ -119,6 +131,21 @@ const reRresh = () => {
   downloadList.splice(0, downloadList.length)
   downloadJsonList.splice(0, downloadJsonList.length)
   initPage()
+}
+
+const search = () => {
+  if (searchInput.value != '') {
+    let tmp = []
+    for (let i = 0; i < downloadJsonList.length; i++) {
+      if (downloadJsonList[i].name.includes(searchInput.value)) {
+        tmp.push(downloadJsonList[i])
+      }
+    }
+    downloadJsonList.splice(0, downloadJsonList.length)
+    tmp.forEach(res => {
+      downloadJsonList.push(res)
+    })
+  }
 }
 </script>
 
