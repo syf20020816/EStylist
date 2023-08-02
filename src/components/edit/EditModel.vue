@@ -35,6 +35,7 @@
       </div>
       <div :class="build('template','base')" v-if="itemData.type=='img'">
         <div class="tmptitle">{{ getStr(store.settings.language,pagei18n.edit.upload) }}</div>
+
         <input type="file" name="" id="upload-picture" @change="uploadPicture">
       </div>
       <div :class="build('template','base')" v-if="itemData.type!='div'">

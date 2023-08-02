@@ -20,88 +20,102 @@
               </tr>
               <tr>
                 <td><span>0.0.2</span></td>
-                <td><span>20230711</span></td>
+                <td><span>20230712</span></td>
+                <td><a href='mailto:syf20020816@outlook.com' target='_blank' class='url'>syf20020816@outlook.com</a></td>
+              </tr>
+              <tr>
+                <td><span>0.1.0</span></td>
+                <td><span>20230802</span></td>
                 <td><a href='mailto:syf20020816@outlook.com' target='_blank' class='url'>syf20020816@outlook.com</a></td>
               </tr>
             </tbody>
           </table>
         </figure>
         <h2 id='update-log'><span>Update Log</span></h2>
+        <h3 id='v010'><span>v0.1.0</span></h3>
+        <ul>
+          <li>
+            <p><span>✅增加模块组件边框属性</span></p>
+          </li>
+          <li>
+            <p><span>✅增加自定义模块组件（支持用户自定义组件进行复用，提升效率）</span></p>
+          </li>
+          <li>
+            <p><span>✅增加模块节点复制功能（添加区域将直接复制上个区域）</span></p>
+          </li>
+          <li>
+            <p><span>✅优化模块节点删除</span></p>
+          </li>
+          <li>
+            <p><span>✅提升模板编辑交互性</span></p>
+          </li>
+          <li>
+            <p><span>✅增加用户模板直接预览</span></p>
+          </li>
+          <li>
+            <p><span>✅增加模板库（用户可在线获取模板）</span></p>
+          </li>
+          <li>
+            <p><span>✅增加组件库（用户在线获取组件）</span></p>
+          </li>
+          <li>
+            <p><span>✅修复不完全国际化</span></p>
+          </li>
+          <li>
+            <p><span>✅修复域冲突问题</span></p>
+          </li>
+          <li>
+            <p><span>✅优化内部数据结构</span></p>
+          </li>
+          <li>
+            <p><span>✅设置优化</span></p>
+          </li>
+          <li>
+            <p><span>✅编辑界面更新(调色器,字体控制器)</span></p>
+          </li>
+          <li>
+            <p><span>✅文档更新</span></p>
+          </li>
+        </ul>
         <h3 id='v002'><span>v0.0.2</span></h3>
         <ul>
           <li>
-            <p><span>降低用户使用门槛，提升用户体验</span></p>
+            <p><span>✅降低用户使用门槛，提升用户体验</span></p>
           </li>
           <li>
-            <p><span>增加设置：版本、软件安装目录</span></p>
+            <p><span>✅增加设置：版本、软件安装目录</span></p>
           </li>
           <li>
-            <p><span>增加检查更新功能</span></p>
+            <p><span>✅增加检查更新功能</span></p>
           </li>
           <li>
-            <p><span>优化模板编辑结构</span></p>
+            <p><span>✅优化模板编辑结构</span></p>
           </li>
           <li>
-            <p><span>增加模板编辑排版方向属性</span></p>
+            <p><span>✅增加模板编辑排版方向属性</span></p>
           </li>
           <li>
-            <p><span>增加区域跨度属性</span></p>
+            <p><span>✅增加区域跨度属性</span></p>
           </li>
           <li>
-            <p><span>修改模板删除（删除后刷新重加载）</span></p>
+            <p><span>✅修改模板删除（删除后刷新重加载）</span></p>
           </li>
           <li>
-            <p><span>优化内部页面结构</span></p>
+            <p><span>✅优化内部页面结构</span></p>
           </li>
           <li>
-            <p><span>优化内部数据结构</span></p>
+            <p><span>✅优化内部数据结构</span></p>
           </li>
           <li>
-            <p><span>去除区域冗余属性</span></p>
+            <p><span>✅去除区域冗余属性</span></p>
           </li>
           <li>
-            <p><span>文档修改</span></p>
+            <p><span>✅文档修改</span></p>
           </li>
         </ul>
         <h2 id='update-preview'><span>Update Preview</span></h2>
-        <h3 id='v010'><span>v0.1.0</span></h3>
-        <p><span> 下一个更新版本设定为v0.1.0</span></p>
-        <ul>
-          <li>
-            <p><span>增加模块边框属性</span></p>
-          </li>
-          <li>
-            <p><span>增加自定义模块组件（支持用户自定义组件进行复用，提升效率）</span></p>
-          </li>
-          <li>
-            <p><span>增加模块节点复制功能</span></p>
-          </li>
-          <li>
-            <p><span>优化模块节点删除</span></p>
-          </li>
-          <li>
-            <p><span>提升模板编辑交互性</span></p>
-          </li>
-          <li>
-            <p><span>增加文字拼写自动检测提示</span></p>
-          </li>
-          <li>
-            <p><span>增加预定义模板（安装时自动安装）</span></p>
-          </li>
-          <li>
-            <p><span>增加用户模板直接预览</span></p>
-          </li>
-          <li>
-            <p><span>增加模板库（用户可在线获取模板）</span></p>
-          </li>
-          <li>
-            <p><span>增加组件库（用户在线获取组件）</span></p>
-          </li>
-          <li>
-            <p><span>嵌入人工智能进行智能推荐（或许会在更晚的版本推出）</span></p>
-          </li>
-        </ul>
-        <p>&nbsp;</p>
+        <h3 id='v011'><span>v0.1.1</span></h3>
+        <p><span>还没想好要更什么</span></p>
       </div>
     </div>
   </div>

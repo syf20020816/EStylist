@@ -17,7 +17,7 @@
         <Update></Update>
       </el-tab-pane>
       <el-tab-pane :label="getStr(store.settings.language,pagei18n.doc.contribute)">
-        <div></div>
+        <Contribute></Contribute>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -35,6 +35,7 @@ import Introduction from '../components/docs/Introduction.vue'
 import HowToUse from '../components/docs/HowToUse.vue'
 import Example from '../components/docs/Example.vue'
 import Update from '../components/docs/Update.vue'
+import Contribute from '../components/docs/Contribute.vue'
 
 const component = 'Doc'
 const store = indexStore()

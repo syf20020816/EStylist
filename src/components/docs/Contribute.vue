@@ -3,606 +3,125 @@
   <body class='typora-export os-windows'>
     <div class='typora-export-content'>
       <div id='write' class=''>
-        <h1 id='how-to-use'><span>How To Use</span></h1>
-        <p><span>首先，我们来了解一下软件的整体构成，EStylist目前由9个模块构成</span></p>
-        <p><span>Firstly, let&#39;s take a look at the overall composition of the software. EStylist is currently composed of six modules</span></p>
-        <p><img src="../../assets/docs/functions.png"></p>
+        <h1 id='贡献-contribute'><span>贡献 Contribute</span></h1>
+        <p><span>作为开发者，我将在资源仓库中提供一些模板和组件，但毕竟个人的能力是有限的，希望软件的使用者也可以贡献一份力量，当然这全凭自愿，也全都免费，这意味着下载的用户和上传的用户也都没有任何支出和收入。</span></p>
+        <p><span>As a developer, I will provide some templates and components in the resource repository, but after all, my personal abilities are limited. I hope that users of the software can also contribute, of course, all of this is voluntary and free, which means that both downloaded and uploaded users have no expenses or income.</span></p>
+        <p><span>资源仓库地址：</span><a href='https://github.com/syf20020816/EStylist-TemplateLib' target='_blank' class='url'>https://github.com/syf20020816/EStylist-TemplateLib</a></p>
+        <p><span>作为软件的使用者，您可以在软件中的组件商店和模板商店直接下载资源仓库中所有的资源到本地使用</span></p>
+        <p><span>As a user of the software, you can directly download all resources in the resource repository from the component store and template store in the software for local use</span></p>
+        <p><img src="../../assets/docs/rep1.png"></p>
+        <h2 id='如何贡献how-to-contribute）'><span>如何贡献（How To Contribute）</span></h2>
+        <ol>
+          <li>
+            <p><span>选择你要贡献的组件或模板对应的html文件和json文件</span></p>
+          </li>
+          <li>
+            <p><span>编写一个</span><code>README.txt</code><span>或</span><code>README.md</code><span>( 编写内容请复制下面并进行修改)</span></p>
+          </li>
+          <li>
+            <p><span>以附件的形式发送给我（</span><a href='mailto:syf20020816@outlook.com' target='_blank' class='url'>syf20020816@outlook.com</a><span>）</span></p>
+          </li>
+          <li>
+            <p><span>我将在1~2个工作日给予回复，并将您的组件上传至资源仓库</span></p>
+          </li>
+          <li>
+            <p><span>非常感谢您的支持</span></p>
+          </li>
+        </ol>
         <ol start=''>
           <li>
-            <p><span>首页 Index</span></p>
+            <p><span>Select the HTML and JSON files corresponding to the components or templates you want to contribute</span></p>
           </li>
           <li>
-            <p><span>模板编辑 Template-Edit</span></p>
+            <p><span>Write a </span><code>README. txt</code><span> or </span><code>README. md</code><span> (please copy and modify the content below)</span></p>
           </li>
           <li>
-            <p><span>组件编辑 Component-Edit</span></p>
+            <p><span>Send it to me as an attachment（ </span><a href='mailto:syf20020816@outlook.com' target='_blank' class='url'>syf20020816@outlook.com</a><span> ）</span></p>
           </li>
           <li>
-            <p><span>邮件发送 Email-Send</span></p>
+            <p><span>I will reply within 1-2 working days and upload your components to the resource warehouse</span></p>
           </li>
           <li>
-            <p><span>文档 Doc</span></p>
-          </li>
-          <li>
-            <p><span>模板商店 Template-Lib</span></p>
-          </li>
-          <li>
-            <p><span>组件商店 Component-Lib</span></p>
-          </li>
-          <li>
-            <p><span>更新信息 Update-Info</span></p>
-          </li>
-          <li>
-            <p><span>设置 Settings</span></p>
+            <p><span>Thank you very much for your support</span></p>
           </li>
         </ol>
-        <p><span>我们主要来了解一下：模板编辑、组件编辑、邮件发送、设置这四大主要功能</span></p>
-        <p><span>Let&#39;s mainly learn about the four main functions: template editing, component editing, email sending, and settings</span></p>
-        <h2 id='settings'><span>Settings</span></h2>
-        <p><span>首先我们要了解的是设置，通过设置，我们能够更好的使用程序，并且如果您需要通过EStylist发送邮件模板则必须先了解这些设置</span></p>
-        <p><span>The first thing we need to understand is the settings. Through these settings, we can better use the program, and if you need to send email templates through EStylist, you must first understand these settings</span></p>
-        <p><img src="../../assets/docs/settings.png" style="zoom: 67%;" /></p>
-        <h3 id='configurations'><span>Configurations</span></h3>
-        <figure class='table-figure'>
-          <table>
-            <thead>
-              <tr>
-                <th><span>Configuration</span></th>
-                <th><span>Option</span></th>
-                <th><span>Main</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span>版本</span><strong><span>Version</span></strong></td>
-                <td><span>eg: 0.0.2</span></td>
-                <td><span>🚫</span></td>
-              </tr>
-              <tr>
-                <td><span>软件安装目录</span><strong><span>Installation Dir</span></strong></td>
-                <td><span>eg:E:\estylist</span></td>
-                <td><span>🚫</span></td>
-              </tr>
-              <tr>
-                <td><span>配置路径 </span><strong><span>Config Path</span></strong></td>
-                <td><span>./conf/EStylist_config.json</span></td>
-                <td><span>🚫</span></td>
-              </tr>
-              <tr>
-                <td><span>资源下载路径 </span><strong><span>Resource Download URL</span></strong></td>
-                <td><a href='https://github.com/syf20020816/EStylist-TemplateLib' target='_blank' class='url'>https://github.com/syf20020816/EStylist-TemplateLib</a></td>
-                <td><span>🚫</span></td>
-              </tr>
-              <tr>
-                <td><span>组件路径 </span><strong><span>Component Path</span></strong></td>
-                <td><span>./components</span></td>
-                <td><span>🚫</span></td>
-              </tr>
-              <tr>
-                <td><span>模板路径 </span><strong><span>Template Path</span></strong></td>
-                <td><span>./templates</span></td>
-                <td><span>❎</span></td>
-              </tr>
-              <tr>
-                <td><span>邮箱 </span><strong><span>Email</span></strong></td>
-                <td><span>Your SMTP Email</span></td>
-                <td><span>✅</span></td>
-              </tr>
-              <tr>
-                <td><span>密码 </span><strong><span>Password</span></strong></td>
-                <td><span>Your SMTP Password</span></td>
-                <td><span>✅</span></td>
-              </tr>
-              <tr>
-                <td><span>SMTP</span></td>
-                <td><span>Any SMTP Service Address</span><br /><span>such as : smtp.gmail.com</span></td>
-                <td><span>✅</span></td>
-              </tr>
-              <tr>
-                <td><span>自动加载模板 </span><strong><span>Automatically load templates</span></strong></td>
-                <td><span>true</span><br /><span>false</span></td>
-                <td><span>❎</span></td>
-              </tr>
-              <tr>
-                <td><span>工作区占比 </span><strong><span>Proportion of workspaces</span></strong></td>
-                <td><span>1:1</span><br /><span>2:3</span><br /><span>3:2</span><br /><span>6:4</span><br /><span>4:6</span><br /><span>13:7</span><br /><span>7:13</span><br /><span>3:1</span></td>
-                <td><span>❤️</span></td>
-              </tr>
-              <tr>
-                <td><span>语言 Language</span></td>
-                <td><span>中文</span><br /><span>English</span></td>
-                <td><span>❤️</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </figure>
-        <blockquote>
-          <p><span>✅：important and must be configured</span></p>
-          <p><span>🚫：No configuration required</span></p>
-          <p><span>❎：It is not recommended to modify the configuration</span></p>
-          <p><span>❤️：Please configure according to your preferences</span></p>
-          <p><span>✅：重要且必须配置</span></p>
-          <p><span>🚫：无需配置</span></p>
-          <p><span>❎：不建议修改配置</span></p>
-          <p><span>❤️：请根据您的偏好进行配置</span></p>
-        </blockquote>
-        <p><span>❗请记住修改配置后请保存</span></p>
-        <p><span>❗Please remember to save after modifying the configuration</span></p>
-        <h2 id='template-edit'><span>Template-Edit</span></h2>
-        <p><span>模板编辑是EStylist的核心功能，他的目的是设计出你满意的邮箱模板，或者可以是个人卡片，对于学习过CSS的用户来说可能能够快速上手，但是若你没有学过，请一定要仔细学习这个部分</span></p>
-        <p><span>Template editing is the core function of EStylist. Its purpose is to design a satisfactory email template, or it can be a personal card. For users who have studied CSS, it may be easy to get started quickly, but if you have not studied it, please carefully study this section</span></p>
-        <p><img src="../../assets/docs/edit.png" style="zoom: 67%;" /></p>
-        <h3 id='level-tree'><span>Level Tree</span></h3>
-        <p><span>EStylist核心结构为层级树，理解它你将更好的使用EStylist构建邮件模板或模板组件</span></p>
-        <p><span>The core structure of EStylist is a hierarchical tree. Understanding it, you will better use EStylist to build email templates or template components</span></p>
-        <h4 id='mail'><span>Mail</span></h4>
-        <p><span>EStylist的邮件模板层级树，被抽象为三层分别是：</span></p>
-        <ol>
-          <li>
-            <p><span>底板层：邮件底板是一个最外层容器,底板的下层是区域,所有的区域都在底板中</span></p>
-          </li>
-          <li>
-            <p><span>区域层：区域是邮件底板的内部容器,区域依旧是一个容器,区域中可以存在很多组件,这些组件的外部属性是相同的</span></p>
-          </li>
-          <li>
-            <p><span>组件层：组件是模板的最小构成单位,在EStylist中组件由系统组件、自定义组件、第三方组件</span></p>
-          </li>
-        </ol>
-        <p><span>The email template hierarchy tree of EStylist is abstracted into three layers:</span></p>
-        <ol>
-          <li>
-            <p><span>Base Plate：The Base Plate is the outermost container, and the lower layer of the bottom plate is the area, all of which are in the bottom plate</span></p>
-          </li>
-          <li>
-            <p><span>Area：The area is the internal container of the Base Plate, and it is still a container. There can be many components in the area, and their external properties are the same</span></p>
-          </li>
-          <li>
-            <p><span>Component：A component is the smallest constituent unit of a template, and in EStylist, a component consists of system components, custom components, and third-party components</span></p>
-          </li>
-        </ol>
-        <p><img src="../../assets/docs/levelTree.png" style="zoom: 80%;" /></p>
-        <h4 id='component'><span>Component</span></h4>
-        <p><span>组件其实是模板的区域层+组件层，所以它去处理底板层</span></p>
-        <p><span>The component is actually the region layer and component layer of the template, so it handles the Base Plate</span></p>
-        <h3 id='understanding-of-padding-and-margins'><span>Understanding of Padding and Margins</span></h3>
-        <p><span>在看配置参数之前我们首先先了解一下什么是内边距和外边距，如图：</span></p>
-        <p><span>Before looking at the configuration parameters, let&#39;s first understand what inner and outer margins are, as shown in the figure：</span></p>
-        <p><img src="../../assets/padding_margin.png" style="zoom: 86%;" /></p>
-        <h3 id='configuration-parameters'><span>configuration parameters</span></h3>
-        <h4 id='底板层base-plate'><span>底板层(Base Plate)</span></h4>
-        <p><img src="../../assets/docs/baseplate_configs.png" style="zoom: 80%;" /></p>
-        <figure class='table-figure'>
-          <table>
-            <thead>
-              <tr>
-                <th><span>名称</span></th>
-                <th><span>name</span></th>
-                <th><span>说明</span></th>
-                <th><span>description</span></th>
-                <th><span>值</span></th>
-                <th><span>Value</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span>宽度</span></td>
-                <td><span>Width</span></td>
-                <td><span>设置底板的宽度</span></td>
-                <td><span>set the width of the Base Plate</span></td>
-                <td><span>数字</span></td>
-                <td><span>Number</span></td>
-              </tr>
-              <tr>
-                <td><span>背景色</span></td>
-                <td><span>BG Color</span></td>
-                <td><span>设置底板背景颜色，使用transparent表示透明</span></td>
-                <td><span>set the background color of the Base Plate，if use transparent means using lower layer color</span></td>
-                <td><span>16进制颜色</span></td>
-                <td><span>Hexadecimal color</span></td>
-              </tr>
-              <tr>
-                <td><span>内边距</span></td>
-                <td><span>Padding</span></td>
-                <td><span>内容区距离边框的宽度</span></td>
-                <td><span>the width of the Area from the Base Plate border</span></td>
-                <td><span>数字</span></td>
-                <td><span>Number</span></td>
-              </tr>
-              <tr>
-                <td><span>方向</span></td>
-                <td><span>Direction</span></td>
-                <td><span>设置区域按照X轴或Y轴排列</span></td>
-                <td><span>arrange the Area according to the X or Y axis</span></td>
-                <td><span>1. x</span><br /><span>2. y</span></td>
-                <td><span>1. x</span><br /><span>2. y</span></td>
-              </tr>
-              <tr>
-                <td><span>子区域个数</span></td>
-                <td><span>Child Area Num</span></td>
-                <td><span>底板中包含几个区域</span></td>
-                <td><span>how many Areas in the Base Plate</span></td>
-                <td><span>数字</span></td>
-                <td><span>Number</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </figure>
-        <h4 id='区域层area'><span>区域层(Area)</span></h4>
-        <p><img src="../../assets/docs/area_configs.png" style="zoom: 80%;" /></p>
-        <figure class='table-figure'>
-          <table>
-            <thead>
-              <tr>
-                <th><span>名称</span></th>
-                <th><span>name</span></th>
-                <th><span>说明</span></th>
-                <th><span>description</span></th>
-                <th><span>值</span></th>
-                <th><span>Value</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span>内容位置</span></td>
-                <td><span>Content Position</span></td>
-                <td><span>指的是内部组件在区域里的位置</span><br /><span>center：居中</span><br /><span>start：居左</span><br /><span>end：居右</span><br /><span>baseline == start</span></td>
-                <td><span>Refers to the position of internal components in the area</span><br /><span>center：in center</span><br /><span>start：left</span><br /><span>end：right</span><br /><span>baseline == start</span></td>
-                <td><span>1. center</span><br /><span>2. start</span><br /><span>3. end</span><br /><span>4. baseline</span></td>
-                <td><span>1. center</span><br /><span>2. start</span><br /><span>3. end</span><br /><span>4. baseline</span></td>
-              </tr>
-              <tr>
-                <td><span>背景色</span></td>
-                <td><span>BG Color</span></td>
-                <td><span>设置区域背景颜色，使用transparent表示透明</span></td>
-                <td><span>set the background color of the Area，if use transparent means using lower layer color</span></td>
-                <td><span>16进制颜色</span></td>
-                <td><span>Hexadecimal color</span></td>
-              </tr>
-              <tr>
-                <td><span>方向</span></td>
-                <td><span>Direction</span></td>
-                <td><span>设置组件按照X轴或Y轴排列</span></td>
-                <td><span>arrange theComponent according to the X or Y axis</span></td>
-                <td><span>1. x</span><br /><span>2. y</span></td>
-                <td><span>1. x</span><br /><span>2. y</span></td>
-              </tr>
-              <tr>
-                <td><span>子区域个数</span></td>
-                <td><span>Child Area Num</span></td>
-                <td><span>区域中包含几个组件</span></td>
-                <td><span>how many Components in the Area</span></td>
-                <td><span>数字</span></td>
-                <td><span>Number</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </figure>
-        <h4 id='组件层component'><span>组件层(Component)</span></h4>
-        <p><img src="../../assets/docs/c_configs1.png" style="zoom: 80%;" /></p>
-        <figure class='table-figure'>
-          <table>
-            <thead>
-              <tr>
-                <th><span>名称</span></th>
-                <th><span>name</span></th>
-                <th><span>说明</span></th>
-                <th><span>description</span></th>
-                <th><span>值</span></th>
-                <th><span>Value</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span>组件名称</span></td>
-                <td><span>Component Name</span></td>
-                <td><span>组件的名字</span></td>
-                <td><span>Component Name</span></td>
-                <td><span>字符串</span></td>
-                <td><span>String</span></td>
-              </tr>
-              <tr>
-                <td><span>组件类型</span></td>
-                <td><span>Model Types</span></td>
-                <td><span>系统组件提供的类型</span></td>
-                <td><span>Types of components provided by the system</span></td>
-                <td><span>1. 文字</span><br /><span>2. 图片</span><br /><span>3. 链接</span></td>
-                <td><span>1. Font</span><br /><span>2. Image</span><br /><span>3. link</span></td>
-              </tr>
-              <tr>
-                <td><span>高度</span></td>
-                <td><span>Height</span></td>
-                <td><span>组件的高度 ，建议如下：</span><br /><span>1. 使用</span><code>px</code><span>像素作为字体大小</span><br /><span>2. 使用</span><code>em</code><span>作为字体大小</span><br /><span>3. </span><code>auto</code><span>表示字体高度等于组件高度</span><br /><span>4. 使用</span><code>%</code><span>设置高度占比</span></td>
-                <td><span>The height of the component is recommended as follows:</span><br /><span>1. Use </span><code>px</code><span> pixels as font size</span><br /><span>2. Use </span><code>em</code><span> as font size</span><br /><span>3. </span><code>auto</code><span> indicates that the font height is equal to the component height</span><br /><span>4. Set height percentage using</span><code>%</code></td>
-                <td><span>字符串</span></td>
-                <td><span>String</span></td>
-              </tr>
-              <tr>
-                <td><span>宽度</span></td>
-                <td><span>Width</span></td>
-                <td><span>区域中包含几个组件</span></td>
-                <td><span>how many Components in the Area</span></td>
-                <td><span>字符串</span></td>
-                <td><span>String</span></td>
-              </tr>
-              <tr>
-                <td><span>内容位置</span></td>
-                <td><span>Content Position</span></td>
-                <td><span>设置组件中的内容在组件中的位置</span><br /><span>center：居中</span><br /><span>start：居左</span><br /><span>end：居右</span><br /><span>baseline == start</span></td>
-                <td><span>Set the position of the content in the component within the component</span><br /><span>center：in center</span><br /><span>start：left</span><br /><span>end：right</span><br /><span>baseline == start</span></td>
-                <td><span>1. center</span><br /><span>2. start</span><br /><span>3. end</span><br /><span>4. baseline</span></td>
-                <td><span>1. center</span><br /><span>2. start</span><br /><span>3. end</span><br /><span>4. baseline</span></td>
-              </tr>
-              <tr>
-                <td><span>圆角</span></td>
-                <td><span>Radius</span></td>
-                <td><span>设置组件圆角，若组件的高度和宽度相等，使用50%表示设置组件为圆</span></td>
-                <td><span>Set component rounded corners. If the height and width of the component are equal, use 50% to set the component as a circle</span></td>
-                <td><span>字符串</span></td>
-                <td><span>String</span></td>
-              </tr>
-              <tr>
-                <td><span>内容</span></td>
-                <td><span>Content</span></td>
-                <td><span>文字内容</span></td>
-                <td><span>Text content</span></td>
-                <td><span>字符串</span></td>
-                <td><span>String</span></td>
-              </tr>
-              <tr>
-                <td><span>背景色</span></td>
-                <td><span>BG Color</span></td>
-                <td><span>设置组件背景颜色，使用transparent表示透明</span></td>
-                <td><span>set the background color of the Component，if use transparent means using lower layer color</span></td>
-                <td><span>16进制颜色</span></td>
-                <td><span>Hexadecimal color</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </figure>
-        <p><img src="../../assets/docs/c_configs2.png" style="zoom: 80%;" /></p>
-        <figure class='table-figure'>
-          <table>
-            <thead>
-              <tr>
-                <th><span>名称</span></th>
-                <th><span>name</span></th>
-                <th><span>说明</span></th>
-                <th><span>description</span></th>
-                <th><span>值</span></th>
-                <th><span>Value</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span>文字大小</span></td>
-                <td><span>Font Size</span></td>
-                <td><span>设置文字的大小 (单位为</span><code>px</code><span>)</span></td>
-                <td><span>Set the size of the text (unit </span><code>px</code><span>)</span></td>
-                <td><span>数字</span></td>
-                <td><span>Number</span></td>
-              </tr>
-              <tr>
-                <td><span>文字粗细</span></td>
-                <td><span>Font Weight</span></td>
-                <td><span>设置文字是否加粗</span></td>
-                <td><span>Set whether the text is bold</span></td>
-                <td><span>布尔值：true | false</span></td>
-                <td><span>bool：true | false</span></td>
-              </tr>
-              <tr>
-                <td><span>字体类型</span></td>
-                <td><span>Font Family</span></td>
-                <td><span>设置文字使用的字体</span></td>
-                <td><span>Set the font used for text</span></td>
-                <td><span>1. Helvetica</span><br /><span>2. Arial Narrow</span><br /><span>3. Verdana</span><br /><span>4. Arial</span><br /><span>5. Franklin Gothic Medium</span></td>
-                <td><span>1. Helvetica</span><br /><span>2. Arial Narrow</span><br /><span>3. Verdana</span><br /><span>4. Arial</span><br /><span>5. Franklin Gothic Medium</span></td>
-              </tr>
-              <tr>
-                <td><span>文字颜色</span></td>
-                <td><span>Font Color</span></td>
-                <td><span>设置文字的颜色</span></td>
-                <td><span>Set the color of text</span></td>
-                <td><span>16进制颜色</span></td>
-                <td><span>Hexadecimal color</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </figure>
-        <p><img src="../../assets/docs/c_configs3.png" style="zoom: 80%;" /></p>
-        <figure class='table-figure'>
-          <table>
-            <thead>
-              <tr>
-                <th><span>名称</span></th>
-                <th><span>name</span></th>
-                <th><span>说明</span></th>
-                <th><span>description</span></th>
-                <th><span>值</span></th>
-                <th><span>Value</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span>文字位置</span></td>
-                <td><span>Text Pos</span></td>
-                <td><span>文字位置是文字在组件中占据的位置，当文字宽度大于组件宽度进行换行时会产生效果</span><br /><span>1. left：左对齐</span><br /><span>2. right：右对齐</span><br /><span>3. center：居中对齐</span><br /><span>4. justify：拉伸对齐</span></td>
-                <td><span>Text position is the position occupied by text in a component. When the width of the text is greater than the width of the component for line wrapping, it will have an effect</span><br /><span>1 Left: Left aligned</span><br /><span>2 Right: Right aligned</span><br /><span>3 Center: Center alignment</span><br /><span>4 Justify: stretch alignment</span></td>
-                <td><span>1. left</span><br /><span>2. right</span><br /><span>3. center</span><br /><span>4. justify</span></td>
-                <td><span>1. left</span><br /><span>2. right</span><br /><span>3. center</span><br /><span>4. justify</span></td>
-              </tr>
-              <tr>
-                <td><span>内边距</span></td>
-                <td><span>Padding</span></td>
-                <td><span>内边距就是内容边框距离内容的宽度</span><br /><span>分为上下左右四个方位</span></td>
-                <td><span>The inner margin is the width of the content border from the content</span><br /><span>It divided into four directions: up, down, left, right</span></td>
-                <td><span>数字</span></td>
-                <td><span>Number</span></td>
-              </tr>
-              <tr>
-                <td><span>外边距</span></td>
-                <td><span>Margin</span></td>
-                <td><span>外边距就是内容边框距离区域的宽度</span><br /><span>分为上下左右四个方位</span></td>
-                <td><span>The margin is the width of the content border from the area</span><br /><span>It divided into four directions: up, down, left, right</span></td>
-                <td><span>数字</span></td>
-                <td><span>Number</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </figure>
-        <p><img src="../../assets/docs/c_configs4.png" style="zoom: 80%;" /></p>
-        <figure class='table-figure'>
-          <table>
-            <thead>
-              <tr>
-                <th><span>名称</span></th>
-                <th><span>name</span></th>
-                <th><span>说明</span></th>
-                <th><span>description</span></th>
-                <th><span>值</span></th>
-                <th><span>Value</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span>Border</span></td>
-                <td><span>边框</span></td>
-                <td><span>设置组件的边框，可以设置边框的宽度，边框颜色、描边类型</span></td>
-                <td><span>Set the border of the component, which can include the width, color, and stroke type of the border</span></td>
-                <td><span>1. 宽度：数字类型</span><br /><span>2. 颜色：十六进制颜色</span><br /><span>3. 描边类型：solid：实线</span><br /><span>double：双实线</span><br /><span>dashed：短线</span><br /><span>dotted：点</span></td>
-                <td><span>1. Width: Number type</span><br /><span>2 Color: hexadecimal color</span><br /><span>3 Stroke type: solid: solid line</span><br /><span>double: double solid line</span><br /><span>dashed: short line</span><br /><span>dotted: point</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </figure>
-        <h4 id='链接和图片-link-and-image'><span>链接和图片 Link and Image</span></h4>
-        <p><span>当我们切换组件类型为链接或图片时会增加一个属性：地址</span>
-          <span>When we switch the component type to Link or Image, we will add an attribute: Url</span>
-        </p>
-        <figure class='table-figure'>
-          <table>
-            <thead>
-              <tr>
-                <th><span>名称</span></th>
-                <th><span>name</span></th>
-                <th><span>说明</span></th>
-                <th><span>description</span></th>
-                <th><span>值</span></th>
-                <th><span>Value</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span>地址（图片）</span></td>
-                <td><span>Url（Image）</span></td>
-                <td><span>表示图片的base64值，在上传图片之后就会显示，请不要更改</span></td>
-                <td><span>Indicates the base64 value of the image, which will be displayed after uploading the image. Please do not change it</span></td>
-                <td><span>字符串</span></td>
-                <td><span>String</span></td>
-              </tr>
-              <tr>
-                <td><span>地址（链接）</span></td>
-                <td><span>Url（Link）</span></td>
-                <td><span>表示链接要跳转的地址，请直接输入</span></td>
-                <td><span>Indicates the address to which the link will jump, please enter it directly</span></td>
-                <td><span>字符串</span></td>
-                <td><span>String</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </figure>
-        <h3 id='工具tools）'><span>工具（tools）</span></h3>
-        <p><span>工具在右下角，当前一共有7种</span></p>
-        <p><span>The tools are in the bottom right corner, currently there are a total of 7 types</span></p>
-        <p><img src="../../assets/docs/tools1.png" /></p>
-        <figure class='table-figure'>
-          <table>
-            <thead>
-              <tr>
-                <th><span>tool</span></th>
-                <th><span>des</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span>1</span></td>
-                <td><span>缩小模板编辑区</span><br /><span>Zoom out the template editing area</span></td>
-              </tr>
-              <tr>
-                <td><span>2</span></td>
-                <td><span>放大模板编辑区</span><br /><span>Zoom in the template editing area</span></td>
-              </tr>
-              <tr>
-                <td><span>3</span></td>
-                <td><span>上传JSON模板文件到邮件设计中</span><br /><span>Upload JSON template file to email design</span></td>
-              </tr>
-              <tr>
-                <td><span>4</span></td>
-                <td><span>下载邮件模板的JSON文件以及HTML文件到templates目录中</span><br /><span>Download the JSON file and HTML file of the email template to the templates directory</span></td>
-              </tr>
-              <tr>
-                <td><span>5</span></td>
-                <td><span>上传JSON模板文件到组件设计中</span><br /><span>Upload JSON template files into component design</span></td>
-              </tr>
-              <tr>
-                <td><span>6</span></td>
-                <td><span>下载组件模板的JSON文件以及HTML文件到components目录中</span><br /><span>Download the JSON file and HTML file of the component template to the components directory</span></td>
-              </tr>
-              <tr>
-                <td><span>7</span></td>
-                <td><span>删除当前模板以及暂存区缓存</span><br /><span>Delete the current template and temporary storage cache</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </figure>
-        <blockquote>
-          <p><span>❗上传文件时请不要焦急，为了完整的解析文件程序会等待0.75s左右的时间，请不要手动关闭，程序解析结束会自动关闭</span></p>
-          <p><span>❗Please do not be anxious when uploading files. In order to fully parse the file, the program will wait for about 0.75 seconds. Please do not manually close it. The program will automatically close after parsing</span></p>
-        </blockquote>
-        <h2 id='email-send'><span>Email-Send</span></h2>
-        <p><span>最后是邮件发送，值得注意的是EStylist旨在发送构建好的邮件模板，若你想要发送寻常的邮件，请移步到普通邮箱</span></p>
-        <p><span>Finally, there is email sending. It is worth noting that EStylist aims to send built email templates. If you want to send regular emails, please move to regular email</span></p>
-        <p><img src="../../assets/docs/send.png" alt="image-20230623004500093" style="zoom:67%;" /></p>
-        <h3 id='buttons'><span>Buttons</span></h3>
-        <figure class='table-figure'>
-          <table>
-            <thead>
-              <tr>
-                <th><span>button</span></th>
-                <th><span>des</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span>Choose</span></td>
-                <td><span>选择你需要发送的模板</span><br /><span>Choose the template you need to send</span></td>
-              </tr>
-              <tr>
-                <td><span>Send</span></td>
-                <td><span>发送邮件</span><br /><span>Send Email</span></td>
-              </tr>
-              <tr>
-                <td><span>Add Contact</span></td>
-                <td><span>添加联系人邮件</span><br /><span>Add contact email</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </figure>
-        <p>&nbsp;</p>
+        <h2 id='readmemdreadmetxt'><span>README.md|README.txt</span></h2>
+        <pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="markdown"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="markdown"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 11px; left: 31px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 27px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre>x</pre>
       </div>
+      <div class="CodeMirror-measure"></div>
+      <div style="position: relative; z-index: 1;"></div>
+      <div class="CodeMirror-code" role="presentation" style="">
+        <div style="position: relative;" class="CodeMirror-activeline">
+          <div class="CodeMirror-activeline-background CodeMirror-linebackground"></div>
+          <div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -27px; width: 27px;"></div>
+          <div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -27px;">
+            <div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 18px;">1</div>
+          </div>
+          <pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-block-start cm-variable-2">- </span><span class="cm-variable-2">email : your email(你的邮箱)</span></span></pre>
+        </div>
+        <div style="position: relative;" class="">
+          <div class="CodeMirror-gutter-wrapper" style="left: -27px;">
+            <div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 18px;">2</div>
+          </div>
+          <pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">// if your contribution is a template =&gt; true</span></pre>
+        </div>
+        <div class="" style="position: relative;">
+          <div class="CodeMirror-gutter-wrapper" style="left: -27px;">
+            <div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 18px;">3</div>
+          </div>
+          <pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">// 如果您的贡献物是一个模板 =&gt; true</span></pre>
+        </div>
+        <div style="position: relative;">
+          <div class="CodeMirror-gutter-wrapper" style="left: -27px;">
+            <div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 18px;">4</div>
+          </div>
+          <pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">- isTemplate : true or false</span></pre>
+        </div>
+        <div class="" style="position: relative;">
+          <div class="CodeMirror-gutter-wrapper" style="left: -27px;">
+            <div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 18px;">5</div>
+          </div>
+          <pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">// Optional, if you have a Github account</span></pre>
+        </div>
+        <div class="" style="position: relative;">
+          <div class="CodeMirror-gutter-wrapper" style="left: -27px;">
+            <div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 18px;">6</div>
+          </div>
+          <pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">// 可选，若您有Github账号的话</span></pre>
+        </div>
+        <div class="" style="position: relative;">
+          <div class="CodeMirror-gutter-wrapper" style="left: -27px;">
+            <div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 18px;">7</div>
+          </div>
+          <pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">- githhub? : your github account or address</span></pre>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 182px;"></div>
+    <div class="CodeMirror-gutters" style="height: 182px; left: 0px;">
+      <div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 26px;"></div>
+    </div>
+    </div>
+    </div>
+    </pre>
+    <p>&nbsp;</p>
+    </div>
     </div>
   </body>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'HowToUse'
+  name: 'Contribute'
 }
 </script>
 
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 </script>
-
 <style type='text/css' scoped>
 html {
   overflow-x: initial !important;
@@ -1459,6 +978,320 @@ mark .md-meta {
 }
 mjx-container {
   break-inside: avoid;
+}
+
+.CodeMirror {
+  height: auto;
+}
+.CodeMirror.cm-s-inner {
+  background: inherit;
+}
+.CodeMirror-scroll {
+  overflow: auto hidden;
+  z-index: 3;
+}
+.CodeMirror-gutter-filler,
+.CodeMirror-scrollbar-filler {
+  background-color: rgb(255, 255, 255);
+}
+.CodeMirror-gutters {
+  border-right: 1px solid rgb(221, 221, 221);
+  background: inherit;
+  white-space: nowrap;
+}
+.CodeMirror-linenumber {
+  padding: 0px 3px 0px 5px;
+  text-align: right;
+  color: rgb(153, 153, 153);
+}
+.cm-s-inner .cm-keyword {
+  color: rgb(119, 0, 136);
+}
+.cm-s-inner .cm-atom,
+.cm-s-inner.cm-atom {
+  color: rgb(34, 17, 153);
+}
+.cm-s-inner .cm-number {
+  color: rgb(17, 102, 68);
+}
+.cm-s-inner .cm-def {
+  color: rgb(0, 0, 255);
+}
+.cm-s-inner .cm-variable {
+  color: rgb(0, 0, 0);
+}
+.cm-s-inner .cm-variable-2 {
+  color: rgb(0, 85, 170);
+}
+.cm-s-inner .cm-variable-3 {
+  color: rgb(0, 136, 85);
+}
+.cm-s-inner .cm-string {
+  color: rgb(170, 17, 17);
+}
+.cm-s-inner .cm-property {
+  color: rgb(0, 0, 0);
+}
+.cm-s-inner .cm-operator {
+  color: rgb(152, 26, 26);
+}
+.cm-s-inner .cm-comment,
+.cm-s-inner.cm-comment {
+  color: rgb(170, 85, 0);
+}
+.cm-s-inner .cm-string-2 {
+  color: rgb(255, 85, 0);
+}
+.cm-s-inner .cm-meta {
+  color: rgb(85, 85, 85);
+}
+.cm-s-inner .cm-qualifier {
+  color: rgb(85, 85, 85);
+}
+.cm-s-inner .cm-builtin {
+  color: rgb(51, 0, 170);
+}
+.cm-s-inner .cm-bracket {
+  color: rgb(153, 153, 119);
+}
+.cm-s-inner .cm-tag {
+  color: rgb(17, 119, 0);
+}
+.cm-s-inner .cm-attribute {
+  color: rgb(0, 0, 204);
+}
+.cm-s-inner .cm-header,
+.cm-s-inner.cm-header {
+  color: rgb(0, 0, 255);
+}
+.cm-s-inner .cm-quote,
+.cm-s-inner.cm-quote {
+  color: rgb(0, 153, 0);
+}
+.cm-s-inner .cm-hr,
+.cm-s-inner.cm-hr {
+  color: rgb(153, 153, 153);
+}
+.cm-s-inner .cm-link,
+.cm-s-inner.cm-link {
+  color: rgb(0, 0, 204);
+}
+.cm-negative {
+  color: rgb(221, 68, 68);
+}
+.cm-positive {
+  color: rgb(34, 153, 34);
+}
+.cm-header,
+.cm-strong {
+  font-weight: 700;
+}
+.cm-del {
+  text-decoration: line-through;
+}
+.cm-em {
+  font-style: italic;
+}
+.cm-link {
+  text-decoration: underline;
+}
+.cm-error {
+  color: red;
+}
+.cm-invalidchar {
+  color: red;
+}
+.cm-constant {
+  color: rgb(38, 139, 210);
+}
+.cm-defined {
+  color: rgb(181, 137, 0);
+}
+div.CodeMirror span.CodeMirror-matchingbracket {
+  color: rgb(0, 255, 0);
+}
+div.CodeMirror span.CodeMirror-nonmatchingbracket {
+  color: rgb(255, 34, 34);
+}
+.cm-s-inner .CodeMirror-activeline-background {
+  background: inherit;
+}
+.CodeMirror {
+  position: relative;
+  overflow: hidden;
+}
+.CodeMirror-scroll {
+  height: 100%;
+  outline: 0px;
+  position: relative;
+  box-sizing: content-box;
+  background: inherit;
+}
+.CodeMirror-sizer {
+  position: relative;
+}
+.CodeMirror-gutter-filler,
+.CodeMirror-hscrollbar,
+.CodeMirror-scrollbar-filler,
+.CodeMirror-vscrollbar {
+  position: absolute;
+  z-index: 6;
+  display: none;
+  outline: 0px;
+}
+.CodeMirror-vscrollbar {
+  right: 0px;
+  top: 0px;
+  overflow: hidden;
+}
+.CodeMirror-hscrollbar {
+  bottom: 0px;
+  left: 0px;
+  overflow: auto hidden;
+}
+.CodeMirror-scrollbar-filler {
+  right: 0px;
+  bottom: 0px;
+}
+.CodeMirror-gutter-filler {
+  left: 0px;
+  bottom: 0px;
+}
+.CodeMirror-gutters {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding-bottom: 10px;
+  z-index: 3;
+  overflow-y: hidden;
+}
+.CodeMirror-gutter {
+  white-space: normal;
+  height: 100%;
+  box-sizing: content-box;
+  padding-bottom: 30px;
+  margin-bottom: -32px;
+  display: inline-block;
+}
+.CodeMirror-gutter-wrapper {
+  position: absolute;
+  z-index: 4;
+  background: 0px 0px !important;
+  border: none !important;
+}
+.CodeMirror-gutter-background {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  z-index: 4;
+}
+.CodeMirror-gutter-elt {
+  position: absolute;
+  cursor: default;
+  z-index: 4;
+}
+.CodeMirror-lines {
+  cursor: text;
+}
+.CodeMirror pre {
+  border-radius: 0px;
+  border-width: 0px;
+  background: 0px 0px;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0px;
+  white-space: pre;
+  overflow-wrap: normal;
+  color: inherit;
+  z-index: 2;
+  position: relative;
+  overflow: visible;
+}
+.CodeMirror-wrap pre {
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: normal;
+}
+.CodeMirror-code pre {
+  border-right: 30px solid transparent;
+  width: fit-content;
+}
+.CodeMirror-wrap .CodeMirror-code pre {
+  border-right: none;
+  width: auto;
+}
+.CodeMirror-linebackground {
+  position: absolute;
+  inset: 0px;
+  z-index: 0;
+}
+.CodeMirror-linewidget {
+  position: relative;
+  z-index: 2;
+  overflow: auto;
+}
+.CodeMirror-wrap .CodeMirror-scroll {
+  overflow-x: hidden;
+}
+.CodeMirror-measure {
+  position: absolute;
+  width: 100%;
+  height: 0px;
+  overflow: hidden;
+  visibility: hidden;
+}
+.CodeMirror-measure pre {
+  position: static;
+}
+.CodeMirror div.CodeMirror-cursor {
+  position: absolute;
+  visibility: hidden;
+  border-right: none;
+  width: 0px;
+}
+.CodeMirror div.CodeMirror-cursor {
+  visibility: hidden;
+}
+.CodeMirror-focused div.CodeMirror-cursor {
+  visibility: inherit;
+}
+.cm-searching {
+  background: rgba(255, 255, 0, 0.4);
+}
+span.cm-underlined {
+  text-decoration: underline;
+}
+span.cm-strikethrough {
+  text-decoration: line-through;
+}
+.cm-tw-syntaxerror {
+  color: rgb(255, 255, 255);
+  background-color: rgb(153, 0, 0);
+}
+.cm-tw-deleted {
+  text-decoration: line-through;
+}
+.cm-tw-header5 {
+  font-weight: 700;
+}
+.cm-tw-listitem:first-child {
+  padding-left: 10px;
+}
+.cm-tw-box {
+  border-style: solid;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-color: inherit;
+  border-top-width: 0px !important;
+}
+.cm-tw-underline {
+  text-decoration: underline;
+}
+@media print {
+  .CodeMirror div.CodeMirror-cursor {
+    visibility: hidden;
+  }
 }
 
 :root {

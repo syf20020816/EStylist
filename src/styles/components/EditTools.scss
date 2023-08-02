@@ -108,7 +108,7 @@ $component: "EditTools";
     }
     @include build("tool2", "config") {
       width: 100%;
-      height: calc(100% - 190px);
+      height: calc(100% - 250px);
       box-sizing: border-box;
       padding-left: 6px;
       .configs_title {

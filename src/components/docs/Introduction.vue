@@ -41,7 +41,7 @@
         <p><span>下载EStylist十分简单，你可以前往Gitee或者GitHub上直接进行下载exe文件，然后将exe放到自己喜欢的目录下直接启动即可，程序会帮助您构建需要的文件以及目录。</span></p>
         <p><span>Downloading EStylist is very simple. You can go to Gitee or GitHub to download the exe file directly, and then place the exe in your favorite directory to start directly. The program will help you build the necessary files and directories.</span></p>
         <h2 id='directory-structure'><span>Directory Structure</span></h2>
-        <p><img src="../../assets/dir.png"></p>
+        <p><img src="../../assets/docs/dir.png"></p>
         <h2 id='how-to-use-estylist'><span>How To Use EStylist</span></h2>
         <ul>
           <li>

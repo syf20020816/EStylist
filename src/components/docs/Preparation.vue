@@ -22,16 +22,16 @@
         <h2 id='example-for-qq'><span>Example For QQ</span></h2>
         <p><span>首先，打开QQ邮箱，选择设置</span></p>
         <p><span>First, open the QQ email and select Settings</span></p>
-        <p><img src="../../assets/image-20230622231149817.png" referrerpolicy="no-referrer" alt="image-20230622231149817"></p>
+        <p><img src="../../assets/docs/image-20230622231149817.png" referrerpolicy="no-referrer" alt="image-20230622231149817"></p>
         <p><span>选择邮箱设置中的账户</span></p>
         <p><span>Select an account in the email settings</span></p>
-        <p><img src="../../assets/image-20230622231314194.png" referrerpolicy="no-referrer" alt="image-20230622231314194"></p>
+        <p><img src="../../assets/docs/image-20230622231314194.png" referrerpolicy="no-referrer" alt="image-20230622231314194"></p>
         <p><span>找到</span><code>POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV</code><span>服务，然后开启服务</span></p>
         <p><span>Find the</span><code>POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV</code><span>service and start the service</span></p>
-        <p><img src="../../assets/image-20230622231359770.png" referrerpolicy="no-referrer" alt="image-20230622231359770"></p>
+        <p><img src="../../assets/docs/image-20230622231359770.png" referrerpolicy="no-referrer" alt="image-20230622231359770"></p>
         <p><span>选择安全设置，找到</span><code>POP3/IMAP/SMTP/Exchange/CardDAV</code><span>服务，然后生成授权码</span></p>
         <p><span>Select security settings, locate the</span><code>POP3/IMAP/SMTP/Exchange/CardDAV</code><span>service, and generate an authorization code</span></p>
-        <p><img src="../../assets/image-20230622231506917.png" referrerpolicy="no-referrer" alt="image-20230622231506917"></p>
+        <p><img src="../../assets/docs/image-20230622231506917.png" referrerpolicy="no-referrer" alt="image-20230622231506917"></p>
         <blockquote>
           <p><span>❗生成的授权码请妥善保存</span></p>
           <p><span>❗Please keep the generated authorization code properly</span></p>
