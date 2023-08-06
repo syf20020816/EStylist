@@ -42,7 +42,7 @@ pub enum Language {
 impl Default for Settings {
     fn default() -> Self {
         Settings {
-            version: "0.1.0".to_string(),
+            version: "0.1.1".to_string(),
             store: format!("./{}/{}.json", CONF_DIR, CONF_FILE),
             template: format!("./{}", TEMPLATE_DIR),
             component: format!("./{}", COMPONENT_DIR),

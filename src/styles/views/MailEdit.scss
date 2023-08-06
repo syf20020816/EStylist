@@ -81,7 +81,7 @@ $component: 'MailEdit';
       display: flex;
       align-items: center;
       justify-content: space-evenly;
-
+      overflow: hidden;
       .el-icon {
         cursor: pointer;
         transition: all 0.4s ease-in-out;

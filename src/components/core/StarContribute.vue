@@ -48,7 +48,7 @@ $component: 'StarContribute';
 
   .title {
     height: 36px;
-    font-size: 16px;
+    font-size: 2vh;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -72,6 +72,7 @@ $component: 'StarContribute';
       line-height: 2.5em;
       text-align: center;
       border-radius: 4px;
+      overflow: hidden;
       cursor: pointer;
     }
     .a {
@@ -80,6 +81,8 @@ $component: 'StarContribute';
       width: 90%;
       display: inline-block;
       height: 2.5em;
+      font-size: 14px;
+      overflow: hidden;
       background-color: #263d48;
       color: #fff;
       line-height: 2.5em;

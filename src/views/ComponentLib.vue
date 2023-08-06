@@ -159,7 +159,7 @@ $component: 'ComponentLib';
 
 @include buildView($component) {
   height: inherit;
-  width: inherit;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -262,7 +262,13 @@ $component: 'ComponentLib';
       .preview {
         border-left: 1px solid #fff;
         display: flex;
-        align-items: flex-start;
+        box-sizing: border-box;
+        overflow: scroll;
+        padding-left: 300px;
+        padding-top: 32px;
+        padding-bottom: 32px;
+        padding-right: 60px;
+        align-items: center;
         justify-content: center;
         width: calc(69%);
         height: 100%;

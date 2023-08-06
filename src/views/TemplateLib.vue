@@ -250,9 +250,15 @@ $component: 'TemplateLib';
         }
       }
       .preview {
+        overflow: scroll;
         border-left: 1px solid #fff;
         display: flex;
-        align-items: flex-start;
+        align-items: center;
+        box-sizing: border-box;
+        padding-left: 300px;
+        padding-top: 32px;
+        padding-bottom: 32px;
+        padding-right: 60px;
         justify-content: center;
         width: calc(69%);
         height: 100%;
