@@ -78,6 +78,11 @@ const tableData = [
     date: '2023-08-02',
     version: '0.1.0',
     author: 'syf20020816@outlook.com'
+  },
+  {
+    date: '2023-08-07',
+    version: '0.1.1',
+    author: 'syf20020816@outlook.com'
   }
 ]
 
@@ -109,39 +114,9 @@ const updateConfirm = () => {
 let updateList = computed(() => {
   let lang = store.settings.language
   if (lang == 'Chinese') {
-    return [
-      '增加模块组件边框属性',
-      '增加自定义模块组件（支持用户自定义组件进行复用，提升效率）',
-      '增加模块节点复制功能（添加区域将直接复制上个区域）',
-      '优化模块节点删除',
-      '提升模板编辑交互性',
-      '增加用户模板直接预览',
-      '增加模板库（用户可在线获取模板）',
-      '增加组件库（用户在线获取组件）',
-      '修复不完全国际化',
-      '修复域冲突问题',
-      '优化内部数据结构',
-      '设置优化',
-      '编辑界面更新(调色器,字体控制器)',
-      '文档更新'
-    ]
+    return ['完善组件|模板商店预览显示问题', '完善编辑界面显示问题']
   }
-  return [
-    'Add module component border attributes',
-    'Add custom module components (supporting reuse of user-defined components to improve efficiency)',
-    'Add module node replication function (adding regions will directly copy the previous region)',
-    'Optimization module node deletion',
-    'Improve template editing interactivity',
-    'Add user template for direct preview',
-    'Add template library (users can obtain templates online)',
-    'Add component library (users can access components online)',
-    'Fix incomplete internationalization',
-    'Fix domain conflict issues',
-    'Optimize internal data structure',
-    'Set Optimization',
-    'Editing interface update (color palette, font controller)',
-    'Document update'
-  ]
+  return ['Improve Components | Template Store Preview Display Issues', 'Improve the editing interface display issues']
 })
 </script>
 

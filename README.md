@@ -1,4 +1,4 @@
-<img src="https://img.shields.io/badge/EStylist-0.1.0-orange?style=flat-square&logo=tauri&logoColor=%23fff&labelColor=%2323B898&color=%2323B898"> <img src="https://img.shields.io/badge/License-MIT-orange?style=flat-square&logoColor=%23fff&labelColor=%2323B898&color=%2323B898">
+<img src="https://img.shields.io/badge/EStylist-0.1.1-orange?style=flat-square&logo=tauri&logoColor=%23fff&labelColor=%2323B898&color=%2323B898"> <img src="https://img.shields.io/badge/License-MIT-orange?style=flat-square&logoColor=%23fff&labelColor=%2323B898&color=%2323B898">
 
 # EStylist
 
@@ -6,12 +6,12 @@
 - author：syf20020816@outlook.com
 - docName：EStylist README
 - createDate：20230619
-- updateDate：20230801
-- version：0.1.0
+- updateDate：20230807
+- version：0.1.1
 - des-tag：release
 - email：syf20020816@outlook.com
 
-<img src="https://img.shields.io/badge/EStylist-0.1.0-orange?style=flat-square&logo=tauri&logoColor=%23fff&labelColor=%2323B898&color=%2323B898">
+<img src="https://img.shields.io/badge/EStylist-0.1.1-orange?style=flat-square&logo=tauri&logoColor=%23fff&labelColor=%2323B898&color=%2323B898">
 
 ## Why EStylist
 

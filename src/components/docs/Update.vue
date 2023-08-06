@@ -28,10 +28,24 @@
                 <td><span>20230802</span></td>
                 <td><a href='mailto:syf20020816@outlook.com' target='_blank' class='url'>syf20020816@outlook.com</a></td>
               </tr>
+              <tr>
+                <td><span>0.1.1</span></td>
+                <td><span>20230807</span></td>
+                <td><a href='mailto:syf20020816@outlook.com' target='_blank' class='url'>syf20020816@outlook.com</a></td>
+              </tr>
             </tbody>
           </table>
         </figure>
         <h2 id='update-log'><span>Update Log</span></h2>
+        <h3 id='v010'><span>v0.1.1</span></h3>
+        <ul>
+          <li>
+            <p><span>✅完善组件|模板商店预览显示问题</span></p>
+          </li>
+          <li>
+            <p><span>✅完善编辑界面显示问题</span></p>
+          </li>
+        </ul>
         <h3 id='v010'><span>v0.1.0</span></h3>
         <ul>
           <li>
@@ -114,7 +128,7 @@
           </li>
         </ul>
         <h2 id='update-preview'><span>Update Preview</span></h2>
-        <h3 id='v011'><span>v0.1.1</span></h3>
+        <h3 id='v011'><span>v0.1.2</span></h3>
         <p><span>还没想好要更什么</span></p>
       </div>
     </div>

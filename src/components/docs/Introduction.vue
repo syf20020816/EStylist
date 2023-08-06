@@ -2,7 +2,7 @@
   <div class='typora-export os-windows'>
     <div class='typora-export-content'>
       <div id='write' class=''>
-        <p><img src="https://img.shields.io/badge/EStylist-0.1.0-orange?style=flat-square&logo=tauri&logoColor=%23fff&labelColor=%2323B898&color=%2323B898"><span style="display: inline-block;width: 10px;"> </span><img src="https://img.shields.io/badge/License-MIT-orange?style=flat-square&logoColor=%23fff&labelColor=%2323B898&color=%2323B898"></p>
+        <p><img src="https://img.shields.io/badge/EStylist-0.1.1-orange?style=flat-square&logo=tauri&logoColor=%23fff&labelColor=%2323B898&color=%2323B898"><span style="display: inline-block;width: 10px;"> </span><img src="https://img.shields.io/badge/License-MIT-orange?style=flat-square&logoColor=%23fff&labelColor=%2323B898&color=%2323B898"></p>
         <h1 id='estylist'><span>EStylist</span></h1>
         <ul>
           <li>
@@ -15,10 +15,10 @@
             <p><span>createDate：20230619</span></p>
           </li>
           <li>
-            <p><span>updateDate：20230801</span></p>
+            <p><span>updateDate：20230807</span></p>
           </li>
           <li>
-            <p><span>version：0.1.0</span></p>
+            <p><span>version：0.1.1</span></p>
           </li>
           <li>
             <p><span>des-tag：release</span></p>
@@ -27,7 +27,7 @@
             <p><span>email：</span><a href='mailto:syf20020816@outlook.com' target='_blank' class='url'>syf20020816@outlook.com</a></p>
           </li>
         </ul>
-        <p><img src="https://img.shields.io/badge/EStylist-0.1.0-orange?style=flat-square&logo=tauri&logoColor=%23fff&labelColor=%2323B898&color=%2323B898"></p>
+        <p><img src="https://img.shields.io/badge/EStylist-0.1.1-orange?style=flat-square&logo=tauri&logoColor=%23fff&labelColor=%2323B898&color=%2323B898"></p>
         <h2 id='why-estylist'><span>Why EStylist</span></h2>
         <p><span>邮件服务公司通常不会在软件中构建邮件模板服务，因为这会增加他们的开发成本和维护成本。此外，邮件模板服务需要大量的数据管理和安全措施，以确保用户的隐私和数据安全。相反，许多邮件服务公司提供了API和SDK,使得开发人员可以轻松地集成邮件模板服务到他们的应用程序中。这些API和SDK通常提供了一系列功能，如发送电子邮件、管理收件人列表、设置主题、添加附件等。但这对于普通人想要构建一个精美的模板而言显得较为困难，也几乎找不到提供的API或SDK进行发布。</span></p>
         <p><span>Email service companies typically do not build email template services in their software, as this increases their development and maintenance costs. In addition, email template services require extensive data management and security measures to ensure user privacy and data security. On the contrary, many email service companies provide APIs and SDKs, allowing developers to easily integrate email template services into their applications. These APIs and SDKs typically provide a series of functions, such as sending emails, managing recipient lists, setting themes, and adding attachments. But this is relatively difficult for ordinary people to build a beautiful template, and there is almost no API or SDK provided for publishing.</span></p>
